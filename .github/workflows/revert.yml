@@ -9,7 +9,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: contains(github.event.comment.body, '/revert')
+    if: contains(github.event.comment.body, '/revert') && github.event.comment.author_association == 'CONTRIBUTOR'
 
     steps:
       - name: Checkout latest code
