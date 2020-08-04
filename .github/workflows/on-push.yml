@@ -1,19 +1,12 @@
-name: Automatic Pull Request on branch push
+name: Execute certain actions when a push occours
 on:
   push
 jobs:
-  auto-pr:
+  execute:
     runs-on: ubuntu-latest
+    name: Execute all actions in the same environment when a push occours
     steps:
-     #- name: enforce-branch-convention
-     #  uses: deepakputhraya/action-branch-name@master
-     #  with:
-     #    regex: '([A-Za-z])+\-([0-9])+(_[a-zA-Z0-9])?'
-     #    allowed_prefixes: 'issue,release'
-     #    ignore: master
-     #    min_length: 7
-     #    max_length: 20
-     - name: create-pr
+     - name: Automatically create a pull request from an issue branch
        uses: "smartinspereira/auto-create-pr-action@master"
        env:
          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
