@@ -1,4 +1,4 @@
-name: automerge
+name: Execute certain actions when a pull request gets approved by its reviewers
 on:
   pull_request:
     types:
@@ -18,10 +18,11 @@ on:
       - completed
   status: {}
 jobs:
-  automerge:
+  execute:
+    name: Executes all actions in the same environment when a pull request gets approved
     runs-on: ubuntu-latest
     steps:
-      - name: automerge
+      - name: Automatically rebase and merge anything with the approved label
         uses: "pascalgn/automerge-action@f81beb99aef41bb55ad072857d43073fba833a98"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
