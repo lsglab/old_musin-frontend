@@ -5,12 +5,20 @@ jobs:
   auto-pr:
     runs-on: ubuntu-latest
     steps:
-      - name: create-pr
-        uses: "smartinspereira/auto-create-pr-action@master"
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          BRANCH_PREFIX: "issue-"
-          BASE_BRANCH: "master"
-          PULL_REQUEST_BODY: "This PR was created automatically in response to pushing to an issue branch. Please edit it or add additional information as a comment."
-          PULL_REQUEST_TITLE: "feat: Resolve Issue"
-          PULL_REQUEST_DRAFT: true
+     - name: enforce-branch-convention
+       uses: deepakputhraya/action-branch-name@master
+       with:
+         regex: '([A-Za-z])+\-([0-9])+(_[a-zA-Z0-9])?'
+         allowed_prefixes: 'issue,release'
+         ignore: master
+         min_length: 7
+         max_length: 20
+     - name: create-pr
+       uses: "smartinspereira/auto-create-pr-action@master"
+       env:
+         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+         BRANCH_PREFIX: "issue-"
+         BASE_BRANCH: "master"
+         PULL_REQUEST_BODY: "This PR was created automatically in response to pushing to an issue branch. Please edit it or add additional information as a comment."
+         PULL_REQUEST_TITLE: "feat: Resolve Issue"
+         PULL_REQUEST_DRAFT: true
