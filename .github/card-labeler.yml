@@ -1,11 +1,11 @@
 Development:
   To do:
-    - 'To do'
+    - "To do"
   In progress:
-    - 'Status: In progress'
+    - "Status: In progress"
   Review in progress:
-    - 'Status: Review in progress'
+    - "Status: Review in progress"
   Reviewer approved:
-    - 'Status: Reviewer approved'
+    - "Status: Reviewer approved"
   Done:
-    - 'Status: Done'
+    - "Status: Done"
