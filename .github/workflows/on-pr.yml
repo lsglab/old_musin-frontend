@@ -6,8 +6,8 @@ on:
       - edited
       - synchronize
       - reopened
-  check_run: 
- 
+  check_run:
+    
 jobs:
   execute:
     runs-on: ubuntu-latest
