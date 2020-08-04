@@ -1,0 +1,23 @@
+name: Execute certain actions when a pull request or an issue is created
+on:
+ - pull_request
+ - issues
+jobs:
+  execute:
+    name: Execute all actions in the same environment when a pull request or an issue is created
+    runs-on: ubuntu-latest
+    steps:
+     - name: Add new issues to a certain project column
+       if: github.event_name == 'issues' && github.event.action == 'opened'
+       uses: docker://takanabe/github-actions-automate-projects:v0.0.2
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         GITHUB_PROJECT_URL: https://github.com/lsglab/frontend/projects/2
+         GITHUB_PROJECT_COLUMN_NAME: To do
+     - name: Add new prs to a certain project column
+       if: github.event_name == 'pull_request' && github.event.action == 'opened'
+       uses: docker://takanabe/github-actions-automate-projects:v0.0.2
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         GITHUB_PROJECT_URL: https://github.com/lsglab/frontend/projects/2
+         GITHUB_PROJECT_COLUMN_NAME: In progress
