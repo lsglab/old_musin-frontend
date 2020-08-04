@@ -31,7 +31,7 @@ jobs:
           MERGE_RETRIES: 3
           MERGE_RETRY_SLEEP: 10000
           MERGE_DELETE_BRANCH: true
-          UPDATE_LABELS: approved
+          UPDATE_LABELS: Approved
           UPDATE_METHOD: rebase
           UPDATE_RETRIES: 3
           UPDATE_RETRY_SLEEP: 10000
