@@ -1,0 +1,7 @@
+commentTemplate: >
+  Thanks for your contribution and welcome to this project! We format our source
+  code using [Prettier](https://prettier.io). I have adjusted the formatting of
+  this pull request for you.
+  To stop seeing this message, please install Prettier on your machine and run
+  `make format` to format your changes before submitting them.
+commitMessage: "style: Automatically fixed formatting of last ({{commitSha}})"
