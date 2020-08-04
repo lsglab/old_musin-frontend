@@ -1,12 +1,28 @@
-name: Execute certain actions when a push occours
+name: Execute certain actions when a push occurs
 on:
   push
 jobs:
   execute:
-    name: Execute all actions in the same environment when a push occours
+    name: Execute all actions in the same environment when a push occurs
     runs-on: ubuntu-latest
     steps:
+     - name: Checkout the current repository
+       if: github.ref == "refs/heads/master"
+       uses: actions/checkout@master
+       with:
+         fetch-depth: 0
+     - name: Automatically bump masters tag version
+       if: github.ref == "refs/heads/master"
+       uses: mathieudutour/github-tag-action@v4.5
+       with:
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         default_bump: false
+         tag_prefix: v
+         release_branches: master
+         create_annotated_tag: false
+         dry_run: false
      - name: Automatically create a pull request from an issue branch
+       if: github.ref != "refs/heads/master"
        uses: "smartinspereira/auto-create-pr-action@master"
        env:
          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
