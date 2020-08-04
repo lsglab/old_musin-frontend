@@ -11,7 +11,7 @@ on:
 jobs:
   execute:
     runs-on: ubuntu-latest
-    name: Execute all actions in the same environment
+    name: Execute all actions in the same environment when a pull request gets opened or edited
     steps:
       - name: Enforce our branching convention
         uses: deepakputhraya/action-branch-name@master
