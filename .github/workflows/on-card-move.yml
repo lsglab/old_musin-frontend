@@ -1,0 +1,12 @@
+name: Execute certain actions when a card move occours
+on:
+  project_card:
+    types:
+     - moved
+jobs:
+  execute:
+    name: Execute all actions in the same environment when a card move occours
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label the card by its column
+        uses: technote-space/auto-card-labeler@v1
