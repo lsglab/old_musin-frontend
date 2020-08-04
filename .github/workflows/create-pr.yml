@@ -5,14 +5,14 @@ jobs:
   auto-pr:
     runs-on: ubuntu-latest
     steps:
-     - name: enforce-branch-convention
-       uses: deepakputhraya/action-branch-name@master
-       with:
-         regex: '([A-Za-z])+\-([0-9])+(_[a-zA-Z0-9])?'
-         allowed_prefixes: 'issue,release'
-         ignore: master
-         min_length: 7
-         max_length: 20
+     #- name: enforce-branch-convention
+     #  uses: deepakputhraya/action-branch-name@master
+     #  with:
+     #    regex: '([A-Za-z])+\-([0-9])+(_[a-zA-Z0-9])?'
+     #    allowed_prefixes: 'issue,release'
+     #    ignore: master
+     #    min_length: 7
+     #    max_length: 20
      - name: create-pr
        uses: "smartinspereira/auto-create-pr-action@master"
        env:
