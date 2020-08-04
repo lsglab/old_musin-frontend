@@ -1,11 +1,11 @@
-name: Execute certain actions when a card move occours
+name: Execute certain actions when a card move occurs
 on:
   project_card:
     types:
      - moved
 jobs:
   execute:
-    name: Execute all actions in the same environment when a card move occours
+    name: Execute all actions in the same environment when a card move occurs
     runs-on: ubuntu-latest
     steps:
       - name: Label the card by its column
