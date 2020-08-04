@@ -1,0 +1,25 @@
+name: Execute certain actions when a comment gets created
+on: 
+  issue_comment:
+    types:
+     - created
+jobs:
+  execute:
+    name: Execute all actions in the same environment when a comment gets created
+    if: github.event.issue.pull_request != '' && github.event.comment.author_association == 'CONTRIBUTOR'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the latest code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Rebase the code on top of master in reaction to the rebase command
+      if: contains(github.event.comment.body, '/rebase')
+      uses: cirrus-actions/rebase@1.3.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Revert a certain commit in reaction to the revert command
+      if: contains(github.event.comment.body, '/revert')
+      uses: srt32/revert@v0.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
