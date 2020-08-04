@@ -4,4 +4,4 @@ commentTemplate: >
   this pull request for you.
   To stop seeing this message, please install Prettier on your machine and run
   `make format` to format your changes before submitting them.
-commitMessage: "style: Automatically fixed formatting of last ({{commitSha}})"
+commitMessage: "style: Automatically fixed formatting of last commit ({{commitSha}})"
