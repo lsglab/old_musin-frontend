@@ -3,8 +3,8 @@ on:
   push
 jobs:
   execute:
-    runs-on: ubuntu-latest
     name: Execute all actions in the same environment when a push occours
+    runs-on: ubuntu-latest
     steps:
      - name: Automatically create a pull request from an issue branch
        uses: "smartinspereira/auto-create-pr-action@master"
