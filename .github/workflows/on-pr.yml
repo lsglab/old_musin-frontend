@@ -1,15 +1,15 @@
-name: On opening and editing of pull requests
+name: On pull requests
 on:
   pull_request:
     types:
+      - synchronize
       - opened
-      - edited
       - reopened
-  check_run:
-    
+      - unlocked
+      - ready_for_review
 jobs:
   execute:
-    name: Verify the branch name and the existance of an issue link
+    name: Verify the branch name and automatically merge
     runs-on: ubuntu-latest
     steps:
       - name: Enforce our branching convention
