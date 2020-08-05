@@ -1,11 +1,11 @@
-name: Execute certain actions when a comment gets created
+name: On comment
 on: 
   issue_comment:
     types:
      - created
 jobs:
   execute:
-    name: Execute all actions in the same environment when a comment gets created
+    name: React to special commands
     if: github.event.issue.pull_request != '' && github.event.comment.author_association == 'CONTRIBUTOR'
     runs-on: ubuntu-latest
     steps:

@@ -1,36 +1,37 @@
-name: Execute certain actions when a pull request gets opened or edited
+name: On opening and editing of pull requests
 on:
   pull_request:
     types:
       - opened
       - edited
-      - synchronize
       - reopened
   check_run:
     
 jobs:
   execute:
-    name: Execute all actions in the same environment when a pull request gets opened or edited
+    name: Verify the branch name and the existance of an issue link
     runs-on: ubuntu-latest
     steps:
       - name: Enforce our branching convention
+        if: github.event.action == 'opened'
         uses: deepakputhraya/action-branch-name@master
         with:
-          regex: '([A-Za-z])+\-([0-9])+(_[a-zA-Z0-9])?'
+          regex: '([A-Za-z])+\-([0-9])+\-([a-zA-Z0-9_-])+'
           allowed_prefixes: 'issue'
           ignore: master
           min_length: 7
           max_length: 100
-      - name: Add an issue link at the bottom of an issue-branch pr
-        uses: tkt-actions/add-issue-links@v1.2.0
-        with:
-          repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          branch-prefix: 'issue-'
-          position: 'bottom'
-          resolve: 'true'
-      - name: Verifies an issue link exists
-        uses: hattan/verify-linked-issue-action@v1.1.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          message: "I wasn't able to find a linked issue. Please link one by mentioning it in the body of your PR."
+      #- name: Add an issue link at the bottom of an issue-branch pr
+      #  if: github.event.action == 'opened'
+      #  uses: tkt-actions/add-issue-links@v1.2.0
+      #  with:
+      #    repo-token: '${{ secrets.GITHUB_TOKEN }}'
+      #    branch-prefix: 'issue-'
+      #    position: 'bottom'
+      #    resolve: 'true'
+      #- name: Verifies an issue link exists
+      #  uses: hattan/verify-linked-issue-action@v1.1.1
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    message: "I wasn't able to find a linked issue. Please link one by mentioning it in the body of your PR."
