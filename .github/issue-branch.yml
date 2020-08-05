@@ -1,4 +1,4 @@
 mode: auto
 silent: false
-branchName: short
+branchName: full
 autoCloseIssue: true
