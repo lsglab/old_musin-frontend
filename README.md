@@ -1,4 +1,4 @@
-<p align="center"><img width=15% src="./.github/logo.png"></p>
+<p align="center"><img width=15% src="./.github/lsglogo.png"></p>
 <h2 align="center">A shiny new frontend for our <a href="https://lsg.musin.de" target="_blank">school homepage</a></h2>
 <p align="center">
   <a href="https://gitpod.io/#https://github.com/lsglab/frontend"><img src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod" alt="Gitpod ready-to-code"></a>
