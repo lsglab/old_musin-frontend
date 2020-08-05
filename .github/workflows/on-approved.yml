@@ -1,15 +1,9 @@
-name: Execute certain actions when a pull request gets approved by its reviewers
+name: On reviewer approval
 on:
   pull_request:
     types:
       - labeled
       - unlabeled
-      - synchronize
-      - opened
-      - edited
-      - ready_for_review
-      - reopened
-      - unlocked
   pull_request_review:
     types:
       - submitted
@@ -19,7 +13,7 @@ on:
   status: {}
 jobs:
   execute:
-    name: Executes all actions in the same environment when a pull request gets approved
+    name: Rebase and Merge automatically
     runs-on: ubuntu-latest
     steps:
       - name: Automatically rebase and merge anything with the approved label
