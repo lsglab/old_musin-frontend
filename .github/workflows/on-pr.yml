@@ -9,7 +9,7 @@ on:
       - ready_for_review
 jobs:
   execute:
-    name: Verify the branch name and automatically merge
+    name: Verify the branch name
     runs-on: ubuntu-latest
     steps:
       - name: Enforce our branching convention
