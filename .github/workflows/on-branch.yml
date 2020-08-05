@@ -13,6 +13,6 @@ jobs:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          BRANCH_PREFIX: issue-
          BASE_BRANCH: master
-         PULL_REQUEST_BODY: This PR was created automatically in response to pushing to an issue branch. Please edit it or add additional information as a comment.
-         PULL_REQUEST_TITLE: 'feat: Resolve Issue'
+         #PULL_REQUEST_BODY: This PR was created automatically in response to pushing to an issue branch. Please edit it or add additional information as a comment.
+         #PULL_REQUEST_TITLE: 'feat: Resolve Issue'
          PULL_REQUEST_DRAFT: true
