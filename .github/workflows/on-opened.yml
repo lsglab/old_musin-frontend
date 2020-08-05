@@ -8,7 +8,7 @@ on:
      - opened
 jobs:
   execute:
-    name: Automatically add this to a project board
+    name: Automatically add it to our project board and label it
     runs-on: ubuntu-latest
     steps:
      - name: Add new issues to a certain project column
@@ -25,3 +25,5 @@ jobs:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          GITHUB_PROJECT_URL: https://github.com/lsglab/frontend/projects/2
          GITHUB_PROJECT_COLUMN_NAME: In progress
+     - name: Label the newly created card by its column
+       uses: technote-space/auto-card-labeler@v1
