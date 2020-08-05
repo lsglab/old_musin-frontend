@@ -1,7 +1,6 @@
-# Always validate the PR title AND all the commits
-titleAndCommits: true
-# Don't allow unsemantic merge commits
+# Validate both title and commits, only commits, only title, or any commit?
+commitsOnly: true
+# Allow use of default (unsemantic) Merge commits?
 allowMergeCommits: false
-# Allow use of Revert commits (eg on github: "Revert "feat: ride unicorns"")
-# this is only relevant when using commitsOnly: true (or titleAndCommits: true)
-allowRevertCommits: true
+# Allow use of default (unsemantic) Revert commits?
+allowRevertCommits: false
