@@ -1,10 +1,15 @@
-name: On reviewer approval
+name: Once pull request is mergeable
 on:
   pull_request:
     types:
-      - labeled
+      - synchronize
+      - opened
+      - ready_for_review
       - reopened
       - unlocked
+  pull_request_review:
+    types:
+      - submitted
   check_suite:
     types:
       - completed
@@ -13,17 +18,17 @@ jobs:
     name: Rebase and Merge automatically
     runs-on: ubuntu-latest
     steps:
-      - name: Automatically rebase and merge anything with the approved label
+      - name: Automatically rebase and merge the PR
         uses: "pascalgn/automerge-action@f81beb99aef41bb55ad072857d43073fba833a98"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          MERGE_LABELS: Approved
+          MERGE_LABELS: ''
           MERGE_COMMIT_MESSAGE: pull-request-title
           MERGE_FORKS: false
           MERGE_RETRIES: 3
           MERGE_RETRY_SLEEP: 10000
           MERGE_DELETE_BRANCH: true
-          UPDATE_LABELS: Approved
+          UPDATE_LABELS: ''
           UPDATE_METHOD: rebase
           UPDATE_RETRIES: 3
           UPDATE_RETRY_SLEEP: 10000
