@@ -1,5 +1,5 @@
 # Validate both title and commits, only commits, only title, or any commit?
-commitsOnly: true
+titleAndCommits: true
 # Allow use of default (unsemantic) Merge commits?
 allowMergeCommits: false
 # Allow use of default (unsemantic) Revert commits?
