@@ -1,10 +1,10 @@
-name: Execute certain actions when a pull request or an issue is created
+name: On creation of an issue or a pull request
 on:
  - pull_request
  - issues
 jobs:
   execute:
-    name: Execute all actions in the same environment when a pull request or an issue is created
+    name: Automatically add this to a project board
     runs-on: ubuntu-latest
     steps:
      - name: Add new issues to a certain project column
