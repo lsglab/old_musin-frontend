@@ -1,0 +1,18 @@
+name: On creation of a new branch
+on:
+  create
+jobs:
+  execute:
+    name: Automatically create a pull request
+    runs-on: ubuntu-latest
+    steps:
+     - name: Automatically create a pull request from an issue branch
+       if: github.ref != 'refs/heads/master' && github.event.ref_type == 'branch'
+       uses: smartinspereira/auto-create-pr-action@master
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         BRANCH_PREFIX: issue-
+         BASE_BRANCH: master
+         PULL_REQUEST_BODY: This PR was created automatically in response to pushing to an issue branch. Please edit it or add additional information as a comment.
+         PULL_REQUEST_TITLE: 'feat: Resolve Issue'
+         PULL_REQUEST_DRAFT: true
