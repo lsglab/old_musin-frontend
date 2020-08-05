@@ -1,0 +1,4 @@
+mode: auto
+silent: false
+branchName: short
+autoCloseIssue: true
