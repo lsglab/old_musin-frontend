@@ -1,6 +1,7 @@
 {
-  "name": "TODO",
-  "description": "TODO",
+  "name": "musin-frontend",
+  "description": "This is a frontend for a new school homepage",
+  "private": true,
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
