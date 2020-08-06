@@ -4,9 +4,13 @@ on:
     types:
       - synchronize
       - opened
+      - ready_for_review
       - reopened
       - unlocked
-      - ready_for_review
+  pull_request_review:
+    types:
+      - submitted
+  status: {}
 jobs:
   execute:
     name: Verify the branch name
