@@ -1,0 +1,15 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - init: yarn && yarn build
+    command: yarn start
+
+vscode:
+  extensions:
+    - mhutchie.git-graph@1.24.0:1YXb3C/Q2X3rk146GJk9WA==
+    - svelte.svelte-vscode@101.7.1:fOkrH6XNGSYw5Cl1GNgY5w==
+    - fivethree.vscode-svelte-snippets@0.5.0:rRkcaFrMb8wbTuH6kbGEQQ==
+    - gencer.html-slim-scss-css-class-completion@1.7.5:iSvfKBHJrWBs7kB7jkDDAw==
+    - formulahendry.auto-close-tag@0.5.8:E3l7NRdQytF0+ykejfHKdQ==
+    - esbenp.prettier-vscode@5.1.3:t532ajsImUSrA9N8Bd7jQw==

@@ -1,0 +1,14 @@
+{
+    "gitlens.currentLine.format": "${author}, ${ago}",
+    "gitlens.codeLens.scopes": [
+        "document",
+        "containers"
+    ],
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.codeLens.recentChange.command": "gitlens.showQuickCommitFileDetails",
+    "gitlens.hovers.annotations.enabled": false,
+    "gitlens.views.repositories.showBranchComparison": false,
+    "gitlens.views.repositories.enabled": true,
+    "gitlens.sortBranchesBy": "date:desc",
+    "gitlens.views.repositories.files.layout": "tree"
+}
