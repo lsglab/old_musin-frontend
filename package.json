@@ -14,9 +14,13 @@
   "dependencies": {
     "compression": "^1.7.1",
     "polka": "next",
+    "node-fetch": "^2.6.0",
     "sirv": "^1.0.0"
   },
   "devDependencies": {
+    "graphql": "^15.3.0",
+    "apollo-boost": "^0.4.9",
+    "svelte-apollo": "^0.3.0",
     "npm-run-all": "^4.1.5",
     "sapper": "^0.27.0",
     "svelte": "^3.0.0",
