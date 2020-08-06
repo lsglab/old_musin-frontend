@@ -1,16 +1,17 @@
 name: On pull requests
 on:
-  pull_request:
-    types:
-      - synchronize
-      - opened
-      - ready_for_review
-      - reopened
-      - unlocked
-  pull_request_review:
-    types:
-      - submitted
-  status: {}
+ push:
+ pull_request:
+  types:
+    - synchronize
+    - opened
+    - ready_for_review
+    - reopened
+    - unlocked
+    - edited
+ pull_request_review:
+  types:
+    - submitted
 jobs:
   execute:
     name: Verify the branch name
