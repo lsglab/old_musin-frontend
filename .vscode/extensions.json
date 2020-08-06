@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "mhutchie.git-graph",
+    "svelte.svelte-vscode",
+    "fivethree.vscode-svelte-snippets",
+    "formulahendry.auto-close-tag",
+    "esbenp.prettier-vscode"
+  ]
+}
