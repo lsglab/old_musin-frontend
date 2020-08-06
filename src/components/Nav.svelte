@@ -261,9 +261,9 @@ nav {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10vw;
+    padding: 0 15vw;
     position: relative;
-    z-index: 1;
+    z-index: 990;
 }
 
 .dashed::before {
@@ -302,6 +302,7 @@ nav > ul > li {
 
 nav > ul > li:last-child {
   margin-right: 0;
+  padding-right: 0;
 }
 
 .menuCard {
@@ -382,8 +383,7 @@ nav > ul > li:last-child {
 /* Responsive navbar */
 @media screen and (max-width: 1050px) {
   nav {
-    padding: 0;
-    justify-content: space-around;
+    padding: 0 75px;
   }
 }
 @media screen and (max-width: 810px) {
@@ -577,5 +577,10 @@ nav > ul > li:last-child {
 }
 .single-title::after {
   display: none;
+}
+@media screen and (max-width: 440px) {
+    nav {
+        padding: 0 20px;
+    }
 }
 </style>
