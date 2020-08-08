@@ -1,5 +1,7 @@
 <script>
     import {onMount} from "svelte";
+    //moved DashBackground in an reusable component that can take a customHeight
+    import DashBackground from "../components/dashBackground.svelte";
     function jump(h){
         var url = location.href;               //Save down the URL without hash.
         location.href = "#"+h;                 //Go to the target element.
@@ -128,15 +130,7 @@
     </div>
     <a href="#" style="margin-top: 30px;font-size: 18px;margin-bottom: 50px;">Zu allen Terminen</a>
 </div>
-<div class="dash-background" style="height: {backgroundHeight}px;">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-</div>
+<DashBackground customHeight="{backgroundHeight}px"></DashBackground>
 <svelte:window on:resize={recalculateHeight}/>
 
 <style>
@@ -212,7 +206,7 @@ header > .left > div {
 header > .left h1 {
     font-size: 45px;
     line-height: 48px;
-    color: #0a2540;
+    color: var(--big-header);
 }
 
 header > .left h3 {
@@ -223,17 +217,11 @@ header > .left h3 {
 header > .left button {
     height: 40px;
     width: 250px;
-    background: rgb(0, 119, 255);
-    color: white;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
 }
 
 header > .left p {
     margin-toP: 40px;
-    color: #778;
+    color: var(--ligt-text);
     font-size: 14px;
 }
 
@@ -266,24 +254,6 @@ header > .left p {
     background-size: 8px 1px;
 }
 
-
-.dash-background {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    flex-wrap: nowrap;
-    z-index: 1;
-}
-.dash-background > div {
-    border-right: 1px dashed rgba(0,0,0,0.075);
-    z-index: 99;
-    height: 100%;
-    width: 100%;
-}
-
 .appointment-section {
     width: 100%;
     height: auto;
@@ -297,7 +267,7 @@ header > .left p {
 .appointment-section > h1 {
     margin-top: 80px;
     font-size: 45px;
-    color: #336;
+    color: var(--mid-header);
     font-weight: bold;
     font-family: Open Sans,Segoe UI,sans-serif;
     z-index: 999;
@@ -308,7 +278,7 @@ header > .left p {
     font-weight: 100;
     line-height: 40px;
     text-align: center;
-    color: #447;
+    color: var(--small-header);
     margin-top: 0;
     font-family: Open Sans,Segoe UI,sans-serif;
     z-index: 999;
@@ -379,7 +349,7 @@ header > .left p {
 ***/
 a {
     text-decoration: none;
-    color: rgb(0, 119, 255);
+    color: var(--link);
     transform: translateX(-20px);
     text-decoration: none;
     z-index: 99;
