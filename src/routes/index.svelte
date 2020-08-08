@@ -134,7 +134,7 @@
 <svelte:window on:resize={recalculateHeight}/>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
 
 
 * {
