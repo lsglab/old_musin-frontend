@@ -1,5 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
 html {
     scroll-behavior: smooth;
+}
+
+:root{
+  /*I put the colors used in index.svelte in vars so that they can be reused and changed easily*/
+  --big-header: #0a2540;
+  --light-text: #778;
+  --mid-header: #336;
+  --small-header: #447;
+  --link: rgb(0, 119, 255);
 }
 
 body {
@@ -11,4 +22,14 @@ body {
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+}
+
+/*moved the style for the button from index.svelte so that all buttons have the same style --> width and height is not included here*/
+button {
+  background: rgb(0, 119, 255);
+  color: white;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
 }
