@@ -2,6 +2,7 @@ name: On card move
 on:
   project_card:
     types:
+     - created
      - moved
 jobs:
   execute:
