@@ -21,8 +21,8 @@ jobs:
         if: github.event.action == 'opened'
         uses: deepakputhraya/action-branch-name@master
         with:
-          regex: '(?:[A-Za-z])+\-(?:[0-9])+(?:\-(?:[a-zA-Z0-9_-])+)?'
-          allowed_prefixes: 'issue'
+          regex: '(?:all\-contributors\/|issue\-(?:[0-9])+\-)(?:[a-zA-Z0-9_-])+'
+          allowed_prefixes: 'issue,all-contributors'
           ignore: master
           min_length: 7
           max_length: 100
