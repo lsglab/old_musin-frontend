@@ -11,17 +11,30 @@ jobs:
     name: Automatically add it to our project board and label it
     runs-on: ubuntu-latest
     steps:
-     - name: Add new issues to a certain project column
+     - name: Add new issues to the To do column
        if: github.event_name == 'issues'
-       uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         GITHUB_PROJECT_URL: https://github.com/lsglab/frontend/projects/2
-         GITHUB_PROJECT_COLUMN_NAME: To do
-     - name: Add new prs to a certain project column
+       uses: alex-page/github-project-automation-plus@v0.2.4
+       with:
+         project: Board
+         column: To do
+         repo-token: ${{ secrets.PAT }}
+     - name: Add new pull requests to the In progress column
        if: github.event_name == 'pull_request'
-       uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         GITHUB_PROJECT_URL: https://github.com/lsglab/frontend/projects/2
-         GITHUB_PROJECT_COLUMN_NAME: In progress
+       uses: alex-page/github-project-automation-plus@v0.2.4
+       with:
+         project: Board
+         column: In progress
+         repo-token: ${{ secrets.PAT }}
+     - name: Enforce our branching convention
+       if: github.event_name == 'pull_request'
+       uses: deepakputhraya/action-branch-name@master
+       with:
+         regex: '(?:all\-contributors\/|issue\-(?:[0-9])+\-)(?:[a-zA-Z0-9_-])+'
+         allowed_prefixes: 'issue,all-contributors'
+         ignore: master
+         min_length: 7
+         max_length: 100
+     - name: Assign author
+       uses: technote-space/assign-author@v1
+       with:
+         GITHUB_TOKEN: ${{ secrets.PAT }}
