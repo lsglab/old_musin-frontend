@@ -8,9 +8,13 @@ on:
      - opened
 jobs:
   execute:
-    name: Automatically add it to our project board and label it
+    name: Check and add to project board
     runs-on: ubuntu-latest
     steps:
+     - name: Assign author
+       uses: technote-space/assign-author@v1
+       with:
+         GITHUB_TOKEN: ${{ secrets.PAT }}
      - name: Add new issues to the To do column
        if: github.event_name == 'issues'
        uses: alex-page/github-project-automation-plus@v0.2.4
@@ -34,7 +38,3 @@ jobs:
          ignore: master
          min_length: 7
          max_length: 100
-     - name: Assign author
-       uses: technote-space/assign-author@v1
-       with:
-         GITHUB_TOKEN: ${{ secrets.PAT }}
