@@ -1,0 +1,27 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "Flosi23",
+      "name": "Flosi23",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/56218180?v=4",
+      "profile": "https://github.com/Flosi23",
+      "contributions": [
+        "code",
+        "content",
+        "design",
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "frontend",
+  "projectOwner": "lsglab",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
