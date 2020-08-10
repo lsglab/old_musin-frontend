@@ -29,12 +29,3 @@ jobs:
          project: Board
          column: In progress
          repo-token: ${{ secrets.PAT }}
-     - name: Enforce our branching convention
-       if: github.event_name == 'pull_request'
-       uses: deepakputhraya/action-branch-name@master
-       with:
-         regex: '(?:all\-contributors\/|issue\-(?:[0-9])+\-)(?:[a-zA-Z0-9_-])+'
-         allowed_prefixes: 'issue,all-contributors'
-         ignore: master
-         min_length: 7
-         max_length: 100
