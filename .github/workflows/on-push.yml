@@ -15,11 +15,21 @@ jobs:
        uses: actions/checkout@master
        with:
          fetch-depth: 0
-     - uses: mschilde/auto-label-merge-conflicts@master
+     - name: Automatically label any merge conflict
+       uses: mschilde/auto-label-merge-conflicts@master
        if: github.event_name == 'pull_request'
        with:
          CONFLICT_LABEL_NAME: "merge conflict"
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     - name: Enforce our branching convention
+       if: github.event_name == 'pull_request'
+       uses: deepakputhraya/action-branch-name@master
+       with:
+         regex: '(?:all\-contributors\/|issue\-(?:[0-9])+\-)(?:[a-zA-Z0-9_-])+'
+         allowed_prefixes: 'issue,all-contributors'
+         ignore: master
+         min_length: 7
+         max_length: 100
 #     - name: Automatically bump masters tag version
 #       uses: mathieudutour/github-tag-action@v4.5
 #       with:
