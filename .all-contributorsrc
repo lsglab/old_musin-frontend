@@ -16,6 +16,19 @@
         "design",
         "ideas"
       ]
+    },
+    {
+      "login": "GitGangGuy",
+      "name": "GitGangGuy",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/50679178?v=4",
+      "profile": "https://github.com/GitGangGuy",
+      "contributions": [
+        "code",
+        "bug",
+        "doc",
+        "projectManagement",
+        "plugin"
+      ]
     }
   ],
   "contributorsPerLine": 7,
