@@ -16,8 +16,8 @@ jobs:
        with:
          fetch-depth: 0
      - name: Automatically label any merge conflict
-       uses: mschilde/auto-label-merge-conflicts@master
        if: github.event_name == 'pull_request'
+       uses: mschilde/auto-label-merge-conflicts@master
        with:
          CONFLICT_LABEL_NAME: "merge conflict"
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -31,6 +31,7 @@ jobs:
          min_length: 7
          max_length: 100
      - name: Automatically rebase and merge the PR
+       if: github.event_name == 'pull_request'
        uses: "pascalgn/automerge-action@f81beb99aef41bb55ad072857d43073fba833a98"
        env:
          GITHUB_TOKEN: "${{ secrets.PAT }}"
