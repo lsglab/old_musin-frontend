@@ -1,0 +1,9 @@
+minApprovals:
+  NONE: 0
+reportStatus: true
+updateBranch: true
+deleteBranchAfterMerge: true
+mergeMethod: merge
+mergeCommitMessage: |
+  merge: {title} (#{number})
+  {body}
