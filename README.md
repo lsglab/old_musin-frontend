@@ -3,8 +3,8 @@
 <p align="center">
   <a href="https://gitpod.io/#https://github.com/lsglab/frontend"><img src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod" alt="Gitpod ready-to-code"></a>
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-  <a href='#contributors'><img src='https://img.shields.io/github/all-contributors/lsglab/frontend/master' alt='All-Contributors Count'></a>
-  <!-- ALL-CONTRIBUTORS-BADGE:END -->
+<a href='#contributors'><img src='https://img.shields.io/github/all-contributors/lsglab/frontend/master' alt='All-Contributors Count'></a>
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 </p>
 
 ## Overview
@@ -31,6 +31,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/Flosi23"><img src="https://avatars1.githubusercontent.com/u/56218180?v=4" width="100px;" alt=""/><br /><sub><b>Flosi23</b></sub></a><br /><a href="https://github.com/lsglab/frontend/commits?author=Flosi23" title="Code">💻</a> <a href="#content-Flosi23" title="Content">🖋</a> <a href="#design-Flosi23" title="Design">🎨</a> <a href="#ideas-Flosi23" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/GitGangGuy"><img src="https://avatars0.githubusercontent.com/u/50679178?v=4" width="100px;" alt=""/><br /><sub><b>GitGangGuy</b></sub></a><br /><a href="https://github.com/lsglab/frontend/commits?author=GitGangGuy" title="Code">💻</a> <a href="https://github.com/lsglab/frontend/issues?q=author%3AGitGangGuy" title="Bug reports">🐛</a> <a href="https://github.com/lsglab/frontend/commits?author=GitGangGuy" title="Documentation">📖</a> <a href="#projectManagement-GitGangGuy" title="Project Management">📆</a> <a href="#plugin-GitGangGuy" title="Plugin/utility libraries">🔌</a></td>
   </tr>
 </table>
 
