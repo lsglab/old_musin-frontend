@@ -1,10 +1,10 @@
 <p align="center"><img width=15% src="./.github/lsglogo.png"></p>
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <h2 align="center">A shiny new frontend for our <a href="https://lsg.musin.de" target="_blank">school homepage</a></h2>
 <p align="center">
   <a href="https://gitpod.io/#https://github.com/lsglab/frontend"><img src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod" alt="Gitpod ready-to-code"></a>
+  <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+  <a href='#contributors'><img src='https://img.shields.io/github/all-contributors/lsglab/frontend/master' alt='All-Contributors Count'></a>
+  <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </p>
 
 ## Overview

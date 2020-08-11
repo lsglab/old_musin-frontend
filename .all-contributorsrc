@@ -23,5 +23,6 @@
   "projectOwner": "lsglab",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "badgeTemplate": "<a href='#contributors'><img src='https://img.shields.io/github/all-contributors/lsglab/frontend/master' alt='All-Contributors Count'></a>"
 }
