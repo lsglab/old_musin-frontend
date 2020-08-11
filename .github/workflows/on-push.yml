@@ -16,7 +16,7 @@ jobs:
        with:
          fetch-depth: 0
      - name: Automatically label any merge conflict
-       if: github.event_name == 'pull_request'
+       if: github.event_name == 'push'
        uses: mschilde/auto-label-merge-conflicts@master
        with:
          CONFLICT_LABEL_NAME: "merge conflict"
