@@ -5,5 +5,5 @@ updateBranch: true
 deleteBranchAfterMerge: true
 mergeMethod: merge
 mergeCommitMessage: |
-  merge: {title} (#{number})
+  {title} (#{number})
   {body}
