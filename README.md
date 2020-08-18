@@ -8,22 +8,41 @@
 </p>
 
 ## Overview
-This is a free-and-open-source, AGPL-licensed homepage written entirely in Svelte (using the Sapper framework).
-The project is in its early stages of development. As such, this README and other parts of the code should be considered as a work in progress.
-It will (hopefully) replace the outdated website visitors are currently greeted with.
+This is a free/libre and open source homepage written entirely in Svelte (using the Sapper framework). It will replace the outdated website visitors are currently greeted with.  
 
-<br />
+## Setup
+Clone this repository and you're good to go.  
+Please note that scripts in this project might only work in a POSIX-compliant shell environment (located at `/bin/sh`); you'll be fine with most \*nix operating systems. More specifically, if you're on Windows ([m](https://tinyurl.com/nuub2bq)[y](https://tinyurl.com/y2emej63)[ ](https://tinyurl.com/y2lzznux)[c](https://tinyurl.com/y3v8vo5a)[o](https://tinyurl.com/y4qcfkw3)[n](https://tinyurl.com/y5gm9ysv)[d](https://tinyurl.com/y69uplwl)[o](https://tinyurl.com/yygc57ta)[l](https://tinyurl.com/yynoa7ql)[e](https://tinyurl.com/y3shavwn)[n](https://tinyurl.com/yxladmrj)[c](https://tinyurl.com/y3yxymqr)[e](https://tinyurl.com/y2c6alo5)[s](https://tinyurl.com/y5qtqr6p)), you'll need to spin up a better environment - WSL seems to be a good fit.  
+While this certainly is not a requirement, [Visual Studio Code](https://code.visualstudio.com/) (or, even better, its open source release [VSCodium](https://vscodium.com/)) is highly recommended, since there are official extension recommendations and workspace settings in this repository for it. If you prefer a different editor (Atom, Vi*m*, Emacs...), you'll have to **install the necessary plugins** for svelte support, linting and formatting yourself. These tools is important as they save a lot of time and allow you to check and (auto)fix your commits locally before they pass tests during CI. You'll find a list of keywords to search for in your editors package manager in the [Tech stack](#tech-stack) section.  
 
-## Contribution guide
-I've made up a certain order which development should follow. This can be found in [CONTRIBUTING.md](CONTRIBUTING.md), once it exists.
+## Development
+We use `package.json` scripts exclusively as a front-end for task automation, and **yarn instead of npm** as a package manager. Static assets are automatically processed with [gulp](https://gulpjs.com/), [svelte](https://svelte.dev/) assets is handled by [rollup](https://rollupjs.org/). We use [Prettier](https://prettier.io/), [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/) to format all css, javascript, json and more automatically before commiting and when the editor saves (assuming the plugins are installed).
 
-<br />
+## Tech stack
+ - [Git](https://git-scm.com/) - Version control
+ - [GitHub Actions](https://github.com/features/actions) - CI/CD
+ - [GitPod](https://www.gitpod.io/) - reproducible dev environments
+ - [NodeJS](https://nodejs.org/en/) - Server-side JavaScript
+ - [Polka](https://github.com/lukeed/polka) - NodeJS web server
+ - [Svelte](https://svelte.dev/) - modern JavaScript compiler
+ - [Sapper](https://sapper.svelte.dev/) - official Svelte framework
+ - [Yarn](https://yarnpkg.com/) - Package management
+ - [Rollup](https://rollupjs.org/) - Svelte asset bundler and minifier
+ - [Gulp](https://gulpjs.com/) - Static asset processor
+ - [Cypress](https://www.cypress.io/) - UI testing
+ - [Editorconfig](https://editorconfig.org/) - IDE file style consistency
+ - [Prettier](https://prettier.io/) - Code formatting
+ - [ESLint](https://eslint.org/) - JavaScript linting
+ - [Stylelint](https://stylelint.io/) - CSS style linting
+ - [Vercel](https://vercel.com/) - Automatic deployments
+ - [Bit](https://bit.dev/) - Component library
 
-### WIP
+## Contributing
+There is a contribution guide in [CONTRIBUTING.md](CONTRIBUTING.md) detailing the git workflow in this repository. We do [Trunk based development](https://trunkbaseddevelopment.com/).
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these contributors. We follow the [all-contributors](https://allcontributors.org/) specification ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -39,4 +58,4 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+Contributions of any kind are welcome!
