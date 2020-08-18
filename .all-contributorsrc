@@ -1,0 +1,41 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "Flosi23",
+      "name": "Flosi23",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/56218180?v=4",
+      "profile": "https://github.com/Flosi23",
+      "contributions": [
+        "code",
+        "content",
+        "design",
+        "ideas"
+      ]
+    },
+    {
+      "login": "GitGangGuy",
+      "name": "GitGangGuy",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/50679178?v=4",
+      "profile": "https://github.com/GitGangGuy",
+      "contributions": [
+        "code",
+        "bug",
+        "doc",
+        "projectManagement",
+        "plugin"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "frontend",
+  "projectOwner": "lsglab",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true,
+  "badgeTemplate": "<a href='#contributors'><img src='https://img.shields.io/github/all-contributors/lsglab/frontend/master' alt='All-Contributors Count'></a>"
+}

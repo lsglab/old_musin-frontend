@@ -2,6 +2,7 @@ name: On card move
 on:
   project_card:
     types:
+     - created
      - moved
 jobs:
   execute:
@@ -10,3 +11,5 @@ jobs:
     steps:
       - name: Label the card by its column
         uses: technote-space/auto-card-labeler@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.PAT }}

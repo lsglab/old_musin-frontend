@@ -1,46 +1,31 @@
-<script context = "module">
-    let slug
-    import { gql } from "apollo-boost";
-    import {client} from '../../data.js'
-    
+<script context = "module"> 
+    let slug 
+
     export async function preload({ params, query }) {       
         //get the slug 
         slug = params.slug
-        
-        const result = await client.query({
-            query: gql`
-            query {
-                articles (where: { slug: "${slug}" }){
-                    title
-                    subTitle
-                    description
-                    slug
-                    image {
-                        url
-                    }
-                    section{
-                        title
-                        subTitle
-                        content
-                    }
-                }
-            }`
-        })
-
-        return { result: result.data.articles[0] }
-	}
+    }
 </script>
 
-<script>
-    export let result
+<script>    
+    import {getClient , query} from "svelte-apollo"
+    import NotFound from '../_error.svelte'
+    import Text from '../../components/text.svelte'
+    import {ARTICLE} from '../../query.js'
+
+    const client = getClient()
+   
+    //new query to fetch the article depending on the given slug
+    const article = query(client, {query: ARTICLE(slug)})
     
+    let result
     let y
     let sticky = false;
     let normOffset;
     let active = 0;
 
+    //function scrolls to the right article section
     function scrollTo(target){
-        
         let target_id = `sect${target}`
         //close nav in case the user is on mobile
         document.getElementById("table-checkbox").checked = false;
@@ -65,7 +50,7 @@
         });
 
     }
-
+    //this function caclulates the estimated reading Time for an article
     function calcReadingTime(sections){
         let txt;
         //get whole text
@@ -80,8 +65,9 @@
 
         return readingTimeAsString;        
     }
-
+    //this func is called every time when scrolled and sets 
     function setActive(){
+        console.log("We are setting active")
         let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
 
         let sections = document.getElementsByClassName("art-content-sect");
@@ -104,6 +90,11 @@
         }
     }
 
+    function setResult(data){
+        result = data.data.articles[0]
+    }
+    
+    //functions checks if the content-table is on the top or not
     function isSticky(y){
         //set the Offset the content table has when the page is first loaded
         if(normOffset == undefined){
@@ -119,87 +110,101 @@
 
     $: y,scroll(y)
 
+
     function scroll(){
         //y == undefined --> means component isn't rendered to the dom yet --> document would throw an error
-        if(y != undefined){
+        //if result was undefined and these functions were called it would lead to an error, too
+        if(y != undefined && result != undefined){
             isSticky(y)
             setActive()
         } else {return}
     }
+
 </script>
 
 <svelte:head>
-    <title>{result == undefined ? "Not found" : result.slug}</title>
+    <title>{result == undefined ? "Loading..." : slug}</title>
 </svelte:head>
 <svelte:window bind:scrollY="{y}" on:resize="{() => normOffset = undefined}"></svelte:window>
 
-{#if result != undefined}
-    <div id = "article">
-        <div id = "header-sect">
-            <div class = "img-wrapper">
-                <img src={client.url + result.image[0].url} alt="">
-            </div>
-            <div class = "mob-text-wrapper text-center">
-                <h1 id = "art-header">{result.title}</h1>
-                <p id = "sub-header">{result.subTitle}</p>
-            </div>
-        </div>
-        <div>
-            <div class = "flex-row" id = "content-wrapper">
-                <!--Das Inhaltsverzeichnis-->
-                <div class="{sticky === true? "content-table-sticky-active content-table mob-text-wrapper" : "content-table mob-text-wrapper"}"  id = "content-table">
-                    <input type="checkbox" id = "table-checkbox">
-                    <div>
-                        <div class = "flex-row justify-content-between align-center flex-wrap">
-                            <h3>INHALTSVERZEICHNIS</h3>
-                            <label for="table-checkbox"></label>
-                        </div>
-                        <ul class = "content-table-ul" id = "content-table-ul">
-                            {#each result.section as section, i}
-                                <li id={i} class="{active === i ? 'li-active' : ''} "on:click="{ () => scrollTo(i)}">{i + 1}. {section.title}</li>
-                            {/each}
-                        </ul>
-                    </div>
+{#await $article}
+{:then data}
+    <!--helper element that calls a function that sets the result-->
+    <div style="display:none">{setResult(data)}</div>
+    {#if result != undefined}
+        <div id = "article">
+            <div class = "header-sect">
+                <div class = "img-wrapper">
+                    <img src={client.url + result.image[0].url} alt="">
                 </div>
-                <!--Der Body vom Artikel-->
-                <div class = "art-content mob-text-wrapper" id = "art-content">
-                    <!--section mit der reading time und eventuell einer Artikel beschreibung-->
-                    <div>
-                        <div class = "flex-row align-center reading-time">
-                            <img src="../../clock.svg" alt="" id = "clock">
-                            <p id = "reading-time">{calcReadingTime(result.section)}</p>
-                        </div>
-                        <p id = "art-desc">{result.description}</p>
-                    </div>
-                    <!--Biespiel einer Artikel section-->
-                    {#each result.section as section, i}
-                        <div class="art-content-sect" id="sect{i}">
-                            <hr> 
-                            <h2>{section.title}</h2> 
-                            <h4>{section.subTitle == null ? "" : section.subTitle}</h4>
-                            <div>{@html section.content}</div>
-                        </div>
-                    {/each}
+                <div class = "mob-text-wrapper text-center">
+                    <h1>{result.title}</h1>
+                    <p>{result.subTitle == null ? "" : result.subTitle}</p>
                 </div>
             </div>
+            <div>
+                <div class = "flex-row content-wrapper">
+                    <!--Das Inhaltsverzeichnis-->
+                    <div class="{sticky === true? "content-table-sticky-active content-table mob-text-wrapper" : "content-table mob-text-wrapper"}"  id = "content-table">
+                        <input type="checkbox" id = "table-checkbox">
+                        <div>
+                            <div class = "flex-row justify-content-between align-center flex-wrap">
+                                <h3>INHALTSVERZEICHNIS</h3>
+                                <label for="table-checkbox"></label>
+                            </div>
+                            <ul class = "content-table-ul">
+                                {#each result.section as section, i}
+                                        <li id={i} class="{active === i ? 'li-active' : ''} "on:click="{ () => scrollTo(i)}">{i + 1}. {section.title}</li>
+                                {/each}
+                            </ul>
+                        </div>
+                    </div>
+                    <!--Der Body vom Artikel-->
+                    <div class = "art-body mob-text-wrapper">
+                        <!--section mit der reading time und eventuell einer Artikel beschreibung-->
+                        <div>
+                            <div class = "flex-row align-center reading-time">
+                                <img src="../../clock.svg" alt="">
+                                <p>{calcReadingTime(result.section)}</p>
+                            </div>
+                            <p class = "desc">{result.description == null ? "" : result.description}</p>
+                        </div>
+                        <!--Biespiel einer Artikel section-->
+                        {#each result.section as section, i}
+                            <div class="art-content-sect" id="sect{i}">
+                                <header>
+                                    <hr> 
+                                    <h1>{`${i + 1}. ${section.title}`}</h1> 
+                                    <h2>{section.subTitle == null ? "" : section.subTitle}</h2>
+                                </header>
+                                <Text>{@html section.content}</Text>
+                            </div>
+                        {/each}
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-{:else}
-<!--otherwise show error message-->
-    <notFound></notFound>
-{/if}
+    {:else}
+        <NotFound status="404" error={{}}></NotFound>
+    {/if}
+{:catch err}
+    <NotFound status="{err.status}" error="{err}"></NotFound>
+{/await}
+
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 #article{
+    word-break: break-word;
+    hyphens: auto;
+    z-index: 3;
     max-width: 1466px;
     margin: 0px auto;
     padding: 0 2rem;
-    font-family: Open Sans,Segoe UI,sans-serif;
     overflow-anchor: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-#header-sect{
+.header-sect{
     /* grid layout höhe Xrem, jede grid Xrem breit --> bild wird quadratisch */
     display: grid;                  
     height: 31rem;
@@ -207,6 +212,19 @@
     /* items werden horizontal und vertical mittig plaziert */
     justify-content: center;
     align-items: center;
+}
+
+.header-sect h1{
+    font-size: 35px;
+    color: var(--big-header);
+}
+
+.header-sect p{
+    font-size: 20px
+}
+
+.header-sect .mob-text-wrapper{
+    margin: 40px
 }
 
 .img-wrapper{
@@ -238,19 +256,16 @@ img{
     flex-direction: row;
 }
 
-
-
 .flex-wrap{
     flex-wrap: wrap;
 }
-
 
 .align-center{
     align-items: center;
 }
 
 /*--------------------styling of the article content--------------------*/
-.art-content{
+.art-body{
     margin: 3rem 0;
     max-width: 650px;
     min-width: 0px;
@@ -276,36 +291,26 @@ img{
     border: 1px solid black;
 }
 
-.art-content-sect h2{
-    font-size: 1.5rem;
+.art-content-sect header > h1{
+    font-size: 1.9rem;
+    font-weight: 500;
     margin: 10px 0;
 }
 
-.art-content-sect h4{
-    font-size: 1.2rem;
+.art-content-sect header > h2{
+    font-size: 1.5rem;
     margin: 20px 0;
-}
-
-.art-content p{
     font-weight: 400;
-    line-height: 1.5625;
-    letter-spacing: normal;
-    font-size: 1rem;
-    margin-bottom: 1rem;
 }
 
 .text-center{
     text-align: center;
 }
+
 /*--------------styling of the article ends here-------------------*/
 
-/*--------------styling of the content table----------------------*/
 
-/*element wird benutzt um rauszufinden ob der content-table sticky ist oder nicht (siehe article style/index.html) */
-#nav-container-top {
-	height: 1px;
-    visibility: hidden;
-}
+/*--------------styling of the content table----------------------*/
 
 .content-table{
     top: 1rem;
@@ -318,9 +323,8 @@ img{
     z-index: 1;
     background-color: white;
     height: min-content;
-    width: 300px;
-    max-width: 400px;
-    border-radius: 10px;
+    width: 340px;
+    hyphens: none;
 }
 
 .content-table h3{
@@ -347,9 +351,11 @@ img{
 .content-table-ul li{
     margin: 1rem 0;
     list-style-type: none;
-    font-weight: 600;
-    font-size: 14px;
     cursor: pointer;
+    font-weight: 600;
+    line-height: 1.286;
+    letter-spacing: .2px;
+    font-size: 1rem;
 }
 
 .li-active{
@@ -358,13 +364,13 @@ img{
 }
 
 /*--------------styling of the content table ends here----------------------*/
-#content-wrapper{
+.content-wrapper{
     margin: auto;
     justify-content: center;
 }
 
 @media(max-width:1104px){
-    #content-wrapper{
+    .content-wrapper{
         flex-wrap: wrap;
     }
 
@@ -373,7 +379,7 @@ img{
         padding-left: 0px;
     }
 
-    #header-sect{
+    .header-sect{
         /* ab bestimmter größe grid zum Flex-container machen, column reverse --> titel kommt nach oben */
         display: flex;
         flex-direction: column-reverse;
