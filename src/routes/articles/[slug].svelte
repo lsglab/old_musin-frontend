@@ -280,6 +280,10 @@ img{
     border-bottom: 2px solid #d8dee9;
 }
 
+.desc{
+    color: var(--light-text)
+}
+
 .reading-time p{
     margin: 0.5rem !important;
 }

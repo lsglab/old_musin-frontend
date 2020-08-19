@@ -5,6 +5,7 @@ export const ARTICLE = (slug) => gql`
         articles (where: { slug: "${slug}" }){
             title
             subTitle
+            description
             image{
                 url
             }
