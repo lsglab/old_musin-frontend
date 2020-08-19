@@ -398,13 +398,12 @@ img{
     }
 
     .content-table{
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
+        margin-top: 0;
+        margin-bottom: 0px !important;
         top: 0px;
         box-shadow: none;
         width: 100%;
         min-width: 0px;
-        max-width: none;
     }
 
     .content-table-ul{
@@ -419,6 +418,8 @@ img{
         width: 100vw !important;
         padding-bottom: 0px !important;
         box-shadow: 0 10px 1rem rgba(0,0,0,.1) !important;
+        max-width: none;
+        border-radius: 15px;
     }
 
     .content-table-sticky-active h3{

@@ -40,7 +40,11 @@ on the whole page -->
     }
 
     div :global(img){
-        width: 100%;
+        max-width: 100%;
+    }
+
+    div :global(figcaption){
+        color: var(--light-text);
     }
     
     div :global(table){
