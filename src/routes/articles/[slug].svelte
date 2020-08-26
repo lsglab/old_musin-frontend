@@ -34,7 +34,7 @@
 
         const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
         //correction = 10 --> now there is a little space above the hr 
-        let correction = 10;
+        let correction = 20;
 
         if(vw <= 1048){
             //if the user is mobile the height of the content-table needs to be added cause it is fixed and thus is not part of offsetTop
@@ -233,6 +233,7 @@
     justify-content: center;
     /* overflow hidden --> das überstehende vom bild wird weggeschnitten */
     width: 100%;
+    max-width: max-content;
     height: 100%;
     /* übernimm die höhe vom parent element,width so breit wie möglich --> so breit wie die grid */
 }
