@@ -1,4 +1,4 @@
-name: On card move
+name: Card moved
 on:
     project_card:
         types:

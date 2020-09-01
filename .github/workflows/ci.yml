@@ -1,4 +1,4 @@
-name: On push
+name: CI
 on:
     - push
     - pull_request
@@ -26,3 +26,13 @@ jobs:
                   ignore: master
                   min_length: 7
                   max_length: 100
+            - name: Setup NodeJS 14
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '14.x'
+            - name: Install dependencies
+              run: yarn --frozen-lockfile
+            - name: Run Tests
+              run: yarn do:testing
+              env:
+                  CI: true

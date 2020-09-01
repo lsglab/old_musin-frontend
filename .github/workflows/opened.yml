@@ -1,4 +1,4 @@
-name: On creation of an issue or a pull request
+name: Pull request or issue created
 on:
     pull_request:
         types:
