@@ -1,21 +1,21 @@
 image:
-  file: .gitpod.Dockerfile
+    file: .gitpod.Dockerfile
 
 tasks:
-  - init: yarn && yarn build
-    command: yarn start
+    - init: yarn && yarn build
+      command: yarn start
 
 vscode:
-  extensions:
-    - formulahendry.auto-close-tag
-    - formulahendry.auto-complete-tag
-    - formulahendry.auto-rename-tag
-    - editorconfig.editorconfig
-    - dbaeumer.vscode-eslint
-    - eg2.vscode-npm-script
-    - christian-kohler.npm-intellisense
-    - esbenp.prettier-vscode
-    - stylelint.vscode-stylelint
-    - fivethree.vscode-svelte-snippets
-    - svelte.svelte-vscode
-    - ardenivanov.svelte-intellisense
+    extensions:
+        - formulahendry.auto-close-tag
+        - formulahendry.auto-complete-tag
+        - formulahendry.auto-rename-tag
+        - editorconfig.editorconfig
+        - dbaeumer.vscode-eslint
+        - eg2.vscode-npm-script
+        - christian-kohler.npm-intellisense
+        - esbenp.prettier-vscode
+        - stylelint.vscode-stylelint
+        - fivethree.vscode-svelte-snippets
+        - svelte.svelte-vscode
+        - ardenivanov.svelte-intellisense

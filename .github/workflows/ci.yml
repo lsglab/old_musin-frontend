@@ -1,0 +1,28 @@
+name: On push
+on:
+    - push
+    - pull_request
+jobs:
+    execute:
+        name: Test and Deploy
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout the current repository
+              uses: actions/checkout@master
+              with:
+                  fetch-depth: 0
+            - name: Automatically label any merge conflict
+              if: github.event_name == 'push'
+              uses: mschilde/auto-label-merge-conflicts@master
+              with:
+                  CONFLICT_LABEL_NAME: 'merge conflict'
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Enforce our branching convention
+              if: github.event_name == 'pull_request'
+              uses: deepakputhraya/action-branch-name@master
+              with:
+                  regex: '(?:all\-contributors\/|issue\-(?:[0-9])+\-|hotfix(?:\-)?)(?:[a-zA-Z0-9_-])+'
+                  allowed_prefixes: 'issue,all-contributors,hotfix'
+                  ignore: master
+                  min_length: 7
+                  max_length: 100

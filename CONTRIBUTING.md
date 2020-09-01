@@ -4,13 +4,16 @@ Any contribution in our repositories always starts with an issue. Wether you're 
 Note that as we have a code of conduct, please follow it in all your interactions with the project.
 
 ## Trunk based development
-This repository follows the guidelines of [Trunk based development](https://trunkbaseddevelopment.com/). We use the 'scalable' approach of branching off and merging into master using issues and pull requests (details on this can be found in the section below). Since we use yarn for script automation, here's a short list of common commands you should use instead of the regular git commands. They enforce a common git development style and mitigate problems. In particular, **never rebase or squash**, as the former breaks other peoples local development on your feature branch and both do not keep a clean history of where commits in master originated from. With these premade scripts, there will never be a need to rebase/squash and merging will work just fine:  
- - `yarn sync`: Stashes any uncommited changes, pulls remote changes from all branches, and adds remote branch tracking to untracked local branches, then pops uncommited changes back
- - `yarn commit`: Commits all changes made with a [conventional commit](https://github.com/commitizen/cz-cli) message using [commitizen](https://github.com/commitizen/cz-cli)
- - `yarn push`: Push local commits to the repository
- - `yarn master`: Merge any changes from master into the current branch, using a conventional commit message. This is only needed when hotfixes or dependent features from master need to be applied to the current branch. Note that updating the current branch just for the associated pull request to pass is done automatically.
+
+This repository follows the guidelines of [Trunk based development](https://trunkbaseddevelopment.com/). We use the 'scalable' approach of branching off and merging into master using issues and pull requests (details on this can be found in the section below). Since we use yarn for script automation, here's a short list of common commands you should use instead of the regular git commands. They enforce a common git development style and mitigate problems. In particular, **never rebase or squash**, as the former breaks other peoples local development on your feature branch and both do not keep a clean history of where commits in master originated from. With these premade scripts, there will never be a need to rebase/squash and merging will work just fine:
+
+-   `yarn sync`: Stashes any uncommited changes, pulls remote changes from all branches, and adds remote branch tracking to untracked local branches, then pops uncommited changes back
+-   `yarn commit`: Commits all changes made with a [conventional commit](https://github.com/commitizen/cz-cli) message using [commitizen](https://github.com/commitizen/cz-cli)
+-   `yarn push`: Push local commits to the repository
+-   `yarn master`: Merge any changes from master into the current branch, using a conventional commit message. This is only needed when hotfixes or dependent features from master need to be applied to the current branch. Note that updating the current branch just for the associated pull request to pass is done automatically.
 
 ## It starts with an issue
+
 1. First, check if an existing issue already addresses what you came for. You can use the GitHub issues search bar for this; don't forget to remove the `is:open` filter to also see closed issues from the past.
 2. We do not accept support questions in the issue section. They will be closed automatically and will not be read.
 3. You can now open an issue. You will be presented with a handful of templates to choose from. Please fill them out as good as you can, as this will save time later.
@@ -32,19 +35,19 @@ In the interest of fostering an open and welcoming environment, we as contributo
 
 Examples of behavior that contributes to creating a positive environment include:
 
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
+-   Using welcoming and inclusive language
+-   Being respectful of differing viewpoints and experiences
+-   Gracefully accepting constructive criticism
+-   Focusing on what is best for the community
+-   Showing empathy towards other community members
 
 Examples of unacceptable behavior by participants include:
 
-* The use of sexualized language or imagery and unwelcome sexual attention or advances
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or electronic address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a professional setting
+-   The use of sexualized language or imagery and unwelcome sexual attention or advances
+-   Trolling, insulting/derogatory comments, and personal or political attacks
+-   Public or private harassment
+-   Publishing others' private information, such as a physical or electronic address, without explicit permission
+-   Other conduct which could reasonably be considered inappropriate in a professional setting
 
 ### Our Responsibilities
 

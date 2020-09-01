@@ -1,16 +1,16 @@
 {
-  "recommendations": [
-    "formulahendry.auto-close-tag",
-    "formulahendry.auto-complete-tag",
-    "formulahendry.auto-rename-tag",
-    "editorconfig.editorconfig",
-    "dbaeumer.vscode-eslint",
-    "eg2.vscode-npm-script",
-    "christian-kohler.npm-intellisense",
-    "esbenp.prettier-vscode",
-    "stylelint.vscode-stylelint",
-    "fivethree.vscode-svelte-snippets",
-    "svelte.svelte-vscode",
-    "ardenivanov.svelte-intellisense",
-  ]
+	"recommendations": [
+		"formulahendry.auto-close-tag",
+		"formulahendry.auto-complete-tag",
+		"formulahendry.auto-rename-tag",
+		"editorconfig.editorconfig",
+		"dbaeumer.vscode-eslint",
+		"eg2.vscode-npm-script",
+		"christian-kohler.npm-intellisense",
+		"esbenp.prettier-vscode",
+		"stylelint.vscode-stylelint",
+		"fivethree.vscode-svelte-snippets",
+		"svelte.svelte-vscode",
+		"ardenivanov.svelte-intellisense"
+	]
 }

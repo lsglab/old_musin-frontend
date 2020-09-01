@@ -1,7 +1,9 @@
 # Security Policy
 
 ## Supported Versions
+
 As this project doesn't utilize versioning due to its nature, the HEAD of master can be seen as the currently supported version.
+
 <!--
 | Version | Supported          |
 | ------- | ------------------ |
@@ -12,4 +14,5 @@ As this project doesn't utilize versioning due to its nature, the HEAD of master
 -->
 
 ## Reporting a Vulnerability
+
 If you found a vulnerability, please report it in the projects issues. Thank you!

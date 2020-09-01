@@ -1,9 +1,9 @@
 minApprovals:
-  NONE: 0
+    NONE: 0
 reportStatus: true
 updateBranch: true
 deleteBranchAfterMerge: true
 mergeMethod: merge
 mergeCommitMessage: |
-  {title} (#{number})
-  {body}
+    {title} (#{number})
+    {body}

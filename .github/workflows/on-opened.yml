@@ -1,31 +1,31 @@
 name: On creation of an issue or a pull request
 on:
-  pull_request:
-    types:
-     - opened
-  issues:
-    types:
-     - opened
+    pull_request:
+        types:
+            - opened
+    issues:
+        types:
+            - opened
 jobs:
-  execute:
-    name: Check and add to project board
-    runs-on: ubuntu-latest
-    steps:
-     - name: Assign author
-       uses: technote-space/assign-author@v1
-       with:
-         GITHUB_TOKEN: ${{ secrets.PAT }}
-     - name: Add new issues to the To do column
-       if: github.event_name == 'issues'
-       uses: alex-page/github-project-automation-plus@v0.2.4
-       with:
-         project: Board
-         column: To do
-         repo-token: ${{ secrets.PAT }}
-     - name: Add new pull requests to the In progress column
-       if: github.event_name == 'pull_request'
-       uses: alex-page/github-project-automation-plus@v0.2.4
-       with:
-         project: Board
-         column: In progress
-         repo-token: ${{ secrets.PAT }}
+    execute:
+        name: Check and add to project board
+        runs-on: ubuntu-latest
+        steps:
+            - name: Assign author
+              uses: technote-space/assign-author@v1
+              with:
+                  GITHUB_TOKEN: ${{ secrets.PAT }}
+            - name: Add new issues to the To do column
+              if: github.event_name == 'issues'
+              uses: alex-page/github-project-automation-plus@v0.2.4
+              with:
+                  project: Board
+                  column: To do
+                  repo-token: ${{ secrets.PAT }}
+            - name: Add new pull requests to the In progress column
+              if: github.event_name == 'pull_request'
+              uses: alex-page/github-project-automation-plus@v0.2.4
+              with:
+                  project: Board
+                  column: In progress
+                  repo-token: ${{ secrets.PAT }}

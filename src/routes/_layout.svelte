@@ -15,8 +15,8 @@
 	}*/
 </style>
 
-<Nav {segment}/>
+<Nav segment="{segment}" />
 
 <main>
-	<slot></slot>
+	<slot />
 </main>
