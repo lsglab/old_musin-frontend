@@ -5,7 +5,7 @@ import postcssReset from 'postcss-autoreset';
 import postcssInitial from 'postcss-initial';
 import postcssAssets from 'postcss-assets';
 import postcssSprites from 'postcss-sprites';
-import postcssFonts from 'postcss-font-magician';
+// import postcssFonts from 'postcss-font-magician';
 import postcssFailOnWarn from 'postcss-fail-on-warn';
 import colorguard from 'colorguard';
 // import tailwindcss from 'tailwindcss';
@@ -21,13 +21,13 @@ export default {
 			plugins: [stylelint],
 		}),
 		// tailwindcss,
-		postcssFonts({
-			display: 'swap',
-			hosted: ['./assets/fonts', '/'],
-			async: './assets/scripts/fontloader.js',
-			formats: 'woff2 woff local eot svg otf',
-			protocol: 'https:',
-		}),
+		// postcssFonts({
+		// 	display: 'swap',
+		// 	hosted: ['./assets/fonts', '/'],
+		// 	async: './assets/scripts/fontloader.js',
+		// 	formats: 'woff2 woff local eot svg otf',
+		// 	protocol: 'https:',
+		// }),
 		postcssAssets({
 			loadPaths: ['assets/media/', 'node_modules/'],
 			relative: true,
@@ -69,7 +69,7 @@ export default {
 			reset: 'all',
 		}),
 		colorguard({
-			threshold: 5,
+			threshold: 10,
 		}),
 		autoprefixer,
 		production &&

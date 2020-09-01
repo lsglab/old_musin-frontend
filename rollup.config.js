@@ -9,7 +9,6 @@ import url from '@rollup/plugin-url';
 import rollupSass from 'rollup-plugin-sass';
 import { terser } from 'rollup-plugin-terser';
 import module from 'module';
-// eslint-disable-next-line import/extensions
 import config from 'sapper/config/rollup';
 import pkg from './package.json';
 import svelteConfig from './svelte.config';
@@ -49,7 +48,7 @@ export default {
 				dom: true,
 			}),
 			svelte({
-				// ...svelteConfig,
+				...svelteConfig,
 				dev,
 				hydratable: true,
 				emitCss: true,
@@ -115,7 +114,7 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode),
 			}),
 			svelte({
-				// ...svelteConfig,
+				...svelteConfig,
 				generate: 'ssr',
 				dev,
 				hydratable: true,
