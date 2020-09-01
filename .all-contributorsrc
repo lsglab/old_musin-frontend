@@ -23,6 +23,18 @@
       "name": "Flosi23",
       "avatar_url": "https://avatars1.githubusercontent.com/u/56218180?v=4",
       "profile": "https://github.com/Flosi23",
+	  "contributions": [
+        "code",
+        "content",
+        "design",
+        "ideas"
+      ]
+	},
+	{
+      "login": "jamwag",
+      "name": "James Wagner",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/42468118?v=4",
+      "profile": "https://github.com/jamwag",
       "contributions": [
         "code",
         "content",
