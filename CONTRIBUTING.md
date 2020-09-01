@@ -1,16 +1,16 @@
 # Contributing
 
-Any contribution in our repositories always starts with an issue. Wether you're experiencing a bug, have an idea or want to suggest a feature, opening an issue is the very first thing to do. This will allow you to gather feedback from others and is the perfect entry gate to how we automate GitOps here.
-Note that as we have a code of conduct, please follow it in all your interactions with the project.
+Wether you're experiencing a bug, have an idea or want to suggest a feature, opening an issue is the very first thing to do. This allows you to gather feedback from others, makes automation easy and organizes development.
+Note that we have a code of conduct, please follow it in all your interactions with the project.
 
 ## Trunk based development
 
 This repository follows the guidelines of [Trunk based development](https://trunkbaseddevelopment.com/). We use the 'scalable' approach of branching off and merging into master using issues and pull requests (details on this can be found in the section below). Since we use yarn for script automation, here's a short list of common commands you should use instead of the regular git commands. They enforce a common git development style and mitigate problems. In particular, **never rebase or squash**, as the former breaks other peoples local development on your feature branch and both do not keep a clean history of where commits in master originated from. With these premade scripts, there will never be a need to rebase/squash and merging will work just fine:
 
--   `yarn sync`: Stashes any uncommited changes, pulls remote changes from all branches, and adds remote branch tracking to untracked local branches, then pops uncommited changes back
--   `yarn commit`: Commits all changes made with a [conventional commit](https://github.com/commitizen/cz-cli) message using [commitizen](https://github.com/commitizen/cz-cli)
--   `yarn push`: Push local commits to the repository
--   `yarn master`: Merge any changes from master into the current branch, using a conventional commit message. This is only needed when hotfixes or dependent features from master need to be applied to the current branch. Note that updating the current branch just for the associated pull request to pass is done automatically.
+-   `yarn do:sync`: Stashes any uncommited changes, pulls remote changes from all branches, and adds remote branch tracking to untracked local branches, then pops uncommited changes back
+-   `yarn do:commit`: Commits all changes made with a [conventional commit](https://github.com/commitizen/cz-cli) message using [commitizen](https://github.com/commitizen/cz-cli)
+-   `yarn do:push`: Push local commits to the repository
+-   `yarn do:master`: Merge any changes from master into the current branch, using a conventional commit message. This is only needed when hotfixes or dependent features from master need to be applied to the current branch. Note that updating the current branch just for the associated pull request to pass is done automatically.
 
 ## It starts with an issue
 
