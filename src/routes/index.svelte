@@ -2,6 +2,8 @@
     import {onMount} from "svelte";
     //moved DashBackground in an reusable component that can take a customHeight
     import DashBackground from "../components/dashBackground.svelte";
+    import Home from "../components/home.svelte"
+
     function jump(h){
         var url = location.href;               //Save down the URL without hash.
         location.href = "#"+h;                 //Go to the target element.
@@ -30,30 +32,14 @@
 	<title>Home - Louise Schroeder Gymnasium</title>
 </svelte:head>
 
-<div class="wrapper">
-    <header>
-        <div class="left">
-            <div>
-                <h1>Städtisches Louise Schroeder Gymnasium München</h1>
-                <h3>Naturwissenschaftlich-technologisches<br>und sprachliches Gymnasium.</h3>
-                <button on:click="{() => jump('termine')}">Aktuelle Termine</button>
-                <p>Referenzschule der TU München</p>
-            </div>
-        </div>
-        <div class="right">
-            <div class="image">
-                <img src="https://lsg.musin.de/homepage/images/header-images/schulhof_mini.jpg" alt="">
-            </div>
-        </div>
-    </header>
-    <div class="awards" id="logo-section">
-        <img class="logo" src="https://lsg.musin.de/homepage/images/LOGOsorsmc_SCREEN_80mm_RGB_mini.jpg" alt="">
-        <img class="logo" src="https://lsg.musin.de/homepage/images/delf.jpg" alt="">
-        <img class="logo" src="https://lsg.musin.de/homepage/images/cae.png" alt="">
-        <img class="logo" src="https://lsg.musin.de/homepage/images/cils.png" alt="">
-        <img class="logo" src="https://lsg.musin.de/homepage/images/KombiLogo.png" alt="">
-    </div>
-</div>
+<!--The plain text is going to be replaced with the content fetched from the database later on-->
+<Home mainHeader="Städtisches Louise Schroeder Gymnasium München" subHeader="Naturwissenschaftlich-technologisches und sprachliches Gymnasium." 
+buttonText="Aktuelle Termine" buttonJump = "termine" 
+desc="Referenzschule der TU München" mainImage="https://lsg.musin.de/homepage/images/header-images/schulhof_mini.jpg"
+awards={["https://lsg.musin.de/homepage/images/LOGOsorsmc_SCREEN_80mm_RGB_mini.jpg","https://lsg.musin.de/homepage/images/delf.jpg",
+"https://lsg.musin.de/homepage/images/cae.png","https://lsg.musin.de/homepage/images/cils.png",
+"https://lsg.musin.de/homepage/images/KombiLogo.png"]}
+></Home>
 <div class="appointment-section" id="termine">
     <h1>Aktuelle Termine</h1>
     <p>Alle demnächst anstehende Termine des Louise-Schroeder-Gymnasiums:</p>
@@ -144,114 +130,6 @@
 
 *:focus {
     outline: none;
-}
-
-.wrapper {
-    background: #f6f9fc;
-    margin-top: -80px;
-}
-
-
-/*** Header ***/
-header {
-    width: 100%;
-    min-height: calc(100vh - 90px);
-    display: flex;
-    flex-wrap: nowrap;
-    padding: 0 15vw;
-    padding-top: 40px;
-    justify-content: space-between;
-}
-
-header > div {
-    display: flex;
-    align-items: center;
-    justify-content: safe center;
-    flex-direction: column;
-    width: 50%;
-    z-index: 99;
-}
-
-/* header > .left {
-    width: 400px;
-}
-
-header > .right {
-    width: 400px;
-} */
-
-
-header > .right > div > img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    max-height: 60vh;
-    object-fit: cover;
-}
-header > .right {
-    width: 100%;
-}
-
-header > .left {
-    width: auto;
-}
-
-header > .left > div {
-    margin: 50px;
-    margin-right: 80px;
-    max-width: 500px;
-    margin-left: 0;
-}
-
-header > .left h1 {
-    font-size: 45px;
-    line-height: 48px;
-    color: var(--big-header);
-}
-
-header > .left h3 {
-    font-weight: 500;
-    font-size: 20px;
-}
-
-header > .left button {
-    height: 40px;
-    width: 250px;
-}
-
-header > .left p {
-    margin-toP: 40px;
-    color: var(--ligt-text);
-    font-size: 14px;
-}
-
-/*** Awards ***/
-.awards {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 0 15vw;
-    padding-bottom: 30px;
-    position: relative;
-}
-
-.awards > img {
-    height: 60px;
-    filter: grayscale(1);
-    mix-blend-mode: multiply;
-}
-
-.awards::before {
-    content: '';
-    width:100%;
-    height: 1px;
-    position: absolute;
-    top: -20px;
-    left: 0px;
-    background: linear-gradient(90deg, rgba(66,71,112,0.09), rgba(66,71,112,0.09) 50%, transparent 0, transparent);
-    background-size: 8px 1px;
 }
 
 .appointment-section {
@@ -389,22 +267,6 @@ a:hover::after {
     opacity: 0 !important;
     pointer-events: none !important;
   }
-  header {
-      flex-wrap: wrap;
-  }
-  .left {
-      margin-top: 30px;
-  }
-  .awards {
-      margin-top: 30px;
-      justify-content: center;
-  }
-  .awards > img {
-      margin: 20px;
-  }
-  .left > div {
-      margin-right: 0 !important;
-  }
 }
 
 @media screen and (min-width: 811px) {
@@ -429,9 +291,6 @@ a:hover::after {
     }
     .time {
         align-items: start !important;
-    }
-    header {
-        padding: 0 20px;
     }
 }
 </style>
