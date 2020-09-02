@@ -29,6 +29,18 @@
         "projectManagement",
         "plugin"
       ]
+    },
+    {
+      "login": "jamwag",
+      "name": "James Wagner",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/42468118?v=4",
+      "profile": "https://github.com/jamwag",
+      "contributions": [
+        "code",
+        "content",
+        "design",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
