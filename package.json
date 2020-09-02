@@ -105,7 +105,6 @@
 		"postcss-font-magician": "^2.3.1",
 		"postcss-import": "^12.0.1",
 		"postcss-initial": "^3.0.2",
-		"postcss-sprites": "^4.2.1",
 		"postcss-url": "^8.0.0",
 		"prettier": "^2.1.1",
 		"prettier-plugin-package": "^1.0.0",
