@@ -1,17 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import sveltePreprocess from 'svelte-preprocess';
-import postcssConfig from './postcss.config';
+const esmImport = require('esm')(module);
 
-const mode = process.env.NODE_ENV;
-const dev = mode === 'development';
+const { postcssOpts } = esmImport('./opts.config.mjs');
 
-export default {
-	preprocess: sveltePreprocess({
-		sourceMap: dev,
-		postcss: { ...postcssConfig },
-		sass: {
-			renderSync: true,
-		},
-		globalStyle: {},
-	}),
-};
+module.exports = postcssOpts;

@@ -19,3 +19,5 @@ vscode:
         - fivethree.vscode-svelte-snippets
         - svelte.svelte-vscode
         - ardenivanov.svelte-intellisense
+        - redhat.vscode-yaml
+        - bradlc.vscode-tailwindcss

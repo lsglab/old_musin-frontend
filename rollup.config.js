@@ -3,18 +3,28 @@ import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
 import babel from '@rollup/plugin-babel';
-import image from '@rollup/plugin-image';
 import strip from '@rollup/plugin-strip';
 import url from '@rollup/plugin-url';
-import rollupSass from 'rollup-plugin-sass';
 import { terser } from 'rollup-plugin-terser';
 import module from 'module';
+import sass from 'sass';
+import scss from 'rollup-plugin-scss';
 import config from 'sapper/config/rollup';
 import pkg from './package.json';
-import svelteConfig from './svelte.config';
+import {
+	sassOpts,
+	preprocessOpts as svelteConfig,
+	terserOpts as terserConfig,
+	babelOpts as babelConfig,
+} from './opts.config';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
+const replaceConfig = (browser) => ({
+	'process.browser': browser,
+	'process.env.NODE_ENV': JSON.stringify(mode),
+});
+const sassConfig = { ...sassOpts, dev, hydratable: true };
 
 // eslint-disable-next-line no-shadow
 const onwarn = (warning, onwarn) =>
@@ -22,35 +32,23 @@ const onwarn = (warning, onwarn) =>
 	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) ||
 	onwarn(warning);
 
-const sassOpts = {
-	outputStyle: 'compressed',
-	precision: 2,
-	includePaths: ['./node_modules/'],
-	// fiber: Fiber,
-};
-
 export default {
 	client: {
 		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
-			replace({
-				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-			}),
-			rollupSass({ options: sassOpts }),
+			replace(replaceConfig(true)),
 			url({
 				limit: 20000,
-				emitFiles: false,
-				publicPath: './static/',
+				emitFiles: true,
 			}),
-			image({
-				dom: true,
+			scss({
+				output: 'static/bundle.css',
+				sass,
+				...sassConfig,
 			}),
 			svelte({
 				...svelteConfig,
-				dev,
-				hydratable: true,
 				emitCss: true,
 			}),
 			resolve({
@@ -58,48 +56,8 @@ export default {
 				dedupe: ['svelte'],
 			}),
 			commonjs(),
-			!dev &&
-				babel({
-					extensions: ['.js', '.mjs', '.html', '.svelte'],
-					babelHelpers: 'runtime',
-					exclude: ['node_modules/@babel/**'],
-				}),
-			!dev &&
-				terser({
-					module: true,
-					compress: {
-						defaults: true,
-						booleans_as_integers: true,
-						drop_console: true,
-						hoist_funs: true,
-						hoist_vars: true,
-						keep_fargs: false,
-						passes: 3,
-						toplevel: true,
-						unsafe: true,
-						unsafe_arrows: true,
-						unsafe_Function: true,
-						unsafe_math: true,
-						unsafe_proto: true,
-						unsafe_undefined: true,
-						safari10: true,
-					},
-					mangle: {
-						toplevel: true,
-						safari10: true,
-					},
-					toplevel: true,
-					warnings: true,
-					safari10: true,
-					ie8: true,
-					format: {
-						indent_level: 0,
-						webkit: true,
-					},
-					parse: {
-						html5_comments: false,
-					},
-				}),
+			babel(babelConfig),
+			!dev && terser(terserConfig),
 			!dev && strip(),
 		],
 		preserveEntrySignatures: false,
@@ -109,15 +67,10 @@ export default {
 		input: config.server.input(),
 		output: { ...config.server.output(), format: 'esm' },
 		plugins: [
-			replace({
-				'process.browser': false,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-			}),
+			replace(replaceConfig(false)),
 			svelte({
 				...svelteConfig,
 				generate: 'ssr',
-				dev,
-				hydratable: true,
 			}),
 			resolve({
 				dedupe: ['svelte'],
@@ -133,53 +86,10 @@ export default {
 		output: config.serviceworker.output(),
 		plugins: [
 			resolve(),
-			replace({
-				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-			}),
+			replace(replaceConfig(false)),
 			commonjs(),
-			!dev &&
-				babel({
-					extensions: ['.js', '.mjs', '.html', '.svelte'],
-					babelHelpers: 'runtime',
-					exclude: ['node_modules/@babel/**'],
-				}),
-			!dev &&
-				terser({
-					module: true,
-					compress: {
-						defaults: true,
-						booleans_as_integers: true,
-						drop_console: true,
-						hoist_funs: true,
-						hoist_vars: true,
-						keep_fargs: false,
-						passes: 3,
-						toplevel: true,
-						unsafe: true,
-						unsafe_arrows: true,
-						unsafe_Function: true,
-						unsafe_math: true,
-						unsafe_proto: true,
-						unsafe_undefined: true,
-						safari10: true,
-					},
-					mangle: {
-						toplevel: true,
-						safari10: true,
-					},
-					toplevel: true,
-					warnings: true,
-					safari10: true,
-					ie8: true,
-					format: {
-						indent_level: 0,
-						webkit: true,
-					},
-					parse: {
-						html5_comments: false,
-					},
-				}),
+			babel(babelConfig),
+			!dev && terser(terserConfig),
 			!dev && strip(),
 		],
 		preserveEntrySignatures: false,

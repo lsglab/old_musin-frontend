@@ -64,7 +64,14 @@
 			"processor": "svelte3/svelte3"
 		},
 		{
-			"files": ["postcss.config.js"],
+			"files": [
+				"postcss.config.js",
+				"postcss.config.mjs",
+				"rollup.config.js",
+				"rollup.config.mjs",
+				"opts.config.js",
+				"opts.config.mjs"
+			],
 			"rules": {
 				"import/no-extraneous-dependencies": [
 					"error",
