@@ -5,6 +5,7 @@ import postcssReset from 'postcss-autoreset';
 import postcssInitial from 'postcss-initial';
 import postcssAssets from 'postcss-assets';
 import postcssFailOnWarn from 'postcss-fail-on-warn';
+import postcssFonts from 'postcss-font-magician';
 import colorguard from 'colorguard';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
@@ -18,7 +19,14 @@ export default {
 		postcssImport({
 			plugins: [stylelint],
 		}),
-		tailwindcss,
+		tailwindcss(),
+		postcssFonts({
+			display: 'swap',
+			hosted: ['./assets/fonts', '/'],
+			async: './assets/scripts/fontloader.js',
+			formats: 'woff2 woff local eot svg otf',
+			protocol: 'https:',
+		}),
 		postcssAssets({
 			loadPaths: ['assets/media/', 'node_modules/'],
 			relative: true,

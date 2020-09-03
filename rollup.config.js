@@ -7,12 +7,9 @@ import strip from '@rollup/plugin-strip';
 import url from '@rollup/plugin-url';
 import { terser } from 'rollup-plugin-terser';
 import module from 'module';
-import sass from 'sass';
-import scss from 'rollup-plugin-scss';
 import config from 'sapper/config/rollup';
 import pkg from './package.json';
 import {
-	sassOpts,
 	preprocessOpts as svelteConfig,
 	terserOpts as terserConfig,
 	babelOpts as babelConfig,
@@ -24,7 +21,6 @@ const replaceConfig = (browser) => ({
 	'process.browser': browser,
 	'process.env.NODE_ENV': JSON.stringify(mode),
 });
-const sassConfig = { ...sassOpts, dev, hydratable: true };
 
 // eslint-disable-next-line no-shadow
 const onwarn = (warning, onwarn) =>
@@ -41,11 +37,6 @@ export default {
 			url({
 				limit: 20000,
 				emitFiles: true,
-			}),
-			scss({
-				output: 'static/bundle.css',
-				sass,
-				...sassConfig,
 			}),
 			svelte({
 				...svelteConfig,

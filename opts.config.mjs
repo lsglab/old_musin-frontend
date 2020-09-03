@@ -11,13 +11,22 @@ const sassOpts = {
 	precision: 2,
 	includePaths: ['./node_modules/'],
 	fiber: Fiber,
+	indentType: 'tab',
+	indentWidth: 4,
+	stripIndent: dev,
 };
 const preprocessOpts = {
 	preprocess: sveltePreprocess({
 		sourceMap: dev,
+		markupTagName: 'template',
+		defaults: {
+			markup: 'html',
+			script: 'typescript',
+			style: 'sass',
+		},
 		postcss: { ...postcssConfig },
-		sass: {
-			renderSync: false,
+		scss: {
+			renderSync: true,
 			implementation: sass,
 			...sassOpts,
 		},

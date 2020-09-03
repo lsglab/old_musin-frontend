@@ -1,5 +1,5 @@
 const esmImport = require('esm')(module);
 
-const { postcssOpts } = esmImport('./opts.config.mjs');
+const { preprocessOpts } = esmImport('./opts.config.mjs');
 
-module.exports = postcssOpts;
+module.exports = preprocessOpts;
