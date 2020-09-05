@@ -4,15 +4,17 @@ import commonjs from '@rollup/plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
 import babel from '@rollup/plugin-babel';
 import strip from '@rollup/plugin-strip';
-import url from '@rollup/plugin-url';
 import { terser } from 'rollup-plugin-terser';
+import json from '@rollup/plugin-json';
 import module from 'module';
 import config from 'sapper/config/rollup';
 import pkg from './package.json';
+import globals from './src/globals';
 import {
-	preprocessOpts as svelteConfig,
-	terserOpts as terserConfig,
-	babelOpts as babelConfig,
+	babelConfig,
+	preprocessConfig as svelteConfig,
+	terserConfig,
+	jsonConfig,
 } from './opts.config';
 
 const mode = process.env.NODE_ENV;
@@ -20,6 +22,7 @@ const dev = mode === 'development';
 const replaceConfig = (browser) => ({
 	'process.browser': browser,
 	'process.env.NODE_ENV': JSON.stringify(mode),
+	'process.globals': JSON.stringify(globals),
 });
 
 // eslint-disable-next-line no-shadow
@@ -34,12 +37,8 @@ export default {
 		output: config.client.output(),
 		plugins: [
 			replace(replaceConfig(true)),
-			url({
-				limit: 20000,
-				emitFiles: true,
-			}),
 			svelte({
-				...svelteConfig,
+				...svelteConfig(dev),
 				emitCss: true,
 			}),
 			resolve({
@@ -47,8 +46,8 @@ export default {
 				dedupe: ['svelte'],
 			}),
 			commonjs(),
-			babel(babelConfig),
-			!dev && terser(terserConfig),
+			babel(babelConfig(dev)),
+			!dev && terser(terserConfig()),
 			!dev && strip(),
 		],
 		preserveEntrySignatures: false,
@@ -56,11 +55,12 @@ export default {
 	},
 	server: {
 		input: config.server.input(),
-		output: { ...config.server.output(), format: 'esm' },
+		output: config.server.output(),
 		plugins: [
 			replace(replaceConfig(false)),
+			json(jsonConfig(dev)),
 			svelte({
-				...svelteConfig,
+				...svelteConfig(dev),
 				generate: 'ssr',
 			}),
 			resolve({
@@ -79,8 +79,8 @@ export default {
 			resolve(),
 			replace(replaceConfig(false)),
 			commonjs(),
-			babel(babelConfig),
-			!dev && terser(terserConfig),
+			babel(babelConfig(dev)),
+			!dev && terser(terserConfig()),
 			!dev && strip(),
 		],
 		preserveEntrySignatures: false,

@@ -2,9 +2,9 @@ module.exports = {
 	purge: {
 		mode: 'all',
 		content: ['./src/**/*.html', './src/**/*.svelte'],
-		// options: {
-		// 	whitelistPatterns: [/svelte-/],
-		// },
+		options: {
+			whitelistPatterns: [/svelte-/],
+		},
 	},
 	theme: {
 		extend: {},

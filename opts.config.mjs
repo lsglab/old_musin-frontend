@@ -1,38 +1,84 @@
 import sveltePreprocess from 'svelte-preprocess';
 import sass from 'sass';
-import Fiber from 'fibers';
-import postcssConfig from './postcss.config';
+import path from 'path';
+import postcssImport from 'postcss-import';
+import postcssUrl from 'postcss-url';
+import postcssFailOnWarn from 'postcss-fail-on-warn';
+import colorguard from 'colorguard';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 
-const mode = process.env.NODE_ENV;
-const dev = mode === 'development';
-
-const sassOpts = {
-	outputStyle: 'compressed',
-	precision: 2,
+const postcssConfig = (dev) => ({
+	plugins: [
+		postcssImport(),
+		colorguard({
+			threshold: 10,
+		}),
+		tailwindcss('./tailwind.config.js'),
+		postcssUrl([
+			{
+				url: 'inline',
+				fallback: 'copy',
+				ignoreFragmentWarning: true,
+				optimizeSvgEncode: true,
+				maxSize: 20,
+				shrink: 0,
+				useHash: true,
+				basePath: [
+					path.resolve('node_modules/'),
+					path.resolve('src/assets/'),
+					path.resolve('src/assets/fonts/'),
+					path.resolve('src/assets/media/'),
+					path.resolve('src/assets/styles/'),
+					path.resolve('static/'),
+				],
+				assetsPath: 'static',
+			},
+			{
+				url: (asset) => {
+					return asset.url.replace('static/', '/'); // Fix relative asset path
+				},
+				multi: true,
+			},
+		]),
+		!dev && autoprefixer,
+		!dev &&
+			cssnano({
+				preset: 'advanced',
+			}),
+		postcssFailOnWarn,
+	].filter(Boolean),
+});
+const sassConfig = (dev) => ({
+	indentedSyntax: false,
+	outputStyle: dev ? 'expanded' : 'compressed',
+	lineFeed: 'lf',
 	includePaths: ['./node_modules/'],
-	fiber: Fiber,
 	indentType: 'tab',
 	indentWidth: 4,
-	stripIndent: dev,
-};
-const preprocessOpts = {
+	sourceMap: dev,
+	sourceMapContents: dev,
+	embedSourceMap: dev,
+});
+const preprocessConfig = (dev) => ({
 	preprocess: sveltePreprocess({
 		sourceMap: dev,
 		markupTagName: 'template',
 		defaults: {
 			markup: 'html',
-			script: 'typescript',
-			style: 'sass',
+			script: 'javascript',
+			style: 'scss',
 		},
-		postcss: { ...postcssConfig },
-		scss: {
+		postcss: { ...postcssConfig(dev) },
+		sass: {
 			renderSync: true,
 			implementation: sass,
-			...sassOpts,
+			...sassConfig(dev),
 		},
 	}),
-};
-const terserOpts = {
+});
+const terserConfig = () => ({
 	module: true,
 	compress: {
 		defaults: true,
@@ -66,12 +112,16 @@ const terserOpts = {
 	parse: {
 		html5_comments: false,
 	},
-};
-const babelOpts = {
-	extensions: ['.js', '.mjs', '.cjs', '.html', '.svelte'],
+});
+const babelConfig = (skip) => ({
+	extensions: ['.js', '.mjs', '.cjs', '.ts', '.html', '.svelte'],
 	babelHelpers: 'bundled',
 	exclude: ['node_modules/@babel/**', 'node_modules/core-js/**'],
-	skipPreflightCheck: false,
-};
+	skipPreflightCheck: skip,
+});
+const jsonConfig = (dev) => ({
+	compact: !dev,
+	preferConst: true,
+});
 
-export { sassOpts, preprocessOpts, terserOpts, babelOpts };
+export { postcssConfig, sassConfig, preprocessConfig, terserConfig, babelConfig, jsonConfig };

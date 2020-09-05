@@ -16,7 +16,6 @@ vscode:
         - christian-kohler.npm-intellisense
         - esbenp.prettier-vscode
         - stylelint.vscode-stylelint
-        - fivethree.vscode-svelte-snippets
         - svelte.svelte-vscode
         - ardenivanov.svelte-intellisense
         - redhat.vscode-yaml

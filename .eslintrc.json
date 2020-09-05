@@ -10,10 +10,10 @@
 	"parserOptions": {
 		"parser": "babel-eslint",
 		"sourceType": "module",
-		"ecmaVersion": 2019
+		"ecmaVersion": 12
 	},
 	"extends": ["airbnb-base", "prettier"],
-	"plugins": ["svelte3", "cypress", "babel"],
+	"plugins": ["cypress", "babel", "svelte3"],
 	"rules": {
 		"babel/camelcase": "off",
 		"babel/no-invalid-this": "warn",
@@ -44,6 +44,7 @@
 		"no-irregular-whitespace": "warn",
 		"no-misleading-character-class": "warn",
 		"no-console": "off",
+		"no-debugger": "off",
 		"import/no-unresolved": [
 			"error",
 			{
@@ -51,17 +52,32 @@
 				"ignore": ["^@sapper"]
 			}
 		]
+		// "sort-keys": ["warn", "asc", { "caseSensitive": true, "natural": true, "minKeys": 2 }],
+		// "autofix/sort-vars": "warn",
+		// "autofix/sort-imports": [
+		// 	"error",
+		// 	{
+		// 		"ignoreCase": false,
+		// 		"ignoreDeclarationSort": false,
+		// 		"ignoreMemberSort": false,
+		// 		"memberSyntaxSortOrder": ["all", "multiple", "single", "none"],
+		// 		"allowSeparatedGroups": false
+		// 	}
+		// ]
 	},
 	"overrides": [
 		{
-			"files": ["**/*worker.js"],
+			"files": ["*.svelte"],
+			"processor": "svelte3/svelte3",
 			"rules": {
-				"no-restricted-globals": [0]
+				"import/no-mutable-exports": "off"
 			}
 		},
 		{
-			"files": ["*.svelte"],
-			"processor": "svelte3/svelte3"
+			"files": ["*worker.js"],
+			"rules": {
+				"no-restricted-globals": [0]
+			}
 		},
 		{
 			"files": [

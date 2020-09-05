@@ -183,4 +183,4 @@ tags
 # End of https://www.toptal.com/developers/gitignore/api/yarn,node,git,sass,vim,visualstudiocode
 # CUSTOM
 static/
-__sapper__/**/
+__sapper__/

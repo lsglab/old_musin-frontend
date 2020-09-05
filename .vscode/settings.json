@@ -42,5 +42,19 @@
 		// "vue-postcss",
 		// "xml",
 		// "xsl"
-	]
+	],
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		"**/node_modules/": true
+	},
+	"eslint.probe": ["javascript", "typescript", "svelte", "html", "markdown"],
+	"eslint.validate": ["svelte", "javascript", "typescript"],
+	"prettier.documentSelectors": ["**/*.{ts,js,cjs,mjs,md,json,yaml,yml,html,less,scss}"],
+	"[svelte]": {
+		"editor.defaultFormatter": "svelte.svelte-vscode"
+	}
 }
