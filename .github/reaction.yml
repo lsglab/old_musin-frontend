@@ -7,8 +7,8 @@ exemptLabels: []
 # Replace matching comments with this message, `{comment-author}` is an
 # optional placeholder. Set to `false` to disable
 reactionComment: >
-  :wave: Hi @{comment-author}, we've noticed you've spammed this discussion.
-  did you mean to use a [reaction](https://git.io/vhzhC) instead?
+    :wave: Hi @{comment-author}, we've noticed you've spammed this discussion.
+    did you mean to use a [reaction](https://git.io/vhzhC) instead?
 
 # Limit to only `issues` or `pulls`
 # only: issues

@@ -1,21 +1,18 @@
 {
-  "recommendations": [
-    "formulahendry.auto-close-tag",
-    "formulahendry.auto-complete-tag",
-    "formulahendry.auto-rename-tag",
-    "msjsdiag.debugger-for-chrome",
-    "editorconfig.editorconfig",
-    "dbaeumer.vscode-eslint",
-    "donjayamanne.githistory",
-    "github.vscode-pull-request-github",
-    "eamodio.gitlens",
-    "ms-vsliveshare.vsliveshare",
-    "eg2.vscode-npm-script",
-    "christian-kohler.npm-intellisense",
-    "esbenp.prettier-vscode",
-    "stylelint.vscode-stylelint",
-    "fivethree.vscode-svelte-snippets",
-    "svelte.svelte-vscode",
-    "ardenivanov.svelte-intellisense",
-  ]
+	"recommendations": [
+		"formulahendry.auto-close-tag",
+		"formulahendry.auto-complete-tag",
+		"formulahendry.auto-rename-tag",
+		"editorconfig.editorconfig",
+		"dbaeumer.vscode-eslint",
+		"eg2.vscode-npm-script",
+		"christian-kohler.npm-intellisense",
+		"esbenp.prettier-vscode",
+		"stylelint.vscode-stylelint",
+		"svelte.svelte-vscode",
+		"ardenivanov.svelte-intellisense",
+		"redhat.vscode-yaml",
+		"bradlc.vscode-tailwindcss",
+		"heybourn.headwind"
+	]
 }

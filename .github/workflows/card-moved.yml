@@ -1,0 +1,15 @@
+name: Card moved
+on:
+    project_card:
+        types:
+            - created
+            - moved
+jobs:
+    execute:
+        name: Automatically label the issue
+        runs-on: ubuntu-latest
+        steps:
+            - name: Label the card by its column
+              uses: technote-space/auto-card-labeler@v1
+              with:
+                  GITHUB_TOKEN: ${{ secrets.PAT }}
