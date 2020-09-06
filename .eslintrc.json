@@ -86,7 +86,8 @@
 				"rollup.config.js",
 				"rollup.config.mjs",
 				"opts.config.js",
-				"opts.config.mjs"
+				"opts.config.mjs",
+				"tailwind.config.js"
 			],
 			"rules": {
 				"import/no-extraneous-dependencies": [
@@ -95,6 +96,12 @@
 						"devDependencies": true
 					}
 				]
+			}
+		},
+		{
+			"files": ["*.js"],
+			"rules": {
+				"global-require": "off"
 			}
 		}
 	]

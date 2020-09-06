@@ -1,3 +1,6 @@
+* {
+	@apply align-middle break-words;
+}
 .center {
 	@apply flex justify-center items-center;
 }

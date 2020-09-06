@@ -28,10 +28,7 @@ const postcssConfig = (dev) => ({
 				basePath: [
 					path.resolve('node_modules/'),
 					path.resolve('src/assets/'),
-					path.resolve('src/assets/fonts/'),
-					path.resolve('src/assets/media/'),
 					path.resolve('src/assets/styles/'),
-					path.resolve('static/'),
 				],
 				assetsPath: 'static',
 			},
