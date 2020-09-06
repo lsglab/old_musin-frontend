@@ -35,6 +35,7 @@ export default {
 	client: {
 		input: config.client.input(),
 		output: config.client.output(),
+		context: 'window',
 		plugins: [
 			replace(replaceConfig(true)),
 			svelte({
@@ -56,6 +57,7 @@ export default {
 	server: {
 		input: config.server.input(),
 		output: config.server.output(),
+		context: '{}',
 		plugins: [
 			replace(replaceConfig(false)),
 			json(jsonConfig(dev)),
@@ -75,6 +77,7 @@ export default {
 	serviceworker: {
 		input: config.serviceworker.input(),
 		output: config.serviceworker.output(),
+		context: 'this',
 		plugins: [
 			resolve(),
 			replace(replaceConfig(false)),

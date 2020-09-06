@@ -95,16 +95,12 @@ const terserConfig = () => ({
 		unsafe_math: true,
 		unsafe_proto: true,
 		unsafe_undefined: true,
-		safari10: true,
 	},
 	mangle: {
 		toplevel: true,
-		safari10: true,
 	},
 	toplevel: true,
 	warnings: true,
-	safari10: true,
-	ie8: true,
 	format: {
 		indent_level: 0,
 		webkit: true,
