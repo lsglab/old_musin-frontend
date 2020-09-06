@@ -26,10 +26,11 @@ const replaceConfig = (browser) => ({
 });
 
 // eslint-disable-next-line no-shadow
-const onwarn = (warning, onwarn) =>
+const onwarn = (warning, warn) =>
 	(warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message)) ||
 	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) ||
-	onwarn(warning);
+	warning.code === 'THIS_IS_UNDEFINED' ||
+	warn(warning);
 
 export default {
 	client: {
