@@ -36,7 +36,7 @@ export default {
 	client: {
 		input: config.client.input(),
 		output: config.client.output(),
-		context: 'window',
+		context: 'this',
 		plugins: [
 			replace(replaceConfig(true)),
 			svelte({
@@ -58,7 +58,7 @@ export default {
 	server: {
 		input: config.server.input(),
 		output: config.server.output(),
-		context: '{}',
+		context: 'this',
 		plugins: [
 			replace(replaceConfig(false)),
 			json(jsonConfig(dev)),

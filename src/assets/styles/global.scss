@@ -1,4 +1,9 @@
-@import './tailwind.scss';
 * {
 	scroll-behavior: smooth;
+}
+html,
+body,
+#app {
+	width: 100%;
+	height: 100%;
 }

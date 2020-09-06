@@ -1,0 +1,68 @@
+{
+	"masterPicture": "./src/assets/media/lsg.png",
+	"iconsPath": "/",
+	"design": {
+		"ios": {
+			"pictureAspect": "backgroundAndMargin",
+			"backgroundColor": "#ffffff",
+			"margin": "0%",
+			"assets": {
+				"ios6AndPriorIcons": false,
+				"ios7AndLaterIcons": true,
+				"precomposedIcons": true,
+				"declareOnlyDefaultIcon": true
+			},
+			"appName": "Louise Schroeder Gymnasium"
+		},
+		"desktopBrowser": {
+			"design": "background",
+			"backgroundColor": "#ffffff",
+			"backgroundRadius": 0.2,
+			"imageScale": 0.9
+		},
+		"windows": {
+			"pictureAspect": "noChange",
+			"backgroundColor": "#00aba9",
+			"onConflict": "override",
+			"assets": {
+				"windows80Ie10Tile": true,
+				"windows10Ie11EdgeTiles": {
+					"small": true,
+					"medium": true,
+					"big": true,
+					"rectangle": true
+				}
+			},
+			"appName": "Louise Schroeder Gymnasium"
+		},
+		"androidChrome": {
+			"pictureAspect": "backgroundAndMargin",
+			"margin": "0%",
+			"backgroundColor": "#fefefe",
+			"themeColor": "#fefefe",
+			"manifest": {
+				"name": "lsg",
+				"display": "standalone",
+				"orientation": "notSet",
+				"onConflict": "override",
+				"declared": true
+			},
+			"assets": {
+				"legacyIcon": true,
+				"lowResolutionIcons": true
+			}
+		},
+		"safariPinnedTab": {
+			"pictureAspect": "blackAndWhite",
+			"threshold": 95.15625,
+			"themeColor": "#00aba9"
+		}
+	},
+	"settings": {
+		"scalingAlgorithm": "Lanczos",
+		"errorOnImageTooSmall": false,
+		"readmeFile": false,
+		"htmlCodeFile": false,
+		"usePathAsIs": false
+	}
+}

@@ -55,6 +55,6 @@
 	"eslint.validate": ["svelte", "javascript", "typescript"],
 	"prettier.documentSelectors": ["**/*.{ts,js,cjs,mjs,md,json,yaml,yml,html,less,scss}"],
 	"[svelte]": {
-		"editor.defaultFormatter": "svelte.svelte-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }

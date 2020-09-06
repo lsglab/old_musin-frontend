@@ -185,3 +185,5 @@ tags
 static/**/*
 !static/.keep
 __sapper__/
+src/template.html
+.stylelintcache
