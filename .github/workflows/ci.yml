@@ -1,7 +1,6 @@
 name: CI
 on:
     - push
-    - pull_request
 jobs:
     execute:
         name: Test and Deploy
@@ -11,14 +10,7 @@ jobs:
               uses: actions/checkout@master
               with:
                   fetch-depth: 0
-            - name: Automatically label any merge conflict
-              if: github.event_name == 'push'
-              uses: mschilde/auto-label-merge-conflicts@master
-              with:
-                  CONFLICT_LABEL_NAME: 'merge conflict'
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: Enforce our branching convention
-              if: github.event_name == 'pull_request'
               uses: deepakputhraya/action-branch-name@master
               with:
                   regex: '(?:all\-contributors\/|issue\-(?:[0-9])+\-|hotfix(?:\-)?|dependabot\/)(?:[a-zA-Z0-9_-])+'

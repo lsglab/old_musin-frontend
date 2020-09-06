@@ -18,7 +18,7 @@
     invariant "^2.2.4"
     semver "^5.5.0"
 
-"@babel/core@>=7.9.0", "@babel/core@^7.11.4":
+"@babel/core@>=7.9.0", "@babel/core@^7.11.6":
   version "7.11.6"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.11.6.tgz#3a9455dc7387ff1bac45770650bc13ba04a15651"
   integrity sha512-Wpcv03AGnmkgm6uS6k8iwhIwTrcP0m17TL1n1sy7qD0qelDu4XNeW0dN0mHfa+Gei211yDaLoEe/VlbXQzM4Bg==
@@ -719,7 +719,7 @@
     "@babel/helper-create-regexp-features-plugin" "^7.10.4"
     "@babel/helper-plugin-utils" "^7.10.4"
 
-"@babel/preset-env@^7.11.0":
+"@babel/preset-env@^7.11.5":
   version "7.11.5"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.11.5.tgz#18cb4b9379e3e92ffea92c07471a99a2914e4272"
   integrity sha512-kXqmW1jVcnB2cdueV+fyBM8estd5mlNfaQi6lwLgRwCby4edpavgbFhiBNjmWA3JpB/yZGSISa7Srf+TwxDQoA==
@@ -2477,7 +2477,7 @@ cuint@^0.2.2:
   resolved "https://registry.yarnpkg.com/cuint/-/cuint-0.2.2.tgz#408086d409550c2631155619e9fa7bcadc3b991b"
   integrity sha1-QICG1AlVDCYxFVYZ6fp7ytw7mRs=
 
-cypress@^5.0.0:
+cypress@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-5.1.0.tgz#979e9ff3e0acd792eefd365bf104046479a9643b"
   integrity sha512-craPRO+Viu4268s7eBvX5VJW8aBYcAQT+EwEccQSMY+eH1ZPwnxIgyDlmMWvxLVX9SkWxOlZbEycPyzanQScBQ==
@@ -2954,7 +2954,7 @@ eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0, eslint-visitor-keys@^1.3
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.3.0.tgz#30ebd1ef7c2fdff01c3a4f151044af25fab0523e"
   integrity sha512-6J72N8UNa462wa/KFODt/PJ3IU60SDpC3QXC1Hjc1BXXpfL2C9R5+AU7jhe0F6GREqVMh4Juu+NY7xn+6dipUQ==
 
-eslint@^7.7.0:
+eslint@^7.8.1:
   version "7.8.1"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.8.1.tgz#e59de3573fb6a5be8ff526c791571646d124a8fa"
   integrity sha512-/2rX2pfhyUG0y+A123d0ccXtMm7DV7sH1m3lk9nk2DZ2LReq39FXHueR9xZwshE5MdfSf0xunSaMWRqyIA6M1w==
@@ -4479,7 +4479,7 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-lint-staged@^10.2.13:
+lint-staged@^10.3.0:
   version "10.3.0"
   resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-10.3.0.tgz#388c3d440590c45c339e7163f669ea69ae90b1e0"
   integrity sha512-an3VgjHqmJk0TORB/sdQl0CTkRg4E5ybYCXTTCSJ5h9jFwZbcgKIx5oVma5e7wp/uKt17s1QYFmYqT9MGVosGw==
@@ -5929,7 +5929,7 @@ prettier-plugin-package@^1.0.0:
   resolved "https://registry.yarnpkg.com/prettier-plugin-package/-/prettier-plugin-package-1.0.0.tgz#164a400f5b695246835b94c7e1b65ea253d67bdc"
   integrity sha512-flbKuLB7ftrW2zQYJjb0mF6zY7R0jDrYatpr0BBNj04Eb+g1RLbquOQSJE1LffDZfzU03fwJQ74grqQjQjYa3Q==
 
-prettier-plugin-svelte@^1.1.1, prettier-plugin-svelte@~1.2.0:
+prettier-plugin-svelte@^1.2.1, prettier-plugin-svelte@~1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prettier-plugin-svelte/-/prettier-plugin-svelte-1.2.1.tgz#2af472cb7ebf7f8254a132e44cce18ed3bf2ef6f"
   integrity sha512-oULQ6cmqAVA3PmtgagM3139UXJHbLOLQjzGOKkH/pRQbT9vXcWQtbWXEO1fAePWQis5TiDgm2p/PIKh5w1fd/A==
@@ -6401,7 +6401,7 @@ rollup-plugin-svelte@^6.0.0:
     rollup-pluginutils "^2.8.2"
     sourcemap-codec "^1.4.8"
 
-rollup-plugin-terser@^7.0.0:
+rollup-plugin-terser@^7.0.2:
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/rollup-plugin-terser/-/rollup-plugin-terser-7.0.2.tgz#e8fbba4869981b2dc35ae7e8a502d5c6c04d324d"
   integrity sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==
@@ -6418,7 +6418,7 @@ rollup-pluginutils@^2.8.2:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^2.26.6:
+rollup@^2.26.10:
   version "2.26.10"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.26.10.tgz#0ffe0390d35f07af850382f22f1b8525c7f57f07"
   integrity sha512-dUnjCWOA0h9qNX6qtcHidyatz8FAFZxVxt1dbcGtKdlJkpSxGK3G9+DLCYvtZr9v94D129ij9zUhG+xbRoqepw==
@@ -6464,7 +6464,7 @@ safe-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sapper@^0.28.2:
+sapper@^0.28.4:
   version "0.28.4"
   resolved "https://registry.yarnpkg.com/sapper/-/sapper-0.28.4.tgz#e2486dfd40decb0b8ee70639ac9ae0ce1a946dab"
   integrity sha512-+6nw10RiMylt8SEXFbY49TWv37TX7x6clTeBKGsAfdlWmIXha8q/Mu9ruVK/Kwsiupv62MREU9vvwtuvLWBtqg==
@@ -6994,7 +6994,7 @@ stylelint-config-prettier@^8.0.2:
   resolved "https://registry.yarnpkg.com/stylelint-config-prettier/-/stylelint-config-prettier-8.0.2.tgz#da9de33da4c56893cbe7e26df239a7374045e14e"
   integrity sha512-TN1l93iVTXpF9NJstlvP7nOu9zY2k+mN0NSFQ/VEGz15ZIP9ohdDZTtCWHs5LjctAhSAzaILULGbgiM0ItId3A==
 
-stylelint@^13.6.1:
+stylelint@^13.7.0:
   version "13.7.0"
   resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-13.7.0.tgz#8d7a4233063b2f06e9f28b3405ff189e334547b5"
   integrity sha512-1wStd4zVetnlHO98VjcHQbjSDmvcA39smkZQMct2cf+hom40H0xlQNdzzbswoG/jGBh61/Ue9m7Lu99PY51O6A==
@@ -7088,7 +7088,7 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-svelte-check@^1.0.33:
+svelte-check@^1.0.36:
   version "1.0.36"
   resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-1.0.36.tgz#4469f0d63f0ea3758e2e599ec4673bfda502b895"
   integrity sha512-TPGpwxir3Z6iIGOsIbZNEm4T+IN9lPVwxkm5VdupReqYJgEV6QCHnK8rNcTHOsHoL4XbiP00IqsTLtMOlDVVoA==
@@ -7125,7 +7125,7 @@ svelte-language-server@*:
     vscode-languageserver-types "3.15.1"
     vscode-uri "2.1.2"
 
-svelte-preprocess@^4.1.2, svelte-preprocess@~4.2.0:
+svelte-preprocess@^4.2.1, svelte-preprocess@~4.2.0:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-4.2.1.tgz#46a936ade6e7b14f407167bff3318df4528484d3"
   integrity sha512-iagQGcKgCwlSKcKJ2GA3SznjWKwz4Q4yAkYdVMvgE8hQ+vTlvjjRcpCo/9P7u+otr5DLG16PPMwgVQZ3h51cKQ==
@@ -7204,7 +7204,7 @@ table@^6.0.1:
     slice-ansi "^4.0.0"
     string-width "^4.2.0"
 
-tailwindcss@^1.7.6:
+tailwindcss@^1.8.3:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.8.3.tgz#2fec8429cd0ed15195086d1c0aa4a230fc1cd1a0"
   integrity sha512-CpLpFWINaXgkL1qXZZnabEoWimJWm1iXE43FX82sjFjDqp7IQBt5yxPM8sYey+jrPOSBskpac1kdcNvSOPaCXg==
