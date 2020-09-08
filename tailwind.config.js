@@ -14,6 +14,11 @@ module.exports = {
 				'9xl': '7rem',
 			},
 		},
+		fontWeight: {
+			light: 300,
+			normal: 400,
+			bold: 600,
+		},
 	},
 	variants: {},
 	plugins: [

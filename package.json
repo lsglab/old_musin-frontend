@@ -1,9 +1,9 @@
 {
-	"name": "musin-frontend",
+	"name": "lsg-homepage",
 	"version": "0.0.1",
 	"private": true,
-	"description": "This is our new school website frontend",
-	"license": "AGPL-3.0-only",
+	"description": "Our new school website frontend",
+	"license": "AGPL-3.0-or-later",
 	"scripts": {
 		"do:autofix": "run-s format lint do:favicon",
 		"do:build": "run-s do:autofix run:build",

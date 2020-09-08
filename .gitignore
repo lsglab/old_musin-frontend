@@ -183,7 +183,8 @@ tags
 # End of https://www.toptal.com/developers/gitignore/api/yarn,node,git,sass,vim,visualstudiocode
 # CUSTOM
 static/**/*
-!static/.keep
+!static/storage/**/*
+!static/storage/
 __sapper__/
 src/template.html
 .stylelintcache

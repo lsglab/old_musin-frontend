@@ -1,6 +1,20 @@
 * {
-	@apply align-middle break-words;
+	@apply break-words font-normal;
 }
 .center {
 	@apply flex justify-center items-center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.bold {
+	@apply font-bold;
+}
+
+.light {
+	@apply font-light;
 }
