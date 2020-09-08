@@ -17,7 +17,7 @@
 		"do:serve": "run-s do:autofix run:serve",
 		"do:start": "yarn run:start",
 		"do:sync": "yarn git:sync",
-		"do:testing": "run-s prettier:report eslint:report typescript:report test favicon:ci",
+		"do:testing": "run-s favicon:ci prettier:report eslint:report typescript:report test",
 		"eslint:fix": "eslint --fix --cache --ext svelte,js,mjs .",
 		"eslint:report": "yarn eslint --cache --ext svelte,js,mjs .",
 		"favicon:ci": "yarn real-favicon check-for-update --fail-on-update faviconData.json",
