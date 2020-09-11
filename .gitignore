@@ -186,5 +186,4 @@ static/**/*
 !static/storage/**/*
 !static/storage/
 __sapper__/
-src/template.html
 .stylelintcache
