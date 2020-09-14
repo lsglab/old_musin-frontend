@@ -75,8 +75,8 @@ const preprocessConfig = (dev) => ({
 		},
 	}),
 });
-const terserConfig = () => ({
-	module: true,
+const terserConfig = (module) => ({
+	module,
 	compress: {
 		defaults: true,
 		booleans_as_integers: true,

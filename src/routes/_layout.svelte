@@ -4,6 +4,10 @@
 	import Footer from '../components/Footer.svelte';
 </script>
 
+<svelte:head>
+	<title>{process.globals.title}</title>
+</svelte:head>
+
 <Tailwind />
 <Styles />
 <slot />

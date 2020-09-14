@@ -17,7 +17,7 @@
 		"do:serve": "run-s do:autofix run:serve",
 		"do:start": "yarn run:start",
 		"do:sync": "yarn git:sync",
-		"do:testing": "run-s favicon:ci prettier:report eslint:report typescript:report test",
+		"do:testing": "run-s favicon:ci prettier:report eslint:report test",
 		"eslint:fix": "eslint --fix --cache --ext svelte,js,mjs .",
 		"eslint:report": "yarn eslint --cache --ext svelte,js,mjs .",
 		"favicon:ci": "yarn real-favicon check-for-update --fail-on-update faviconData.json",
@@ -44,7 +44,6 @@
 		"lint:styles": "run-s lint:styles:*",
 		"lint:styles:stylelint": "yarn stylelint:fix",
 		"lint:styles:validate": "yarn stylelint:validate",
-		"lint:typescript": "yarn typescript:validate",
 		"prettier:fix": "prettier --write --plugin-search-dir=. ./**/*.{svelte,js,mjs,md,json,yml,html,css}",
 		"prettier:report": "prettier --check --plugin-search-dir=. ./**/*.{svelte,js,mjs,md,json,yml,html,css}",
 		"run:build": "cross-env NODE_ENV=production run-s run:build:*",
@@ -62,8 +61,6 @@
 		"test": "start-server-and-test 'yarn run:serve' http://localhost:3000 'yarn test:run'",
 		"test:run": "run-p --race test:run:*",
 		"test:run:cypress": "cypress run",
-		"typescript:report": "yarn svelte-check",
-		"typescript:validate": "yarn svelte-check || true",
 		"warn:soydows": "echo \"Warning: This will fail if you're on a non-unix-like operating system, or more specifically, Windows. Get WSL, or just install Linux directly.\""
 	},
 	"dependencies": {
@@ -79,7 +76,6 @@
 		"@babel/plugin-proposal-optional-chaining": "^7.11.0",
 		"@babel/plugin-syntax-dynamic-import": "^7.8.3",
 		"@babel/preset-env": "^7.11.5",
-		"@babel/preset-typescript": "^7.10.4",
 		"@commitlint/cli": "^9.1.2",
 		"@commitlint/config-conventional": "^9.1.2",
 		"@rollup/plugin-babel": "^5.2.0",
@@ -89,7 +85,6 @@
 		"@rollup/plugin-node-resolve": "^9.0.0",
 		"@rollup/plugin-replace": "^2.3.3",
 		"@rollup/plugin-strip": "^2.0.0",
-		"@tsconfig/svelte": "^1.0.10",
 		"autoprefixer": "^9.8.6",
 		"babel-eslint": "^10.1.0",
 		"cli-real-favicon": "^0.0.8",
@@ -126,12 +121,9 @@
 		"stylelint": "^13.7.0",
 		"stylelint-config-prettier": "^8.0.2",
 		"svelte": "^3.24.1",
-		"svelte-check": "^1.0.36",
 		"svelte-preprocess": "^4.2.1",
 		"tailwindcss": "^1.8.3",
-		"tailwindcss-fluid": "^0.2.0",
-		"tslib": "^2.0.1",
-		"typescript": "^4.0.2"
+		"tailwindcss-fluid": "^0.2.0"
 	},
 	"config": {
 		"commitizen": {

@@ -10,12 +10,7 @@ import module from 'module';
 import config from 'sapper/config/rollup';
 import pkg from './package.json';
 import globals from './src/globals';
-import {
-	babelConfig,
-	preprocessConfig as svelteConfig,
-	terserConfig,
-	jsonConfig,
-} from './opts.config';
+import { babelConfig, preprocessConfig, terserConfig, jsonConfig } from './opts.config';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -23,6 +18,11 @@ const replaceConfig = (browser) => ({
 	'process.browser': browser,
 	'process.env.NODE_ENV': JSON.stringify(mode),
 	'process.globals': JSON.stringify(globals),
+});
+const svelteConfig = () => ({
+	...preprocessConfig(dev),
+	dev,
+	hydratable: true,
 });
 
 // eslint-disable-next-line no-shadow
@@ -40,7 +40,7 @@ export default {
 		plugins: [
 			replace(replaceConfig(true)),
 			svelte({
-				...svelteConfig(dev),
+				...svelteConfig(),
 				emitCss: true,
 			}),
 			resolve({
@@ -49,7 +49,7 @@ export default {
 			}),
 			commonjs(),
 			babel(babelConfig(dev)),
-			!dev && terser(terserConfig()),
+			!dev && terser(terserConfig(true)),
 			!dev && strip(),
 		],
 		preserveEntrySignatures: false,
@@ -63,7 +63,7 @@ export default {
 			replace(replaceConfig(false)),
 			json(jsonConfig(dev)),
 			svelte({
-				...svelteConfig(dev),
+				...svelteConfig(),
 				generate: 'ssr',
 			}),
 			resolve({
@@ -84,7 +84,7 @@ export default {
 			replace(replaceConfig(false)),
 			commonjs(),
 			babel(babelConfig(dev)),
-			!dev && terser(terserConfig()),
+			!dev && terser(terserConfig(false)),
 			!dev && strip(),
 		],
 		preserveEntrySignatures: false,

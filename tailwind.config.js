@@ -13,6 +13,11 @@ module.exports = {
 				'8xl': '6rem',
 				'9xl': '7rem',
 			},
+			inset: {
+				'1/4': '25%',
+				'1/2': '50%',
+				'3/4': '75%',
+			},
 		},
 		fontWeight: {
 			light: 300,

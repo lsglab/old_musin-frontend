@@ -51,10 +51,10 @@
 		"**/.DS_Store": true,
 		"**/node_modules/": true
 	},
-	"eslint.probe": ["javascript", "typescript", "svelte", "html", "markdown"],
-	"eslint.validate": ["svelte", "javascript", "typescript"],
-	"prettier.documentSelectors": ["**/*.{ts,js,cjs,mjs,md,json,yaml,yml,html,less,scss}"],
+	"eslint.probe": ["javascript", "svelte", "html", "markdown"],
+	"eslint.validate": ["svelte", "javascript"],
+	"prettier.documentSelectors": ["**/*.{js,cjs,mjs,md,json,yaml,yml,html,less,scss}"],
 	"[svelte]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "svelte.svelte-vscode"
 	}
 }
