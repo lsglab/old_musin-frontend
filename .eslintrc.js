@@ -1,9 +1,8 @@
 module.exports = {
 	root: true,
 	env: {
-		'browser': true,
-		'es6': true,
-		'cypress/globals': true,
+		browser: true,
+		es6: true,
 	},
 	parserOptions: {
 		parser: 'babel-eslint',
@@ -11,7 +10,7 @@ module.exports = {
 		ecmaVersion: 12,
 	},
 	extends: ['airbnb-base', 'prettier'],
-	plugins: ['cypress', 'babel', 'svelte3'],
+	plugins: ['babel', 'svelte3'],
 	rules: {
 		'babel/camelcase': 'off',
 		'babel/no-invalid-this': 'warn',
