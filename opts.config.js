@@ -29,6 +29,7 @@ const postcssConfig = (dev) => ({
 					path.resolve('node_modules/'),
 					path.resolve('src/assets/'),
 					path.resolve('src/assets/styles/'),
+					path.resolve('src/assets/media/'),
 				],
 				assetsPath: 'static',
 			},
@@ -62,12 +63,7 @@ const preprocessConfig = (dev) => ({
 	preprocess: sveltePreprocess({
 		sourceMap: dev,
 		markupTagName: 'template',
-		defaults: {
-			markup: 'html',
-			script: 'javascript',
-			style: 'scss',
-		},
-		postcss: { ...postcssConfig(dev) },
+		postcss: true,
 		sass: {
 			renderSync: true,
 			implementation: sass,

@@ -58,6 +58,7 @@ module.exports = {
 				'import/no-mutable-exports': 'off',
 				'import/prefer-default-export': 'off',
 				'prettier/prettier': 'off',
+				'prefer-destructuring': 'off',
 			},
 		},
 		{
