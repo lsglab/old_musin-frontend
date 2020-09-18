@@ -4,6 +4,9 @@
 .center {
 	@apply flex justify-center items-center;
 }
+.fullscreen {
+	@apply w-full h-full;
+}
 
 h1,
 h2,

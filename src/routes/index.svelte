@@ -1,11 +1,13 @@
 <script>
-	// import Hero from '../components/Hero.svelte';
-	import HeroAlt from '../components/HeroAlt.svelte';
+	import Calender from '../components/Calender.svelte';
+	import Hero from '../components/Hero.svelte';
 </script>
 
 <svelte:head>
 	<title>{process.globals.start} | {process.globals.title}</title>
 </svelte:head>
-<HeroAlt
+<Hero
+	classes="bg-gray-200"
 	title="Louise Schroeder Gymnasium"
 	subtitle="Naturwissenschaftlich-technologisches und sprachliches Gymnasium" />
+<Calender />

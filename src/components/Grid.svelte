@@ -11,8 +11,8 @@
 
 <!--
 	@component
-	The Grid component provides a tailwindcss mobile-first grid. It will always resize to one column on mobile, unless responsive is set to false.
+	Provides a tailwindcss mobile-first grid. It will always resize to one column on mobile, unless responsive is set to false.
 -->
-<div class="grid grid-cols-1 gap-{gap} {responsive ? `md:grid-cols-${cols}` : ''} {classes}">
+<div class="grid {responsive ? 'grid-cols-1' : ''} gap-{gap} {responsive ? 'md:' : ''}grid-cols-{cols} {classes}">
 	<slot />
 </div>
