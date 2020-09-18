@@ -16,7 +16,7 @@
 		"do:serve": "run-s do:autofix run:serve",
 		"do:start": "yarn run:start",
 		"do:sync": "yarn git:sync",
-		"do:testing": "run-s favicon:ci prettier:report eslint:report test",
+		"do:testing": "run-s favicon:ci prettier:report eslint:report",
 		"eslint:fix": "eslint --fix --cache --ext svelte,js .",
 		"eslint:report": "yarn eslint --cache --ext svelte,js .",
 		"favicon:ci": "yarn real-favicon check-for-update --fail-on-update faviconData.json",
@@ -57,9 +57,6 @@
 		"stylelint:fix": "stylelint ./**/*.{html,css,scss,svelte} --fix --cache",
 		"stylelint:report": "stylelint ./**/*.{html,css,scss,svelte} --cache",
 		"stylelint:validate": "stylelint-config-prettier-check",
-		"test": "true || start-server-and-test 'yarn run:serve' http://localhost:3000 'yarn test:run'",
-		"test:run": "run-p --race test:run:*",
-		"test:run:cypress": "true || cypress run",
 		"warn:soydows": "echo \"Warning: This will fail if you're on a non-unix-like operating system, or more specifically, Windows. Get WSL, or just install Linux directly.\""
 	},
 	"dependencies": {
@@ -115,7 +112,6 @@
 		"rollup-plugin-terser": "^7.0.2",
 		"sapper": "^0.28.7",
 		"sass": "^1.26.10",
-		"start-server-and-test": "^1.11.3",
 		"stylelint": "^13.7.1",
 		"stylelint-config-prettier": "^8.0.2",
 		"svelte": "^3.25.1",
