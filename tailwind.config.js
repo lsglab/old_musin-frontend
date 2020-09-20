@@ -1,9 +1,12 @@
 module.exports = {
 	purge: {
 		mode: 'all',
-		content: ['./src/**/*.html', './src/**/*.svelte'],
+		preserveHtmlElements: false,
+		content: ['./__sapper__/export/**/*.html', './__sapper__/export/**/*.js'],
 		options: {
-			whitelistPatterns: [/svelte-/],
+			keyframes: true,
+			fontFace: true,
+			variables: true,
 		},
 	},
 	theme: {

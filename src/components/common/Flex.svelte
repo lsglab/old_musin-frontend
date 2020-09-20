@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="flex content-center {cols ? 'flex-col' : 'flex-row'}
+	class="flex {cols ? 'flex-col' : 'flex-row'}
 		{wrap ? 'flex-wrap' : 'flex-no-wrap'} justify-{justify} items-{align}
 		{classes}">
 	<slot />

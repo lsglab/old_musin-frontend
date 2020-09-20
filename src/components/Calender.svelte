@@ -1,5 +1,6 @@
 <script>
 	import Flex from './common/Flex.svelte';
+	import Link from './common/Link.svelte';
 	import Section from './Section.svelte';
 </script>
 
@@ -74,6 +75,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<a href="http://example.com">Zur Termin&uuml;bersicht &gt;</a>
+		<Link href="http://example.com">Zur Termin&uuml;bersicht</Link>
 	</Flex>
 </Section>
