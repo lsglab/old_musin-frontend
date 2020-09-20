@@ -1,6 +1,6 @@
 <script>
+	import Flex from './common/Flex.svelte';
 	import Section from './Section.svelte';
-	import Flex from './Flex.svelte';
 
 	const startYear = 2020;
 	const currentYear = new Date().getFullYear();

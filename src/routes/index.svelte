@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>{process.globals.start} | {process.globals.title}</title>
+	<title>Startseite | {process.globals.title}</title>
 </svelte:head>
 <Hero
 	classes="bg-gray-200"

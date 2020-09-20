@@ -1,5 +1,5 @@
 * {
-	@apply break-words font-normal;
+	@apply font-normal whitespace-normal break-words;
 }
 .center {
 	@apply flex justify-center items-center;

@@ -1,3 +1,3 @@
-<style lang="scss" global>
-	@import '../assets/styles/tailwind.scss';
+<style global>
+	@import '../assets/styles/tailwind.pcss';
 </style>
