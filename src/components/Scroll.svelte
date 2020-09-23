@@ -9,7 +9,7 @@
 	}
 </style>
 
-<a href="#{target}" class="absolute top-1/2 left-1/2 {classes}">
+<a href="#{target}" class="absolute left-1/2 {classes}">
 	<svg
 		class="w-6 h-6 text-gray-100 animate-bounce"
 		fill="none"
