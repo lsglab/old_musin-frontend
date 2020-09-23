@@ -1,8 +1,7 @@
 *,
 *::after,
 *::before {
-	@apply font-normal whitespace-normal break-words box-border antialiased transition-all duration-300;
-	transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+	@apply font-normal whitespace-normal break-words box-border antialiased transition-all duration-300 ease-easeInOutCirc;
 	scroll-behavior: smooth;
 	text-rendering: geometricPrecision;
 	word-break: break-word;
@@ -42,7 +41,7 @@ a {
 		&.emphasize::before {
 			content: '';
 			height: 2px;
-			@apply absolute bottom-0 left-0 w-0 bg-blue-700 duration-1000;
+			@apply absolute bottom-0 left-0 w-0 bg-blue-700 duration-500;
 		}
 		&.emphasize:hover::before {
 			@apply w-full;

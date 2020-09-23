@@ -19,7 +19,7 @@
 	}
 </style>
 
-<Section fullscreen="true" classes="bg-gray-100 center">
+<Section fullscreen="true" classes="bg-gray-100 center" id="termine">
 	<Flex cols="true" justify="center" align="center">
 		<h2>Aktuelle Termine</h2>
 		<p>Alle demnächst anstehenden Termine</p>

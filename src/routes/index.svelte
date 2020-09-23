@@ -9,5 +9,6 @@
 <Hero
 	classes="bg-gray-200"
 	title="Louise Schroeder Gymnasium"
-	subtitle="Naturwissenschaftlich-technologisches und sprachliches Gymnasium" />
+	subtitle="Naturwissenschaftlich-technologisches und sprachliches Gymnasium"
+	to="termine" />
 <Calender />
