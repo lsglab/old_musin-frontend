@@ -27,8 +27,8 @@ We use `package.json` scripts exclusively as a front-end for task automation, an
 -   `yarn do:dev`: Starts a hot-reloading development environment in `__sapper__/dev`
 -   `yarn do:build`: Builds sapper in the `__sapper__/build` directory for server-side serving
 -   `yarn do:start`: Starts the server-side polka instance from `__sapper__/build`
--   `yarn do:serve`: Runs `do:build`, then `do:start`
 -   `yarn do:export`: Builds a static sapper instance by snapshotting each hydratable page returned from the server
+-   `yarn do:serve`: Serves the exported static webpage
 -   `yarn do:autofix`: Automatically formats, lints and fixes all code
 -   `yarn do:testing`: Formats, lints and tests; fails on error
 

@@ -185,3 +185,4 @@ tags
 __sapper__/
 .stylelintcache
 src/template.html
+static/

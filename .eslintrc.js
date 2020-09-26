@@ -22,26 +22,6 @@ module.exports = {
 			},
 		},
 		{
-			files: [
-				'postcss.config.js',
-				'postcss.config.mjs',
-				'rollup.config.js',
-				'rollup.config.mjs',
-				'opts.config.js',
-				'opts.config.mjs',
-				'tailwind.config.js',
-				'svelte.config.js',
-			],
-			rules: {
-				'import/no-extraneous-dependencies': [
-					'error',
-					{
-						devDependencies: true,
-					},
-				],
-			},
-		},
-		{
 			files: ['*.js'],
 			rules: {
 				'global-require': 'off',
@@ -64,6 +44,7 @@ module.exports = {
 		'babel/valid-typeof': 'off',
 		'for-direction': 'error',
 		'getter-return': 'warn',
+		'import/no-extraneous-dependencies': 'off',
 		'import/no-unresolved': [
 			'error',
 			{

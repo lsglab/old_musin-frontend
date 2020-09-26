@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import * as sapper from '@sapper/server';
 import compression from 'compression';
 import polka from 'polka';

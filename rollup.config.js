@@ -14,6 +14,14 @@ import svelte from 'rollup-plugin-svelte';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
+// const legacy = !!process.env.SAPPER_LEGACY_BUILD && !dev;
+
+const onwarn = (warning, warn) =>
+	(warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message)) ||
+	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) ||
+	warning.code === 'THIS_IS_UNDEFINED' ||
+	warn(warning);
+
 const replaceConfig = (browser) => ({
 	'process.browser': browser,
 	'process.env.NODE_ENV': JSON.stringify(mode),
@@ -23,21 +31,19 @@ const svelteConfig = () => ({
 	...preprocessConfig(dev),
 	dev,
 	hydratable: true,
+	legacy: !!process.env.SAPPER_LEGACY_BUILD,
 });
-
-// eslint-disable-next-line no-shadow
-const onwarn = (warning, warn) =>
-	(warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message)) ||
-	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) ||
-	warning.code === 'THIS_IS_UNDEFINED' ||
-	warn(warning);
+const clientOutput = () => ({
+	...config.client.output(),
+	format: process.env.SAPPER_LEGACY_BUILD ? 'system' : config.client.output().format,
+});
 
 export default {
 	client: {
 		context: 'this',
 		input: config.client.input(),
 		onwarn,
-		output: config.client.output(),
+		output: clientOutput(),
 		plugins: [
 			replace(replaceConfig(true)),
 			svelte({
@@ -49,8 +55,8 @@ export default {
 				dedupe: ['svelte'],
 			}),
 			commonjs(),
-			babel(babelConfig(dev)),
-			!dev && terser(terserConfig(true)),
+			babel(babelConfig()),
+			!dev && terser(terserConfig()),
 			!dev && strip(),
 		],
 		preserveEntrySignatures: false,
@@ -84,8 +90,8 @@ export default {
 			resolve(),
 			replace(replaceConfig(false)),
 			commonjs(),
-			babel(babelConfig(dev)),
-			!dev && terser(terserConfig(false)),
+			babel(babelConfig()),
+			!dev && terser(terserConfig()),
 			!dev && strip(),
 		],
 		preserveEntrySignatures: false,

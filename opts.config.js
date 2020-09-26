@@ -1,7 +1,9 @@
+import { statSync } from 'fs';
 import autoprefixer from 'autoprefixer';
-import colorguard from 'colorguard';
+import copy from 'cp-file';
 import cssnano from 'cssnano';
 import path from 'path';
+import postcssAssets from 'postcss-assets';
 import postcssFailOnWarn from 'postcss-fail-on-warn';
 import postcssImport from 'postcss-import';
 import postcssUrl from 'postcss-url';
@@ -9,43 +11,58 @@ import sass from 'sass';
 import sveltePreprocess from 'svelte-preprocess';
 import tailwindcss from 'tailwindcss';
 
+const staticPath = path.resolve(__dirname, 'static/');
 const postcssConfig = (dev) => ({
 	plugins: [
 		postcssImport(),
-		colorguard({
-			threshold: 10,
-		}),
 		tailwindcss('./tailwind.config.js'),
-		postcssUrl([
-			{
-				assetsPath: 'static',
-				basePath: [
-					path.resolve('node_modules/'),
-					path.resolve('src/assets/'),
-					path.resolve('src/assets/styles/'),
-					path.resolve('src/assets/media/'),
-				],
-				fallback: 'copy',
-				ignoreFragmentWarning: true,
-				maxSize: 20,
-				optimizeSvgEncode: true,
-				shrink: 0,
-				url: 'inline',
-				useHash: true,
+		// postcssUrl([
+		// 	{
+		// 		assetsPath: path.resolve('static/'),
+		// 		basePath: [
+		// 			path.resolve('src/assets/styles/'),
+		// 			path.resolve('src/assets/media/'),
+		// 			path.resolve('src/assets/fonts/'),
+		// 			path.resolve('src/assets/'),
+		// 			path.resolve('node_modules/'),
+		// 		],
+		// 		hashOptions: {
+		// 			append: dev,
+		// 			method: 'xxhash64',
+		// 			shrink: 0,
+		// 		},
+		// 		url: 'copy',
+		// 		useHash: !dev,
+		// 	},
+		// 	{
+		// 		multi: true,
+		// 		url: (asset) => {
+		// 			return asset.url.replace('static/', '/'); // Fix relative asset path
+		// 		},
+		// 	},
+		// ]),
+		postcssAssets({
+			basePath: '.',
+			loadPaths: ['src/assets/media/', 'src/assets/fonts/', 'src/assets/styles/', 'src/assets/', 'node_modules/'],
+			relative: true,
+		}),
+		postcssUrl({
+			url: (asset) => {
+				const oldPath = asset.absolutePath;
+				const oldName = asset.pathname;
+				const newName = dev ? oldName : statSync(oldPath).mtime.getTime().toString(16) + path.extname(oldName);
+				const newPath = path.resolve(staticPath, newName);
+				if (newName !== oldName) copy.sync(oldPath, newPath);
+				console.log(`${oldPath} -> ${newPath})`);
+				return newName;
 			},
-			{
-				multi: true,
-				url: (asset) => {
-					return asset.url.replace('static/', '/'); // Fix relative asset path
-				},
-			},
-		]),
+		}),
 		!dev && autoprefixer,
 		!dev &&
 			cssnano({
 				preset: 'advanced',
 			}),
-		postcssFailOnWarn,
+		!dev && postcssFailOnWarn,
 	].filter(Boolean),
 });
 const sassConfig = (dev) => ({
@@ -71,7 +88,7 @@ const preprocessConfig = (dev) => ({
 		sourceMap: dev,
 	}),
 });
-const terserConfig = (module) => ({
+const terserConfig = () => ({
 	compress: {
 		booleans_as_integers: true,
 		defaults: true,
@@ -95,18 +112,17 @@ const terserConfig = (module) => ({
 	mangle: {
 		toplevel: true,
 	},
-	module,
 	parse: {
 		html5_comments: false,
 	},
 	toplevel: true,
 	warnings: true,
 });
-const babelConfig = (skip) => ({
+const babelConfig = () => ({
 	babelHelpers: 'bundled',
-	exclude: ['node_modules/@babel/**', 'node_modules/core-js/**'],
+	configFile: './babel.config.js',
+	exclude: ['node_modules/@babel/**', 'node_modules/core-js/**', 'node_modules/core-js-pure/**'],
 	extensions: ['.js', '.mjs', '.cjs', '.ts', '.html', '.svelte'],
-	skipPreflightCheck: skip,
 });
 const jsonConfig = (dev) => ({
 	compact: !dev,
