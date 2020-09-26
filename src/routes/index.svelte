@@ -6,9 +6,6 @@
 <svelte:head>
 	<title>Startseite | {process.globals.title}</title>
 </svelte:head>
-<Hero
-	classes="bg-gray-200"
-	title="Louise Schroeder Gymnasium"
-	subtitle="Naturwissenschaftlich-technologisches und sprachliches Gymnasium"
-	to="termine" />
+
+<Hero />
 <Calender />

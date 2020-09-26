@@ -11,7 +11,7 @@
 		}
 		> th,
 		> td {
-			@apply p-2;
+			@apply p-3;
 		}
 		> th {
 			@apply break-normal;
@@ -19,14 +19,16 @@
 	}
 </style>
 
-<Section fullscreen="true" classes="bg-gray-100 center" id="termine">
-	<Flex cols="true" justify="center" align="center">
-		<h2>Aktuelle Termine</h2>
-		<p>Alle demnächst anstehenden Termine</p>
-		<table
-			class="mx-1 my-2 bg-white border-collapse divide-y divide-gray-400 rounded-md shadow-md table-auto
-				md:rounded-lg md:shadow-xl md:mx-2 divide-solid">
-			<thead>
+<Section fullscreen="true" classes="bg-white" id="termine">
+	<Flex cols="true" align="center" classes="my-10">
+		<Flex cols="true" align="center">
+			<h2 class="text-blue-900">Aktuelle Termine</h2>
+			<p class="my-5 text-center text-blue-800">
+				Alle demnächst anstehenden Termine des Louise-Schroeder-Gynasiums
+			</p>
+		</Flex>
+		<table class="my-10 bg-white divide-y divide-gray-400 shadow-xl divide-solid">
+			<thead class="bg-gray-100">
 				<tr>
 					<th>Datum</th>
 					<th>Uhrzeit</th>
@@ -55,19 +57,19 @@
 					<td>Mensa</td>
 					<td class="content">Q12: Vollversammlung: Wahl der Jahrgangsstufensprecher</td>
 				</tr>
-				<tr class="hidden md:table-row">
+				<tr>
 					<td>24.09.</td>
 					<td>19:00</td>
 					<td>Kla.Zi.</td>
 					<td class="content">09. Jgst.: Klassenelternversammlung</td>
 				</tr>
-				<tr class="hidden md:table-row">
+				<tr>
 					<td>29.09.</td>
 					<td>8:00 - 8:45</td>
 					<td>Mensa</td>
 					<td class="content">Q11: Vollversammlung: Wahl der Jahrgangsstufensprecher</td>
 				</tr>
-				<tr class="hidden md:table-row">
+				<tr>
 					<td>29.09.</td>
 					<td>19:00</td>
 					<td>Kla.Zi.</td>

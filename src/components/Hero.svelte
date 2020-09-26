@@ -1,35 +1,65 @@
 <script>
-	import _ from 'lodash';
-	import Section from './Section.svelte';
-	import Scroll from './Scroll.svelte';
-
-	export let classes = '';
-	export let title = process.globals.title;
-	export let subtitle = process.globals.start;
-	export let id = _.camelCase(title);
-	export let to;
+	import Button from './common/Button.svelte';
+	import Flex from './common/Flex.svelte';
 </script>
 
 <style lang="scss">
-	#headerImg {
-		background: url('bg.jpg') center center/cover no-repeat border-box border-box fixed;
-		&::after {
-			position: absolute;
-			width: 100%;
+	.header {
+		height: 80%;
+		padding-top: 5%;
+	}
+
+	.hero {
+		padding: 0 10%;
+	}
+	.awards {
+		height: 20%;
+
+		img {
+			filter: grayscale(1);
+			mix-blend-mode: multiply;
+			max-height: 100px;
 			height: 100%;
-			content: '';
-			background: url('black.jpg') center center/cover no-repeat border-box border-box scroll;
-			opacity: 0.5;
+			padding: 20px 0;
 		}
+	}
+
+	img {
+		@apply h-full;
 	}
 </style>
 
-<Section fullscreen="true" classes="p-4 text-center md:p-8 xl:p-16 {classes}" id="{id}">
-	<div class="relative w-full h-full center" id="headerImg">
-		<div class="relative z-10 text-white">
-			<h1>{title}</h1>
-			<p class="fluid-xs">{subtitle}</p>
-			<Scroll target="{to}" />
+<div class="w-full min-h-screen bg-gray-200 lg:h-screen md:h-auto hero">
+	<Flex cols="true" justify="evenly" classes="w-full min-h-screen">
+		<div class="header">
+			<Flex wrap="true" align="center" classes="header md:auto lg:h-full">
+				<div class="h-full md:w-full lg:w-1/3">
+					<Flex justify="center" align="center" classes="w-full h-full">
+						<div class="w-full">
+							<h2 class="font-black text-blue-900">Städtisches Louise Schroeder Gymnasium München</h2>
+							<p class="my-4 text-sm">
+								Naturwissenschaftlich- technologisches und sprachliches Gymnasium
+							</p>
+							<Button buttonText="Aktuelle Termine" classes="w-56" />
+							<p class="my-4 text-xs text-gray-800">Referenzschule der TU München</p>
+						</div>
+					</Flex>
+				</div>
+				<div class="h-full py-4 md:w-full lg:w-2/3 right lg:pl-10">
+					<Flex justify="center" align="center" classes="w-full h-full overflow-hidden shadow-2xl rounded-lg">
+						<img src="https://wallpaperaccess.com/full/14229.jpg" class="object-cover" alt="" />
+					</Flex>
+				</div>
+			</Flex>
 		</div>
-	</div>
-</Section>
+		<div class="awards">
+			<Flex wrap="true" justify="between" align="center" classes="w-full awards h-full">
+				<img src="https://lsg.musin.de/homepage/images/LOGOsorsmc_SCREEN_80mm_RGB_mini.jpg" alt="" />
+				<img src="https://lsg.musin.de/homepage/images/delf.jpg" alt="" />
+				<img src="https://lsg.musin.de/homepage/images/cae.png" alt="" />
+				<img src="https://lsg.musin.de/homepage/images/cils.png" alt="" />
+				<img src="https://lsg.musin.de/homepage/images/KombiLogo.png" alt="" />
+			</Flex>
+		</div>
+	</Flex>
+</div>
