@@ -1,16 +1,16 @@
-import resolve from '@rollup/plugin-node-resolve';
-import replace from '@rollup/plugin-replace';
-import commonjs from '@rollup/plugin-commonjs';
-import svelte from 'rollup-plugin-svelte';
-import babel from '@rollup/plugin-babel';
-import strip from '@rollup/plugin-strip';
+import { babelConfig, jsonConfig, preprocessConfig, terserConfig } from './opts.config';
 import { terser } from 'rollup-plugin-terser';
+import babel from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
+import config from 'sapper/config/rollup';
+import globals from './src/globals';
 import json from '@rollup/plugin-json';
 import module from 'module';
-import config from 'sapper/config/rollup';
 import pkg from './package.json';
-import globals from './src/globals';
-import { babelConfig, preprocessConfig, terserConfig, jsonConfig } from './opts.config';
+import replace from '@rollup/plugin-replace';
+import resolve from '@rollup/plugin-node-resolve';
+import strip from '@rollup/plugin-strip';
+import svelte from 'rollup-plugin-svelte';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -34,9 +34,10 @@ const onwarn = (warning, warn) =>
 
 export default {
 	client: {
-		input: config.client.input(),
-		output: config.client.output(),
 		context: 'this',
+		input: config.client.input(),
+		onwarn,
+		output: config.client.output(),
 		plugins: [
 			replace(replaceConfig(true)),
 			svelte({
@@ -53,12 +54,13 @@ export default {
 			!dev && strip(),
 		],
 		preserveEntrySignatures: false,
-		onwarn,
 	},
 	server: {
-		input: config.server.input(),
-		output: config.server.output(),
 		context: 'this',
+		external: Object.keys(pkg.dependencies).concat(module.builtinModules),
+		input: config.server.input(),
+		onwarn,
+		output: config.server.output(),
 		plugins: [
 			replace(replaceConfig(false)),
 			json(jsonConfig(dev)),
@@ -71,14 +73,13 @@ export default {
 			}),
 			commonjs(),
 		],
-		external: Object.keys(pkg.dependencies).concat(module.builtinModules),
 		preserveEntrySignatures: 'strict',
-		onwarn,
 	},
 	serviceworker: {
-		input: config.serviceworker.input(),
-		output: config.serviceworker.output(),
 		context: 'this',
+		input: config.serviceworker.input(),
+		onwarn,
+		output: config.serviceworker.output(),
 		plugins: [
 			resolve(),
 			replace(replaceConfig(false)),
@@ -88,6 +89,5 @@ export default {
 			!dev && strip(),
 		],
 		preserveEntrySignatures: false,
-		onwarn,
 	},
 };

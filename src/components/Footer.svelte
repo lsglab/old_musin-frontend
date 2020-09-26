@@ -19,7 +19,9 @@
 			<Link href="https://github.com/lsglab/frontend/">Der gesamte Quellcode ist auf GitHub einsehbar</Link>
 		</p>
 		<p class="text-gray-600">
-			Copyright (c) {startYear === currentYear ? currentYear : `${startYear}-${currentYear}`} LSG Admins
+			Copyright (c)
+			{startYear === currentYear ? currentYear : `${startYear}-${currentYear}`}
+			LSG Admins
 		</p>
 	</Flex>
 </Section>

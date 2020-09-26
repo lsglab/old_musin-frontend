@@ -19,13 +19,12 @@
 	}
 </style>
 
-<Section fullscreen="true" classes="bg-gray-100 center" id="termine">
+<Section fullscreen="true" classes="bg-gray-100 text-center px-1 py-2" id="termine">
 	<Flex cols="true" justify="center" align="center">
 		<h2>Aktuelle Termine</h2>
 		<p>Alle demnächst anstehenden Termine</p>
 		<table
-			class="mx-1 my-2 bg-white border-collapse divide-y divide-gray-400 rounded-md shadow-md table-auto
-				md:rounded-lg md:shadow-xl md:mx-2 divide-solid">
+			class="mx-1 my-2 bg-white border-collapse divide-y divide-gray-400 rounded-lg shadow-md table-auto md:shadow-xl md:mx-2 divide-solid">
 			<thead>
 				<tr>
 					<th>Datum</th>
@@ -55,19 +54,19 @@
 					<td>Mensa</td>
 					<td class="content">Q12: Vollversammlung: Wahl der Jahrgangsstufensprecher</td>
 				</tr>
-				<tr class="hidden md:table-row">
+				<tr>
 					<td>24.09.</td>
 					<td>19:00</td>
 					<td>Kla.Zi.</td>
 					<td class="content">09. Jgst.: Klassenelternversammlung</td>
 				</tr>
-				<tr class="hidden md:table-row">
+				<tr>
 					<td>29.09.</td>
 					<td>8:00 - 8:45</td>
 					<td>Mensa</td>
 					<td class="content">Q11: Vollversammlung: Wahl der Jahrgangsstufensprecher</td>
 				</tr>
-				<tr class="hidden md:table-row">
+				<tr>
 					<td>29.09.</td>
 					<td>19:00</td>
 					<td>Kla.Zi.</td>

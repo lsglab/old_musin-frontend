@@ -5,7 +5,7 @@
 
 <style lang="scss">
 	a {
-		top: calc(50% + 25vh);
+		top: calc(100vh - (100vh - 100%) * 0.75);
 	}
 </style>
 

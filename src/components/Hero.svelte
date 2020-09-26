@@ -1,7 +1,8 @@
 <script>
-	import _ from 'lodash';
-	import Section from './Section.svelte';
+	import Flex from './common/Flex.svelte';
 	import Scroll from './Scroll.svelte';
+	import Section from './Section.svelte';
+	import _ from 'lodash';
 
 	export let classes = '';
 	export let title = process.globals.title;
@@ -25,11 +26,13 @@
 </style>
 
 <Section fullscreen="true" classes="p-4 text-center md:p-8 xl:p-16 {classes}" id="{id}">
-	<div class="relative w-full h-full center" id="headerImg">
-		<div class="relative z-10 text-white">
-			<h1>{title}</h1>
-			<p class="fluid-xs">{subtitle}</p>
-			<Scroll target="{to}" />
-		</div>
+	<div class="relative fullscreen" id="headerImg">
+		<Flex justify="center" align="center">
+			<div class="relative z-10 text-white">
+				<h1>{title}</h1>
+				<p class="fluid-xs">{subtitle}</p>
+				<Scroll target="{to}" />
+			</div>
+		</Flex>
 	</div>
 </Section>

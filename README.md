@@ -24,12 +24,11 @@ We use `package.json` scripts exclusively as a front-end for task automation, an
 ### Scripts
 
 -   `yarn do:sync|do:commit|...`: These scripts are related to git operations, and are explained in the [Contributing](CONTRIBUTING.md) guide
+-   `yarn do:dev`: Starts a hot-reloading development environment in `__sapper__/dev`
 -   `yarn do:build`: Builds sapper in the `__sapper__/build` directory for server-side serving
 -   `yarn do:start`: Starts the server-side polka instance from `__sapper__/build`
 -   `yarn do:serve`: Runs `do:build`, then `do:start`
--   `yarn do:dev`: Starts a hot-reloading development environment in `__sapper__/dev`
 -   `yarn do:export`: Builds a static sapper instance by snapshotting each hydratable page returned from the server
--   `yarn do:cypress`: Opens a cypress window for running ui tests
 -   `yarn do:autofix`: Automatically formats, lints and fixes all code
 -   `yarn do:testing`: Formats, lints and tests; fails on error
 

@@ -13,12 +13,11 @@ body,
 	@apply w-full h-full;
 }
 
-.center {
-	@apply flex justify-center items-center;
-}
-
 .fullscreen {
-	@apply w-full h-full;
+	@apply w-full min-h-full h-auto flex flex-col;
+	> * {
+		flex: 1;
+	}
 }
 
 h1,

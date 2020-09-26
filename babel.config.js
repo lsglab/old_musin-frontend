@@ -3,13 +3,13 @@ const presets = [
 		'@babel/preset-env',
 		{
 			bugfixes: true,
-			spec: true,
-			loose: true,
-			useBuiltIns: 'usage',
 			corejs: {
-				version: '3.6',
 				proposals: true,
+				version: '3.6',
 			},
+			loose: true,
+			spec: true,
+			useBuiltIns: 'usage',
 		},
 	],
 ];
@@ -22,5 +22,5 @@ const plugins = [
 
 module.exports = (api) => {
 	const dev = api.env('development');
-	return dev ? { plugins } : { presets, plugins };
+	return dev ? { plugins } : { plugins, presets };
 };

@@ -1,8 +1,8 @@
-import sirv from 'sirv';
-import polka from 'polka';
-import compression from 'compression';
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 import * as sapper from '@sapper/server';
+import compression from 'compression';
+import polka from 'polka';
+import sirv from 'sirv';
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';

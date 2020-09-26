@@ -1,13 +1,13 @@
-import sveltePreprocess from 'svelte-preprocess';
-import sass from 'sass';
+import autoprefixer from 'autoprefixer';
+import colorguard from 'colorguard';
+import cssnano from 'cssnano';
 import path from 'path';
+import postcssFailOnWarn from 'postcss-fail-on-warn';
 import postcssImport from 'postcss-import';
 import postcssUrl from 'postcss-url';
-import postcssFailOnWarn from 'postcss-fail-on-warn';
-import colorguard from 'colorguard';
+import sass from 'sass';
+import sveltePreprocess from 'svelte-preprocess';
 import tailwindcss from 'tailwindcss';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
 
 const postcssConfig = (dev) => ({
 	plugins: [
@@ -18,26 +18,26 @@ const postcssConfig = (dev) => ({
 		tailwindcss('./tailwind.config.js'),
 		postcssUrl([
 			{
-				url: 'inline',
-				fallback: 'copy',
-				ignoreFragmentWarning: true,
-				optimizeSvgEncode: true,
-				maxSize: 20,
-				shrink: 0,
-				useHash: true,
+				assetsPath: 'static',
 				basePath: [
 					path.resolve('node_modules/'),
 					path.resolve('src/assets/'),
 					path.resolve('src/assets/styles/'),
 					path.resolve('src/assets/media/'),
 				],
-				assetsPath: 'static',
+				fallback: 'copy',
+				ignoreFragmentWarning: true,
+				maxSize: 20,
+				optimizeSvgEncode: true,
+				shrink: 0,
+				url: 'inline',
+				useHash: true,
 			},
 			{
+				multi: true,
 				url: (asset) => {
 					return asset.url.replace('static/', '/'); // Fix relative asset path
 				},
-				multi: true,
 			},
 		]),
 		!dev && autoprefixer,
@@ -49,33 +49,32 @@ const postcssConfig = (dev) => ({
 	].filter(Boolean),
 });
 const sassConfig = (dev) => ({
-	indentedSyntax: false,
-	outputStyle: dev ? 'expanded' : 'compressed',
-	lineFeed: 'lf',
+	embedSourceMap: dev,
 	includePaths: ['./node_modules/'],
 	indentType: 'tab',
 	indentWidth: 4,
+	indentedSyntax: false,
+	lineFeed: 'lf',
+	outputStyle: dev ? 'expanded' : 'compressed',
 	sourceMap: dev,
 	sourceMapContents: dev,
-	embedSourceMap: dev,
 });
 const preprocessConfig = (dev) => ({
 	preprocess: sveltePreprocess({
-		sourceMap: dev,
 		markupTagName: 'template',
 		postcss: true,
 		sass: {
-			renderSync: true,
 			implementation: sass,
+			renderSync: true,
 			...sassConfig(dev),
 		},
+		sourceMap: dev,
 	}),
 });
 const terserConfig = (module) => ({
-	module,
 	compress: {
-		defaults: true,
 		booleans_as_integers: true,
+		defaults: true,
 		drop_console: true,
 		hoist_funs: true,
 		hoist_vars: true,
@@ -83,29 +82,30 @@ const terserConfig = (module) => ({
 		passes: 3,
 		toplevel: true,
 		unsafe: true,
-		unsafe_arrows: true,
 		unsafe_Function: true,
+		unsafe_arrows: true,
 		unsafe_math: true,
 		unsafe_proto: true,
 		unsafe_undefined: true,
 	},
-	mangle: {
-		toplevel: true,
-	},
-	toplevel: true,
-	warnings: true,
 	format: {
 		indent_level: 0,
 		webkit: true,
 	},
+	mangle: {
+		toplevel: true,
+	},
+	module,
 	parse: {
 		html5_comments: false,
 	},
+	toplevel: true,
+	warnings: true,
 });
 const babelConfig = (skip) => ({
-	extensions: ['.js', '.mjs', '.cjs', '.ts', '.html', '.svelte'],
 	babelHelpers: 'bundled',
 	exclude: ['node_modules/@babel/**', 'node_modules/core-js/**'],
+	extensions: ['.js', '.mjs', '.cjs', '.ts', '.html', '.svelte'],
 	skipPreflightCheck: skip,
 });
 const jsonConfig = (dev) => ({
