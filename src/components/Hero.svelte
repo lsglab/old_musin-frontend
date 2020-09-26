@@ -40,14 +40,17 @@
 							<p class="my-4 text-sm">
 								Naturwissenschaftlich- technologisches und sprachliches Gymnasium
 							</p>
-							<Button buttonText="Aktuelle Termine" classes="w-56" />
+							<Button buttonText="Aktuelle Termine" classes="w-56" link="true" href="#termine" />
 							<p class="my-4 text-xs text-gray-800">Referenzschule der TU München</p>
 						</div>
 					</Flex>
 				</div>
 				<div class="h-full py-4 md:w-full lg:w-2/3 right lg:pl-10">
 					<Flex justify="center" align="center" classes="w-full h-full overflow-hidden shadow-2xl rounded-lg">
-						<img src="https://wallpaperaccess.com/full/14229.jpg" class="object-cover" alt="" />
+						<img
+							src="https://lsg.musin.de/homepage/images/header-images/schulhof_mini.jpg"
+							class="object-cover"
+							alt="" />
 					</Flex>
 				</div>
 			</Flex>

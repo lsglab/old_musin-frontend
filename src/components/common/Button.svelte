@@ -5,6 +5,10 @@
 	export let buttonFunction = () => {};
 	// custom styles the user wants to apply to the button
 	export let classes = '';
+	// Is the button is a link?
+	export let link = false;
+	// If it is, the href is needed
+	export let href = '';
 </script>
 
 <style lang="scss">
@@ -12,8 +16,14 @@
 		max-width: 300px;
 		background-color: #07f;
 	}
+
+	button,
+	a {
+		@apply text-white;
+		@apply text-xs;
+	}
 </style>
 
-<button
-	class="{classes} py-1 px-4 text-white rounded-lg text-xs"
-	on:click="{() => buttonFunction}">{buttonText}</button>
+<button class="{classes} py-1 px-4 rounded-lg" on:click="{() => buttonFunction}">
+	{#if link}<a href="{href}">{buttonText}</a>{:else}{buttonText}{/if}
+</button>
