@@ -20,7 +20,7 @@
 </style>
 
 <Section fullscreen="true" classes="bg-white" id="termine">
-	<Flex cols="true" align="center" classes="my-10">
+	<Flex cols="true" align="center" classes="py-10">
 		<Flex cols="true" align="center">
 			<h2 class="text-blue-900">Aktuelle Termine</h2>
 			<p class="my-5 text-center text-blue-800">

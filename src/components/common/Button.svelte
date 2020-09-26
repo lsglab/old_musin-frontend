@@ -25,5 +25,5 @@
 </style>
 
 <button class="{classes} py-1 px-4 rounded-lg" on:click="{() => buttonFunction}">
-	{#if link}<a href="{href}">{buttonText}</a>{:else}{buttonText}{/if}
+	{#if link}<a class="w-full h-full" href="{href}">{buttonText}</a>{:else}{buttonText}{/if}
 </button>

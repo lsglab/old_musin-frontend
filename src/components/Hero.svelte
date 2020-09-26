@@ -1,12 +1,17 @@
 <script>
 	import Button from './common/Button.svelte';
 	import Flex from './common/Flex.svelte';
+	import DashBackground from './DashBackground.svelte';
 </script>
 
 <style lang="scss">
 	.header {
 		height: 80%;
 		padding-top: 5%;
+
+		* {
+			z-index: 2;
+		}
 	}
 
 	.hero {
@@ -47,16 +52,13 @@
 				</div>
 				<div class="h-full py-4 md:w-full lg:w-2/3 right lg:pl-10">
 					<Flex justify="center" align="center" classes="w-full h-full overflow-hidden shadow-2xl rounded-lg">
-						<img
-							src="https://lsg.musin.de/homepage/images/header-images/schulhof_mini.jpg"
-							class="object-cover"
-							alt="" />
+						<img src="https://wallpaperaccess.com/full/14229.jpg" class="object-cover" alt="" />
 					</Flex>
 				</div>
 			</Flex>
 		</div>
 		<div class="awards">
-			<Flex wrap="true" justify="between" align="center" classes="w-full awards h-full">
+			<Flex wrap="true" justify="between" align="center" classes="w-full h-full">
 				<img src="https://lsg.musin.de/homepage/images/LOGOsorsmc_SCREEN_80mm_RGB_mini.jpg" alt="" />
 				<img src="https://lsg.musin.de/homepage/images/delf.jpg" alt="" />
 				<img src="https://lsg.musin.de/homepage/images/cae.png" alt="" />
@@ -65,4 +67,5 @@
 			</Flex>
 		</div>
 	</Flex>
+	<DashBackground />
 </div>
