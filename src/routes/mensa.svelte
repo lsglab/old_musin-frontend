@@ -1,0 +1,32 @@
+<script>
+	import Flex from '../components/common/Flex.svelte';
+	import Hero from '../components/Hero.svelte';
+	import HeroDown from '../components/heroDown.svelte';
+	import MensaImage from '../components/MensaImage.svelte';
+</script>
+
+<svelte:head>
+	<title>LSG | Mensa</title>
+</svelte:head>
+
+<Hero
+	header="Mensa"
+	subHeader="Im Schulzentrum an der Pfarrer-Grimm-Straße"
+	image="https://stage.ktchnrebel.com/wp-content/uploads/2019/04/Company-Catering_credit-Quelle-Otto-Kantine-Kochwerk-Elbe-3-2.jpg"
+	buttonText="Mehr Informationen"
+	href="mensa/#information"
+	awards="{['https://lsg.musin.de/homepage/images/Mensa/Mensa-Logo.jpg']}" />
+<HeroDown
+	header="Informationen"
+	linkText="Aktuelle Informationen"
+	href="https://lsg.musin.de/homepage/images/Mensa/aktuelles.pdf"
+	id="information">
+	<Flex classes="w-100" wrap="true">
+		<MensaImage
+			header="Speiseplan der Woche"
+			image="https://lsg.musin.de/homepage/images/Mensa/_N4O8600_mini.jpg" />
+		<MensaImage
+			header="Mensa Kräutergarten"
+			image="https://lsg.musin.de/homepage/images/Mensa/Artikel-9_mini.jpg" />
+	</Flex>
+</HeroDown>
