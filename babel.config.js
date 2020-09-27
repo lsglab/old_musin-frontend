@@ -37,7 +37,7 @@ module.exports = (api) => {
 	// api.cache(false);
 	const legacy = process.env.SAPPER_LEGACY_BUILD !== undefined;
 	const dev = process.env.NODE_ENV === 'development';
-	console.log(`[BABEL] legacy: ${legacy}, dev: ${dev}`);
+	// console.log(`[BABEL] legacy: ${legacy}, dev: ${dev}`);
 	// eslint-disable-next-line no-nested-ternary
 	return legacy ? legacyMode : dev ? devMode : defaultMode;
 };

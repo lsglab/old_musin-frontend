@@ -13,13 +13,13 @@
 
 <style lang="scss">
 	#headerImg {
-		background: url('bg.jpg') center center/cover no-repeat border-box border-box fixed;
+		background: resolve('bg.jpg') center center/cover no-repeat border-box border-box fixed;
 		&::after {
 			position: absolute;
 			width: 100%;
 			height: 100%;
 			content: '';
-			background: url('black.jpg') center center/cover no-repeat border-box border-box scroll;
+			background: resolve('black.jpg') center center/cover no-repeat border-box border-box scroll;
 			opacity: 0.5;
 		}
 	}

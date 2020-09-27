@@ -5,6 +5,7 @@ import cssnano from 'cssnano';
 import path from 'path';
 import postcssAssets from 'postcss-assets';
 import postcssFailOnWarn from 'postcss-fail-on-warn';
+import postcssFlexbugs from 'postcss-flexbugs-fixes';
 import postcssImport from 'postcss-import';
 import postcssUrl from 'postcss-url';
 import sass from 'sass';
@@ -16,53 +17,31 @@ const postcssConfig = (dev) => ({
 	plugins: [
 		postcssImport(),
 		tailwindcss('./tailwind.config.js'),
-		// postcssUrl([
-		// 	{
-		// 		assetsPath: path.resolve('static/'),
-		// 		basePath: [
-		// 			path.resolve('src/assets/styles/'),
-		// 			path.resolve('src/assets/media/'),
-		// 			path.resolve('src/assets/fonts/'),
-		// 			path.resolve('src/assets/'),
-		// 			path.resolve('node_modules/'),
-		// 		],
-		// 		hashOptions: {
-		// 			append: dev,
-		// 			method: 'xxhash64',
-		// 			shrink: 0,
-		// 		},
-		// 		url: 'copy',
-		// 		useHash: !dev,
-		// 	},
-		// 	{
-		// 		multi: true,
-		// 		url: (asset) => {
-		// 			return asset.url.replace('static/', '/'); // Fix relative asset path
-		// 		},
-		// 	},
-		// ]),
 		postcssAssets({
-			basePath: '.',
-			loadPaths: ['src/assets/media/', 'src/assets/fonts/', 'src/assets/styles/', 'src/assets/', 'node_modules/'],
+			loadPaths: ['src/assets/media/', 'src/assets/fonts/'],
 			relative: true,
 		}),
 		postcssUrl({
-			url: (asset) => {
-				const oldPath = asset.absolutePath;
-				const oldName = asset.pathname;
+			url: (asset, dir) => {
+				const oldPath = path.resolve(dir.from, asset.url);
+				const oldName = path.basename(oldPath);
 				const newName = dev ? oldName : statSync(oldPath).mtime.getTime().toString(16) + path.extname(oldName);
 				const newPath = path.resolve(staticPath, newName);
-				if (newName !== oldName) copy.sync(oldPath, newPath);
-				console.log(`${oldPath} -> ${newPath})`);
-				return newName;
+				// console.log(
+				// 	`[DEBUG] file: ${dir.file},\n\tfrom: ${dir.from},\n\tto: ${dir.to},\n\turl: ${asset.url},\n\trelative: ${asset.relativePath},\n\tabsolute: ${asset.absolutePath},\n\toldPath: ${oldPath},\n\toldName: ${oldName},\n\tnewName: ${newName},\n\tnewPath: ${newPath}`
+				// );
+				copy.sync(oldPath, newPath, { overwrite: false });
+				// console.log(`[POSTCSS] ${oldPath} -> ${newPath}`);
+				return `/${newName}`;
 			},
 		}),
-		!dev && autoprefixer,
+		!dev && postcssFlexbugs(),
+		!dev && autoprefixer({ grid: 'autoplace' }),
 		!dev &&
 			cssnano({
 				preset: 'advanced',
 			}),
-		!dev && postcssFailOnWarn,
+		!dev && postcssFailOnWarn(),
 	].filter(Boolean),
 });
 const sassConfig = (dev) => ({
