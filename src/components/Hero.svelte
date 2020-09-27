@@ -1,8 +1,8 @@
 <script>
 	import Button from './common/Button.svelte';
 	import Flex from './common/Flex.svelte';
-	import ShadowImage from './common/ShadowImage.svelte';
 	import DashBackground from './DashBackground.svelte';
+	import Section from './Section.svelte';
 	// The header of the Hero
 	export let header;
 	// The sub-header
@@ -22,15 +22,11 @@
 <style lang="scss">
 	.header {
 		height: 80%;
-		padding-top: 5%;
+		padding-top: 70px;
 
 		* {
 			z-index: 2;
 		}
-	}
-
-	.hero {
-		padding: 0 10%;
 	}
 	.awards {
 		height: 20%;
@@ -38,8 +34,8 @@
 		img {
 			filter: grayscale(1);
 			mix-blend-mode: multiply;
-			max-height: 100px;
 			padding: 20px 0;
+			max-height: 100px;
 		}
 	}
 
@@ -48,8 +44,8 @@
 	}
 </style>
 
-<div class="w-full min-h-screen bg-gray-100 lg:h-screen md:h-auto hero">
-	<Flex cols="true" justify="evenly" classes="w-full min-h-screen">
+<Section classes="w-full bg-gray-100 lg:h-screen md:h-auto" padding="0 10%">
+	<Flex cols="true" justify="evenly" classes="w-full h-full">
 		<div class="header">
 			<Flex wrap="true" align="center" classes="header lg:h-full">
 				<div class="h-full md:w-full lg:w-1/3">
@@ -63,7 +59,9 @@
 					</Flex>
 				</div>
 				<div class="h-full py-4 md:w-full lg:w-2/3 right lg:pl-10">
-					<ShadowImage src="{image}" />
+					<Flex justify="center" align="center" classes="w-full h-full overflow-hidden shadow-2xl rounded-lg">
+						<img class="object-cover w-full h-full" src="{image}" alt="" />
+					</Flex>
 				</div>
 			</Flex>
 		</div>
@@ -76,4 +74,4 @@
 		</div>
 	</Flex>
 	<DashBackground />
-</div>
+</Section>

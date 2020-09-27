@@ -20,13 +20,16 @@
 	header="Informationen"
 	linkText="Aktuelle Informationen"
 	href="https://lsg.musin.de/homepage/images/Mensa/aktuelles.pdf"
-	id="information">
-	<Flex classes="w-100" wrap="true">
+	id="information"
+	padding="0 10%">
+	<Flex classes="w-full" wrap="true" justify="between">
 		<MensaImage
 			header="Speiseplan der Woche"
-			image="https://lsg.musin.de/homepage/images/Mensa/_N4O8600_mini.jpg" />
+			image="https://lsg.musin.de/homepage/images/Mensa/_N4O8600_mini.jpg"
+			href="https://lsg.musin.de/homepage/images/Mensa/speiseplan.pdf" />
 		<MensaImage
 			header="Mensa Kräutergarten"
-			image="https://lsg.musin.de/homepage/images/Mensa/Artikel-9_mini.jpg" />
+			image="https://lsg.musin.de/homepage/images/Mensa/Artikel-9_mini.jpg"
+			href="https://lsg.musin.de/homepage/9-home/92-kraeutergarten" />
 	</Flex>
 </HeroDown>

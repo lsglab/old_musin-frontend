@@ -12,10 +12,12 @@
 	export let href;
 	// The id of the element
 	export let id;
+	// custom padding like 10%
+	export let padding = '';
 </script>
 
-<Section classes="bg-white lg:h-screen md:h-auto" id="{id}">
-	<Flex cols="true" align="center" classes="py-10 h-full">
+<Section classes="bg-white lg:h-screen md:h-auto" id="{id}" padding="{padding}">
+	<Flex cols="true" align="center" classes="py-10 h-full" justify="between">
 		<Flex cols="true" align="center">
 			<h2 class="text-blue-900">{header}</h2>
 			<p class="my-5 text-center text-blue-800">{subHeader}</p>
