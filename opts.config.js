@@ -1,7 +1,8 @@
-import { statSync } from 'fs';
-import autoprefixer from 'autoprefixer';
+// import autoprefixer from 'autoprefixer';
+import { readFileSync } from 'fs';
 import copy from 'cp-file';
 import cssnano from 'cssnano';
+import hash from 'xxhashjs';
 import path from 'path';
 import postcssAssets from 'postcss-assets';
 import postcssFailOnWarn from 'postcss-fail-on-warn';
@@ -25,7 +26,9 @@ const postcssConfig = (dev) => ({
 			url: (asset, dir) => {
 				const oldPath = path.resolve(dir.from, asset.url);
 				const oldName = path.basename(oldPath);
-				const newName = dev ? oldName : statSync(oldPath).mtime.getTime().toString(16) + path.extname(oldName);
+				const newName = dev
+					? oldName
+					: hash.h32(readFileSync(oldPath, { encoding: 'utf-8' }), 12345).toString(16);
 				const newPath = path.resolve(staticPath, newName);
 				// console.log(
 				// 	`[DEBUG] file: ${dir.file},\n\tfrom: ${dir.from},\n\tto: ${dir.to},\n\turl: ${asset.url},\n\trelative: ${asset.relativePath},\n\tabsolute: ${asset.absolutePath},\n\toldPath: ${oldPath},\n\toldName: ${oldName},\n\tnewName: ${newName},\n\tnewPath: ${newPath}`
@@ -36,7 +39,7 @@ const postcssConfig = (dev) => ({
 			},
 		}),
 		!dev && postcssFlexbugs(),
-		!dev && autoprefixer({ grid: 'autoplace' }),
+		// !dev && autoprefixer({ grid: 'autoplace' }),
 		!dev &&
 			cssnano({
 				preset: 'advanced',

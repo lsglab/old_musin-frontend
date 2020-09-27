@@ -138,7 +138,7 @@
 		"svelte-preprocess": "^4.3.2",
 		"systemjs": "^6.6.1",
 		"tailwindcss": "^1.8.10",
-		"tailwindcss-fluid": "^0.2.0"
+		"xxhashjs": "^0.2.2"
 	},
 	"config": {
 		"commitizen": {

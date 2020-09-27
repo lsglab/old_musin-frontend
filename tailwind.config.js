@@ -3,36 +3,7 @@ module.exports = {
 		purgeLayersByDefault: true,
 		removeDeprecatedGapUtilities: true,
 	},
-	plugins: [
-		require('tailwindcss-fluid')({
-			textSizes: {
-				lg: {
-					max: '45px',
-					maxvw: '1280px',
-					min: '30px',
-					minvw: '640px',
-				},
-				md: {
-					max: '30px',
-					maxvw: '1280px',
-					min: '20px',
-					minvw: '640px',
-				},
-				sm: {
-					max: '20px',
-					maxvw: '1280px',
-					min: '10px',
-					minvw: '640px',
-				},
-				xl: {
-					max: '70px',
-					maxvw: '1280px',
-					min: '50px',
-					minvw: '640px',
-				},
-			},
-		}),
-	],
+	plugins: [],
 	purge: {
 		content: ['./__sapper__/export/**/*.html', './__sapper__/export/**/*.js'],
 		mode: 'all',
