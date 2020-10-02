@@ -1,7 +1,7 @@
 <script>
 	import Button from './common/Button.svelte';
-	import Flex from './common/Flex.svelte';
 	import DashBackground from './DashBackground.svelte';
+	import Flex from './common/Flex.svelte';
 	import Section from './Section.svelte';
 	// The header of the Hero
 	export let header;

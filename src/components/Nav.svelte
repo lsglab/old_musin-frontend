@@ -3,7 +3,7 @@
 		<h3><a href=".">Louise Schroeder Gymnasium</a></h3>
 		<h4><a href=".">LSG</a></h4>
 	</div>
-	<a class="burger" href="#"> <span></span> <span></span> <span></span> </a>
+	<button class="burger"> <span></span> <span></span> <span></span> </button>
 	<ul>
 		<li class="dropdown">
 			<span>Die Schule</span>

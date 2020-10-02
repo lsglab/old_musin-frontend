@@ -1,81 +1,79 @@
-import sveltePreprocess from 'svelte-preprocess';
-import sass from 'sass';
+// import autoprefixer from 'autoprefixer';
+import { readFileSync } from 'fs';
+import copy from 'cp-file';
+import cssnano from 'cssnano';
+import hash from 'xxhashjs';
 import path from 'path';
+import postcssAssets from 'postcss-assets';
+import postcssFailOnWarn from 'postcss-fail-on-warn';
+import postcssFlexbugs from 'postcss-flexbugs-fixes';
 import postcssImport from 'postcss-import';
 import postcssUrl from 'postcss-url';
-import postcssFailOnWarn from 'postcss-fail-on-warn';
-import colorguard from 'colorguard';
+import sass from 'sass';
+import sveltePreprocess from 'svelte-preprocess';
 import tailwindcss from 'tailwindcss';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
 
+const staticPath = path.resolve(__dirname, 'static/');
 const postcssConfig = (dev) => ({
 	plugins: [
 		postcssImport(),
-		colorguard({
-			threshold: 10,
-		}),
 		tailwindcss('./tailwind.config.js'),
-		postcssUrl([
-			{
-				url: 'inline',
-				fallback: 'copy',
-				ignoreFragmentWarning: true,
-				optimizeSvgEncode: true,
-				maxSize: 20,
-				shrink: 0,
-				useHash: true,
-				basePath: [
-					path.resolve('node_modules/'),
-					path.resolve('src/assets/'),
-					path.resolve('src/assets/styles/'),
-					path.resolve('src/assets/media/'),
-				],
-				assetsPath: 'static',
+		postcssAssets({
+			loadPaths: ['src/assets/media/', 'src/assets/fonts/'],
+			relative: true,
+		}),
+		postcssUrl({
+			url: (asset, dir) => {
+				const oldPath = path.resolve(dir.from, asset.url);
+				const oldName = path.basename(oldPath);
+				const newName = dev
+					? oldName
+					: hash.h32(readFileSync(oldPath, { encoding: 'utf-8' }), 12345).toString(16);
+				const newPath = path.resolve(staticPath, newName);
+				// console.log(
+				// 	`[DEBUG] file: ${dir.file},\n\tfrom: ${dir.from},\n\tto: ${dir.to},\n\turl: ${asset.url},\n\trelative: ${asset.relativePath},\n\tabsolute: ${asset.absolutePath},\n\toldPath: ${oldPath},\n\toldName: ${oldName},\n\tnewName: ${newName},\n\tnewPath: ${newPath}`
+				// );
+				copy.sync(oldPath, newPath, { overwrite: false });
+				// console.log(`[POSTCSS] ${oldPath} -> ${newPath}`);
+				return `/${newName}`;
 			},
-			{
-				url: (asset) => {
-					return asset.url.replace('static/', '/'); // Fix relative asset path
-				},
-				multi: true,
-			},
-		]),
-		!dev && autoprefixer,
+		}),
+		!dev && postcssFlexbugs(),
+		// !dev && autoprefixer({ grid: 'autoplace' }),
 		!dev &&
 			cssnano({
 				preset: 'advanced',
 			}),
-		postcssFailOnWarn,
+		!dev && postcssFailOnWarn(),
 	].filter(Boolean),
 });
 const sassConfig = (dev) => ({
-	indentedSyntax: false,
-	outputStyle: dev ? 'expanded' : 'compressed',
-	lineFeed: 'lf',
+	embedSourceMap: dev,
 	includePaths: ['./node_modules/'],
 	indentType: 'tab',
 	indentWidth: 4,
+	indentedSyntax: false,
+	lineFeed: 'lf',
+	outputStyle: dev ? 'expanded' : 'compressed',
 	sourceMap: dev,
 	sourceMapContents: dev,
-	embedSourceMap: dev,
 });
 const preprocessConfig = (dev) => ({
 	preprocess: sveltePreprocess({
-		sourceMap: dev,
 		markupTagName: 'template',
 		postcss: true,
 		sass: {
-			renderSync: true,
 			implementation: sass,
+			renderSync: true,
 			...sassConfig(dev),
 		},
+		sourceMap: dev,
 	}),
 });
-const terserConfig = (module) => ({
-	module,
+const terserConfig = () => ({
 	compress: {
-		defaults: true,
 		booleans_as_integers: true,
+		defaults: true,
 		drop_console: true,
 		hoist_funs: true,
 		hoist_vars: true,
@@ -83,30 +81,30 @@ const terserConfig = (module) => ({
 		passes: 3,
 		toplevel: true,
 		unsafe: true,
-		unsafe_arrows: true,
 		unsafe_Function: true,
+		unsafe_arrows: true,
 		unsafe_math: true,
 		unsafe_proto: true,
 		unsafe_undefined: true,
 	},
-	mangle: {
-		toplevel: true,
-	},
-	toplevel: true,
-	warnings: true,
 	format: {
 		indent_level: 0,
 		webkit: true,
 	},
+	mangle: {
+		toplevel: true,
+	},
 	parse: {
 		html5_comments: false,
 	},
+	toplevel: true,
+	warnings: true,
 });
-const babelConfig = (skip) => ({
-	extensions: ['.js', '.mjs', '.cjs', '.ts', '.html', '.svelte'],
+const babelConfig = () => ({
 	babelHelpers: 'bundled',
-	exclude: ['node_modules/@babel/**', 'node_modules/core-js/**'],
-	skipPreflightCheck: skip,
+	configFile: './babel.config.js',
+	exclude: ['node_modules/@babel/**', 'node_modules/core-js/**', 'node_modules/core-js-pure/**'],
+	extensions: ['.js', '.mjs', '.cjs', '.ts', '.html', '.svelte'],
 });
 const jsonConfig = (dev) => ({
 	compact: !dev,

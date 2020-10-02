@@ -1,30 +1,65 @@
 module.exports = {
-	root: true,
 	env: {
 		browser: true,
 		es6: true,
 	},
+	extends: ['airbnb-base', 'prettier'],
+	overrides: [
+		{
+			files: ['*.svelte'],
+			processor: 'svelte3/svelte3',
+			rules: {
+				'import/no-mutable-exports': 'off',
+				'import/prefer-default-export': 'off',
+				'prefer-destructuring': 'off',
+				'prettier/prettier': 'off',
+			},
+		},
+		{
+			files: ['*worker.js'],
+			rules: {
+				'no-restricted-globals': [0],
+			},
+		},
+		{
+			files: ['*.js'],
+			rules: {
+				'global-require': 'off',
+			},
+		},
+	],
 	parserOptions: {
+		ecmaVersion: 12,
 		parser: 'babel-eslint',
 		sourceType: 'module',
-		ecmaVersion: 12,
 	},
-	extends: ['airbnb-base', 'prettier'],
-	plugins: ['babel', 'svelte3'],
+	plugins: ['babel', 'svelte3', 'sort-keys-fix', 'sort-imports-es6-autofix'],
+	root: true,
 	rules: {
 		'babel/camelcase': 'off',
 		'babel/no-invalid-this': 'warn',
+		'babel/no-unused-expressions': 'off',
 		'babel/object-curly-spacing': 'off',
 		'babel/semi': 'warn',
-		'babel/no-unused-expressions': 'off',
 		'babel/valid-typeof': 'off',
 		'for-direction': 'error',
 		'getter-return': 'warn',
+		'import/no-extraneous-dependencies': 'off',
+		'import/no-unresolved': [
+			'error',
+			{
+				caseSensitive: false,
+				ignore: ['^@sapper'],
+			},
+		],
+		'import/order': 'off',
 		'no-async-promise-executor': 'error',
 		'no-compare-neg-zero': 'warn',
 		'no-cond-assign': ['warn', 'always'],
+		'no-console': 'off',
 		'no-constant-condition': 'warn',
 		'no-control-regex': 'warn',
+		'no-debugger': 'off',
 		'no-dupe-args': 'warn',
 		'no-dupe-else-if': 'warn',
 		'no-dupe-keys': 'warn',
@@ -40,60 +75,20 @@ module.exports = {
 		'no-invalid-regexp': 'error',
 		'no-irregular-whitespace': 'warn',
 		'no-misleading-character-class': 'warn',
-		'no-console': 'off',
-		'no-debugger': 'off',
-		'import/no-unresolved': [
-			'error',
+		'sort-imports-es6-autofix/sort-imports-es6': [
+			'warn',
 			{
-				caseSensitive: false,
-				ignore: ['^@sapper'],
+				// allowSeparatedGroups: false,
+				ignoreCase: false,
+				// ignoreDeclarationSort: false,
+				ignoreMemberSort: false,
+				memberSyntaxSortOrder: ['all', 'multiple', 'single', 'none'],
 			},
 		],
+		'sort-keys': ['warn', 'asc', { caseSensitive: true, minKeys: 2, natural: true }],
+		'sort-keys-fix/sort-keys-fix': 'warn',
+		'sort-vars': 'warn',
 	},
-	overrides: [
-		{
-			files: ['*.svelte'],
-			processor: 'svelte3/svelte3',
-			rules: {
-				'import/no-mutable-exports': 'off',
-				'import/prefer-default-export': 'off',
-				'prettier/prettier': 'off',
-				'prefer-destructuring': 'off',
-			},
-		},
-		{
-			files: ['*worker.js'],
-			rules: {
-				'no-restricted-globals': [0],
-			},
-		},
-		{
-			files: [
-				'postcss.config.js',
-				'postcss.config.mjs',
-				'rollup.config.js',
-				'rollup.config.mjs',
-				'opts.config.js',
-				'opts.config.mjs',
-				'tailwind.config.js',
-				'svelte.config.js',
-			],
-			rules: {
-				'import/no-extraneous-dependencies': [
-					'error',
-					{
-						devDependencies: true,
-					},
-				],
-			},
-		},
-		{
-			files: ['*.js'],
-			rules: {
-				'global-require': 'off',
-			},
-		},
-	],
 	settings: {
 		'svelte3/ignore-styles': () => true,
 	},
