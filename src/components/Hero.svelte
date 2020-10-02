@@ -69,7 +69,7 @@
 				</div>
 			</Flex>
 		</div>
-		<div class="awards h-2/10">
+		<div class="hidden awards h-2/10 md:block lg:block xl:block">
 			<Flex wrap="true" justify="between" align="center" classes="w-full h-full">
 				{#each awards as award}
 					<img src="{award}" alt="" class="h-full {awards.length <= 3 ? 'mx-auto' : ''}" />
