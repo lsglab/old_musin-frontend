@@ -12,7 +12,7 @@
 <Hero
 	header="Mensa"
 	subHeader="Im Schulzentrum an der Pfarrer-Grimm-Straße"
-	image="https://stage.ktchnrebel.com/wp-content/uploads/2019/04/Company-Catering_credit-Quelle-Otto-Kantine-Kochwerk-Elbe-3-2.jpg"
+	image="https://www.zulassungs-express.de/wp-content/uploads/2019/11/placeholder.png"
 	buttonText="Mehr Informationen"
 	href="mensa/#information"
 	awards="{['https://lsg.musin.de/homepage/images/Mensa/Mensa-Logo.jpg']}" />
@@ -21,7 +21,7 @@
 	linkText="Aktuelle Informationen"
 	href="https://lsg.musin.de/homepage/images/Mensa/aktuelles.pdf"
 	id="information"
-	padding="0 10%">
+	padding="true">
 	<Flex classes="w-full" wrap="true" justify="between">
 		<MensaImage
 			header="Speiseplan der Woche"

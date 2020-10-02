@@ -21,16 +21,12 @@
 
 <style lang="scss">
 	.header {
-		height: 80%;
-		padding-top: 70px;
-
+		padding-top: 70px; /* only temporarly until the nav comes */
 		* {
 			z-index: 2;
 		}
 	}
 	.awards {
-		height: 20%;
-
 		img {
 			filter: grayscale(1);
 			mix-blend-mode: multiply;
@@ -44,9 +40,14 @@
 	}
 </style>
 
-<Section classes="w-full bg-gray-100 lg:h-screen md:h-auto" padding="0 10%">
+<!--
+	@component
+	Gives you a hero page with an image, awards section and custom text
+-->
+
+<Section classes="w-full bg-gray-100 md:h-auto main lg:h-screen" padding="true">
 	<Flex cols="true" justify="evenly" classes="w-full h-full">
-		<div class="header">
+		<div class="header h-8/10">
 			<Flex wrap="true" align="center" classes="header lg:h-full">
 				<div class="h-full md:w-full lg:w-1/3">
 					<Flex justify="center" align="center" classes="w-full h-full">
@@ -59,13 +60,16 @@
 					</Flex>
 				</div>
 				<div class="h-full py-4 md:w-full lg:w-2/3 right lg:pl-10">
-					<Flex justify="center" align="center" classes="w-full h-full overflow-hidden shadow-2xl rounded-lg">
+					<Flex
+						justify="center"
+						align="center"
+						classes="w-full h-full overflow-hidden shadow-2xl rounded-lg">
 						<img class="object-cover w-full h-full" src="{image}" alt="" />
 					</Flex>
 				</div>
 			</Flex>
 		</div>
-		<div class="awards">
+		<div class="awards h-2/10">
 			<Flex wrap="true" justify="between" align="center" classes="w-full h-full">
 				{#each awards as award}
 					<img src="{award}" alt="" class="h-full {awards.length <= 3 ? 'mx-auto' : ''}" />

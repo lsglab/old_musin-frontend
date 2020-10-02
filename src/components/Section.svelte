@@ -5,8 +5,8 @@
 	export let classes = '';
 	/** Center content */
 	export let center = false;
-	// custom padding, e.g 10%
-	export let padding = '';
+	// tailwind padding
+	export let padding = false;
 	/** ID of the section */
 	export let id;
 </script>
@@ -16,8 +16,7 @@
 	A full-width section
 -->
 <section
-	class="{fullscreen ? 'fullscreen' : 'w-full'} {center ? 'center' : ''} {classes}"
-	id="{id}"
-	style="padding: {padding}">
+	class="{fullscreen ? 'fullscreen' : 'w-full'} {padding ? 'lg:px-32 md:px-20 px-8' : ""} {center ? 'center' : ''} {classes}"
+	id="{id}">
 	<slot />
 </section>

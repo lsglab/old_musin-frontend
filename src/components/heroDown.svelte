@@ -12,9 +12,14 @@
 	export let href;
 	// The id of the element
 	export let id;
-	// custom padding like 10%
-	export let padding = '';
+	// default padding yes or no
+	export let padding = false;
 </script>
+
+<!--
+	@component
+	Provides a page that usually follows the hero with a title, subtitle (optional), and link
+-->
 
 <Section classes="bg-white lg:h-screen md:h-auto" id="{id}" padding="{padding}">
 	<Flex cols="true" align="center" classes="py-10 h-full" justify="between">
