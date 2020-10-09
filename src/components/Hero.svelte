@@ -31,7 +31,7 @@
 			filter: grayscale(1);
 			mix-blend-mode: multiply;
 			padding: 20px 0;
-			max-height: 100px;
+			max-height: 120px;
 		}
 	}
 
@@ -49,9 +49,9 @@
 	<Flex cols="true" justify="evenly" classes="w-full h-full">
 		<div class="header h-8/10">
 			<Flex wrap="true" align="center" classes="header lg:h-full">
-				<div class="h-full md:w-full lg:w-1/3">
+				<div class="h-full text-center md:w-full lg:w-1/3">
 					<Flex justify="center" align="center" classes="w-full h-full">
-						<div class="w-full">
+						<div class="w-full text-center lg:text-left xl:text-left">
 							<h2 class="font-black text-blue-900 h1">{header}</h2>
 							<p class="my-4 text-sm">{subHeader}</p>
 							<Button buttonText="{buttonText}" classes="w-56" link="true" href="{href}" />
@@ -69,7 +69,7 @@
 				</div>
 			</Flex>
 		</div>
-		<div class="hidden awards h-2/10 md:block lg:block xl:block">
+		<div class="hidden awards h-2/10 lg:block xl:block">
 			<Flex wrap="true" justify="between" align="center" classes="w-full h-full">
 				{#each awards as award}
 					<img src="{award}" alt="" class="h-full {awards.length <= 3 ? 'mx-auto' : ''}" />

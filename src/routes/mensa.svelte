@@ -1,7 +1,7 @@
 <script>
 	import Flex from '../components/common/Flex.svelte';
 	import Hero from '../components/Hero.svelte';
-	import HeroDown from '../components/heroDown.svelte';
+	import HeroDown from '../components/sectionWrapper.svelte';
 	import MensaImage from '../components/MensaImage.svelte';
 </script>
 

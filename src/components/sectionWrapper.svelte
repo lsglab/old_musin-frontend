@@ -18,7 +18,7 @@
 
 <!--
 	@component
-	Provides a page that usually follows the hero with a title, subtitle (optional), and link
+	Provides a page that usually follows the hero, with a title, subtitle (optional), and link
 -->
 
 <Section classes="bg-white lg:h-screen md:h-auto" id="{id}" padding="{padding}">
