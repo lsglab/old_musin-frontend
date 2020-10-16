@@ -24,11 +24,13 @@ module.exports = {
 			height: {
 				'2/10': '20%',
 				'8/10': '80%',
+				'min-content': 'min-content',
 			},
 			inset: {
 				'1/2': '50%',
 				'1/4': '25%',
 				'3/4': '75%',
+				'4': '1rem',
 			},
 			transitionTimingFunction: {
 				default: 'easeInOutExpo',
