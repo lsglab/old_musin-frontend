@@ -16,12 +16,16 @@ module.exports = {
 	},
 	theme: {
 		extend: {
+			backgroundImage: () => ({
+				arrowIcon: 'url(../assets/media/arrow.svg)',
+			}),
 			fontSize: {
 				'7xl': '5rem',
 				'8xl': '6rem',
 				'9xl': '7rem',
 			},
 			height: {
+				'100': '25rem',
 				'2/10': '20%',
 				'8/10': '80%',
 				'min-content': 'min-content',
@@ -31,6 +35,12 @@ module.exports = {
 				'1/4': '25%',
 				'3/4': '75%',
 				'4': '1rem',
+			},
+			listStyleType: {
+				square: 'square',
+			},
+			maxHeight: {
+				0: '0',
 			},
 			transitionTimingFunction: {
 				default: 'easeInOutExpo',
@@ -59,6 +69,7 @@ module.exports = {
 				linear: 'linear',
 			},
 			width: {
+				'200': '50rem',
 				'9/20': '45%',
 			},
 		},
