@@ -12,6 +12,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Assign author
+              if: github.event_name == 'pull_request'
               uses: technote-space/assign-author@v1
               with:
                   GITHUB_TOKEN: ${{ secrets.PAT }}

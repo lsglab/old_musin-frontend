@@ -1,6 +1,7 @@
 #!/bin/sh
 echo "Syncing with remote 'origin'"
 # Check if there are uncommited changes
+git add -A
 STASHED=false
 if ! git diff --name-only --exit-code > /dev/null 2>&1; then # there are uncommited changes
 	STASHED=true

@@ -5,7 +5,7 @@ quoteProps: 'consistent'
 jsxSingleQuote: true
 trailingComma: 'es5'
 jsxBracketSameLine: true
-printWidth: 100
+printWidth: 120
 svelteStrictMode: true
 svelteSortOrder: scripts-styles-markup
 svelteAllowShorthand: true

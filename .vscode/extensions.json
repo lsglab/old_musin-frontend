@@ -1,18 +1,29 @@
 {
 	"recommendations": [
-		"formulahendry.auto-close-tag",
 		"formulahendry.auto-complete-tag",
-		"formulahendry.auto-rename-tag",
 		"editorconfig.editorconfig",
 		"dbaeumer.vscode-eslint",
+		"adrianwilczynski.format-selection-as-html",
+		"mhutchie.git-graph",
+		"eamodio.gitlens",
+		"heybourn.headwind",
+		"zignd.html-css-class-completion",
+		"bierner.markdown-preview-github-styles",
 		"eg2.vscode-npm-script",
 		"christian-kohler.npm-intellisense",
+		"csstools.postcss",
 		"esbenp.prettier-vscode",
 		"stylelint.vscode-stylelint",
+		"fivethree.vscode-svelte-snippets",
+		"proverbialninja.svelte-extractor",
 		"svelte.svelte-vscode",
 		"ardenivanov.svelte-intellisense",
-		"redhat.vscode-yaml",
 		"bradlc.vscode-tailwindcss",
-		"heybourn.headwind"
+		"austenc.tailwind-docs",
+		"macieklad.tailwind-sass-syntax",
+		"bourhaouta.tailwindshades",
+		"pflannery.vscode-versionlens",
+		"vscode-icons-team.vscode-icons",
+		"redhat.vscode-yaml"
 	]
 }

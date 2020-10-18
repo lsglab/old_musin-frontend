@@ -1,0 +1,41 @@
+/* stylelint-disable number-max-precision -- This file includes some very specific decimals */
+$fontSize: calc(11px + 0.7vw);
+$lineHeight: calc(#{$fontSize} * 1.4);
+$letterSpacing: calc(#{$fontSize} * 0.0015);
+$fontWeight: 300;
+
+* {
+	font-size: $fontSize;
+	line-height: $lineHeight;
+	letter-spacing: $letterSpacing;
+}
+
+h1,
+.fluid-xl {
+	font-size: calc(#{$fontSize} * 3);
+	line-height: calc(#{$lineHeight} * 3);
+}
+
+h2,
+.fluid-lg {
+	font-size: calc(#{$fontSize} * 2);
+	line-height: calc(#{$lineHeight} * 2);
+}
+
+h3,
+.fluid-md {
+	font-size: calc(#{$fontSize} * 1.75);
+	line-height: calc(#{$lineHeight} * 1.75);
+}
+
+h4,
+.fluid-sm {
+	font-size: calc(#{$fontSize} * 1.5);
+	line-height: calc(#{$lineHeight} * 1.5);
+}
+
+h5,
+.fluid-xs {
+	font-size: calc(#{$fontSize} * 1.25);
+	line-height: calc(#{$lineHeight} * 1.25);
+}

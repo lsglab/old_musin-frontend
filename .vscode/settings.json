@@ -1,13 +1,4 @@
 {
-	"gitlens.currentLine.format": "${author}, ${ago}",
-	"gitlens.codeLens.scopes": ["document", "containers"],
-	"gitlens.codeLens.authors.enabled": false,
-	"gitlens.codeLens.recentChange.command": "gitlens.showQuickCommitFileDetails",
-	"gitlens.hovers.annotations.enabled": false,
-	"gitlens.views.repositories.showBranchComparison": false,
-	"gitlens.views.repositories.enabled": true,
-	"gitlens.sortBranchesBy": "date:desc",
-	"gitlens.views.repositories.files.layout": "tree",
 	"editor.formatOnPaste": true,
 	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -23,25 +14,25 @@
 	"stylelint.validate": [
 		"css",
 		"html",
-		// "javascript",
-		// "javascriptreact",
+		"javascript",
+		"javascriptreact",
 		"less",
-		// "markdown",
-		// "postcss",
+		"markdown",
+		"postcss",
 		"sass",
 		"scss",
 		"source.css.styled",
-		// "source.markdown.math",
+		"source.markdown.math",
 		"styled-css",
-		// "sugarss",
-		"svelte"
-		// "typescript",
-		// "typescriptreact",
-		// "vue",
-		// "vue-html",
-		// "vue-postcss",
-		// "xml",
-		// "xsl"
+		"sugarss",
+		"svelte",
+		"typescript",
+		"typescriptreact",
+		"vue",
+		"vue-html",
+		"vue-postcss",
+		"xml",
+		"xsl"
 	],
 	"files.exclude": {
 		"**/.git": true,
@@ -51,10 +42,11 @@
 		"**/.DS_Store": true,
 		"**/node_modules/": true
 	},
-	"eslint.probe": ["javascript", "typescript", "svelte", "html", "markdown"],
-	"eslint.validate": ["svelte", "javascript", "typescript"],
-	"prettier.documentSelectors": ["**/*.{ts,js,cjs,mjs,md,json,yaml,yml,html,less,scss}"],
+	"eslint.probe": ["javascript", "svelte", "html", "markdown"],
+	"eslint.validate": ["svelte", "javascript"],
+	"prettier.documentSelectors": ["**/*.{js,cjs,mjs,md,json,yaml,yml,html,less,scss}"],
 	"[svelte]": {
 		"editor.defaultFormatter": "svelte.svelte-vscode"
-	}
+	},
+	"svelte.plugin.css.diagnostics.enable": false
 }
