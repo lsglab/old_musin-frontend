@@ -5,10 +5,10 @@
 
 <!--
     @component
-    Provides a resonsive multi-purpose card container with variable number of segments.
+    Provides a responsive multi-purpose card container with variable number of segments.
 -->
 
-<div class="overflow-hidden bg-gray-300 shadow-lg rounded-md p-1  {classes}">	
+<div class="overflow-hidden bg-gray-300 shadow-lg rounded-md px-2  {classes}">	
 	<!--Card header section-->
 	<slot name="header"/>
 

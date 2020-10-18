@@ -12,17 +12,20 @@
 		font-size: 1em;
 		text-align: center;
 	}
+	p {
+		font-size: 0.9em;
+	}
 </style>
 
-<Section fullscreen="true" classes="bg-gray-100" id="carddeck">
+<Section fullscreen="true" classes="bg-rect-pattern bg-fixed bg-no-repeat" id="carddeck">
 	<div>
-		<h4>{title}</h4>
+		<h4 class="mb-2">{title}</h4>
 		<Flex wrap="true" justify="center" align="center" classes="px-2 gap-4">
 			<Card>
 				<div slot="header">
 					<h4>Organisatorisches</h4>
 				</div>
-				<div slot="body" class="border-2 border-gray-500 rounded-md bg-gray-400">
+				<div slot="body" class="rounded-md bg-gray-400">
 					<Flex cols="true" wrap="true" justify="evenly" align="left" classes="px-2 w-full h-full">
 						<Link class="w-1/5" href="https://losgymuc.eltern-portal.org">Elternportal</Link>
 						<Link class="w-1/5" href="https://lsg.musin.de/homepage/images/schulverwaltung/Recht/IfsG.pdf">
@@ -52,7 +55,7 @@
 				<div slot="header">
 					<h4>Informationsabend zur Einschreibung 2020</h4>
 				</div>
-				<div slot="body" class="border-2 border-gray-500 rounded-md bg-gray-400 max-w-sm">
+				<div slot="body" class="rounded-md bg-gray-400 max-w-sm">
 					<Flex cols="true" wrap="true" justify="evenly" align="left" classes="px-2 w-full h-full">
 						<p>
 							Wegen der Corona-Krise entfällt der Informationsabend zur Einschreibung für die neuen 5.
@@ -77,7 +80,7 @@
 				<div slot="header">
 					<h4>Konzepte</h4>
 				</div>
-				<div slot="body" class="border-2 border-gray-500 rounded-md bg-gray-400">
+				<div slot="body" class="rounded-md bg-gray-400">
 					<Flex cols="true" wrap="true" justify="evenly" align="left" classes="px-2 w-full h-full">
 						<Link
 							class="w-1/5"

@@ -1,6 +1,6 @@
 <script>
-	import Carddeck from '../components/Carddeck.svelte';
-	import Nav from '../components/Nav.svelte';
+	import Carddeck from '../../components/Carddeck.svelte';
+	import Nav from '../../components/Nav.svelte';
 
 	export let title;
 </script>
