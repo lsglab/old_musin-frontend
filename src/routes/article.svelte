@@ -57,7 +57,7 @@
 		}
 	}
 
-	// THIS SCROLL HAS TO BE MADE WITH JAVA SCRIPT, OTHERWISE IT WOULDNT WORK ON MOBILE
+	// THIS SCROLL HAS TO BE MADE WITH JAVA SCRIPT, OTHERWISE IT WOULDNT CORRECTLY WORK ON MOBILE
 	function scrollTo(target) {
 		const targetId = `sect${target}`;
 		// close nav in case the user is on mobile
