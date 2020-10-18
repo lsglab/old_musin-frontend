@@ -1,65 +1,95 @@
-<nav class="w-full">
-	<div>
-		<h3><a href=".">Louise Schroeder Gymnasium</a></h3>
-		<h4><a href=".">LSG</a></h4>
-	</div>
-	<button class="burger"> <span></span> <span></span> <span></span> </button>
-	<ul>
-		<li class="dropdown">
-			<span>Die Schule</span>
-			<ul>
-				<li><a href="leitbild">Leitbild</a></li>
-				<li><span>Strukturdaten</span></li>
-				<li><span>Ausbildungsrichtungen</span></li>
-				<li><span>Mensa</span></li>
-				<li><span>Erziehungspartnerschaft</span></li>
-				<li><span>Schulentwicklungsplan</span></li>
-				<li><span>Kontakt</span></li>
-			</ul>
-		</li>
-		<li class="dropdown">
-			<span>Schulfamilie</span>
-			<ul>
-				<li><span>Schulleitung</span></li>
-				<li><span>Verwaltung</span></li>
-				<li><span>Elternbeirat</span></li>
-				<li><span>Förderverein</span></li>
-			</ul>
-		</li>
-		<li class="dropdown">
-			<span>Profile</span>
-			<ul>
-				<li><span>EVA</span></li>
-				<li><span>Informationstechnik</span></li>
-				<li><span>Kunst</span></li>
-				<li><span>Musik</span></li>
-				<li><span>MINT</span></li>
-				<li><span>Schulsanitätsdienst</span></li>
-				<li><span>Schülerzeitung</span></li>
-				<li><span>Sport</span></li>
-				<li><span>Sprachen</span></li>
-				<li><span>Theater und Literatur</span></li>
-			</ul>
-		</li>
-		<li class="dropdown">
-			<span>Beratung</span>
-			<ul class="dropdown-items">
-				<li><span>Schulberatung</span></li>
-				<li><span>Nachhilfe</span></li>
-				<li><span>Schulpsychologie</span></li>
-				<li><span>Unterstufe</span></li>
-				<li><span>Mittelstufe</span></li>
-				<li><span>Oberstufe</span></li>
-			</ul>
-		</li>
-		<li class="dropdown">
-			<span>Information</span>
-			<ul class="dropdown-items">
-				<li><span>für Eltern</span></li>
-				<li><span>für Schüler</span></li>
-				<li><span>für Lehrer</span></li>
-			</ul>
-		</li>
-		<li><span>Termine</span></li>
-	</ul>
+<script>
+	import Flex from './common/Flex.svelte';
+</script>
+
+<style lang="scss">
+	nav {
+		backdrop-filter: blur(3px);
+		word-break: normal;
+		word-wrap: normal;
+		div.dropdown {
+			@apply w-full h-full relative flex justify-center items-center;
+			&:hover > div.items {
+				@apply flex;
+			}
+			> div.items {
+				@apply absolute left-0 bg-gray-100 rounded-lg shadow-xl flex-col justify-between hidden min-w-full;
+				top: 95%;
+				> div {
+					@apply w-full py-2 px-1;
+					&:hover {
+						@apply bg-gray-300;
+					}
+				}
+			}
+		}
+	}
+</style>
+
+<nav class="relative z-50 w-full p-1 text-center bg-transparent">
+	<Flex justify="between" classes="w-full">
+		<Flex both="center">
+			<h4>Louise Schroeder Gymnasium</h4>
+		</Flex>
+		<Flex justify="evenly" classes="w-full">
+			<div class="dropdown">
+				<div>Die Schule</div>
+				<div class="divide-y divide-gray-400 items divide-solid">
+					<div>Leitbild</div>
+					<div>Strukturdaten</div>
+					<div>Ausbildungsrichtungen</div>
+					<div>Mensa</div>
+					<div>Erziehungspartnerschaft</div>
+					<div>Schulentwicklungsplan</div>
+					<div>Kontakt</div>
+				</div>
+			</div>
+			<div class="dropdown">
+				<div>Schulfamilie</div>
+				<div class="divide-y divide-gray-400 items divide-solid">
+					<div>Schulleitung</div>
+					<div>Verwaltung</div>
+					<div>Elternbeirat</div>
+					<div>Förderverein</div>
+				</div>
+			</div>
+			<div class="dropdown">
+				<div>Profile</div>
+				<div class="divide-y divide-gray-400 items divide-solid">
+					<div>EVA</div>
+					<div>Informationstechnik</div>
+					<div>Kunst</div>
+					<div>Musik</div>
+					<div>MINT</div>
+					<div>Schulsanitätsdienst</div>
+					<div>Schülerzeitung</div>
+					<div>Sport</div>
+					<div>Sprachen</div>
+					<div>Theater und literatur</div>
+				</div>
+			</div>
+			<div class="dropdown">
+				<div>Beratung</div>
+				<div class="divide-y divide-gray-400 items divide-solid">
+					<div>Schulberatung</div>
+					<div>Nachhilfe</div>
+					<div>Schulpsychologie</div>
+					<div>Unterstufe</div>
+					<div>Mittelstufe</div>
+					<div>Oberstufe</div>
+				</div>
+			</div>
+			<div class="dropdown">
+				<div>Information</div>
+				<div class="divide-y divide-gray-400 items divide-solid">
+					<div>für Eltern</div>
+					<div>für Schüler</div>
+					<div>für Lehrer</div>
+				</div>
+			</div>
+			<div class="dropdown">
+				<div>Termine</div>
+			</div>
+		</Flex>
+	</Flex>
 </nav>

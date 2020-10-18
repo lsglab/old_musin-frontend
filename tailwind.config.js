@@ -25,6 +25,7 @@ module.exports = {
 				'1/2': '50%',
 				'1/4': '25%',
 				'3/4': '75%',
+				'full': '100%',
 			},
 			transitionTimingFunction: {
 				default: 'easeInOutExpo',

@@ -18,7 +18,6 @@
 		],
 		"declaration-block-no-shorthand-property-overrides": true,
 		"block-no-empty": true,
-		"selector-pseudo-class-no-unknown": true,
 		"selector-pseudo-element-no-unknown": true,
 		"selector-type-no-unknown": true,
 		"media-feature-name-no-unknown": true,
@@ -71,6 +70,12 @@
 			}
 		],
 		"declaration-block-trailing-semicolon": null,
-		"no-descending-specificity": null
+		"no-descending-specificity": null,
+		"selector-pseudo-class-no-unknown": [
+			true,
+			{
+				"ignorePseudoClasses": ["global"]
+			}
+		]
 	}
 }

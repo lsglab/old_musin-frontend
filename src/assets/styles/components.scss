@@ -1,23 +1,30 @@
+html,
+body {
+	@apply font-normal whitespace-normal transition-all duration-300 ease-easeInOutCirc antialiased;
+	text-rendering: geometricPrecision;
+	scroll-behavior: smooth;
+	word-break: break-word;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	background-origin: border-box;
+	background-clip: border-box;
+}
 *,
 *::after,
 *::before {
-	@apply font-normal whitespace-normal break-words box-border antialiased transition-all duration-300 ease-easeInOutCirc;
-	scroll-behavior: smooth;
-	text-rendering: geometricPrecision;
-	word-break: break-word;
+	@apply box-border;
+	scroll-behavior: inherit;
+	transition-property: inherit;
+	transition-duration: inherit;
+	transition-timing-function: inherit;
+	background-origin: inherit;
+	background-clip: inherit;
 }
 
 html,
 body,
 #app {
 	@apply w-full h-full;
-}
-
-.fullscreen {
-	@apply w-full min-h-full h-auto flex flex-col;
-	> * {
-		flex: 1;
-	}
 }
 
 h1,
