@@ -1,9 +1,9 @@
 name: Automatic Revert
 
 on:
-  issue_comment:
-    types:
-      - created
+    issue_comment:
+        types:
+            - created
 
 jobs:
     executed:
@@ -11,9 +11,9 @@ jobs:
         runs-on: ubuntu-latest
         if: contains(github.event.comment.body, '/revert')
         steps:
-          - name: Checkout latest code
-            uses: actions/checkout@v2
-          - name: Automatic Revert
-            uses: srt32/revert@v0.0.1
-            env:
-                GITHUB_TOKEN: ${{ secrets.PAT }}
+            - name: Checkout latest code
+              uses: actions/checkout@v2
+            - name: Automatic Revert
+              uses: srt32/revert@v0.0.1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.PAT }}

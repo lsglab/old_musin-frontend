@@ -2,9 +2,9 @@ maxRequestedChanges:
     MEMBER: 0
     COLLABORATOR: 1
 requiredBaseBranches:
-  - regex: '(?:all\-contributors\/|issue\-(?:[0-9])+\-|hotfix(?:\-)?|dependabot\/)(?:[a-zA-Z0-9_-])+'
+    - regex: '(?:all\-contributors\/|issue\-(?:[0-9])+\-|hotfix(?:\-)?|dependabot\/)(?:[a-zA-Z0-9_-])+'
 blockingLabels:
-  - merge-conflict
+    - merge-conflict
 reportStatus: true
 updateBranch: true
 deleteBranchAfterMerge: true
