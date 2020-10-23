@@ -1,5 +1,12 @@
-minApprovals:
-    NONE: 0
+requiredReviewers:
+  - GitGangGuy
+maxRequestedChanges:
+    MEMBER: 0
+    COLLABORATOR: 1
+requiredBaseBranches:
+  - regex: '(?:all\-contributors\/|issue\-(?:[0-9])+\-|hotfix(?:\-)?|dependabot\/)(?:[a-zA-Z0-9_-])+'
+blockingLabels:
+  - merge-conflict
 reportStatus: true
 updateBranch: true
 deleteBranchAfterMerge: true
@@ -7,3 +14,10 @@ mergeMethod: merge
 mergeCommitMessage: |
     {title} (#{number})
     {body}
+rules:
+  - requiredAuthorRole: OWNER
+    minApprovals:
+        NONE: 0
+  - minApprovals:
+        MEMBER: 1
+        COLLABORATOR: 2
