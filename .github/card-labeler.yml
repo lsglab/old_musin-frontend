@@ -1,11 +1,13 @@
 Board:
     To do:
-        - 'To do'
+        - 'to do'
     In progress:
-        - 'In progress'
+        - 'in progress'
+    Ready for review:
+        - 'ready for review'
     Review in progress:
-        - 'In review'
+        - 'in review'
     Reviewer approved:
-        - 'Approved'
+        - 'approved'
     Done:
-        - 'Done'
+        - 'done'
