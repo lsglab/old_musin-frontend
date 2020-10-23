@@ -47,5 +47,6 @@
 	"prettier.documentSelectors": ["**/*.{js,cjs,mjs,md,json,yaml,yml,html,less,scss}"],
 	"[svelte]": {
 		"editor.defaultFormatter": "svelte.svelte-vscode"
-	}
+	},
+	"svelte.plugin.css.diagnostics.enable": false
 }
