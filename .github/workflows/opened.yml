@@ -30,3 +30,9 @@ jobs:
                   project: Board
                   column: In progress
                   repo-token: ${{ secrets.PAT }}
+            - name: Welcome first-time contributors
+              uses: actions/first-interaction@v1
+              with:
+                  repo-token: ${{ secrets.PAT }}
+                  issue-message: 'Hi! Please familiarize yourself with our Contribution guide (Contributing.md) in the root of this repository. Thanks for contributing.'
+                  pr-message: "It's me again. Don't forget to mark your PR as 'ready for review' within a couple days!"
