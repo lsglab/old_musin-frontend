@@ -1,11 +1,5 @@
 name: Pushed to a branch
-on:
-    pull_request:
-        types:
-            - opened
-    issues:
-        types:
-            - opened
+on: push
 jobs:
     execute:
         name: Create a PR from the branch
