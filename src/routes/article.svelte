@@ -153,7 +153,7 @@
 					</div>
 					<!--Biespiel einer Artikel section-->
 					{#each [0, 0, 0, 0] as Section, i}
-						<div class="pt-20 m-0 art-content-sect pt-10px" id="sect{i}">
+						<div class="pt-20 m-0 lg:mt-20 lg:pt-0 xl:pt-0 xl:mt-20 art-content-sect pt-10px" id="sect{i}">
 							<header>
 								<hr class="w-12 my-3 text-black border-t-0 border-b-2 border-black" />
 								<h1 class="my-2 text-3xl font-normal">{i + 1}. Leitbild des LSG</h1>
