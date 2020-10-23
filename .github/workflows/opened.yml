@@ -11,11 +11,6 @@ jobs:
         name: Onboard, welcome and assign
         runs-on: ubuntu-latest
         steps:
-            - name: Assign author
-              if: github.event_name == 'pull_request'
-              uses: technote-space/assign-author@v1
-              with:
-                  GITHUB_TOKEN: ${{ secrets.PAT }}
             - name: Add new issues to the To do column
               if: github.event_name == 'issues'
               uses: alex-page/github-project-automation-plus@v0.2.4
