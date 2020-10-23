@@ -1,21 +1,26 @@
 <script>
-	import Awards from '../components/Awards.svelte';
 	import Calender from '../components/Calender.svelte';
-	import Flex from '../components/common/Flex.svelte';
 	import Hero from '../components/Hero.svelte';
-	import Nav from '../components/Nav.svelte';
+	import HeroDown from '../components/sectionWrapper.svelte';
 </script>
 
 <svelte:head>
 	<title>Startseite | {process.globals.title}</title>
 </svelte:head>
 
-<Flex cols="true" justify="between" classes="w-full h-full bg-gray-200">
-	<Nav />
-	<Hero
-		title="Louise Schroeder Gymnasium"
-		subtitle="Naturwissenschaftlich-technologisches und sprachliches Gymnasium"
-		to="termine" />
-	<Awards />
-</Flex>
-<Calender />
+<Hero
+	header="Städtisches Louise Schroeder Gymnasium München"
+	subHeader="Naturwissenschaftlich-technologisches und sprachliches Gymnasium"
+	buttonText="Aktuelle Termine"
+	href="#termine"
+	note="Referenzschule der TU München"
+	image="https://lsg.musin.de/homepage/images/header-images/schulhof_mini.jpg"
+	awards="{['https://lsg.musin.de/homepage/images/LOGOsorsmc_SCREEN_80mm_RGB_mini.jpg', 'https://lsg.musin.de/homepage/images/delf.jpg', 'https://lsg.musin.de/homepage/images/cae.png', 'https://lsg.musin.de/homepage/images/cils.png']}" />
+<HeroDown
+	header="Aktuelle Termine"
+	subHeader="Alle demnächst anstehenden Termine des Louise-Schroeder-Gynasiums"
+	linkText="Zur Terminübersicht"
+	href="http://example.com/"
+	id="termine">
+	<Calender />
+</HeroDown>

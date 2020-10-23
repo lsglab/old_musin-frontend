@@ -27,6 +27,13 @@ body,
 	@apply w-full h-full;
 }
 
+.fullscreen {
+	@apply w-full min-h-full h-auto flex flex-col;
+	> * {
+		flex: 1;
+	}
+}
+
 h1,
 h2,
 h3,

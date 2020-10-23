@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+
 module.exports = {
 	future: {
 		purgeLayersByDefault: true,
@@ -16,16 +18,31 @@ module.exports = {
 	},
 	theme: {
 		extend: {
+			backgroundImage: () => ({
+				arrowIcon: 'url(../assets/media/arrow.svg)',
+			}),
 			fontSize: {
 				'7xl': '5rem',
 				'8xl': '6rem',
 				'9xl': '7rem',
 			},
+			height: {
+				'2/10': '20%',
+				'8/10': '80%',
+				'100': '25rem',
+				'min-content': 'min-content',
+			},
 			inset: {
 				'1/2': '50%',
 				'1/4': '25%',
 				'3/4': '75%',
-				'full': '100%',
+				'4': '1rem',
+			},
+			listStyleType: {
+				square: 'square',
+			},
+			maxHeight: {
+				0: '0',
 			},
 			transitionTimingFunction: {
 				default: 'easeInOutExpo',
@@ -52,6 +69,10 @@ module.exports = {
 				easeOutQuart: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
 				easeOutQuint: 'cubic-bezier(0.23, 1, 0.32, 1)',
 				linear: 'linear',
+			},
+			width: {
+				'9/20': '45%',
+				'200': '50rem',
 			},
 		},
 		fontWeight: {
