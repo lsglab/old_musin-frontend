@@ -1,5 +1,3 @@
-requiredReviewers:
-  - GitGangGuy
 maxRequestedChanges:
     MEMBER: 0
     COLLABORATOR: 1
@@ -14,10 +12,5 @@ mergeMethod: merge
 mergeCommitMessage: |
     {title} (#{number})
     {body}
-rules:
-  - requiredAuthorRole: OWNER
-    minApprovals:
-        NONE: 0
-  - minApprovals:
-        MEMBER: 1
-        COLLABORATOR: 2
+minApprovals:
+    MEMBER: 1
