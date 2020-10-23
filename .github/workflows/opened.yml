@@ -8,14 +8,9 @@ on:
             - opened
 jobs:
     execute:
-        name: Check and add to project board
+        name: Onboard, welcome and assign
         runs-on: ubuntu-latest
         steps:
-            - name: Assign author
-              if: github.event_name == 'pull_request'
-              uses: technote-space/assign-author@v1
-              with:
-                  GITHUB_TOKEN: ${{ secrets.PAT }}
             - name: Add new issues to the To do column
               if: github.event_name == 'issues'
               uses: alex-page/github-project-automation-plus@v0.2.4
@@ -30,3 +25,19 @@ jobs:
                   project: Board
                   column: In progress
                   repo-token: ${{ secrets.PAT }}
+            - name: Welcome first-time contributors
+              uses: actions/first-interaction@v1
+              with:
+                  repo-token: ${{ secrets.PAT }}
+                  issue-message: 'Hi! Please familiarize yourself with our Contribution guide (Contributing.md) in the root of this repository. Thanks for contributing.'
+                  pr-message: "It's me again. Don't forget to mark your PR as 'ready for review' within a couple days!"
+            - name: Approve pull request
+              if: github.actor == 'dependabot[bot]' || github.actor == 'allcontributors[bot]'
+              uses: andrewmusgrave/automatic-pull-request-review@0.0.2
+              with:
+                  repo-token: ${{ secrets.PAT }}
+                  event: APPROVE
+                  body: 'Yeah *\o/*'
+            - name: Automatically assign
+              if: github.event_name == 'pull_request'
+              uses: kentaro-m/auto-assign-action@v1.1.2
