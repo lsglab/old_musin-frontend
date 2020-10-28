@@ -9,6 +9,23 @@
 	let y;
 	let active = 0;
 	let checked = false;
+
+	// THIS HARDCODED LIST/OBJECT IS ONLY TEMPORARELY NECCESARY!!!!!!!!!!
+
+	const list = [
+		{
+			header: 'Ausbildungsrichtungen',
+			html: `<meta itemprop="inLanguage" content="de-DE"><div class="page-header"></div><div itemprop="articleBody"><p>Am LSG werden die Ausbildungsrichtung Naturwissenschaftlich-Technologisches Gymnasium (NTG) mit der Sprachenfolge Englisch-Französisch oder Englisch-Latein und die Ausbildungsrichtung Sprachliches Gymnasium (SG) mit der Sprachenfolge Englisch-Latein-Italienisch oder Englisch-Französisch-Italienisch angeboten. <a href="http://www.isb.bayern.de/schulartspezifisches/lehrplan/gymnasium/" target="_blank">(Lehrpläne)<br></a>Die (<a href="/homepage/images/schulverwaltung/unterricht/wahlzweitefremdspracheFranz.pdf" target="_blank">Französisch</a> oder <a href="/homepage/images/schulverwaltung/unterricht/WahlzweiteFremdspracheLatein.pdf" target="_blank">Latein</a>) wird in Jahrgangsstufe 5, die Ausbildungsrichtung (NTG, SG) in Jahrgangsstufe 7 gewählt.</p><br><p><strong><span>Unterschiede</span>:</strong></p><p>In den Jahrgangsstufen 6 und 7 unterscheiden sich SG und NTG am LSG in der 2. Fremdsprache <a href="/homepage/images/schulverwaltung/unterricht/WahlzweiteFremdspracheLatein.pdf" target="_blank">Latein</a> oder <a href="/homepage/images/schulverwaltung/unterricht/wahlzweitefremdspracheFranz.pdf" target="_blank">Französisch</a>. Ab Jahrgangstufe 8 beginnt die eigentliche Differenzierung der Ausbildungsrichtungen.</p><table style="" border="1"><caption>&nbsp;</caption><tbody style="text-align: left;"><tr style="text-align: left;"><td style="text-align: left;"><span><strong>Unterschied</strong> in Wochenstunden</span><br><span>(am LSG)</span></td><td style="text-align: left;"><span><strong>Sprachliches Gymnasium </strong></span><span><strong>SG</strong></span></td><td colspan="3" style="text-align: left;"><span><strong>Naturwissenschaftlich - technologisches&nbsp; Gymnasium </strong></span><span><strong>NTG</strong></span></td></tr><tr style="text-align: left;"><td style="text-align: center;"><span>Jahrgangsstufe </span><span> (JgSt.)</span></td><td style="text-align: center;"><span><strong>Italienisch</strong></span></td><td style="text-align: center;"><span><strong>Physik</strong></span><span>(Profilstunde)</span></td><td style="text-align: center;"><span><strong>Chemie</strong></span><span>(Profilstunde)</span></td><td style="text-align: center;"><span><strong>Informatik</strong></span></td></tr><tr style="text-align: left;"><td style="text-align: center;"><span><strong>8</strong></span></td><td style="text-align: center;"><span>4 Std</span></td><td style="text-align: center;"><span>1 Std</span></td><td style="text-align: center;"><span>3 Std</span></td><td style="text-align: center;"><span>./.</span></td></tr><tr style="text-align: left;"><td style="text-align: center;"><span><strong>9</strong></span></td><td style="text-align: center;"><span>4 Std</span></td><td style="text-align: center;"><span>1 Std</span></td><td style="text-align: center;"><span>1 Std</span></td><td style="text-align: center;"><span>2 Std</span></td></tr><tr style="text-align: left;"><td style="text-align: center;"><span><strong>10</strong></span></td><td style="text-align: center;"><span>4 Std</span></td><td style="text-align: center;"><span>1 Std</span></td><td style="text-align: center;"><span>1 Std</span></td><td style="text-align: center;"><span>2 Std</span></td></tr></tbody></table><p>&nbsp;</p><p><strong><span>Anmerkungen </span></strong>(Stundentafeln<span class="external"> </span><a href="http://www.gesetze-bayern.de/Content/Document/BayGSO-ANL_1" target="_blank" rel="noopener noreferrer" class="external">Mittelstufe</a> und <a href="http://www.gymnasiale-oberstufe.bayern.de/faecherwahl-und-belegung/faecherwahl-q1112/erlaeuterungen-zur-stundentafel.html" target="_blank">Oberstufe</a>):</p><p><strong>Informatik</strong> wird in der 6. und 7. JgSt. in beiden Ausbildungsrichtungen innerhalb des Faches Natur- und Technik jeweils einstündig unterrichtet.</p><p><strong>Phys<span>ik</span></strong><span> wird in den JgSt. 8 bis 10 in beiden Ausbildungsrichtungen zweistündig unterrichtet. Für das NTG gibt es jeweils eine zusätzliche Profilstunde mit besonderen Inhalten und Möglichkeiten zum Experimentieren.</span></p><p><span><strong>Chemie</strong> wird am SG nur in den JgSt. 9 und 10 zweistündig unterrichtet.&nbsp;Für das NTG gibt es jeweils eine zusätzliche Profilstunde mit besonderen Inhalten und Möglichkeiten zum Experimentieren.In der 8. Jg.St. ist Chemie 3-stündig.</span></p>`,
+		},
+		{
+			header: 'Schriftliche Leisungsnachweise',
+			html: `<table><tbody><tr style="vertical-align: top;"><td><span style="font-size: 11pt;"><strong>Italienisch:</strong></span></td><td><span style="font-size: 11pt;">Als 3. Fremdsprache ist Italienisch 4-stündiges Kernfach im SG. Damit werden 4&nbsp;Schulaufgaben (große Leistungsnachweise) verlangt, wovon i.d.R. eine mündlich ist.</span></td></tr><tr style="vertical-align: top;"><td><span style="font-size: 11pt;"><strong>Physik</strong>: </span></td><td><span style="font-size: 11pt;">Da Physik in beiden Ausbildungsrichtungen Kernfach ist, werden jeweils 2&nbsp;Schulaufgaben im Schuljahr geschrieben.</span></td></tr><tr style="vertical-align: top;"><td><span style="font-size: 11pt;"><strong>Chemie</strong>:</span></td><td><span style="font-size: 11pt;">Ist nur im NTG Kernfach, so dass nur im NTG 2 Schulaufgaben geschrieben werden.&nbsp; Im SG werden kleine Leistungsnachweise (Stegreifaufgabe und/oder Kurzarbeit) verlangt.</span></td></tr><tr style="vertical-align: top;"><td><span style="font-size: 11pt;"><strong>Informatik: &nbsp;&nbsp; <br></strong></span></td><td><span style="font-size: 11pt;">Informatik ist kein Kernfach, es werden kleine Leistungsnachweise (z. B. Stegreifaufgabe und/oder Kurzarbeit) verlangt.</span></td></tr></tbody></table>`,
+		},
+		{
+			header: 'Allgemeine Hochschulreife',
+			html: `<p>Innerhalb aller Ausbildungsrichtungen wird nach BayEUG Art 9 die allgemeine Hochschulreife verliehen.</p><p><a href="/homepage/images/Dokumente/ausbildungsrichtungenamlsg.pdf" target="_self">PDF zu den Ausbildungsrichtungen am LSG</a></p></div>`,
+		},
+	];
 	// is the dom loaded or not
 	let dom = false;
 	// functions checks if the content-table is on the top or not
@@ -96,8 +113,8 @@
 			</Flex>
 			<Flex justify="center" align="center" classes="w-full h-full">
 				<div class="m-8 text-center">
-					<h1>LSG</h1>
-					<p>Cooler shit</p>
+					<h3>Ausbildungsrichtungen am LSG</h3>
+					<p></p>
 				</div>
 			</Flex>
 		</div>
@@ -117,12 +134,12 @@
 						</Flex>
 						<ul
 							class="pl-4 overflow-hidden opacity-0 content-table-ul transition-300 lg:opacity-100 xl:opacity-100 max-h-0 lg:max-h-full xl:max-h-full">
-							{#each ['test', 'test', 'test', 'test'] as title, i}
+							{#each list as title, i}
 								<li
 									class="my-4 font-semibold list-none cursor-pointer leading-5 tracking-wide
 										lg:text-sm xl:text-sm {active !== i ? '' : 'text-blue-400 list-square'}"
 									id="{i}">
-									<a href="article/#sect{i}" on:click="{() => {checked = false;}}">{i + 1}. {title}</a>
+									<a href="article/#sect{i}" on:click="{() => {checked = false;}}">{i + 1}. {title.header}</a>
 								</li>
 							{/each}
 						</ul>
@@ -146,30 +163,18 @@
 							<p>10min</p>
 						</Flex>
 						<p class="text-gray-700">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Id earum officia nemo ratione ullam
-							odio non aperiam inventore porro nostrum facere, culpa fugiat soluta commodi quo est tenetur
-							atque praesentium?
+							Letzte Aktualisierung am 28.10.2020
 						</p>
 					</div>
 					<!--Biespiel einer Artikel section-->
-					{#each [0, 0, 0, 0] as Section, i}
-						<div class="pt-20 m-0 art-content-sect pt-10px" id="sect{i}">
+					{#each list as Section, i}
+						<div class="pt-20 m-0 lg:pt-0 xl:pt-0 lg:mt-16 xl:mt-16 art-content-sect pt-10px" id="sect{i}">
 							<header>
 								<hr class="w-12 my-3 text-black border-t-0 border-b-2 border-black" />
-								<h1 class="my-2 text-3xl font-normal">{i + 1}. Leitbild des LSG</h1>
-								<h2 class="mb-2 text-2xl font-normal">test</h2>
+								<h1 class="my-2 text-3xl font-normal">{i + 1}. {Section.header}</h1>
+								<h2 class="mb-2 text-2xl font-normal"> </h2>
 							</header>
-							<Text html="as Münchner Städt. Louise-Schroeder-Gymnasium (LSG) ist an seinem jetzigen Standort
-									eine verhältnis­mäßig junge Schule. Das koedukativ geführte Gymnasium wurde 1983 als
-									Teil des Schulzentrums an der Pfarrer-Grimm-Straße eingerichtet, wodurch dem
-									gestiegenen Bedarf im Nordwesten Münchens Rechnung getragen wurde. Das LSG erfreut
-									sich großen Zuspruchs und unverminderter Nachfrage - insbesondere aus dem
-									Haupteinzugsbereich Allach-Untermenzing, also aus sich kontinuierlich
-									weiterentwickelnden und anwachsenden Wohngebieten. Die Kombination aus einem
-									naturwissenschaftlich-technologischen Zweig mit der Sprachenfolge Englisch -
-									Französisch oder Englisch - Latein und einem sprachlichen Zweig mit der
-									Sprachenfolge Englisch - Latein - Italienisch oder Englisch - Französisch -
-									Italienisch gewährleistet ein breit gefächertes Unterrichtsangebot."/>
+							<Text html="{Section.html}"/>
 						</div>
 					{/each}
 				</div>

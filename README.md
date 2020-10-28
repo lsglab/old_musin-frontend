@@ -72,6 +72,7 @@ Special thanks go to these contributors. We follow the [all-contributors](https:
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Contributions of any kind are welcome!
