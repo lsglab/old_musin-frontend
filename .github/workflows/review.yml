@@ -7,12 +7,12 @@ on:
             - review_request_removed
 jobs:
     execute:
-        name: Toggle the 'ready for review' label
+        name: Move the card to the 'ready for review' column
         runs-on: ubuntu-latest
         steps:
-            - name: label swapping
-              uses: jinmayamashita/ready-for-review@1.0.0
+            - name: Move the card
+              uses: alex-page/github-project-automation-plus@v0.2.4
               with:
-                  in-progress-label: 'in progress'
-                  ready-for-review-label: 'ready for review'
+                  project: Board
+                  column: Ready for review
                   repo-token: ${{ secrets.PAT }}

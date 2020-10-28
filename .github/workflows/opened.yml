@@ -17,27 +17,15 @@ jobs:
               with:
                   project: Board
                   column: To do
-                  repo-token: ${{ secrets.PAT }}
+                  repo-token: '${{ secrets.PAT }}'
             - name: Add new pull requests to the In progress column
               if: github.event_name == 'pull_request'
               uses: alex-page/github-project-automation-plus@v0.2.4
               with:
                   project: Board
                   column: In progress
-                  repo-token: ${{ secrets.PAT }}
-            - name: Welcome first-time contributors
-              uses: actions/first-interaction@v1
+                  repo-token: '${{ secrets.PAT }}'
+            - uses: hmarr/auto-approve-action@v2.0.0
+              if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'allcontributors[bot]'
               with:
-                  repo-token: ${{ secrets.PAT }}
-                  issue-message: 'Hi! Please familiarize yourself with our Contribution guide (Contributing.md) in the root of this repository. Thanks for contributing.'
-                  pr-message: "It's me again. Don't forget to mark your PR as 'ready for review' within a couple days!"
-            - name: Approve pull request
-              if: github.actor == 'dependabot[bot]' || github.actor == 'allcontributors[bot]'
-              uses: andrewmusgrave/automatic-pull-request-review@0.0.2
-              with:
-                  repo-token: ${{ secrets.PAT }}
-                  event: APPROVE
-                  body: 'Yeah *\o/*'
-            - name: Automatically assign
-              if: github.event_name == 'pull_request'
-              uses: kentaro-m/auto-assign-action@v1.1.2
+                  github-token: '${{ secrets.PAT }}'
