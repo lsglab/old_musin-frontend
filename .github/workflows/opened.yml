@@ -17,15 +17,15 @@ jobs:
               with:
                   project: Board
                   column: To do
-                  repo-token: "${{ secrets.PAT }}"
+                  repo-token: '${{ secrets.PAT }}'
             - name: Add new pull requests to the In progress column
               if: github.event_name == 'pull_request'
               uses: alex-page/github-project-automation-plus@v0.2.4
               with:
                   project: Board
                   column: In progress
-                  repo-token: "${{ secrets.PAT }}"
+                  repo-token: '${{ secrets.PAT }}'
             - uses: hmarr/auto-approve-action@v2.0.0
               if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'allcontributors[bot]'
               with:
-                  github-token: "${{ secrets.PAT }}"
+                  github-token: '${{ secrets.PAT }}'
