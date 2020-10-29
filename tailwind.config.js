@@ -20,6 +20,7 @@ module.exports = {
 		extend: {
 			backgroundImage: () => ({
 				'rect-pattern': "url('../assets/media/rect-pattern.png')",
+				'diamond-pattern': "url('../assets/media/diamond-pattern.png')",
 			}),
 			fontSize: {
 				'7xl': '5rem',

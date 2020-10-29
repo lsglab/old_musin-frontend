@@ -8,7 +8,7 @@
     Provides a responsive multi-purpose universal card container with three sections.
 -->
 
-<div class="overflow-hidden bg-gray-300 shadow-lg rounded-md px-2 {classes}">	
+<div class="overflow-hidden bg-gray-300 shadow-lg rounded-md p-2 {classes}">	
 	<!--Card header section-->
 	<slot name="header"/>
 	<!--Card body section--> 

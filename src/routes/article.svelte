@@ -97,7 +97,7 @@
 			<Flex justify="center" align="center" classes="w-full h-full">
 				<div class="m-8 text-center">
 					<h1>LSG</h1>
-					<p>Cooler shit</p>
+					<p>Cooler [EXPLETIVE DELETED]</p>
 				</div>
 			</Flex>
 		</div>

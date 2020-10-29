@@ -3,22 +3,19 @@
 	import Carddeck from '../../components/Carddeck.svelte';
 	import Flex from '../../components/common/Flex.svelte';
 	import Link from '../../components/common/Link.svelte';
-	import Nav from '../../components/Nav.svelte';
 
 	export let title;
 </script>
 
-<style>
+<style lang="scss">
 	h4 {
-		font-size: 1em;
-		text-align: center;
+		@apply text-center text-lg;
 	}
 </style>
 
 <svelte:head>
 	<title>{title}</title>
 </svelte:head>
-<Nav />
 <Carddeck title="Informationen für {title} | {process.globals.title}" background="bg-rect-pattern">
 	<Card>
 		<div slot="header">
