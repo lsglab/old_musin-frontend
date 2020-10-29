@@ -8,13 +8,13 @@
 	let normOffset;
 	let y;
 	let active = 0;
+	let checked = false;
 	// is the dom loaded or not
 	let dom = false;
-
 	// functions checks if the content-table is on the top or not
 	function isSticky() {
 		// set the Offset the content table has when the page is first loaded
-		if (normOffset === undefined) {
+		if (normOffset == null) {
 			normOffset = document.getElementById('content-table').offsetTop;
 		} else if (y >= normOffset && sticky === false) {
 			sticky = true;
@@ -24,7 +24,6 @@
 	}
 
 	function setActive() {
-		console.log('ACTIVE', active);
 		let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
 		const sections = document.getElementsByClassName('art-content-sect');
 		// get height of viewport
@@ -50,35 +49,10 @@
 	}
 
 	function scroll() {
-		console.log('NA HAALOOOO');
 		if (dom) {
 			isSticky();
 			setActive();
 		}
-	}
-
-	// THIS SCROLL HAS TO BE MADE WITH JAVA SCRIPT, OTHERWISE IT WOULDNT CORRECTLY WORK ON MOBILE
-	function scrollTo(target) {
-		const targetId = `sect${target}`;
-		// close nav in case the user is on mobile
-		document.getElementById('table-checkbox').checked = false;
-
-		let offsetTop = document.getElementById(targetId).offsetTop;
-		const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-		// correction = 10 --> now there is a little space above the hr
-		let correction = 20;
-		if (vw <= 1048) {
-			// if the user is mobile the height of the content-table needs to be added cause it is fixed and thus is not part of offsetTop
-			correction += document.getElementById('content-table').offsetHeight;
-		}
-
-		offsetTop -= correction;
-		// IMPORTANT: window.scroll is not being supported in safari
-		window.scroll({
-			behavior: 'smooth',
-			left: 0,
-			top: offsetTop,
-		});
 	}
 
 	onMount(() => {
@@ -110,15 +84,14 @@
 		scroll();
 	}}" />
 
-<div id="article" class="mx-auto break-words">
+<div id="article" class="pb-20 mx-auto break-words">
 	<Flex align="center" classes="w-full" cols="true">
 		<div
-			class="flex w-full flex-col-reverse justify-center align-center lg:grid lg:grid-cols-2 xl:grid
-				lg:grid-cols-2 lg:w-200 xl:w-200 lg:h-100 xl:h-100">
+			class="flex flex-col-reverse justify-center w-full transition-none align-center lg:grid lg:grid-cols-2 xl:grid lg:w-200 xl:w-200 lg:h-100 xl:h-100">
 			<Flex justify="center" classes="w-full h-full overflow-hidden">
 				<img
-					class="lg:h-full xl:h-full w-full object-cover"
-					src="https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png"
+					class="object-cover w-full lg:h-full xl:h-full"
+					src="https://lsg.musin.de/homepage/images/header-images/schulhof_mini.jpg"
 					alt="" />
 			</Flex>
 			<Flex justify="center" align="center" classes="w-full h-full">
@@ -128,33 +101,28 @@
 				</div>
 			</Flex>
 		</div>
-		<div>
+		<div class="w-full">
 			<Flex justify="center" wrap="true" classes="m-auto lg:flex-no-wrap xl:flex-no-wrap">
 				<!--Das Inhaltsverzeichnis-->
 				<div
-					class="sticky py-5 top-0 w-full bg-white lg:p-4 xl:p-4 lg:shadow-xl px-8 lg:top-4 xl:top-4
-						xl:shadow-xl lg:m-0 xl:m-0 lg:mr-4 lg:w-auto xl:w-auto xl:mr-4 lg:-mt-12 xl:-mt-12 h-min-content {sticky ? 'shadow-xl' : ''}"
+					class="sticky top-0 w-full px-8 py-5 transition-none bg-white lg:p-4 xl:p-4 lg:shadow-xl lg:top-4 xl:top-4 xl:shadow-xl lg:m-0 xl:m-0 lg:mr-4 lg:w-auto xl:w-auto xl:mr-4 lg:-mt-12 xl:-mt-12 h-min-content"
 					id="content-table">
-					<input class="hidden" type="checkbox" id="table-checkbox" />
-					<div>
+					<input class="hidden" type="checkbox" id="table-checkbox" bind:checked="{checked}"  />
+					<div class="{sticky ? "lg:relative xl:relative  px-8 py-5 transition-none absolute top-0 shadow-xl lg:p-0 xl:p-0 lg:shadow-none w-full xl:shadow-none left-0 bg-white" : ""}">
 						<Flex justify="between" wrap="true" align="center">
 							<h5 class="truncate">INHALTSVERZEICHNIS</h5>
 							<label
-								class="lg:hidden xl:hidden bg-arrowIcon bg-auto h-8 w-8 bg-center cursor-pointer"
+								class="w-8 h-8 bg-center bg-auto cursor-pointer lg:hidden xl:hidden bg-arrowIcon"
 								for="table-checkbox"></label>
 						</Flex>
 						<ul
-							class="content-table-ul pl-4 transition-300 opacity-0 lg:opacity-100 xl:opacity-100
-								overflow-hidden max-h-0 lg:max-h-full xl:max-h-full">
+							class="pl-4 overflow-hidden opacity-0 content-table-ul transition-300 lg:opacity-100 xl:opacity-100 max-h-0 lg:max-h-full xl:max-h-full">
 							{#each ['test', 'test', 'test', 'test'] as title, i}
 								<li
 									class="my-4 font-semibold list-none cursor-pointer leading-5 tracking-wide
 										lg:text-sm xl:text-sm {active !== i ? '' : 'text-blue-400 list-square'}"
-									id="{i}"
-									on:click="{() => {
-										scrollTo(i);
-									}}">
-									{i + 1}. title
+									id="{i}">
+									<a href="article/#sect{i}" on:click="{() => {checked = false;}}">{i + 1}. {title}</a>
 								</li>
 							{/each}
 						</ul>
@@ -185,15 +153,13 @@
 					</div>
 					<!--Biespiel einer Artikel section-->
 					{#each [0, 0, 0, 0] as Section, i}
-						<div class="art-content-sect m-0 mt-20 pt-10px" id="sect{i}">
+						<div class="pt-20 m-0 art-content-sect pt-10px" id="sect{i}">
 							<header>
-								<hr class="text-black w-12 my-3 border-black border-b-2 border-t-0" />
-								<h1 class="text-3xl my-2 font-normal">{i + 1}. Leitbild des LSG</h1>
-								<h2 class="text-2xl mb-2 font-normal">test</h2>
+								<hr class="w-12 my-3 text-black border-t-0 border-b-2 border-black" />
+								<h1 class="my-2 text-3xl font-normal">{i + 1}. Leitbild des LSG</h1>
+								<h2 class="mb-2 text-2xl font-normal">test</h2>
 							</header>
-							<Text>
-								<p>
-									Das Münchner Städt. Louise-Schroeder-Gymnasium (LSG) ist an seinem jetzigen Standort
+							<Text html="as Münchner Städt. Louise-Schroeder-Gymnasium (LSG) ist an seinem jetzigen Standort
 									eine verhältnis­mäßig junge Schule. Das koedukativ geführte Gymnasium wurde 1983 als
 									Teil des Schulzentrums an der Pfarrer-Grimm-Straße eingerichtet, wodurch dem
 									gestiegenen Bedarf im Nordwesten Münchens Rechnung getragen wurde. Das LSG erfreut
@@ -203,9 +169,7 @@
 									naturwissenschaftlich-technologischen Zweig mit der Sprachenfolge Englisch -
 									Französisch oder Englisch - Latein und einem sprachlichen Zweig mit der
 									Sprachenfolge Englisch - Latein - Italienisch oder Englisch - Französisch -
-									Italienisch gewährleistet ein breit gefächertes Unterrichtsangebot.
-								</p>
-							</Text>
+									Italienisch gewährleistet ein breit gefächertes Unterrichtsangebot."/>
 						</div>
 					{/each}
 				</div>

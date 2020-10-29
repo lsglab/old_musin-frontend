@@ -8,7 +8,7 @@
 	// tailwind padding
 	export let padding = false;
 	/** ID of the section */
-	export let id;
+	export let id = '';
 </script>
 
 <!--
