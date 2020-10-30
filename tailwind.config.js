@@ -1,5 +1,3 @@
-/* eslint-disable sort-keys-fix/sort-keys-fix */
-
 module.exports = {
 	future: {
 		purgeLayersByDefault: true,
@@ -30,7 +28,7 @@ module.exports = {
 			height: {
 				'2/10': '20%',
 				'8/10': '80%',
-				'100': '25rem',
+				'80': '20rem',
 				'min-content': 'min-content',
 			},
 			inset: {
@@ -73,7 +71,6 @@ module.exports = {
 			},
 			width: {
 				'9/20': '45%',
-				'200': '50rem',
 			},
 		},
 		fontWeight: {

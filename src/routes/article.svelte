@@ -123,10 +123,10 @@
 <div id="article" class="pb-20 mx-auto break-words">
 	<Flex align="center" classes="w-full" cols="true">
 		<div
-			class="flex flex-col-reverse justify-center w-full transition-none align-center lg:grid lg:grid-cols-2 xl:grid lg:w-200 xl:w-200 lg:h-100 xl:h-100">
+			class="flex flex-col-reverse justify-center w-full transition-none lg:px-40 lg:h-80 xl:h-80 align-center article lg:grid lg:grid-cols-2 xl:grid">
 			<Flex justify="center" classes="w-full h-full overflow-hidden">
 				<img
-					class="object-cover w-full lg:h-full xl:h-full"
+					class="object-cover w-full lg:w-auto lg:h-full xl:h-full"
 					src="https://lsg.musin.de/homepage/images/header-images/schulhof_mini.jpg"
 					alt="" />
 			</Flex>
