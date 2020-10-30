@@ -3,4 +3,6 @@
 
 # Automatically assign the following people to every PR:
 
-*	@GitGangGuy
+*	@GitGangGuy @jamwag
+
+src/routes/article.svelte @Flosi23
