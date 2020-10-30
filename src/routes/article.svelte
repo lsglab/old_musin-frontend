@@ -156,9 +156,9 @@
 							{#each list as title, i}
 								<li
 									class="my-4 font-semibold list-none cursor-pointer leading-5 tracking-wide
-										lg:text-sm xl:text-sm {active !== i ? '' : 'text-blue-400 list-square'}"
+										{active !== i ? '' : 'text-blue-400 list-square'}"
 									id="{i}">
-									<a href="article/#sect{i}" on:click="{() => {checked = false;}}">{i + 1}. {title.header}</a>
+									<a class = "lg:text-sm xl:text-sm" href="article/#sect{i}" on:click="{() => {checked = false;}}">{i + 1}. {title.header}</a>
 								</li>
 							{/each}
 						</ul>
