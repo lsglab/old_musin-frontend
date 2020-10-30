@@ -3,6 +3,7 @@
 	import Tailwind from '../components/Tailwind.svelte';
 	import Styles from '../components/Styles.svelte';
 	import Footer from '../components/Footer.svelte';
+	import Nav from '../components/Nav.svelte';
 </script>
 
 <svelte:head>
@@ -11,5 +12,6 @@
 
 <Tailwind />
 <Styles />
+<Nav />
 <slot />
 <Footer />
