@@ -71,7 +71,7 @@
 			// get offset top of next ele --> if the list reached its end, set next_top higher than own offset --> if statemnt is till true
 			const nextTop =
 				i !== Object.keys(sections).length - 1 ? sections[(i + 1).toString()].offsetTop : scrollTop + 1;
-			// wenn die momentane position zwischen dem offset von i und i + 1 ist:
+			// if the scroll position is between the offset of i and i + 1:
 			if (scrollTop > eleTop && scrollTop < nextTop) {
 				// set active equal to i
 				active = i;
@@ -139,7 +139,7 @@
 		</div>
 		<div class="w-full">
 			<Flex justify="center" wrap="true" classes="m-auto lg:flex-no-wrap xl:flex-no-wrap">
-				<!--Das Inhaltsverzeichnis-->
+				<!--Content table-->
 				<div
 				class="sticky top-0 z-10 w-full px-8 py-4 bg-white table-transition lg:p-4 xl:p-4 lg:shadow-xl lg:top-4 xl:top-4 xl:shadow-xl lg:m-0 xl:m-0 lg:mr-4 lg:w-auto xl:w-auto xl:mr-4 lg:-mt-12 xl:-mt-12 h-min-content"
 				id="content-table">
@@ -164,9 +164,9 @@
 						</ul>
 					</div>
 				</div>
-				<!--Der Body vom Artikel-->
+				<!--Body of the article-->
 				<div class="max-w-2xl px-8">
-					<!--section mit der reading time und eventuell einer Artikel beschreibung-->
+					<!--Section with reading time and article description-->
 					<div class="my-5">
 						<Flex align="center" classes="border-b border-solid border-gray-500 pb-2 mb-1">
 							<svg
@@ -185,7 +185,7 @@
 							Letzte Aktualisierung am 28.10.2020
 						</p>
 					</div>
-					<!--Biespiel einer Artikel section-->
+					<!--Build loop for the article sections-->
 					{#each list as Section, i}
 						<div class="pt-20 m-0 lg:pt-0 xl:pt-0 lg:mt-16 xl:mt-16 art-content-sect pt-10px" id="sect{i}">
 							<header>

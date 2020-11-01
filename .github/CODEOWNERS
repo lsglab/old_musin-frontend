@@ -6,3 +6,4 @@
 *	@GitGangGuy @jamwag
 
 src/routes/article.svelte @Flosi23
+src/routes/_error.svelte @Flosi23
