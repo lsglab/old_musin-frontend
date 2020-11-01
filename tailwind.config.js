@@ -17,9 +17,9 @@ module.exports = {
 	theme: {
 		extend: {
 			backgroundImage: () => ({
-				'arrowIcon': "url('../assets/media/arrow.svg')",
-				'diamond-pattern': "url('../assets/media/diamond-pattern.png')",
-				'rect-pattern': "url('../assets/media/rect-pattern.png')",
+				'arrowIcon': 'resolve(arrow.svg)',
+				'diamond-pattern': 'resolve(diamond-pattern.png)',
+				'rect-pattern': 'resolve(rect-pattern.png)',
 			}),
 			fontSize: {
 				'7xl': '5rem',
