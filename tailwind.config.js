@@ -1,5 +1,3 @@
-/* eslint-disable sort-keys-fix/sort-keys-fix */
-
 module.exports = {
 	future: {
 		purgeLayersByDefault: true,
@@ -19,8 +17,9 @@ module.exports = {
 	theme: {
 		extend: {
 			backgroundImage: () => ({
-				'diamond-pattern': "url('../assets/media/diamond-pattern.png')",
-				'rect-pattern': "url('../assets/media/rect-pattern.png')",
+				'arrowIcon': 'resolve(arrow.svg)',
+				'diamond-pattern': 'resolve(diamond-pattern.png)',
+				'rect-pattern': 'resolve(rect-pattern.png)',
 			}),
 			fontSize: {
 				'7xl': '5rem',
@@ -30,7 +29,7 @@ module.exports = {
 			height: {
 				'2/10': '20%',
 				'8/10': '80%',
-				'100': '25rem',
+				'80': '20rem',
 				'min-content': 'min-content',
 			},
 			inset: {
@@ -73,7 +72,6 @@ module.exports = {
 			},
 			width: {
 				'9/20': '45%',
-				'200': '50rem',
 			},
 		},
 		fontWeight: {
