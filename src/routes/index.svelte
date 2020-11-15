@@ -5,12 +5,18 @@
 
 	.awards::before {
 		content: '';
-		width:100%;
+		width: 100%;
 		height: 1px;
 		position: absolute;
 		top: -20px;
-		left: 0px;
-		background: linear-gradient(90deg, rgba(66,71,112,0.09), rgba(66,71,112,0.09) 50%, transparent 0, transparent);
+		left: 0;
+		background: linear-gradient(
+			90deg,
+			rgba(66, 71, 112, 0.09),
+			rgba(66, 71, 112, 0.09) 50%,
+			transparent 0,
+			transparent
+		);
 		background-size: 8px 1px;
 	}
 </style>
@@ -18,7 +24,6 @@
 <svelte:head>
 	<title>Startseite | {process.globals.title}</title>
 </svelte:head>
-
 
 <div class="" style="background: #f6f9fc;margin-top: -80px;">
 	<header
@@ -32,7 +37,8 @@
 				<h3 class="my-4" style="font-weight: 900; font-size: 20px; line-height: 26px;">
 					Naturwissenschaftlich-technologisches<br />und sprachliches Gymnasium.
 				</h3>
-				<button class="text-white border-none cursor-pointer"
+				<button
+					class="text-white border-none cursor-pointer"
 					style="height: 40px; width: 250px; background: rgb(0, 119, 255); border-radius: 10px; font-size: 14px;">Aktuelle
 					Termine</button>
 				<p style="margin-top: 40px; color: #778; font-size: 14px">Referenzschule der TU München</p>
@@ -99,9 +105,7 @@
 			<li
 				class="w-full ml-0 pl-0 flex flex-no-wrap"
 				style="background: #fafbff; min-height: 50px; border-bottom: 1px solid rgba(0,0,0,0.1);">
-				<div
-					class="time flex flex-col items-center justify-center"
-					style="min-width: 100px; padding: 20px;">
+				<div class="time flex flex-col items-center justify-center" style="min-width: 100px; padding: 20px;">
 					<span class="font-normal" style="font-size: 16px; color: #667">Uhrzeit</span>
 				</div>
 				<div
@@ -214,5 +218,5 @@
 			</li>
 		</ul>
 	</div>
-	<a href="#" style="margin-top: 30px;font-size: 18px;margin-bottom: 50px;">Zu allen Terminen</a>
+	<a href="/termine" style="margin-top: 30px;font-size: 18px;margin-bottom: 50px;">Zu allen Terminen</a>
 </div>
