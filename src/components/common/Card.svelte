@@ -1,6 +1,6 @@
 <script>
 	/** Additional classes to pass in */
-	export let classes;
+	export let classes = '';
 </script>
 
 <!--

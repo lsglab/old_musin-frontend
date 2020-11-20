@@ -5,7 +5,7 @@
 	export let title;
 
 	/** Additional classes to pass to pass to the section */
-	export let background = '';
+	export let classes = '';
 </script>
 
 <style>
@@ -15,7 +15,7 @@
 	}
 </style>
 
-<Section fullscreen="true" classes="bg-fixed bg-no-repeat {background}" id="carddeck">
+<Section fullscreen="true" classes="{classes}">
 	<div>
 		<h4 class="mb-2">{title}</h4>
 		<Flex wrap="true" justify="center" align="center" classes="px-2 gap-4">
