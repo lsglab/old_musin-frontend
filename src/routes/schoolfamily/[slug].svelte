@@ -1,25 +1,15 @@
 <script>
 	import Card from '../../components/common/Card.svelte';
-	import Carddeck from '../../components/Carddeck.svelte';
 	import Flex from '../../components/common/Flex.svelte';
 
 	export let title;
 </script>
 
-<style lang="scss">
-	div.profile-card {
-		@apply cursor-default;
-		&:hover {
-			@apply cursor-default; //todo: add flipping card
-		}
-	}
-</style>
-
 <svelte:head>
 	<title>{title}</title>
 </svelte:head>
-
-<Carddeck title="Schulleitung | {process.globals.title}" background="bg-diamond-pattern">
+<h4 align="center" class="mb-2">{title} | {process.globals.title}</h4>
+<Flex wrap="true" justify="center" align="center" classes="px-2 gap-4">
 	<Card>
 		<div slot="body" class="profile-card rounded-md bg-gray-400">
 			<Flex
@@ -80,4 +70,4 @@
 		</div>
 		<div slot="footer" class="my-2 border-b-2 border-gray-500 border-dotted"></div>
 	</Card>
-</Carddeck>
+</Flex>

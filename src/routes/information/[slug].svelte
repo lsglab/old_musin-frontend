@@ -1,6 +1,5 @@
 <script>
 	import Card from '../../components/common/Card.svelte';
-	import Carddeck from '../../components/Carddeck.svelte';
 	import Flex from '../../components/common/Flex.svelte';
 	import Link from '../../components/common/Link.svelte';
 
@@ -16,7 +15,8 @@
 <svelte:head>
 	<title>{title}</title>
 </svelte:head>
-<Carddeck title="Informationen für {title} | {process.globals.title}" background="bg-rect-pattern">
+<h4 align="center" class="mb-2">{title} | {process.globals.title}</h4>
+<Flex wrap="true" justify="center" align="center" classes="px-2 gap-4">
 	<Card>
 		<div slot="header">
 			<h4>Organisatorisches</h4>
@@ -81,4 +81,4 @@
 		</div>
 		<div slot="footer" class="my-2 border-b-2 border-gray-500 border-dotted"></div>
 	</Card>
-</Carddeck>
+</Flex>
