@@ -22,12 +22,14 @@
 -->
 
 <Section classes="bg-white lg:h-screen md:h-auto" id="{id}" padding="{padding}">
-	<Flex cols="true" align="center" classes="py-10 h-full" justify="between">
+	<Flex cols="true" align="center" classes="py-10 h-full">
 		<Flex cols="true" align="center">
 			<h2 class="text-blue-900">{header}</h2>
 			<p class="my-5 text-center text-blue-800">{subHeader}</p>
 		</Flex>
 		<slot />
-		<Link href="{href}">{linkText}</Link>
+		{#if href}
+			<Link href="{href}">{linkText}</Link>
+		{/if}
 	</Flex>
 </Section>
