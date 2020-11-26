@@ -5,12 +5,6 @@
 	import SectionWrapper from '../../components/sectionWrapper.svelte';
 </script>
 
-<style>
-	.body:hover {
-		width: 102%;
-	}
-</style>
-
 <svelte:head>
 	<title>{process.title} Schulleitung</title>
 </svelte:head>
