@@ -3,7 +3,7 @@
 
 <style lang="scss">
 	.dash-background div {
-		border-right: 1px dashed rgba(0, 0, 0, 0.07);
+		border-right: 1px dashed rgba(0, 0, 0, 0.12);
 		height: 100%;
 		width: 100%;
 	}
