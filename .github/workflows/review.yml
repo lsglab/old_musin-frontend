@@ -3,8 +3,6 @@ on:
     pull_request:
         types:
             - ready_for_review
-            - review_requested
-            - review_request_removed
 jobs:
     execute:
         name: Move the card to the 'ready for review' column
