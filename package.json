@@ -18,7 +18,7 @@
 		"do:static": "yarn static",
 		"do:sync": "yarn git:sync",
 		"do:testing": "run-s do:static do:favicon prettier:report eslint:report stylelint:report run:export",
-		"eslint:fix": "eslint --fix --cache --report-unused-disable-directives --ext svelte,js .",
+		"eslint:fix": "eslint --fix-dry-run --quiet --cache --report-unused-disable-directives --ext svelte,js .",
 		"eslint:report": "eslint --report-unused-disable-directives --max-warnings 0 --ext svelte,js .",
 		"favicon:ci": "real-favicon check-for-update --fail-on-update faviconData.json",
 		"favicon:copy": "cpy \"./src/assets/favicons/**/*\" static --dot",

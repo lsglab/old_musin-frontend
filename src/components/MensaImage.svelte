@@ -1,5 +1,5 @@
 <script>
-	// Header of this componen
+	// Header of this component
 	export let header;
 	// The image
 	export let image;
