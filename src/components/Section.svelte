@@ -33,6 +33,17 @@
 			background-size: 8px 1px;
 		}
 	}
+
+	.defaultPadding {
+		padding-left: 15vw;
+		padding-right: 15vw;
+	}
+	@media screen and (max-width: 1500px) {
+		.defaultPadding {
+			padding-left: 5vw !important;
+			padding-right: 5vw !important;
+		}
+	}
 </style>
 
 <!--
@@ -40,7 +51,7 @@
 	A full-width section
 -->
 <section
-	class="{fullscreen ? 'fullscreen' : 'w-full'} {padding ? 'lg:px-32 md:px-20 px-8' : ""} {center ? 'center' : ''} {classes}"
+	class="{fullscreen ? 'fullscreen' : 'w-full'} {padding ? 'lg:px-32 md:px-20 px-8' : "defaultPadding"} {center ? 'center' : ''} {classes}"
 	style={customStyles}
 	id="{id}">
 	<slot />
