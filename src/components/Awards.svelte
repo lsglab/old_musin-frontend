@@ -29,11 +29,11 @@
 	}
 </style>
 
-<Section customStyles="padding: 0px 15vw 30px;" classes="dashedTopBorder">
-	<Flex justify="between" classes="w-full bg-transparent">
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-	</Flex>
+<Section customStyles="padding-bottom: 30px; padding-left: 15vw; padding-right: 15vw;" classes="dashedTopBorder">
+		<Flex justify="between" classes="w-full bg-transparent">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</Flex>
 </Section>

@@ -21,6 +21,12 @@ module.exports = {
 				'diamond-pattern': 'resolve(diamond-pattern.png)',
 				'rect-pattern': 'resolve(rect-pattern.png)',
 			}),
+			colors: {
+				btnBlue: 'rgb(0, 119, 255)',
+				heading: '#0a2540',
+				heading2: '#336',
+				purpleAccent: '#447',
+			},
 			fontSize: {
 				'7xl': '5rem',
 				'8xl': '6rem',
