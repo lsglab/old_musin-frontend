@@ -9,23 +9,28 @@
 		background-position: center center;
 		background-size: contain;
 		background-repeat: no-repeat;
+		filter: grayscale(1);
+		mix-blend-mode: multiply;
+		height: 60px;
 		&:nth-child(1) {
-			background-image: resolve('award-cae.png');
+			background-image: resolve('award-courage.jpg');
+			background-position: left;
 		}
 		&:nth-child(2) {
-			background-image: resolve('award-cils.png');
+			background-image: resolve('award-delf.jpg');
 		}
 		&:nth-child(3) {
-			background-image: resolve('award-courage.jpg');
+			background-image: resolve('award-cils.png');
 		}
 		&:nth-child(4) {
-			background-image: resolve('award-delf.jpg');
+			background-image: resolve('award-cae.png');
+			background-position: right;
 		}
 	}
 </style>
 
-<Section classes="p-4">
-	<Flex justify="around" classes="w-full bg-transparent h-16">
+<Section customStyles="padding-bottom: 30px; padding-left: 15vw; padding-right: 15vw;" classes="dashedTopBorder">
+	<Flex justify="between" classes="w-full bg-transparent">
 		<div></div>
 		<div></div>
 		<div></div>

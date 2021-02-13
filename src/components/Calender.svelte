@@ -2,27 +2,36 @@
 </script>
 
 <style lang="scss">
+	* {
+		font-size: 16px;
+	}
 	table tr {
-		&:nth-child(even) {
-			@apply bg-gray-100;
-		}
 		> th,
 		> td {
 			@apply p-3;
+			padding: 20px;
+			color: #445;
+		}
+		> td:nth-child(1) {
+			color: black;
 		}
 		> th {
 			@apply break-normal;
+			color: #334;
+			font-weight: 400;
 		}
 	}
 </style>
 
-<table class="my-10 bg-white divide-y divide-gray-400 shadow-xl divide-solid">
-	<thead class="bg-gray-100">
+<table
+	class="w-4/5 my-10 overflow-hidden text-left bg-white divide-y divide-gray-400 rounded-lg divide-solid"
+	style="box-shadow: 0 5px 15px rgba(0,0,0,0.2); max-width: 1000px;">
+	<thead style="background: #fafbff;">
 		<tr>
 			<th>Datum</th>
 			<th>Uhrzeit</th>
 			<th>Ort</th>
-			<th></th>
+			<th>Beschreibung</th>
 		</tr>
 	</thead>
 	<tbody class="max-w-full divide-y divide-gray-400 divide-dashed">
@@ -40,7 +49,7 @@
 		</tr>
 		<tr>
 			<td>23.09.</td>
-			<td>08:45 - 9:30</td>
+			<td>08:45 - 09:30</td>
 			<td>Mensa</td>
 			<td class="content">Q12: Vollversammlung: Wahl der Jahrgangsstufensprecher</td>
 		</tr>
@@ -52,7 +61,7 @@
 		</tr>
 		<tr>
 			<td>29.09.</td>
-			<td>8:00 - 8:45</td>
+			<td>08:00 - 08:45</td>
 			<td>Mensa</td>
 			<td class="content">Q11: Vollversammlung: Wahl der Jahrgangsstufensprecher</td>
 		</tr>
