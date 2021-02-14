@@ -58,7 +58,7 @@
 					{/if}
 				</div>
 				<div class="btn-wrap">
-					<Button buttonText="Zur Startseite" link="true" href="/" />
+					<Button buttonText="Zur Startseite" href="/" />
 				</div>
 			</div>
 		</div>

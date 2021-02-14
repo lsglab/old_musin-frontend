@@ -54,7 +54,7 @@
 						<div class="w-full text-center lg:text-left xl:text-left">
 							<h2 class="font-black text-blue-900 h1">{header}</h2>
 							<p class="my-4 text-sm">{subHeader}</p>
-							<Button buttonText="{buttonText}" classes="w-56" link="true" href="{href}" />
+							<Button buttonText="{buttonText}" classes="w-56" href="{href}" />
 							<p class="my-4 text-xs text-gray-800">{note}</p>
 						</div>
 					</Flex>
