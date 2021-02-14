@@ -13,7 +13,7 @@
 -->
 <a
 	href="{href}"
-	class="{outgoing ? '' : 'arrow'} emphasize"
+	class="{outgoing ? '' : 'arrow'} emphasize text-sm"
 	target="{outgoing ? '_blank' : '_self'}"
 	rel="{outgoing ? 'external noopener noreferrer' : 'prefetch'}">
 	<slot>{content}</slot>
