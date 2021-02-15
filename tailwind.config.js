@@ -1,3 +1,6 @@
+// eslint sort keys disabled because it doesnt work correctly with the 5vw and 15vw padding properties
+/* eslint-disable sort-keys */
+
 module.exports = {
 	future: {
 		purgeLayersByDefault: true,
