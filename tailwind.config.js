@@ -1,3 +1,6 @@
+// eslint sort keys disabled because it doesnt work correctly with the 5vw and 15vw padding properties
+/* eslint-disable sort-keys */
+
 module.exports = {
 	future: {
 		purgeLayersByDefault: true,
@@ -52,6 +55,13 @@ module.exports = {
 			},
 			maxHeight: {
 				0: '0',
+			},
+			padding: {
+				'15vw': '15vw',
+				'5vw': '5vw',
+			},
+			screens: {
+				'2xl': '1536px',
 			},
 			transitionTimingFunction: {
 				default: 'easeInOutExpo',
