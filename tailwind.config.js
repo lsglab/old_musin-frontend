@@ -53,6 +53,13 @@ module.exports = {
 			maxHeight: {
 				0: '0',
 			},
+			padding: {
+				'15vw': '15vw',
+				'5vw': '5vw',
+			},
+			screens: {
+				'2xl': '1536px',
+			},
 			transitionTimingFunction: {
 				default: 'easeInOutExpo',
 				ease: 'ease',
