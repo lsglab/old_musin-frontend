@@ -24,6 +24,9 @@ module.exports = {
 				'diamond-pattern': 'resolve(diamond-pattern.png)',
 				'rect-pattern': 'resolve(rect-pattern.png)',
 			}),
+			boxShadow: {
+				equal: '0 5px 15px rgba(0,0,0,0.2)',
+			},
 			colors: {
 				btnBlue: 'rgb(0, 119, 255)',
 				heading: '#0a2540',
@@ -42,6 +45,7 @@ module.exports = {
 				'7/10': '70%',
 				'8/10': '80%',
 				'80': '20rem',
+				'inherit': 'inherit',
 				'min-content': 'min-content',
 			},
 			inset: {
@@ -49,9 +53,13 @@ module.exports = {
 				'1/4': '25%',
 				'3/4': '75%',
 				'4': '1rem',
+				'center': 'calc(-50vw + 50%)',
 			},
 			listStyleType: {
 				square: 'square',
+			},
+			margin: {
+				full: '100%',
 			},
 			maxHeight: {
 				0: '0',
@@ -59,6 +67,7 @@ module.exports = {
 			padding: {
 				'15vw': '15vw',
 				'5vw': '5vw',
+				'unset': 'unset',
 			},
 			screens: {
 				'2xl': '1536px',
