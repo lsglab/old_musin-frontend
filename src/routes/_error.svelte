@@ -11,7 +11,7 @@
 
 <style>
 	.h1 {
-		font-size: 14rem;
+		font-size: 11rem;
 		word-break: keep-all;
 		-webkit-text-stroke: 2px black;
 	}
@@ -23,6 +23,10 @@
 	.stack {
 		@apply flex-wrap;
 	}
+
+	p {
+		@apply text-sm;
+	}
 </style>
 
 <svelte:head>
@@ -30,15 +34,13 @@
 </svelte:head>
 
 <Section fullscreen="true">
-	<div
-		class="flex flex-wrap items-center justify-center p-5 m-auto md:p-10 lg:p-20 xl:p-20 lg:flex-no-wrap xl:flex-no-wrap"
-		class:stack>
+	<div class="flex flex-wrap items-center justify-center m-auto y-5 md:py-10 lg:py-20 lg:flex-no-wrap" class:stack>
 		<h1 class="z-20 text-white {!stack ? 'lg:-mt-48' : ''} h1">{status}</h1>
 
-		<div class="z-10 h-auto mt-10 bg-white shadow-2xl md:-ml-6 card">
+		<div class="z-10 h-auto mt-10 bg-white shadow-equal md:-ml-6 card">
 			<div class="m-5 ml-10">
-				<h2>{status === 404 ? 'Seite nicht gefunden' : error.message}</h2>
-				<div class="my-6">
+				<h3 class="font-normal">{status === 404 ? 'Seite nicht gefunden' : error.message}</h3>
+				<div class="my-5">
 					{#if error.stack || status === 404}
 						{#if status === 404}
 							<div>
@@ -57,9 +59,7 @@
 						{/if}
 					{/if}
 				</div>
-				<div class="btn-wrap">
-					<Button buttonText="Zur Startseite" href="/" />
-				</div>
+				<Button buttonText="Zur Startseite" href="/" />
 			</div>
 		</div>
 	</div>

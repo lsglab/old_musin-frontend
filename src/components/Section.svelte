@@ -40,7 +40,7 @@
 	A full-width section
 -->
 <section
-	class="{fullscreen ? 'fullscreen' : 'w-full'} {padding ? `${padding}` : "px-5vw 2xl:px-15vw"} {center ? 'center' : ''} {classes}"
+	class="{classes} {fullscreen ? 'fullscreen' : 'w-full'} {padding ? `${padding}` : "px-5vw 2xl:px-15vw"} {center ? 'center' : ''}"
 	style={customStyles}
 	id="{id}">
 	<slot />

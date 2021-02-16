@@ -9,7 +9,7 @@
 	<title>{process.title} Schulleitung</title>
 </svelte:head>
 <SectionWrapper header="Schulfamilie" subHeader="Louise-Schroeder-Gymnasium">
-	<Flex justify="evenly" wrap="true" align="center" classes="h-full w-full">
+	<Flex justify="evenly" wrap="true" align="center" classes="h-full w-full mt-10">
 		<Card
 			classes="h-80 w-48 cursor-pointer z-50 m-4"
 			link="https://lsg.musin.de/homepage/19-menschen/55-steckbrief-herr-laslop">
