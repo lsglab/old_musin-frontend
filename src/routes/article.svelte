@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 
 	import Flex from '../components/common/Flex.svelte';
+	import Section from '../components/Section.svelte';
 	import Text from '../components/common/Text.svelte';
 
 	let sticky = false;
@@ -19,7 +20,7 @@
 		},
 		{
 			header: 'Schriftliche Leisungsnachweise',
-			html: `<table><tbody><tr style="vertical-align: top;"><td><span style="font-size: 11pt;"><strong>Italienisch:</strong></span></td><td><span style="font-size: 11pt;">Als 3. Fremdsprache ist Italienisch 4-stündiges Kernfach im SG. Damit werden 4&nbsp;Schulaufgaben (große Leistungsnachweise) verlangt, wovon i.d.R. eine mündlich ist.</span></td></tr><tr style="vertical-align: top;"><td><span style="font-size: 11pt;"><strong>Physik</strong>: </span></td><td><span style="font-size: 11pt;">Da Physik in beiden Ausbildungsrichtungen Kernfach ist, werden jeweils 2&nbsp;Schulaufgaben im Schuljahr geschrieben.</span></td></tr><tr style="vertical-align: top;"><td><span style="font-size: 11pt;"><strong>Chemie</strong>:</span></td><td><span style="font-size: 11pt;">Ist nur im NTG Kernfach, so dass nur im NTG 2 Schulaufgaben geschrieben werden.&nbsp; Im SG werden kleine Leistungsnachweise (Stegreifaufgabe und/oder Kurzarbeit) verlangt.</span></td></tr><tr style="vertical-align: top;"><td><span style="font-size: 11pt;"><strong>Informatik: &nbsp;&nbsp; <br></strong></span></td><td><span style="font-size: 11pt;">Informatik ist kein Kernfach, es werden kleine Leistungsnachweise (z. B. Stegreifaufgabe und/oder Kurzarbeit) verlangt.</span></td></tr></tbody></table>`,
+			html: `<table><tbody><tr style="vertical-align: top;"><td><span><strong>Italienisch:</strong></span></td><td><span>Als 3. Fremdsprache ist Italienisch 4-stündiges Kernfach im SG. Damit werden 4&nbsp;Schulaufgaben (große Leistungsnachweise) verlangt, wovon i.d.R. eine mündlich ist.</span></td></tr><tr style="vertical-align: top;"><td><span><strong>Physik</strong>: </span></td><td><span>Da Physik in beiden Ausbildungsrichtungen Kernfach ist, werden jeweils 2&nbsp;Schulaufgaben im Schuljahr geschrieben.</span></td></tr><tr style="vertical-align: top;"><td><span><strong>Chemie</strong>:</span></td><td><span>Ist nur im NTG Kernfach, so dass nur im NTG 2 Schulaufgaben geschrieben werden.&nbsp; Im SG werden kleine Leistungsnachweise (Stegreifaufgabe und/oder Kurzarbeit) verlangt.</span></td></tr><tr style="vertical-align: top;"><td><span><strong>Informatik: &nbsp;&nbsp; <br></strong></span></td><td><span>Informatik ist kein Kernfach, es werden kleine Leistungsnachweise (z. B. Stegreifaufgabe und/oder Kurzarbeit) verlangt.</span></td></tr></tbody></table>`,
 		},
 		{
 			header: 'Allgemeine Hochschulreife',
@@ -28,11 +29,25 @@
 	];
 	// is the dom loaded or not
 	let dom = false;
+
+	function getOffsetTop(ele) {
+		let offsetTop = 0;
+
+		let element = ele;
+
+		while (element) {
+			offsetTop += element.offsetTop;
+			element = element.offsetParent;
+		}
+
+		return offsetTop;
+	}
 	// functions checks if the content-table is on the top or not
 	function isSticky() {
+		console.log('normOffset', normOffset);
 		// set the Offset the content table has when the page is first loaded
 		if (normOffset == null) {
-			normOffset = document.getElementById('content-table').offsetTop;
+			normOffset = getOffsetTop(document.getElementById('content-table'));
 		} else if (y >= normOffset && sticky === false) {
 			sticky = true;
 		} else if (y <= normOffset && sticky === true) {
@@ -67,10 +82,10 @@
 		// loop through art-content-sections
 		for (let i = 0; i < Object.keys(sections).length; i += 1) {
 			// get offset top of ele
-			const eleTop = sections[i.toString()].offsetTop;
+			const eleTop = getOffsetTop(sections[i.toString()]);
 			// get offset top of next ele --> if the list reached its end, set next_top higher than own offset --> if statemnt is till true
 			const nextTop =
-				i !== Object.keys(sections).length - 1 ? sections[(i + 1).toString()].offsetTop : scrollTop + 1;
+				i !== Object.keys(sections).length - 1 ? getOffsetTop(sections[(i + 1).toString()]) : scrollTop + 1;
 			// if the scroll position is between the offset of i and i + 1:
 			if (scrollTop > eleTop && scrollTop < nextTop) {
 				// set active equal to i
@@ -93,24 +108,21 @@
 </script>
 
 <style>
-	#article {
-		hyphens: auto;
-		overflow-anchor: none;
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-			'Open Sans', 'Helvetica Neue', sans-serif;
-	}
-
 	#table-checkbox:checked ~ * .content-table-ul {
 		max-height: 100vh;
 		opacity: 1;
 	}
 
-	#table-checkbox:checked ~ * label {
+	#table-checkbox:checked ~ * .arrow {
 		transform: rotate(90deg);
 	}
 
 	.table-transition {
 		transition: all 0.3s ease, padding 0s;
+	}
+
+	.mobile-sticky {
+		transition: margin 0s;
 	}
 </style>
 
@@ -120,84 +132,87 @@
 		scroll();
 	}}" />
 
-<div id="article" class="pb-20 mx-auto break-words">
-	<Flex align="center" classes="w-full" cols="true">
-		<div
-			class="flex flex-col-reverse justify-center w-full transition-none lg:px-40 lg:h-80 xl:h-80 align-center article lg:grid lg:grid-cols-2 xl:grid">
-			<Flex justify="center" classes="w-full h-full overflow-hidden">
-				<img
-					class="object-cover w-full lg:w-auto lg:h-full xl:h-full"
-					src="https://lsg.musin.de/homepage/images/header-images/schulhof_mini.jpg"
-					alt="" />
-			</Flex>
-			<Flex justify="center" align="center" classes="w-full h-full">
-				<div class="m-8 text-center">
-					<h3>Ausbildungsrichtungen am LSG</h3>
-					<p></p>
-				</div>
-			</Flex>
-		</div>
-		<div class="w-full">
-			<Flex justify="center" wrap="true" classes="m-auto lg:flex-no-wrap xl:flex-no-wrap">
-				<!--Content table-->
-				<div
-				class="sticky top-0 z-10 w-full px-8 py-4 bg-white table-transition lg:p-4 xl:p-4 lg:shadow-xl lg:top-4 xl:top-4 xl:shadow-xl lg:m-0 xl:m-0 lg:mr-4 lg:w-auto xl:w-auto xl:mr-4 lg:-mt-12 xl:-mt-12 h-min-content"
-				id="content-table">
-					<input class="hidden" type="checkbox" id="table-checkbox" bind:checked="{checked}"  />
-					<div class="{sticky ? "px-8 py-4 table-transition lg:relative xl:relative absolute top-0 shadow-xl lg:p-0 xl:p-0 lg:shadow-none w-full xl:shadow-none left-0 bg-white" : ""}">
+<Section classes="my-10">
+	<div
+		class="flex flex-col-reverse justify-center transition-none lg:h-80 align-center article lg:grid lg:grid-cols-2">
+		<Flex justify="center" classes="w-full h-inherit">
+			<img
+				class="object-cover w-full h-full rounded-md shadow-equal lg:w-auto"
+				src="https://wallpaperaccess.com/full/900950.jpg"
+				alt="" />
+		</Flex>
+		<Flex justify="center" align="center" classes="w-full h-full">
+			<div class="m-8 text-center">
+				<h3 class="text-heading">Ausbildungsrichtungen am LSG</h3>
+				<p class="mt-3 text-heading2">Das ist ein sub-header</p>
+			</div>
+		</Flex>
+	</div>
+</Section>
+<Section classes="dashedTopBorder pb-20">
+	<div class="w-full">
+		<Flex justify="between" wrap="true" classes="m-auto lg:flex-no-wrap xl:flex-no-wrap">
+			<!--Content table-->
+			<div
+			class="sticky lg:mr-4 top-0 z-10 w-full bg-white rounded-md table-transition lg:top-4 lg:p-4 lg:shadow-equal lg:m-0 lg:w-auto h-min-content {sticky ? "py-0" : "py-4"} "
+			id="content-table">
+				<input class="hidden" type="checkbox" id="table-checkbox" bind:checked="{checked}"  />
+				<div class="{sticky ? "relative left-center lg:left-0 w-screen lg:w-auto mobile-sticky top-0 bg-white lg:py-0 py-4 table-transition shadow-xl lg:shadow-none" : ""}">
+					<Section customStyles="{sticky ? "" : "padding: 0px"}" classes="lg:px-unset xl:px-unset 2xl:px-unset">
+						<label for="table-checkbox" class="cursor-pointer">
 						<Flex justify="between" wrap="true" align="center">
-							<h5 class="truncate">INHALTSVERZEICHNIS</h5>
-							<label
-								class="w-8 h-8 bg-center bg-auto cursor-pointer lg:hidden xl:hidden bg-arrowIcon"
-								for="table-checkbox"></label>
+								<h5 class="truncate lg:text-lg text-heading">INHALTSVERZEICHNIS</h5>
+								<div
+									class="w-8 h-8 bg-center bg-auto cursor-pointer arrow lg:hidden xl:hidden bg-arrowIcon"
+								></div>
 						</Flex>
+						</label>
 						<ul
 							class="pl-4 overflow-hidden opacity-0 content-table-ul transition-300 lg:opacity-100 xl:opacity-100 max-h-0 lg:max-h-full xl:max-h-full">
 							{#each list as title, i}
 								<li
-									class="my-4 font-semibold list-none cursor-pointer leading-5 tracking-wide
+									class="my-4 lg:my-3 font-semibold list-none cursor-pointer tracking-wide
 										{active !== i ? '' : 'text-blue-400 list-square'}"
 									id="{i}">
-									<a class = "lg:text-sm xl:text-sm" href="article/#sect{i}" on:click="{() => {checked = false;}}">{i + 1}. {title.header}</a>
+									<a class = "lg:text-sm" href="article/#sect{i}" on:click="{() => {checked = false;}}">{i + 1}. {title.header}</a>
 								</li>
 							{/each}
 						</ul>
-					</div>
+					</Section>
 				</div>
-				<!--Body of the article-->
-				<div class="max-w-2xl px-8">
-					<!--Section with reading time and article description-->
-					<div class="my-5">
-						<Flex align="center" classes="border-b border-solid border-gray-500 pb-2 mb-1">
-							<svg
-								class="w-5 h-5 mr-1"
-								xmlns="http://www.w3.org/2000/svg"
-								height="24"
-								viewBox="0 0 24 24"
-								width="24"><path d="M0 0h24v24H0z" fill="none"></path>
-								<path
-									d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
-								<path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path>
-							</svg>
-							<p>{calcReadingTime(list)}</p>
-						</Flex>
-						<p class="text-gray-700">
-							Letzte Aktualisierung am 28.10.2020
-						</p>
-					</div>
-					<!--Build loop for the article sections-->
-					{#each list as Section, i}
-						<div class="pt-20 m-0 lg:pt-0 xl:pt-0 lg:mt-16 xl:mt-16 art-content-sect pt-10px" id="sect{i}">
-							<header>
-								<hr class="w-12 my-3 text-black border-t-0 border-b-2 border-black" />
-								<h3 class="my-4 font-normal">{i + 1}. {Section.header}</h3>
-								<h4 class="mb-2 font-normal"> </h4>
-							</header>
-							<Text html="{Section.html}"/>
-						</div>
-					{/each}
+			</div>
+			<!--Body of the article-->
+			<div class="w-full lg:w-2/3 lg:ml-4" >
+				<!--Section with reading time and article description-->
+				<div class="mt-2 -mb-5">
+					<Flex align="center" classes="border-b border-solid border-gray-500 pb-1">
+						<svg
+							class="w-5 h-5 mr-1"
+							xmlns="http://www.w3.org/2000/svg"
+							height="24"
+							viewBox="0 0 24 24"
+							width="24"><path d="M0 0h24v24H0z" fill="none"></path>
+							<path
+								d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
+							<path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path>
+						</svg>
+						<p>{calcReadingTime(list)}</p>
+					</Flex>
+					<p class="text-sm text-gray-700">
+						Letzte Aktualisierung am 28.10.2020
+					</p>
 				</div>
-			</Flex>
-		</div>
-	</Flex>
-</div>
+				<!--Build loop for the article sections-->
+				{#each list as section, i}
+					<div class="pt-20 m-0 lg:pt-0 xl:pt-0 lg:mt-16 xl:mt-16 art-content-sect pt-10px" id="sect{i}">
+						<header>
+							<hr class="w-12 my-3 text-black border-t-0 border-b-2 border-black" />
+							<h5 class="my-4 font-normal">{i + 1}. {section.header}</h5>
+						</header>
+						<Text html="{section.html}"/>
+					</div>
+				{/each}
+			</div>
+		</Flex>
+	</div>
+</Section>

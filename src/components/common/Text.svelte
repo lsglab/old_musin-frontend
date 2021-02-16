@@ -8,27 +8,14 @@
 	// 		'Open Sans', 'Helvetica Neue', sans-serif;
 	// }
 
-	div {
+	.text {
 		:global(a) {
 			text-decoration: none;
 		}
-		:global(p) {
-			font-weight: 400;
+		:global(p, a, td, th, span, strong) {
 			letter-spacing: normal;
-			font-size: 1rem;
+			font-size: 0.8rem;
 			line-height: 1.56;
-		}
-
-		:global(h2) {
-			font-weight: 400;
-		}
-
-		:global(h3) {
-			font-weight: 400;
-		}
-
-		:global(h4) {
-			font-weight: 400;
 		}
 
 		:global(li) {
@@ -48,22 +35,18 @@
 		:global(table) {
 			border-collapse: collapse;
 		}
-
-		:global(td) {
-			border: 1px solid black;
-			text-align: center;
-			vertical-align: middle;
-			padding: 10px;
-		}
 		:global(th) {
 			word-break: keep-all;
 			hyphens: none;
-			border: 1px solid black;
 			background-color: #f5f8fd;
 			font-weight: 600;
+		}
+
+		:global(td, th) {
+			border: 1px solid black;
 			text-align: center;
 			vertical-align: middle;
-			padding: 10px;
+			@apply p-2;
 		}
 
 		:global(blockquote) {
@@ -85,6 +68,6 @@
 	@component
 	Provides styling for long text passages with images, tables etc..
 -->
-<div>
+<div class="text">
 	{@html html}
 </div>
