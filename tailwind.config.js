@@ -24,6 +24,9 @@ module.exports = {
 				'diamond-pattern': 'resolve(diamond-pattern.png)',
 				'rect-pattern': 'resolve(rect-pattern.png)',
 			}),
+			boxShadow: {
+				equal: '0 5px 15px rgba(0,0,0,0.2)',
+			},
 			colors: {
 				btnBlue: 'rgb(0, 119, 255)',
 				heading: '#0a2540',
