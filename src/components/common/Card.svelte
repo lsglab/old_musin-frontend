@@ -18,7 +18,7 @@
 	}
 </style>
 
-<div class="overflow-hidden shadow-lg rounded-md {classes}">
+<div class="overflow-hidden shadow-equal rounded-md {classes}">
 	{#if link}
 		<div class="w-full h-full {link ? 'hover' : ''}">
 			<Link href="{link}">

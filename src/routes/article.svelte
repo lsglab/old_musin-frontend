@@ -138,7 +138,7 @@
 		<Flex justify="center" classes="w-full h-inherit">
 			<img
 				class="object-cover w-full h-full rounded-md shadow-equal lg:w-auto"
-				src="https://wallpaperaccess.com/full/900950.jpg"
+				src="https://www.tagesschau.de/multimedia/bilder/schule-153~_v-videowebl.jpg"
 				alt="" />
 		</Flex>
 		<Flex justify="center" align="center" classes="w-full h-full">
