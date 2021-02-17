@@ -12,7 +12,6 @@
 		padding-top: 56.25%; /* 16:9 Aspect Ratio */
 		transition: 0.2 ease;
 	}
-
 	.img:hover {
 		cursor: pointer;
 		@apply shadow-2xl;
@@ -20,7 +19,7 @@
 </style>
 
 <div class="w-full my-10 lg:w-9/20">
-	<p class="text-center text-blue-700">{header}</p>
+	<p class="text-center text-heading">{header}</p>
 	<div class="w-full py-10">
 		<a href="{href}" class="w-full h-full">
 			<div

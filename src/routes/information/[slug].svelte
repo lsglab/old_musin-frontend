@@ -1,9 +1,9 @@
 <script>
-	import Card from '../../components/common/Card.svelte';
-	import DashBackground from '../../components/DashBackground.svelte';
-	import Flex from '../../components/common/Flex.svelte';
-	import Link from '../../components/common/Link.svelte';
-	import SectionWrapper from '../../components/sectionWrapper.svelte';
+	import Card from '../../components/molecules/Card.svelte';
+	import DashBackground from '../../components/atoms/DashBackground.svelte';
+	import Flex from '../../components/atoms/Flex.svelte';
+	import Link from '../../components/atoms/Link.svelte';
+	import SectionWrapper from '../../components/molecules/sectionWrapper.svelte';
 
 	export let title;
 </script>

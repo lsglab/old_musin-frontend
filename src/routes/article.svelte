@@ -1,9 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 
-	import Flex from '../components/common/Flex.svelte';
-	import Section from '../components/Section.svelte';
-	import Text from '../components/common/Text.svelte';
+	import Flex from '../components/atoms/Flex.svelte';
+	import Section from '../components/atoms/Section.svelte';
+	import Text from '../components/atoms/Text.svelte';
 
 	let sticky = false;
 	let normOffset;
@@ -151,7 +151,7 @@
 </Section>
 <Section classes="dashedTopBorder pb-20">
 	<div class="w-full">
-		<Flex justify="between" wrap="true" classes="m-auto lg:flex-no-wrap xl:flex-no-wrap">
+		<Flex justify="between" wrap="true" classes="m-auto lg:flex-nowrap">
 			<!--Content table-->
 			<div
 			class="sticky lg:mr-4 top-0 z-10 w-full bg-white rounded-md table-transition lg:top-4 lg:p-4 lg:shadow-equal lg:m-0 lg:w-auto h-min-content {sticky ? "py-0" : "py-4"} "
