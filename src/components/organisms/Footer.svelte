@@ -1,7 +1,7 @@
 <script>
-	import Flex from './common/Flex.svelte';
-	import Link from './common/Link.svelte';
-	import Section from './Section.svelte';
+	import Flex from '../atoms/Flex.svelte';
+	import Link from '../atoms/Link.svelte';
+	import Section from '../atoms/Section.svelte';
 
 	const startYear = 2020;
 	const currentYear = new Date().getFullYear();

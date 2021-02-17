@@ -1,5 +1,5 @@
 <script>
-	import Flex from './common/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 </script>
 
 <style lang="scss">

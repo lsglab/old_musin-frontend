@@ -1,7 +1,7 @@
 <script>
-	import Button from '../components/common/Button.svelte';
-	import DashBackground from '../components/DashBackground.svelte';
-	import Section from '../components/Section.svelte';
+	import Button from '../components/atoms/Button.svelte';
+	import DashBackground from '../components/atoms/DashBackground.svelte';
+	import Section from '../components/atoms/Section.svelte';
 
 	export let error;
 	export let status;

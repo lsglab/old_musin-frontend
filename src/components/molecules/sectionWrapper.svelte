@@ -1,7 +1,7 @@
 <script>
-	import Flex from './common/Flex.svelte';
-	import Link from './common/Link.svelte';
-	import Section from './Section.svelte';
+	import Flex from '../atoms/Flex.svelte';
+	import Link from '../atoms/Link.svelte';
+	import Section from '../atoms/Section.svelte';
 	// header of this Section
 	export let header;
 	// subHeader of the title
@@ -9,7 +9,7 @@
 	// Text of the link
 	export let linkText;
 	// The href of the link
-	export let href;
+	export let link;
 	// The id of the element
 	export let id;
 	// default padding yes or no
@@ -31,8 +31,8 @@
 				<p class="z-50 mt-4 text-center text-purpleAccent">{subHeader}</p>
 			</Flex>
 			<slot />
-			{#if href}
-				<Link href="{href}">{linkText}</Link>
+			{#if link}
+				<Link href="{link}">{linkText}</Link>
 			{/if}
 		</Flex>
 	</Flex>
