@@ -5,41 +5,70 @@
 
 <style lang="scss">
 	nav {
-		backdrop-filter: blur(3px);
 		word-break: normal;
 		word-wrap: normal;
-		div.dropdown {
-			@apply h-auto relative flex justify-center items-center cursor-default;
+
+		.dropdown {
+			@apply relative inline-block cursor-pointer;
+
 			&:hover > div.items {
-				@apply flex;
+				@apply opacity-100 pointer-events-auto;
+				animation-name: slide-up;
+				animation-duration: 0.3s;
 			}
-			> div.items {
-				@apply absolute left-0 bg-gray-100 rounded-b-lg transition-colors flex-col justify-between hidden min-w-full;
+
+			p {
+				@apply p-3 text-xs;
+			}
+
+			> .items {
+				@apply opacity-0 transition duration-300 absolute z-50 pointer-events-none rounded-lg bg-white pb-1;
+				box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.1);
+				width: 200px;
 				top: 95%;
+
 				> a {
-					@apply w-full py-2 px-1 block text-black;
+					@apply w-full block text-black;
+					font-size: 14px;
+					text-decoration: none;
+
 					&:hover {
-						@apply bg-gray-300;
-						&:last-child {
-							@apply rounded-b-lg;
-						}
+						background: #f4f4f4;
 					}
 				}
+
+				> p {
+					color: #99a;
+					font-size: 12px;
+					@apply font-bold uppercase;
+				}
+
+				> * {
+					@apply py-1 px-2;
+				}
 			}
+		}
+	}
+
+	@keyframes slide-up {
+		0% {
+			transform: translateX(40px);
+		}
+		100% {
+			transform: translateX(0);
 		}
 	}
 </style>
 
 <Section>
-	<nav class="relative z-50 w-full text-center bg-transparent">
-		<Flex justify="between" classes="w-full">
-			<Flex both="center">
-				<p>Louise Schroeder Gymnasium</p>
-			</Flex>
-			<Flex justify="evenly" classes="w-full">
+	<nav class="w-full">
+		<Flex align="center" justify="between" classes="relative z-90 w-full">
+			<div class="mr-5 logo">LSG</div>
+			<Flex align="center" classes="h-full">
 				<div class="dropdown">
-					<div>Die Schule</div>
-					<div class="divide-y divide-gray-400 items divide-solid">
+					<p>Die Schule</p>
+					<div class="items">
+						<p>Die Schule</p>
 						<a href="/">Leitbild</a>
 						<a href="/">Strukturdaten</a>
 						<a href="/">Ausbildungsrichtungen</a>
@@ -50,8 +79,9 @@
 					</div>
 				</div>
 				<div class="dropdown">
-					<div>Schulfamilie</div>
-					<div class="divide-y divide-gray-400 items divide-solid">
+					<p>Schulfamilie</p>
+					<div class="items">
+						<p>Schulfamilie</p>
 						<a href="/schoolfamily/1-profile">Schulleitung</a>
 						<a href="/schoolfamily/1-profile">Verwaltung</a>
 						<a href="/schoolfamily/1-profile">Elternbeirat</a>
@@ -59,8 +89,9 @@
 					</div>
 				</div>
 				<div class="dropdown">
-					<div>Profile</div>
-					<div class="divide-y divide-gray-400 items divide-solid">
+					<p>Profile</p>
+					<div class="items">
+						<p>Profile</p>
 						<a href="/">EVA</a>
 						<a href="/">Informationstechnik</a>
 						<a href="/">Kunst</a>
@@ -74,8 +105,9 @@
 					</div>
 				</div>
 				<div class="dropdown">
-					<div>Beratung</div>
-					<div class="divide-y divide-gray-400 items divide-solid">
+					<p>Beratung</p>
+					<div class="items">
+						<p>Beratung</p>
 						<a href="/">Schulberatung</a>
 						<a href="/">Nachhilfe</a>
 						<a href="/">Schulpsychologie</a>
@@ -85,18 +117,19 @@
 					</div>
 				</div>
 				<div class="dropdown">
-					<div>Information</div>
-					<div class="divide-y divide-gray-400 items divide-solid">
+					<p>Information</p>
+					<div class="items">
+						<p>Information</p>
 						<a href="/information/1-information">für Eltern</a>
 						<a href="/information/1-information">für Schüler</a>
 						<a href="/information/1-information">für Lehrer</a>
 					</div>
 				</div>
 				<div class="dropdown">
-					<div>Termine</div>
-					<div class="divide-y divide-gray-400 items divide-solid"><a href="/">Termine</a></div>
+					<p>Termine</p>
 				</div>
 			</Flex>
+			<input type="checkbox" id="nav-open" class="absolute hidden pointer-events-none" />
 		</Flex>
 	</nav>
 </Section>
