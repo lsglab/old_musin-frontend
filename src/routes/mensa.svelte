@@ -1,5 +1,5 @@
 <script>
-	import Mensa from '../components/templates/mensa.svelte';
+	import Mensa from '../components/templates/Mensa.svelte';
 </script>
 
 <svelte:head>

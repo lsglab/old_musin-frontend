@@ -1,5 +1,5 @@
 <script>
-	import Index from '../components/templates/index.svelte';
+	import Index from '../components/templates/Index.svelte';
 </script>
 
 <Index
