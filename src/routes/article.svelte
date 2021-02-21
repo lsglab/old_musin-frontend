@@ -207,7 +207,7 @@
 					<div class="pt-20 m-0 lg:pt-0 xl:pt-0 lg:mt-16 xl:mt-16 art-content-sect pt-10px" id="sect{i}">
 						<header>
 							<hr class="w-12 my-3 text-black border-t-0 border-b-2 border-black" />
-							<h5 class="my-4 font-normal">{i + 1}. {section.header}</h5>
+							<h4 class="my-4 font-normal">{i + 1}. {section.header}</h4>
 						</header>
 						<Text html="{section.html}"/>
 					</div>

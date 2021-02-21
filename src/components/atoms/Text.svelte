@@ -3,21 +3,7 @@
 </script>
 
 <style lang="scss">
-	// div :global(div) {
-	// 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-	// 		'Open Sans', 'Helvetica Neue', sans-serif;
-	// }
-
-	.text {
-		:global(a) {
-			text-decoration: none;
-		}
-		:global(p, a, td, th, span, strong) {
-			letter-spacing: normal;
-			font-size: 0.8rem;
-			line-height: 1.56;
-		}
-
+	.dynamic-html {
 		:global(li) {
 			font-size: 1rem;
 			padding: 4px;
@@ -68,6 +54,6 @@
 	@component
 	Provides styling for long text passages with images, tables etc..
 -->
-<div class="text">
+<div class="dynamic-html">
 	{@html html}
 </div>
