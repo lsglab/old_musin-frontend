@@ -24,7 +24,7 @@
 
 <div class="" style="background: #f6f9fc;margin-top: -80px;">
 	<Section>
-		<header class="flex flex-no-wrap justify-between w-full" style="min-height: 80vh; padding-top: 40px;">
+		<header class="flex flex-nowrap justify-between w-full" style="min-height: 80vh; padding-top: 40px;">
 			<div class="z-10 flex flex-col items-center justify-center w-1/2">
 				<div class="m-12 ml-0 mr-24" style="max-width: 500px">
 					<h1 class="text-3xl break-normal text-heading" style="line-height: 52px;">{header}</h1>
