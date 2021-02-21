@@ -9,7 +9,7 @@
 	}
 </style>
 
-<div class="absolute top-0 left-0 flex flex-no-wrap w-full h-full dash-background">
+<div class="absolute top-0 left-0 flex flex-nowrap w-full h-full dash-background">
 	<div></div>
 	<div></div>
 	<div></div>
