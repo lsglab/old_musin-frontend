@@ -1,6 +1,6 @@
 <script>
-	import Flex from './common/Flex.svelte';
-	import Section from './Section.svelte';
+	import Flex from '../atoms/Flex.svelte';
+	import Section from '../atoms/Section.svelte';
 </script>
 
 <style lang="scss">

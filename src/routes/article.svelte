@@ -1,9 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 
-	import Flex from '../components/common/Flex.svelte';
-	import Section from '../components/Section.svelte';
-	import Text from '../components/common/Text.svelte';
+	import Flex from '../components/atoms/Flex.svelte';
+	import Section from '../components/atoms/Section.svelte';
+	import Text from '../components/atoms/Text.svelte';
 
 	let sticky = false;
 	let normOffset;
@@ -143,7 +143,7 @@
 		</Flex>
 		<Flex justify="center" align="center" classes="w-full h-full">
 			<div class="m-8 text-center">
-				<h3 class="text-heading">Ausbildungsrichtungen am LSG</h3>
+				<h3 class="text-2xl text-heading md:text-2.5xl">Ausbildungsrichtungen am LSG</h3>
 				<p class="mt-3 text-heading2">Das ist ein sub-header</p>
 			</div>
 		</Flex>
@@ -151,17 +151,17 @@
 </Section>
 <Section classes="dashedTopBorder pb-20">
 	<div class="w-full">
-		<Flex justify="between" wrap="true" classes="m-auto lg:flex-no-wrap xl:flex-no-wrap">
+		<Flex justify="between" wrap="true" classes="m-auto lg:flex-nowrap">
 			<!--Content table-->
 			<div
 			class="sticky lg:mr-4 top-0 z-10 w-full bg-white rounded-md table-transition lg:top-4 lg:p-4 lg:shadow-equal lg:m-0 lg:w-auto h-min-content {sticky ? "py-0" : "py-4"} "
 			id="content-table">
 				<input class="hidden" type="checkbox" id="table-checkbox" bind:checked="{checked}"  />
-				<div class="{sticky ? "relative left-center lg:left-0 w-screen lg:w-auto mobile-sticky top-0 bg-white lg:py-0 py-4 table-transition shadow-xl lg:shadow-none" : ""}">
+				<div class="{sticky ? "relative left-center lg:left-0 w-screen lg:w-auto mobile-sticky top-0 bg-white lg:py-0 py-3 table-transition shadow-xl lg:shadow-none" : ""}">
 					<Section customStyles="{sticky ? "" : "padding: 0px"}" classes="lg:px-unset xl:px-unset 2xl:px-unset">
 						<label for="table-checkbox" class="cursor-pointer">
 						<Flex justify="between" wrap="true" align="center">
-								<h5 class="truncate lg:text-lg text-heading">INHALTSVERZEICHNIS</h5>
+								<h5 class="text-lg truncate text-heading">INHALTSVERZEICHNIS</h5>
 								<div
 									class="w-8 h-8 bg-center bg-auto cursor-pointer arrow lg:hidden xl:hidden bg-arrowIcon"
 								></div>
@@ -204,10 +204,10 @@
 				</div>
 				<!--Build loop for the article sections-->
 				{#each list as section, i}
-					<div class="pt-20 m-0 lg:pt-0 xl:pt-0 lg:mt-16 xl:mt-16 art-content-sect pt-10px" id="sect{i}">
+					<div class="m-0 mt-16 lg:pt-0 art-content-sect pt-10px" id="sect{i}">
 						<header>
 							<hr class="w-12 my-3 text-black border-t-0 border-b-2 border-black" />
-							<h5 class="my-4 font-normal">{i + 1}. {section.header}</h5>
+							<h4 class="my-4 font-normal">{i + 1}. {section.header}</h4>
 						</header>
 						<Text html="{section.html}"/>
 					</div>

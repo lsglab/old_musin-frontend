@@ -2,10 +2,6 @@
 /* eslint-disable sort-keys */
 
 module.exports = {
-	future: {
-		purgeLayersByDefault: true,
-		removeDeprecatedGapUtilities: true,
-	},
 	plugins: [],
 	purge: {
 		content: ['./__sapper__/export/**/*.html', './__sapper__/export/**/*.js'],
@@ -34,6 +30,7 @@ module.exports = {
 				purpleAccent: '#447',
 			},
 			fontSize: {
+				'2.5xl': '1.7rem',
 				'7xl': '5rem',
 				'8xl': '6rem',
 				'9xl': '7rem',
@@ -68,9 +65,6 @@ module.exports = {
 				'15vw': '15vw',
 				'5vw': '5vw',
 				'unset': 'unset',
-			},
-			screens: {
-				'2xl': '1536px',
 			},
 			transitionTimingFunction: {
 				default: 'easeInOutExpo',

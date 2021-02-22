@@ -1,6 +1,12 @@
 /* stylelint-disable number-max-precision -- This file includes some very specific decimals */
-$fontSize: calc(11px + 0.7vw);
-$lineHeight: calc(#{$fontSize} * 1.4);
+//Dont use pixel units
+$minS: 18;
+$minV: 300;
+$maxS: 24;
+$maxV: 1924;
+
+$fontSize: calc(#{$minS}px + (#{$maxS} - #{$minS}) * ((100vw - #{$minV}px) / (#{$maxV} - #{$minV})));
+$lineHeight: calc(#{$fontSize} * 1.5);
 $letterSpacing: calc(#{$fontSize} * 0.0015);
 $fontWeight: 300;
 
@@ -8,6 +14,13 @@ $fontWeight: 300;
 	font-size: $fontSize;
 	line-height: $lineHeight;
 	letter-spacing: $letterSpacing;
+}
+
+p,
+a,
+strong,
+span {
+	font-size: calc(#{$fontSize} * 0.9);
 }
 
 h1,
@@ -30,7 +43,7 @@ h3,
 
 h4,
 .fluid-sm {
-	font-size: calc(#{$fontSize} * 1.5);
+	font-size: calc(#{$fontSize} * 1.4);
 	line-height: calc(#{$lineHeight} * 1.5);
 }
 

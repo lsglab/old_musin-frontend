@@ -1,7 +1,7 @@
 <script>
-	import Button from '../components/common/Button.svelte';
-	import DashBackground from '../components/DashBackground.svelte';
-	import Section from '../components/Section.svelte';
+	import Button from '../components/atoms/Button.svelte';
+	import DashBackground from '../components/atoms/DashBackground.svelte';
+	import Section from '../components/atoms/Section.svelte';
 
 	export let error;
 	export let status;
@@ -25,7 +25,7 @@
 	}
 
 	p {
-		@apply text-sm;
+		@apply lg:text-sm;
 	}
 </style>
 
@@ -34,11 +34,11 @@
 </svelte:head>
 
 <Section fullscreen="true">
-	<div class="flex flex-wrap items-center justify-center m-auto y-5 md:py-10 lg:py-20 lg:flex-no-wrap" class:stack>
+	<div class="flex flex-wrap items-center justify-center m-auto y-5 md:py-10 lg:py-20 lg:flex-nowrap" class:stack>
 		<h1 class="z-20 text-white {!stack ? 'lg:-mt-48' : ''} h1">{status}</h1>
 
 		<div class="z-10 h-auto mt-10 bg-white shadow-equal md:-ml-6 card">
-			<div class="m-5 ml-10">
+			<div class="m-5 lg:ml-10">
 				<h3 class="font-normal">{status === 404 ? 'Seite nicht gefunden' : error.message}</h3>
 				<div class="my-5">
 					{#if error.stack || status === 404}

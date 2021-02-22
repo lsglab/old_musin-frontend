@@ -1,9 +1,0 @@
-# See https://github.blog/2017-07-06-introducing-code-owners/
-# This file defines reviewers automatically assigned to PRs based on modified files
-
-# Automatically assign the following people to every PR:
-
-*	@GitGangGuy @jamwag
-
-src/routes/article.svelte @Flosi23
-src/routes/_error.svelte @Flosi23
