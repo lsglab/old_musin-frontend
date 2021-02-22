@@ -11,14 +11,14 @@
 
 <style lang="scss">
 	button {
-		padding-top: 0.16rem;
-		padding-bottom: 0.16rem;
+		padding-top: 0.32rem;
+		padding-bottom: 0.32rem;
 	}
 
 	button,
 	a {
 		@apply text-white;
-		font-size: 0.7rem;
+		@apply lg:text-xs;
 	}
 </style>
 
@@ -27,7 +27,7 @@
 	Provides a button, that either acts as a link or takes a custom function
 -->
 
-<button class="{classes} px-4 rounded-md border-none cursor-pointer bg-btnBlue" on:click="{() => buttonFunction}">
+<button class="{classes} px-4 rounded-md border-none cursor-pointer bg-btnBlue" on:click="{buttonFunction}">
 	{#if href !== false}
 		<a class="w-full h-full" href="{href}">{buttonText}</a>
 	{:else}

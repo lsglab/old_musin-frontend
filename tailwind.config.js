@@ -30,6 +30,7 @@ module.exports = {
 				purpleAccent: '#447',
 			},
 			fontSize: {
+				'2.5xl': '1.7rem',
 				'7xl': '5rem',
 				'8xl': '6rem',
 				'9xl': '7rem',
