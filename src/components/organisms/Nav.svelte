@@ -9,7 +9,7 @@
 		word-break: normal;
 		word-wrap: normal;
 		div.dropdown {
-			@apply h-auto relative flex justify-center items-center cursor-default;
+			@apply h-auto relative lg:opacity-0 xl:flex justify-center items-center cursor-default;
 			&:hover > div.items {
 				@apply flex;
 			}
