@@ -14,14 +14,25 @@
 </script>
 
 <style lang="scss">
-	.dashedTopBorder {
+	.dashedTopBorder::before {
+		top: -20px;
+		height: 1px;
+	}
+
+	.dashedBottomBorder::after {
+		bottom: 0;
+		height: 1px;
+	}
+
+	section {
 		position: relative;
-		&::before {
+
+		&::before,
+		&::after {
 			content: '';
 			width: 100%;
-			height: 1px;
+			height: 0;
 			position: absolute;
-			top: -20px;
 			left: 0;
 			background: linear-gradient(
 				90deg,
