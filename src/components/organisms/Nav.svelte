@@ -189,7 +189,7 @@
 
 	function menuHover(e, menu) {
 		const rect = e.target.getBoundingClientRect();
-		cardPosition.x = rect.left - (200 - e.target.offsetWidth) / 2;
+		cardPosition.x = rect.left - (menuCard.offsetWidth - e.target.offsetWidth) / 2;
 		cardHeight = (menu.contents.length + 1) * document.getElementsByClassName('menuCardLink')[0].offsetHeight;
 		cardVisible = true;
 		currentMenu = menu.id;
@@ -205,11 +205,11 @@
 
 	function onresize() {
 		const rect = menuCard.getBoundingClientRect();
-		if (rect.left + 200 > window.innerWidth) {
+		if (rect.left + menuCard.offsetWidth > window.innerWidth) {
 			if (!cardVisible) {
-				cardPosition.x = -200;
+				cardPosition.x = -menuCard.offsetWidth;
 			} else {
-				cardPosition.x = window.innerWidth - 200;
+				cardPosition.x = window.innerWidth - menuCard.offsetWidth;
 			}
 		}
 	}
@@ -250,12 +250,12 @@
 			//mobile
 			@apply opacity-0 top-0 w-full left-0 z-50 absolute pointer-events-none  bg-white rounded-lg shadow-equal-xl;
 			//normal styling
-			@apply xl:opacity-100 xl:w-auto xl:relative xl:z-auto xl:pointer-events-auto xl:rounded-none xl:shadow-none xl:bg-transparent;
+			@apply lg:opacity-100 lg:w-auto lg:relative lg:z-auto lg:pointer-events-auto lg:rounded-none lg:shadow-none lg:bg-transparent;
 			.menu {
 				//mobile
 				@apply flex-col flex relative;
 				//normal styling
-				@apply xl:flex-row align-middle;
+				@apply lg:flex-row align-middle;
 
 				.dropdown {
 					@apply relative cursor-pointer;
@@ -263,21 +263,21 @@
 					p,
 					> a {
 						font-size: 0.65rem;
-						@apply p-3 xl:text-xs xl:normal-case uppercase xl:font-normal font-bold;
+						@apply p-3 lg:text-xs lg:normal-case uppercase lg:font-normal font-bold;
 					}
 
 					> a {
-						@apply xl:text-black w-3/4 text-gray-700 block;
+						@apply lg:text-black w-3/4 text-gray-700 block;
 					}
 
 					label {
 						@apply relative cursor-pointer flex flex-row items-center justify-between;
 						> p {
-							@apply xl:text-black text-gray-400;
+							@apply lg:text-black text-gray-400;
 						}
 
 						> svg {
-							@apply text-gray-400 fill-current block xl:hidden mr-20;
+							@apply text-gray-400 fill-current block lg:hidden mr-20;
 							transform: rotate(0deg);
 							transition: $expand-trans-duration ease;
 						}
@@ -338,7 +338,7 @@
 	}
 
 	.menuCard {
-		@apply hidden top-12 overflow-hidden w-32 shadow-equal-xl xl:grid max-h-screen h-auto absolute z-40 rounded-lg bg-white pb-1;
+		@apply hidden top-12 overflow-hidden w-32 shadow-equal-xl lg:grid max-h-screen h-auto absolute z-40 rounded-lg bg-white pb-1;
 		transition: 0.3s;
 		> div {
 			@apply flex flex-col;
@@ -352,7 +352,7 @@
 		}
 
 		a:hover {
-			@apply bg-gray-100;
+			@apply bg-gray-200;
 		}
 
 		a,
@@ -377,7 +377,7 @@
 				<div class="menu" id="menu">
 					<label
 						for="nav-open"
-						class="absolute right-0 z-50 visible block w-10 h-10 p-2 cursor-pointer xl:hidden">
+						class="absolute right-0 z-50 visible block w-10 h-10 p-2 cursor-pointer lg:hidden">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							enable-background="new 0 0 24 24"
@@ -409,7 +409,7 @@
 										width="24"><path d="M0 0h24v24H0V0z" fill="none"></path>
 										<path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path></svg>
 								</label>
-								<div class="items xl:hidden">
+								<div class="items lg:hidden">
 									{#each menu.contents as content}<a href="{content.href}">{content.title}</a>{/each}
 								</div>
 							{:else}<a href="{menu.href}">{menu.title}</a>{/if}
@@ -418,7 +418,7 @@
 				</div>
 			</div>
 			<label
-				class="visible px-2.5 py-3.5 bg-gray-200 z-40 cursor-pointer rounded-2xl xl:hidden burger-wrp"
+				class="visible px-2.5 py-3.5 bg-gray-200 z-40 cursor-pointer rounded-2xl lg:hidden burger-wrp"
 				for="nav-open">
 				<div class="relative bg-black burger"></div>
 			</label>
