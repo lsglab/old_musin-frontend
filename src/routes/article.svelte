@@ -157,7 +157,7 @@
 			class="sticky lg:mr-4 top-0 z-10 w-full bg-white rounded-md table-transition lg:top-4 lg:p-4 lg:shadow-equal lg:m-0 lg:w-auto h-min-content {sticky ? "py-0" : "py-4"} "
 			id="content-table">
 				<input class="hidden" type="checkbox" id="table-checkbox" bind:checked="{checked}"  />
-				<div class="{sticky ? "relative left-center lg:left-0 w-screen lg:w-auto mobile-sticky top-0 bg-white lg:py-0 py-3 table-transition shadow-xl lg:shadow-none" : ""}">
+				<div class="{sticky ? "relative left-center lg:left-0 w-screen lg:w-auto mobile-sticky top-0 bg-white lg:py-0 py-2 table-transition shadow-xl lg:shadow-none" : ""}">
 					<Section customStyles="{sticky ? "" : "padding: 0px"}" classes="lg:px-unset xl:px-unset 2xl:px-unset">
 						<label for="table-checkbox" class="cursor-pointer">
 						<Flex justify="between" wrap="true" align="center">
@@ -204,7 +204,7 @@
 				</div>
 				<!--Build loop for the article sections-->
 				{#each list as section, i}
-					<div class="m-0 mt-16 lg:pt-0 art-content-sect pt-10px" id="sect{i}">
+					<div class="pt-16 m-0 art-content-sect" id="sect{i}">
 						<header>
 							<hr class="w-12 my-3 text-black border-t-0 border-b-2 border-black" />
 							<h4 class="my-4 font-normal">{i + 1}. {section.header}</h4>
