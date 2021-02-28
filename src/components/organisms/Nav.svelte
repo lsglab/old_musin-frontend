@@ -347,7 +347,8 @@
 		}
 
 		a {
-			@apply text-xss text-gray-800;
+			@apply text-gray-800;
+			font-size: 0.6rem;
 			text-decoration: none;
 		}
 

@@ -7,13 +7,12 @@
 
 <style lang="scss">
 	div {
-		@apply w-full h-full mx-auto;
+		@apply w-full mx-auto h-10;
 		background-position: center center;
 		background-size: contain;
 		background-repeat: no-repeat;
 		filter: grayscale(1);
 		mix-blend-mode: multiply;
-		height: 60px;
 	}
 
 	.awards {
@@ -27,7 +26,7 @@
 	}
 </style>
 
-<Section customStyles="padding-bottom: 30px; padding-left: 15vw; padding-right: 15vw;" classes="dashedTopBorder">
+<Section customStyles="padding-bottom: 30px;" classes="dashedTopBorder hidden md:block">
 	<Flex justify="between" classes="w-full bg-transparent">
 		{#each awards as award}
 			<div style="background-image: url('{award}');" class="{awards.length > 1 ? 'awards' : ''}"></div>

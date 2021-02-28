@@ -3,13 +3,12 @@
 
 <style lang="scss">
 	* {
-		font-size: 16px;
+		@apply lg:text-xss text-xs;
 	}
 	table tr {
 		> th,
 		> td {
-			@apply p-3;
-			padding: 20px;
+			@apply p-4;
 			color: #445;
 		}
 		> td:nth-child(1) {
@@ -24,7 +23,7 @@
 </style>
 
 <table
-	class="w-4/5 my-10 overflow-hidden text-left bg-white divide-y divide-gray-400 rounded-lg divide-solid"
+	class="w-11/12 my-10 overflow-hidden text-left bg-white divide-y divide-gray-400 rounded-lg lg:w-4/5 divide-solid"
 	style="box-shadow: 0 5px 15px rgba(0,0,0,0.2); max-width: 1000px;">
 	<thead style="background: #fafbff;">
 		<tr>
