@@ -35,7 +35,7 @@ module.exports = {
 				'7xl': '5rem',
 				'8xl': '6rem',
 				'9xl': '7rem',
-				'xss': '0.6rem',
+				'xss': '0.66rem',
 			},
 			height: {
 				'1/4': '25%',
@@ -44,6 +44,7 @@ module.exports = {
 				'7/10': '70%',
 				'8/10': '80%',
 				'80': '20rem',
+				'85vh': '85vh',
 				'inherit': 'inherit',
 				'min-content': 'min-content',
 			},
@@ -63,7 +64,11 @@ module.exports = {
 			maxHeight: {
 				0: '0',
 			},
+			minWidth: {
+				40: '10rem',
+			},
 			padding: {
+				'10vh': '10vh',
 				'15vw': '15vw',
 				'5vw': '5vw',
 				'unset': 'unset',
