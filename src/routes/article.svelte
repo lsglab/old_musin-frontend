@@ -132,7 +132,7 @@
 		scroll();
 	}}" />
 
-<Section classes="my-10">
+<Section classes="mb-10 mt-5">
 	<div
 		class="flex flex-col-reverse justify-center transition-none lg:h-80 align-center article lg:grid lg:grid-cols-2">
 		<Flex justify="center" classes="w-full h-inherit">

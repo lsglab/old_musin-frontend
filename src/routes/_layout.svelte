@@ -3,6 +3,7 @@
 	import Tailwind from '../components/atoms/Tailwind.svelte';
 	import Styles from '../components/atoms/Styles.svelte';
 	import Footer from '../components/organisms/Footer.svelte';
+	import Nav from '../components/organisms/Nav.svelte';
 </script>
 
 <svelte:head>
@@ -11,5 +12,6 @@
 
 <Tailwind />
 <Styles />
+<Nav />
 <slot />
 <Footer />

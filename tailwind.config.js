@@ -21,7 +21,8 @@ module.exports = {
 				'rect-pattern': 'resolve(rect-pattern.png)',
 			}),
 			boxShadow: {
-				equal: '0 5px 15px rgba(0,0,0,0.2)',
+				'equal': '0 5px 15px rgba(0,0,0,0.2)',
+				'equal-xl': '0 10px 20px 5px rgba(0, 0, 0, 0.1);',
 			},
 			colors: {
 				btnBlue: 'rgb(0, 119, 255)',
@@ -34,6 +35,7 @@ module.exports = {
 				'7xl': '5rem',
 				'8xl': '6rem',
 				'9xl': '7rem',
+				'xss': '0.6rem',
 			},
 			height: {
 				'1/4': '25%',
