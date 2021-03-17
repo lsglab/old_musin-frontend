@@ -1,4 +1,5 @@
 <script>
+	export let classes = '';
 </script>
 
 <style lang="scss">
@@ -23,8 +24,7 @@
 </style>
 
 <table
-	class="w-11/12 my-10 overflow-hidden text-left bg-white divide-y divide-gray-400 rounded-lg lg:w-4/5 divide-solid"
-	style="box-shadow: 0 5px 15px rgba(0,0,0,0.2); max-width: 1000px;">
+	class="{classes} shadow-equal my-10 overflow-hidden text-left bg-white divide-y divide-gray-400 rounded-lg divide-solid">
 	<thead style="background: #fafbff;">
 		<tr>
 			<th>Datum</th>
