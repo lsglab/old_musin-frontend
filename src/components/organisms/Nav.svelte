@@ -25,7 +25,7 @@
 					title: 'Ausbildungsrichtungen',
 				},
 				{
-					href: '/mensa',
+					href: '/schule/mensa',
 					title: 'Mensa',
 				},
 				{
@@ -47,19 +47,19 @@
 		{
 			contents: [
 				{
-					href: '/schoolfamily/xy',
+					href: '/schulfamilie/schule',
 					title: 'Schulleitung',
 				},
 				{
-					href: '/schoolfamily/xy',
+					href: '/schulfamilie/schule#custody',
 					title: 'Verwaltung',
 				},
 				{
-					href: '/schoolfamily/xy',
+					href: '/schulfamilie/elternbeirat',
 					title: 'Elternbeirat',
 				},
 				{
-					href: '/schoolfamily/xy',
+					href: '/schulfamilie/foerderverein',
 					title: 'Förderverein',
 				},
 			],

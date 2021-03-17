@@ -22,7 +22,7 @@
 	<title>Startseite | {process.globals.title}</title>
 </svelte:head>
 
-<div style="background: #f6f9fc;margin-top: -80px;">
+<div style="margin-top: -80px;" class="bg-backgroundDark">
 	<Section>
 		<header
 			class="flex flex-col w-full lg:justify-between flex-nowrap lg:flex-row"

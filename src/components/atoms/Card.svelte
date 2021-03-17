@@ -1,8 +1,10 @@
 <script>
-	import Link from '../atoms/Link.svelte';
+	import Link from './Link.svelte';
 
 	/** Additional classes to pass in */
 	export let classes = '';
+
+	export let shadow = true;
 
 	export let link = false;
 </script>
@@ -18,7 +20,7 @@
 	}
 </style>
 
-<div class="overflow-hidden shadow-equal rounded-md {classes}">
+<div class="overflow-hidden {shadow === true ? 'shadow-equal' : 'border-gray-300 border-2'} rounded-md {classes}">
 	{#if link}
 		<div class="w-full h-full {link ? 'hover' : ''}">
 			<Link href="{link}">

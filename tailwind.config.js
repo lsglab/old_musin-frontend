@@ -18,6 +18,10 @@ module.exports = {
 			backgroundImage: () => ({
 				'arrowIcon': 'resolve(arrow.svg)',
 				'diamond-pattern': 'resolve(diamond-pattern.png)',
+				'icon-design': 'resolve(design.svg)',
+				'icon-events': 'resolve(emoji_events.svg)',
+				'icon-organise': 'resolve(sort.svg)',
+				'icon-paid': 'resolve(paid.svg)',
 				'rect-pattern': 'resolve(rect-pattern.png)',
 			}),
 			boxShadow: {
@@ -25,6 +29,7 @@ module.exports = {
 				'equal-xl': '0 10px 20px 5px rgba(0, 0, 0, 0.1);',
 			},
 			colors: {
+				backgroundDark: '#f6f9fc',
 				btnBlue: 'rgb(0, 119, 255)',
 				heading: '#0a2540',
 				heading2: '#336',
