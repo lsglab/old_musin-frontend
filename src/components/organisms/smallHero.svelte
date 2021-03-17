@@ -21,12 +21,7 @@
 					<Button buttonText="{buttonText}" classes="mr-4 my-2" href="{buttonLink}" />
 				</Flex>
 			</div>
-			<div class="w-full lg:w-1/2">
-				<img
-					src="https://interiorpark.com/wp-content/uploads/2016/05/placeholder.png"
-					alt=""
-					class="w-full h-full rounded-md shadow-lg" />
-			</div>
+			<div class="w-full lg:w-1/2"><img src="{img}" alt="" class="w-full h-full rounded-md shadow-lg" /></div>
 		</Flex>
 	</Section>
 </div>
