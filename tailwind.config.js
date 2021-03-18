@@ -33,6 +33,7 @@ module.exports = {
 				btnBlue: 'rgb(0, 119, 255)',
 				heading: '#0a2540',
 				heading2: '#336',
+				lightBlue: '#56C1FB',
 				purpleAccent: '#447',
 			},
 			fontSize: {
@@ -114,5 +115,4 @@ module.exports = {
 			normal: 400,
 		},
 	},
-	variants: {},
 };
