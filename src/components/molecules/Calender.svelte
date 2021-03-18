@@ -4,7 +4,7 @@
 
 <style lang="scss">
 	* {
-		@apply lg:text-xss text-xs;
+		@apply text-xs;
 	}
 	table tr {
 		> th,

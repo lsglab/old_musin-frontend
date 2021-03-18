@@ -1,13 +1,13 @@
 <script>
 	import Calender from '../components/molecules/Calender.svelte';
-	import DatePicker from '../components/molecules/datePicker.svelte';
+	import DatePicker from '../components/atoms/datePicker.svelte';
 	import Flex from '../components/atoms/Flex.svelte';
 	import SearchBox from '../components/atoms/searchBox.svelte';
 	import Section from '../components/atoms/Section.svelte';
 </script>
 
-<div style="margin-top: -80px; padding-top:80px">
-	<Section classes="py-10">
+<div style="margin-top: -80px; padding-top:80px; margin-bottom:80px">
+	<Section classes="py-10" fullscreen="true">
 		<Flex wrap="true">
 			<SearchBox classes="w-60">
 				<div>
@@ -25,8 +25,8 @@
 					type="text"
 					placeholder="Search by title" />
 			</SearchBox>
-			<DatePicker placeholder="Startdatum" />
-			<DatePicker placeholder="Enddatum" />
+			<DatePicker placeholder="Startdatum wählen" id="start" />
+			<DatePicker placeholder="Enddatum wählen" id="end" />
 		</Flex>
 		<Calender classes="w-full" />
 	</Section>

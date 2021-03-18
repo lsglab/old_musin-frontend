@@ -13,6 +13,7 @@
 	buttonText="Aktuelle Termine"
 	buttonLink="#termine" />
 <SectionWrapper
+	fullscreen="true"
 	header="Aktuelle Termine"
 	subHeader="Alle demnächst anstehende Termine des Louise-Schroeder-Gymnasiums"
 	linkText="Zu allen Terminen"
