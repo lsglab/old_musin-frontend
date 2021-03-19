@@ -2,6 +2,7 @@
 	import { fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import Flex from '../atoms/Flex.svelte';
+	import Logo from '../atoms/Logo.svelte';
 	import Section from '../atoms/Section.svelte';
 
 	const menus = [
@@ -372,7 +373,7 @@
 <Section classes="dashedBottomBorder z-30">
 	<nav class="w-full">
 		<Flex align="center" justify="between" classes="relative w-full">
-			<div class="mr-5 logo">LSG</div>
+			<Logo classes="mr-5" />
 			<input id="nav-open" type="checkbox" />
 			<div class="menu-wrp" id="menu-wrap">
 				<div class="menu" id="menu">
