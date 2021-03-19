@@ -11,6 +11,7 @@
 	let active = 0;
 	let checked = false;
 
+	export let img = false;
 	// THIS HARDCODED LIST/OBJECT IS ONLY TEMPORARELY NECCESARY!!!!!!!!!!
 
 	const list = [
@@ -124,6 +125,10 @@
 	.mobile-sticky {
 		transition: margin 0s;
 	}
+
+	.article-width {
+		@apply w-full lg:w-2/3;
+	}
 </style>
 
 <svelte:window
@@ -134,19 +139,20 @@
 
 <Section classes="mb-10 mt-5">
 	<div
-		class="flex flex-col-reverse justify-center transition-none lg:h-80 align-center article lg:grid lg:grid-cols-2">
-		<Flex justify="center" classes="w-full h-inherit">
-			<img
-				class="object-cover w-full h-full rounded-md shadow-equal lg:w-auto"
-				src="https://www.tagesschau.de/multimedia/bilder/schule-153~_v-videowebl.jpg"
-				alt="" />
-		</Flex>
-		<Flex justify="center" align="center" classes="w-full h-full">
-			<div class="m-8 text-center">
-				<h3 class="text-2xl text-heading md:text-2.5xl">Ausbildungsrichtungen am LSG</h3>
-				<p class="mt-3 text-heading2">Das ist ein sub-header</p>
-			</div>
-		</Flex>
+		class="flex flex-col-reverse justify-center transition-none align-center article lg:grid {img ? 'lg:grid-cols-2 lg:h-80' : 'lg:grid-cols-1 h-52'}">
+		{#if img !== false}
+			<Flex justify="center" classes="w-full h-inherit">
+				<img class="object-cover w-full h-full rounded-md shadow-equal lg:w-auto" src="{img}" alt="" />
+			</Flex>
+		{/if}
+		<div class="{img ? 'w-auto' : 'article-width justify-self-end'}">
+			<Flex justify="{img ? 'center' : 'start'}" align="center" classes="w-full h-full">
+				<div class="m-8 {img ? 'text-center' : 'text-left ml-0'}">
+					<h3 class="text-2xl text-heading md:text-2.5xl">Ausbildungsrichtungen am LSG</h3>
+					<p class="mt-3 text-heading2">Das ist ein sub-header</p>
+				</div>
+			</Flex>
+		</div>
 	</div>
 </Section>
 <Section classes="dashedTopBorder pb-20">
@@ -182,7 +188,7 @@
 				</div>
 			</div>
 			<!--Body of the article-->
-			<div class="w-full lg:w-2/3 lg:ml-4" >
+			<div class="article-width lg:ml-4" >
 				<!--Section with reading time and article description-->
 				<div class="mt-2 -mb-5">
 					<Flex align="center" classes="border-b border-solid border-gray-500 pb-1">
