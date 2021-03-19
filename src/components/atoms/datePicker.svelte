@@ -1,5 +1,5 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import Flex from './Flex.svelte';
 	import SearchBox from './searchBox.svelte';
 
@@ -11,6 +11,7 @@
 
 	let inputContainer;
 	let datePicker;
+	const datePickerId = `datepicker-${id}`;
 
 	let visible = false;
 	// the actual text in the input
@@ -25,6 +26,16 @@
 	let months;
 	// default value of selected is -1 --> nothing is selected
 	let selected = -1;
+
+	const weekdays = [];
+
+	function calculateWeekDayNames() {
+		for (let i = 1; i < 8; i += 1) {
+			const name = new Date(2021, 2, i).toLocaleString('default', { weekday: 'narrow' });
+
+			weekdays.push(name);
+		}
+	}
 
 	function calculateMonths() {
 		months = [];
@@ -105,6 +116,7 @@
 	}
 
 	calculateMonths();
+	calculateWeekDayNames();
 
 	function mouseclick(e) {
 		// if the mousclick was not on the input or the date picker, set the visibility to false
@@ -112,6 +124,48 @@
 			visible = false;
 		}
 	}
+
+	let x0;
+	let touched;
+	function lock(e) {
+		x0 = e.clientX || e.touches[0].clientX;
+
+		console.log('x0', x0);
+
+		touched = true;
+	}
+
+	// function drag(e) {}
+
+	function move(e) {
+		if (touched) {
+			const x1 = e.clientX || e.changedTouches[0].clientX;
+
+			if (Math.abs(x1 - x0) > 80) {
+				if (x1 > x0) {
+					changeCurrent(-1);
+				} else {
+					changeCurrent(1);
+				}
+			}
+
+			touched = false;
+		}
+	}
+
+	function addListeners() {
+		const picker = document.getElementById(datePickerId);
+
+		picker.addEventListener('mousedown', lock, false);
+		picker.addEventListener('touchstart', lock, false);
+
+		picker.addEventListener('mouseup', move, false);
+		picker.addEventListener('touchend', move, false);
+	}
+
+	onMount(() => {
+		addListeners();
+	});
 </script>
 
 <style lang="scss">
@@ -188,7 +242,7 @@
 	<div
 		bind:this="{datePicker}"
 		class="absolute z-40 p-3 bg-white rounded-lg opacity-0 pointer-events-none inset-top-full box shadow-equal-xl"
-		id="date-picker-{id}"
+		id="{datePickerId}"
 		class:visible>
 		<Flex justify="between">
 			<div
@@ -208,13 +262,9 @@
 		<div class="mt-2 body">
 			<div class="mt-4 -mb-2 days">
 				<Flex>
-					<p>M</p>
-					<p>D</p>
-					<p>M</p>
-					<p>D</p>
-					<p>F</p>
-					<p>S</p>
-					<p>S</p>
+					{#each weekdays as weekday}
+						<p>{weekday}</p>
+					{/each}
 				</Flex>
 			</div>
 			<div>
