@@ -33,3 +33,5 @@
 		{/each}
 	</Flex>
 </Section>
+
+<svelte:options accessors="{true}" />

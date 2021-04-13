@@ -56,3 +56,5 @@
 		</Flex>
 	</Flex>
 </Section>
+
+<svelte:options accessors="{true}" />

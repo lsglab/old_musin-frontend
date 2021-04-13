@@ -1,17 +1,23 @@
 <script>
+	import EditInput from '../../EditInput';
+
 	import Card from '../atoms/Card.svelte';
 	import Flex from '../atoms/Flex.svelte';
 
-	export let title;
-	export let description = '';
-	export let img;
-	export let link;
+	export let href = '';
+
+	export const blueprint = {
+		description: new EditInput('shortText', 'Beschreibung'),
+		header: new EditInput('shortText', 'Name'),
+		img: new EditInput('img', 'http://aeda.gov.gh/wp-content/uploads/2016/11/placeholder-person.jpg'),
+	};
+
 	export let classes = '';
 </script>
 
-<Card classes="h-80 w-48 m-2 {link ? 'cursor-pointer' : ''} z-10 {classes}" link="{link}">
+<Card classes="h-80 w-48 m-2 {href ? 'cursor-pointer' : ''} z-10 {classes}" link="{href}">
 	<div slot="body" class="w-full overflow-hidden h-8/10">
-		<img class="object-cover w-full h-full" src="{img}" alt="" />
+		<img class="object-cover w-full h-full" id="{blueprint.img.id}" src="{blueprint.img.data}" alt="" />
 	</div>
 	<div slot="footer" class="h-2/10">
 		<Flex align="center" classes="relative h-full bg-white rounded-tr-sm">
@@ -19,9 +25,11 @@
 				<div class="mx-2 border-2 border-blue-400 h-7/10"></div>
 			</Flex>
 			<div>
-				<p>{title}</p>
-				<p class="text-xs">{description}</p>
+				<p id="{blueprint.header.id}">{blueprint.header.data}</p>
+				<p class="text-xs" id="{blueprint.description.id}">{blueprint.description.data}</p>
 			</div>
 		</Flex>
 	</div>
 </Card>
+
+<svelte:options accessors="{true}" />

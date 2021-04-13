@@ -1,14 +1,21 @@
 <script>
 	import Button from '../atoms/Button.svelte';
 	import Card from '../atoms/Card.svelte';
+	import EditInput from '../../EditInput';
 	import Flex from '../atoms/Flex.svelte';
 
-	export let title;
-	export let description = '';
-	export let bio = '';
-	export let img;
-	export let classes = '';
+	// blueprint for the component
+	export let blueprint = {
+		bio: new EditInput('longText', 'Biographie der Person'),
+		description: new EditInput('shortText', 'Beschreibung der Person'),
+		img: new EditInput('img', 'http://aeda.gov.gh/wp-content/uploads/2016/11/placeholder-person.jpg'),
+		title: new EditInput('shortText', 'Titel'),
+	};
 
+	export let editing = false;
+	// additional classes for card styling
+	export let classes = '';
+	// data
 	let collapsed = false;
 
 	function click() {
@@ -23,21 +30,27 @@
 	}
 </style>
 
-<Card classes="w-full lg:w-3/4 mt-10 p-5 pt-3 z-10 {classes}">
+<Card classes="w-full lg:w-3/4 my-10 p-5 pt-3 z-10 {classes}">
 	<div slot="body" class="w-full overflow-hidden h-4/10">
 		<Flex classes="md:flex-row flex-col">
 			<img
 				class="object-cover max-w-50 md:max-w-full mx-auto mb-4 md:w-3/12 h-40 mt-2.5 rounded-sm"
-				src="{img}"
-				alt="" />
+				alt=""
+				id="{blueprint.img.id}"
+				src="{blueprint.img.data}" />
 			<div class="w-full h-full sm:px-5 md:w-9/12 card-body">
 				<div class="h-20">
-					<h3 class="text-heading">{title}</h3>
-					<p class="mt-1 text-xs font-bold uppercase text-heading2">{description}</p>
+					<h3 class="text-heading" id="{blueprint.title.id}">{blueprint.title.data}</h3>
+					<p class="mt-1 text-xs font-bold uppercase text-heading2" id="{blueprint.description.id}">
+						{blueprint.description.data}
+					</p>
 				</div>
-				<p class="overflow-hidden text-xs leading-6 text-gray-600 max-h-40" class:collapsed>
-					{@html bio}
-				</p>
+				<div
+					id="{blueprint.bio.id}"
+					class="overflow-hidden text-xs leading-6 text-gray-600 {!editing ? 'max-h-40' : ''}"
+					class:collapsed>
+					{blueprint.bio.data}
+				</div>
 				<Button
 					classes="h-8 lg:h-7 mt-5 md:w-20"
 					buttonText="{collapsed ? 'Weniger' : 'Mehr'}"

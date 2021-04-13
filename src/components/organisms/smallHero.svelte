@@ -25,3 +25,5 @@
 		</Flex>
 	</Section>
 </div>
+
+<svelte:options accessors="{true}" />

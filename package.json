@@ -70,6 +70,7 @@
 		"warn:soydows": "echo \"Warning: This will fail if you're on a non-unix-like operating system, or more specifically, Windows. Get WSL, or just install Linux directly.\""
 	},
 	"dependencies": {
+		"@ckeditor/ckeditor5-build-inline": "^27.0.0",
 		"compression": "^1.7.4",
 		"polka": "next",
 		"serve": "^11.3.2",

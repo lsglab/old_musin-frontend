@@ -445,3 +445,5 @@
 </div>
 
 <svelte:window on:mousemove="{mousemove}" on:touchmove="{mousemove}" on:resize="{onresize}" />
+
+<svelte:options accessors="{true}" />

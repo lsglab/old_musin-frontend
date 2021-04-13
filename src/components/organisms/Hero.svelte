@@ -48,3 +48,5 @@
 
 	<Awards awards="{awards}" />
 </div>
+
+<svelte:options accessors="{true}" />

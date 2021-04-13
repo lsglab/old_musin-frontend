@@ -1,7 +1,7 @@
 <script>
 	/** The URL that the hyperlink points to :O */
+	export let id = '';
 	export let href = '#';
-	export let content = 'fallback';
 	export let classes = '';
 	export let noArrow = false;
 
@@ -15,9 +15,10 @@
 	The <a> tag defines a hyperlink, which can be used to link from one web page to another.
 -->
 <a
+	id='{id}'
 	href="{href}"
-	class="{!outgoing && noArrow === false ? 'arrow' : ''} emphasize text-sm {classes}"
+	class="{!outgoing && noArrow === false ? 'arrow' : ''} relative emphasize text-sm {classes}"
 	target="{outgoing ? '_blank' : '_self'}"
 	rel="{outgoing ? 'external noopener noreferrer' : 'prefetch'}">
-	<slot>{content}</slot>
+	<slot></slot>
 </a>

@@ -4,6 +4,9 @@
 	export let both = false;
 	export let justify = both || 'start';
 	export let align = both || 'stretch';
+
+	export const blueprint = {};
+
 	export let classes = '';
 </script>
 
