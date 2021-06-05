@@ -1,7 +1,7 @@
 <script>
-	import Flex from '../../components/atoms/Flex.svelte';
-	import Section from '../../components/atoms/Section.svelte';
-	import SectionWrapper from '../../components/molecules/sectionWrapper.svelte';
+	import Flex from '../../components/both/atoms/Flex.svelte';
+	import Section from '../../components/frontend/atoms/Section.svelte';
+	import SectionWrapper from '../../components/frontend/molecules/sectionWrapper.svelte';
 
 	export let title;
 </script>

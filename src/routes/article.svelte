@@ -1,9 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 
-	import Flex from '../components/atoms/Flex.svelte';
-	import Section from '../components/atoms/Section.svelte';
-	import Text from '../components/atoms/Text.svelte';
+	import Flex from '../components/both/atoms/Flex.svelte';
+	import Section from '../components/frontend/atoms/Section.svelte';
+	import Text from '../components/frontend/atoms/Text.svelte';
 
 	let sticky = false;
 	let normOffset;

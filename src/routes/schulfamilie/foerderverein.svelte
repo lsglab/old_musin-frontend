@@ -1,8 +1,8 @@
 <script>
-	import Flex from '../../components/atoms/Flex.svelte';
-	import SectionWrapper from '../../components/molecules/sectionWrapper.svelte';
-	import SmallHero from '../../components/organisms/smallHero.svelte';
-	import Task from '../../components/atoms/task.svelte';
+	import Flex from '../../components/both/atoms/Flex.svelte';
+	import SectionWrapper from '../../components/frontend/molecules/sectionWrapper.svelte';
+	import SmallHero from '../../components/frontend/organisms/smallHero.svelte';
+	import Task from '../../components/frontend/atoms/task.svelte';
 </script>
 
 <SmallHero

@@ -26,11 +26,15 @@ module.exports = {
 			}),
 			boxShadow: {
 				'equal': '0 5px 15px rgba(0,0,0,0.2)',
+				'equal-sm': '0px 0px 10px 0px rgba(0,0,0,0.2)',
 				'equal-xl': '0 10px 20px 5px rgba(0, 0, 0, 0.1);',
 			},
 			colors: {
 				backgroundDark: '#f6f9fc',
 				btnBlue: 'rgb(0, 119, 255)',
+				cmsBtnColor: 'rgb(0, 119, 255)',
+				cmsErrorRed: '#ff3333',
+				cmsSucessGreen: 'rgb(109,187,26)',
 				heading: '#0a2540',
 				heading2: '#336',
 				lightBlue: '#56C1FB',

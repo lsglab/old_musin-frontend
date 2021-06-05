@@ -1,8 +1,8 @@
 <script>
-	import Flex from '../../components/atoms/Flex.svelte';
-	import Hero from '../../components/organisms/Hero.svelte';
-	import MensaCard from '../../components/molecules/MensaCard.svelte';
-	import SectionWrapper from '../../components/molecules/sectionWrapper.svelte';
+	import Flex from '../../components/both/atoms/Flex.svelte';
+	import Hero from '../../components/frontend/organisms/Hero.svelte';
+	import MensaCard from '../../components/frontend/molecules/MensaCard.svelte';
+	import SectionWrapper from '../../components/frontend/molecules/sectionWrapper.svelte';
 </script>
 
 <svelte:head>
