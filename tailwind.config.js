@@ -34,7 +34,7 @@ module.exports = {
 				btnBlue: 'rgb(0, 119, 255)',
 				cmsBtnColor: 'rgb(0, 119, 255)',
 				cmsErrorRed: '#ff3333',
-				cmsSucessGreen: 'rgb(109,187,26)',
+				cmsSuccessGreen: 'rgb(109,187,26)',
 				heading: '#0a2540',
 				heading2: '#336',
 				lightBlue: '#56C1FB',

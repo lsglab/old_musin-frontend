@@ -23,13 +23,12 @@
 		const blueprint = getProperty('blueprint');
 		if (blueprint !== undefined) {
 			Object.keys(blueprint).forEach((key) => {
-				callback(blueprint, key);
+				if (key !== 'children') callback(blueprint, key);
 			});
 		}
 	}
 
 	function insertFields() {
-		console.log('inserting fields');
 		loopBlueprints((blueprint, key) => {
 			blueprint[key].prepareInput(document);
 		});
@@ -69,6 +68,15 @@
 		triggeredUpdate = true;
 	}
 
+	function childrenTypes() {
+		const blueprint = getProperty('blueprint');
+		if (blueprint && blueprint.children) {
+			blueprint.children.forEach((child) => {
+				component.childrenTypes.push(child.name);
+			});
+		}
+	}
+
 	async function build() {
 		if (rendered === undefined) {
 			// wait for dom actions to finish, otherwise wont be created when buildComponent is called
@@ -76,6 +84,7 @@
 			advancedFields();
 			checkForSlot();
 			await tick();
+			childrenTypes();
 			triggerUpdate();
 		}
 	}

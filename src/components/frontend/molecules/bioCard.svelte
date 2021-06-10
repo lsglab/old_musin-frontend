@@ -7,7 +7,7 @@
 	import ShortText from '../../../cms/SiteEditor/Inputs/ShortText';
 
 	// blueprint for the component
-	export let blueprint = {
+	export const blueprint = {
 		bio: new LongText('Biographie der Person'),
 		description: new ShortText('Beschreibung der Person'),
 		img: new Img('http://aeda.gov.gh/wp-content/uploads/2016/11/placeholder-person.jpg'),
@@ -53,10 +53,9 @@
 					class:collapsed>
 					{blueprint.bio.data}
 				</div>
-				<Button
-					classes="h-8 lg:h-7 mt-5 md:w-20"
-					buttonText="{collapsed ? 'Weniger' : 'Mehr'}"
-					buttonFunction="{click}" />
+				<Button classes="h-8 lg:h-7 mt-5 md:w-20" buttonFunction="{click}">
+					{collapsed ? 'Weniger' : 'Mehr'}
+				</Button>
 			</div>
 		</Flex>
 	</div>

@@ -1,4 +1,4 @@
-import Base from './Base';
+import Base from '../Base';
 import Column from './Columns/column';
 import Relation from './Columns/relation';
 

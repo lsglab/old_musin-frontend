@@ -3,7 +3,7 @@
 export default class Base {
 	constructor(placeholder = '') {
 		this.placeholder = placeholder;
-		this.data = placeholder;
+		this.data = this.placeholder;
 		this.createUUID();
 	}
 

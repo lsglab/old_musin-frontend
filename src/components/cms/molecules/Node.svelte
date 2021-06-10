@@ -9,8 +9,6 @@
 
 	export let component;
 
-	console.log('component', component);
-
 	let propsOpen = true;
 	let open = true;
 
@@ -27,7 +25,6 @@
 	}
 
 	function triggerUpdate() {
-		console.log('props', JSON.parse(JSON.stringify(component.props)));
 		// trigger a layout reload
 		const newList = $layout;
 		layout.set(newList);
@@ -53,14 +50,6 @@
 			return 'radio';
 		}
 		return 'text';
-	}
-
-	function blurUpdate(prop) {
-		if (getType(prop) === 'text') triggerUpdate();
-	}
-
-	function inputUpdate(prop) {
-		if (getType(prop) === 'radio') triggerUpdate();
 	}
 </script>
 
@@ -136,12 +125,7 @@
 				<div transition:fade="{{ duration: 100 }}">
 					{#each Object.keys(component.props) as key}
 						<Input
-							on:blur="{() => {
-								blurUpdate(component.props[key]);
-							}}"
-							on:input="{() => {
-								inputUpdate(component.props[key]);
-							}}"
+							on:blur="{triggerUpdate}"
 							id="{key}"
 							justify="between"
 							classes="w-full my-1"

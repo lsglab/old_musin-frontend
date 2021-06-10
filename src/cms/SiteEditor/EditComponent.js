@@ -2,6 +2,7 @@ export default class EditComponent {
 	constructor(component, parent) {
 		this.component = component;
 		this.children = [];
+		this.childrenTypes = [];
 		this.props = {};
 		this.parent = parent;
 		this.slot = false;

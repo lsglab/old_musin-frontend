@@ -2,9 +2,10 @@ import Base from './Base';
 import EditLink from '../../../components/cms/molecules/EditLink.svelte';
 
 export default class Link extends Base {
-	constructor(placeholder = 'https://example.com') {
+	constructor(placeholder = 'Link', hrefPlaceholder = 'https://example.com') {
 		super(placeholder);
 		this.type = 'link';
+		this.href = hrefPlaceholder;
 	}
 
 	newLink(node, id) {

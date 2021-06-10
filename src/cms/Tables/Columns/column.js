@@ -1,5 +1,5 @@
 import { toLocalDateString } from '../../Utils/time';
-import Base from '../Base';
+import Base from '../../Base';
 
 export default class Column extends Base {
 	constructor(object) {

@@ -66,10 +66,6 @@ a {
 	}
 }
 
-.cms-inherit {
-	all: inherit;
-}
-
 $top-nav-height: 3rem;
 
 .top-nav-height {
@@ -93,5 +89,5 @@ $top-nav-height: 3rem;
 *:focus-visible {
 	outline: none;
 	-moz-outline: none;
-	@apply border-black border;
+	@apply border-btnBlue p-1 border rounded-sm;
 }

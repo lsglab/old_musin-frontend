@@ -1,19 +1,16 @@
 <script>
 	/* eslint-disable import/first */
-	import { layout } from '../../../stores';
-	import AboutSection from '../../frontend/molecules/aboutSection.svelte';
-	import BioCard from '../../frontend/molecules/bioCard.svelte';
+	import { compConfig, layout } from '../../../stores';
 	import Card from '../../frontend/atoms/Card.svelte';
 	import EditComponent from '../../../cms/SiteEditor/EditComponent';
 	import Flex from '../../both/atoms/Flex.svelte';
-	import MensaCard from '../../frontend/molecules/MensaCard.svelte';
-	import SectionWrapper from '../../frontend/molecules/sectionWrapper.svelte';
-	import StaffCard from '../../frontend/molecules/staffCard.svelte';
-
-	const components = [BioCard, SectionWrapper, AboutSection, MensaCard, StaffCard, Flex];
 
 	let visible = false;
 	export let parent;
+
+	const components = $compConfig.filter((ele) => {
+		return parent.childrenTypes.length === 0 || parent.childrenTypes.includes(ele.name);
+	});
 
 	function componentChosen(component) {
 		parent.children.push(new EditComponent(component, parent));

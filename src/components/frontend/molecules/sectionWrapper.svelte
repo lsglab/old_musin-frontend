@@ -14,6 +14,8 @@
 	// export let link;
 	// The id of the element
 	export let id = '';
+	// content will be centered
+	export let center = true;
 	// section height 100vh ?
 	export let fullscreen = false;
 	// describes the "object"
@@ -42,7 +44,9 @@
 				<h3 class="text-center text-heading2" id="{blueprint.header.id}">{blueprint.header.data}</h3>
 				<p class="mt-4 text-center text-purpleAccent" id="{blueprint.subHeader.id}">{blueprint.subHeader.data}</p>
 			</Flex>
-			<slot />
+			<div>
+				<slot />
+			</div>
 			{#if href !== undefined}
 				<Link href="{blueprint.link.href}" id="{blueprint.link.id}">{blueprint.link.data}</Link>
 			{/if}

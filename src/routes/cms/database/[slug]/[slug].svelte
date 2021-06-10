@@ -195,9 +195,6 @@
 		let deleteP = _.differenceWith(oldData[permissions], data[permissions], _.isEqual);
 		const createP = _.differenceWith(data[permissions], oldData[permissions], _.isEqual);
 
-		console.log('deleteP', deleteP);
-		console.log('createP', createP);
-
 		if (deleteP.length > 0) {
 			deleteP = deleteP.map((ele) => ele.id);
 			await request(url, 'delete', { ids: deleteP }, true);
@@ -208,6 +205,8 @@
 	}
 
 	function savePermissions(newRole) {
+		if (table.table !== 'roles') return;
+
 		savePermissionType('permissions', `${process.globals.baseUrl}/permissions?_norelations=true`, newRole);
 		savePermissionType(
 			'entry_permissions_by_role',
@@ -291,7 +290,7 @@
 		<Flex classes="w-full mb-6" align="center" justify="between">
 			<h5>{data[table.getDisplayValue()]}</h5>
 			{#if table.getPermissions().create && id === 'new'}
-				<Button color="bg-successGreen" buttonFunction="{createEntry}">Erstellen</Button>
+				<Button color="bg-cmsSuccessGreen" buttonFunction="{createEntry}">Erstellen</Button>
 			{/if}
 			{#if table.getPermissions().edit && id !== 'new'}
 				<Button buttonFunction="{saveEntry}" disabled="{!save}">Speichern</Button>

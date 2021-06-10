@@ -1,6 +1,7 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
+	import Input from '../../both/molecules/Input.svelte';
 
 	export let placeholder;
 	export let id;
@@ -24,30 +25,63 @@
 		});
 		visible = false;
 	}
+
+	function checkBoundaries() {
+		const ele = document.getElementById(id);
+		const boundaries = ele.getBoundingClientRect();
+		let translate = 0;
+		const padding = 10;
+		const transDirection = [];
+
+		const windowHeight = document.documentElement.scrollHeight;
+		const windowWidth = document.documentElement.scrollWidth;
+
+		if (boundaries.x < 0) {
+			transDirection.push('left');
+			translate = Math.abs(boundaries.x) + padding;
+		}
+		if (boundaries.x > windowWidth) {
+			transDirection.push('right');
+			translate = boundaries.x - windowWidth + padding;
+		}
+		if (boundaries.y < 0) {
+			transDirection.push('top');
+			translate = Math.abs(boundaries.y) + padding;
+		}
+		if (boundaries.y > windowHeight) {
+			transDirection.push('bottom');
+			translate = boundaries.y - windowHeight + padding;
+		}
+
+		transDirection.forEach((direction) => {
+			ele.style[direction] = `${translate}px`;
+		});
+
+		if (transDirection.length === 0) {
+			ele.style.left = '50%';
+			ele.style.top = '50%';
+		}
+	}
+
+	onMount(() => {
+		checkBoundaries();
+	});
 </script>
+
+<style>
+	.material-icons {
+		@apply cursor-pointer ml-1;
+	}
+</style>
 
 <div
 	id="{id}"
-	class="absolute rounded-sm cursor-default z-50 p-4 origin-center bg-white border border-gray-400 border-solid shadow-md top-1/2 left-1/2 pos {visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}"
-	style="transform: translate(-50%,-50%);">
-	<Flex>
-		<input class="mx-2" type="text" bind:value="{placeholder}" />
-		<input class="mx-2" type="url" bind:value="{href}" placeholder="Url des Links" />
-		<svg
-			on:click="{save}"
-			xmlns="http://www.w3.org/2000/svg"
-			class="w-5 h-5 mx-2 text-green-600 cursor-pointer fill-current "
-			viewBox="0 0 24 24"
-			fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"></path>
-			<path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path></svg>
-
-		<svg
-			on:click="{close}"
-			xmlns="http://www.w3.org/2000/svg"
-			class="w-5 h-5 mx-2 text-red-600 cursor-pointer fill-current"
-			viewBox="0 0 24 24"
-			fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"></path>
-			<path
-				d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+	class="absolute rounded-sm z-50 cursor-default p-2 origin-center bg-white border border-gray-400 border-solid shadow-md pos {visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}"
+	style="transform: translate(-50%,-50%)">
+	<Flex align="center">
+		<Input id="text-{id}" classes="mx-2" type="text" bind:value="{placeholder}" />
+		<Input id="link-{id}" classes="mx-2" type="url" bind:value="{href}" placeholder="Url des Links" />
+		<div on:click="{save}" class="material-icons text-cmsSuccessGreen">done</div>
+		<div on:click="{close}" class="material-icons text-cmsErrorRed">close</div>
 	</Flex>
 </div>
