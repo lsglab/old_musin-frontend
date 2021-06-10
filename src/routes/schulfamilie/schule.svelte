@@ -1,8 +1,8 @@
 <script>
-	import AboutSection from '../../components/molecules/aboutSection.svelte';
-	import BioCard from '../../components/molecules/bioCard.svelte';
-	import Flex from '../../components/atoms/Flex.svelte';
-	import StaffCard from '../../components/molecules/staffCard.svelte';
+	import AboutSection from '../../components/frontend/molecules/aboutSection.svelte';
+	import BioCard from '../../components/frontend/molecules/bioCard.svelte';
+	import Flex from '../../components/both/atoms/Flex.svelte';
+	import StaffCard from '../../components/frontend/molecules/staffCard.svelte';
 </script>
 
 <svelte:head>

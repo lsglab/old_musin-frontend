@@ -1,9 +1,9 @@
 <script>
-	import Calender from '../components/molecules/Calender.svelte';
-	import DatePicker from '../components/atoms/datePicker.svelte';
-	import Flex from '../components/atoms/Flex.svelte';
-	import SearchBox from '../components/atoms/searchBox.svelte';
-	import Section from '../components/atoms/Section.svelte';
+	import Calender from '../components/frontend/molecules/Calender.svelte';
+	import DatePicker from '../components/both/atoms/datePicker.svelte';
+	import Flex from '../components/both/atoms/Flex.svelte';
+	import SearchBox from '../components/frontend/atoms/searchBox.svelte';
+	import Section from '../components/frontend/atoms/Section.svelte';
 </script>
 
 <div style="margin-top: -80px; padding-top:80px; margin-bottom:80px">

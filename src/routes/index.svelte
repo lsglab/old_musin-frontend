@@ -1,7 +1,7 @@
 <script>
-	import Calender from '../components/molecules/Calender.svelte';
-	import Hero from '../components/organisms/Hero.svelte';
-	import SectionWrapper from '../components/molecules/sectionWrapper.svelte';
+	import Calender from '../components/frontend/molecules/Calender.svelte';
+	import Hero from '../components/frontend/organisms/Hero.svelte';
+	import SectionWrapper from '../components/frontend/molecules/sectionWrapper.svelte';
 </script>
 
 <Hero
@@ -21,3 +21,5 @@
 	id="termine">
 	<Calender classes="w-11/12 lg:w-4/5" />
 </SectionWrapper>
+<a href="/cms" style="opacity: 0;position: absolute;pointer-events:none">d</a>
+<a href="/auth/login" style="opacity: 0;position: absolute;pointer-events:none">d</a>

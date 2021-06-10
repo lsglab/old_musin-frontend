@@ -1,7 +1,7 @@
 <script>
-	import Calender from '../../components/molecules/Calender.svelte';
-	import SectionWrapper from '../../components/molecules/sectionWrapper.svelte';
-	import SmallHero from '../../components/organisms/smallHero.svelte';
+	import Calender from '../../components/frontend/molecules/Calender.svelte';
+	import SectionWrapper from '../../components/frontend/molecules/sectionWrapper.svelte';
+	import SmallHero from '../../components/frontend/organisms/smallHero.svelte';
 </script>
 
 <SmallHero

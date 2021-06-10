@@ -1,8 +1,7 @@
 <script>
-	import Button from '../components/atoms/Button.svelte';
-	import DashBackground from '../components/atoms/DashBackground.svelte';
-	import Flex from '../components/atoms/Flex.svelte';
-	import Section from '../components/atoms/Section.svelte';
+	import Button from '../components/frontend/atoms/Button.svelte';
+	import Flex from '../components/both/atoms/Flex.svelte';
+	import Section from '../components/frontend/atoms/Section.svelte';
 
 	export let error;
 	export let status;
@@ -61,10 +60,9 @@
 							{/if}
 						{/if}
 					</div>
-					<Button buttonText="Zur Startseite" href="/" />
+					<Button href="/">Zur Startseite</Button>
 				</div>
 			</div>
 		</div>
 	</Flex>
 </Section>
-<DashBackground />

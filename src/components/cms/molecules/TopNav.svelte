@@ -1,0 +1,45 @@
+<script>
+	import { onMount } from 'svelte';
+	import Button from '../atoms/Button.svelte';
+	import Flex from '../../both/atoms/Flex.svelte';
+	import Loading from '../atoms/Loading.svelte';
+	import request from '../../../cms/Utils/requests';
+
+	let user;
+
+	onMount(async () => {
+		if (JSON.parse(sessionStorage.getItem('user')) == null) {
+			const res = await request('http://localhost:8000/api/auth/user', 'get', {}, true);
+			if (!res.error) {
+				user = res.data.user;
+				sessionStorage.setItem('user', JSON.stringify(user));
+			}
+		}
+
+		user = JSON.parse(sessionStorage.getItem('user'));
+	});
+
+	async function logOut() {
+		const res = await request('http://localhost:8000/api/auth/logout', 'get', {}, true);
+
+		if (!res.error) {
+			localStorage.clear();
+			sessionStorage.clear();
+			window.location.replace('/auth/login');
+		}
+	}
+</script>
+
+<Flex classes="top-nav-height shadow-md bg-white w-full pl-4 pr-6" justify="between" align="center">
+	<div>
+		<slot />
+	</div>
+	<Flex classes="h-full" align="center" justify="center">
+		{#if user !== undefined}
+			<p class="mr-4 text-xs">{user.name}</p>
+			<Button color="bg-cmsErrorRed" buttonFunction="{logOut}">Logout</Button>
+		{:else}
+			<Loading diameter="8" />
+		{/if}
+	</Flex>
+</Flex>

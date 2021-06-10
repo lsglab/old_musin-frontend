@@ -1,5 +1,5 @@
 <script>
-	import Flex from '../components/atoms/Flex.svelte';
+	import Flex from '../components/both/atoms/Flex.svelte';
 
 	export let title;
 </script>
