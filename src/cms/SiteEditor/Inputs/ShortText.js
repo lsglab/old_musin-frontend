@@ -10,5 +10,6 @@ export default class ShortText extends Base {
 		const ele = document.getElementById(this.id);
 		ele.contentEditable = true;
 		ele.contenteditable = true;
+		ele.classList.add('input-outline');
 	}
 }

@@ -14,8 +14,6 @@
 	// export let link;
 	// The id of the element
 	export let id = '';
-	// content will be centered
-	export let center = true;
 	// section height 100vh ?
 	export let fullscreen = false;
 	// describes the "object"
