@@ -4,7 +4,7 @@
 </script>
 
 <style lang="scss">
-	/* stylelint-disable at-rule-no-unknown */
+	/* stylelint-disable at-rule-no-unknown -- Styleint cant deal with for syntax in scss */
 
 	.object {
 		@apply w-full h-full absolute inset-0 m-auto rounded-full;

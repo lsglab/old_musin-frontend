@@ -29,7 +29,7 @@
 		"function-url-no-scheme-relative": true,
 		"keyframes-name-pattern": "[a-z0-9]+(?:[A-Z][a-z0-9]+)*",
 		"number-max-precision": 2,
-		"unit-blacklist": ["cm", "mm", "in", "pt", "pc", "ex", "ch"],
+		"unit-disallowed-list": ["cm", "mm", "in", "pt", "pc", "ex", "ch"],
 		"shorthand-property-no-redundant-values": true,
 		"declaration-block-no-redundant-longhand-properties": true,
 		"length-zero-no-unit": true,
