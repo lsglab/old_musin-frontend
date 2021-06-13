@@ -1,13 +1,11 @@
 <script>
 	/* eslint-disable no-param-reassign */
-	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
 
 	import Flex from '../../both/atoms/Flex.svelte';
 	import Input from '../../both/molecules/Input.svelte';
 	import Loading from '../atoms/Loading.svelte';
 	import Table from '../../../cms/Tables/table';
-	import _ from 'lodash';
 	import request from '../../../cms/Utils/requests';
 
 	export let oldData;
@@ -22,17 +20,9 @@
 	let domLoaded = false;
 
 	const actions = ['read', 'read-self', 'edit', 'edit-self', 'delete', 'delete-self', 'create'];
-	const baseActions = ['read', 'edit', 'delete'];
 
 	actions.forEach((ele, i) => {
 		actions[i] = {
-			action: ele,
-			checked: false,
-		};
-	});
-
-	baseActions.forEach((ele, i) => {
-		baseActions[i] = {
 			action: ele,
 			checked: false,
 		};
@@ -42,42 +32,6 @@
 		data.forEach((ele) => {
 			ele.open = false;
 			ele.role_permissions = [];
-			ele.entry_permissions = [];
-			baseActions.forEach((action) => {
-				ele.entries.forEach((entry) => {
-					entry.checked = false;
-
-					const perm = {
-						action: action.action,
-						entry_id: entry.id,
-						role_id: role.id,
-						table: ele.table,
-					};
-
-					const find = role.entry_permissions_by_role.find((per) => {
-						return per.table === perm.table && per.action === perm.action && per.entry_id === perm.entry_id;
-					});
-
-					if (find !== undefined) {
-						perm.checked = true;
-						perm.id = find.id;
-					} else if (
-						role.permissions.find((per) => per.action === perm.action && per.table === perm.table) !==
-							undefined &&
-						role.entry_permissions_by_role.filter(
-							(per) => per.action === perm.action && per.table === perm.table
-						).length === 0
-					) {
-						perm.checked = true;
-						perm.id = null;
-					} else {
-						perm.checked = false;
-						perm.id = null;
-					}
-
-					ele.entry_permissions.push(perm);
-				});
-			});
 			actions.forEach((action) => {
 				const perm = {
 					action: action.action,
@@ -142,32 +96,11 @@
 		}
 	}
 
-	function tablePermissionUpdate(table, tablePermission) {
-		if (roleTable.getReadOnly(id)) return;
-		table.entry_permissions
-			.filter((ele) => ele.action === tablePermission.action)
-			.forEach((per) => {
-				per.checked = !tablePermission.checked;
-			});
-	}
-
 	function tableUpdate(table) {
 		if (roleTable.getReadOnly(id)) return;
 		table.role_permissions.forEach((per) => {
 			per.checked = !table.checked;
-			const trick = JSON.parse(JSON.stringify(per));
-			trick.checked = !per.checked;
-			tablePermissionUpdate(table, trick);
 		});
-	}
-
-	function tableEntryUpdate(table, entry) {
-		if (roleTable.getReadOnly(id)) return;
-		table.entry_permissions
-			.filter((ele) => ele.entry_id === entry.id)
-			.forEach((per) => {
-				per.checked = !entry.checked;
-			});
 	}
 
 	function actionUpdate(action) {
@@ -179,9 +112,6 @@
 				group.tables.forEach((table) => {
 					const find = table.role_permissions.find((per) => per.action === action.action);
 					find.checked = !action.checked;
-					const trick = JSON.parse(JSON.stringify(find));
-					trick.checked = !find.checked;
-					tablePermissionUpdate(table, trick);
 				});
 			});
 		groups = groups;
@@ -193,22 +123,9 @@
 		});
 	}
 
-	function entryPermissionChanged(table, entryPermission, permission) {
-		const checkedLength = table.entry_permissions.filter(
-			(ele) => ele.action === entryPermission.action && ele.checked === true
-		).length;
-
-		if (checkedLength === table.entries.length) {
-			permission.checked = true;
-		} else {
-			permission.checked = false;
-		}
-	}
-
 	function permissionsChanged() {
 		if (groups === undefined) return;
 		const permissions = [];
-		const entryPermissions = [];
 		groups.forEach((group) => {
 			group.tables.forEach((table) => {
 				table.role_permissions.forEach((per) => {
@@ -216,28 +133,9 @@
 						permissions.push(per);
 					}
 				});
-				table.entry_permissions.forEach((per) => {
-					const permission = table.role_permissions.find((ele) => ele.action === per.action);
-					const filter = table.entry_permissions.filter(
-						(ele) => ele.action === per.action && ele.checked === true
-					);
-
-					if (permission.checked === false && filter.length > 0) {
-						if (!_.includes(permissions, permission)) {
-							permissions.push(permission);
-						}
-					}
-
-					if (per.checked && filter.length < table.entries.length) {
-						entryPermissions.push(per);
-					}
-
-					entryPermissionChanged(table, per, permission);
-				});
 			});
 		});
 		role.permissions = permissions;
-		role.entry_permissions_by_role = entryPermissions;
 		role = role;
 	}
 
@@ -261,10 +159,6 @@
 	td,
 	th {
 		@apply p-1;
-	}
-
-	.entries {
-		@apply bg-gray-50;
 	}
 
 	.rotate {
@@ -335,9 +229,6 @@
 									{#each table.role_permissions as perm}
 										<td>
 											<Input
-												on:click="{() => {
-													tablePermissionUpdate(table, perm);
-												}}"
 												bind:value="{perm.checked}"
 												readonly="{roleTable.getReadOnly(id)}"
 												id="p-{table.table}-{perm.action}"
@@ -356,37 +247,7 @@
 									</td>
 								</tr>
 								{#if table.open}
-									{#each table.entries as entry}
-										<tr transition:fade="{{ duration: 100 }}" class="entries">
-											<td></td>
-											<td>
-												<Input
-													on:click="{() => {
-														tableEntryUpdate(table, entry);
-													}}"
-													bind:value="{entry.checked}"
-													readonly="{roleTable.getReadOnly(id)}"
-													id="s-{table.table}-{entry.id}"
-													type="checkbox"
-													labelPos="right"
-													labelClasses="text-xss font-bold">
-													{entry[table.getDisplayValue()]}
-												</Input>
-											</td>
-											{#each table.entry_permissions.filter((ele) => ele.entry_id === entry.id) as entry_permission}
-												<td>
-													<Input
-														readonly="{roleTable.getReadOnly(id)}"
-														bind:value="{entry_permission.checked}"
-														id="ep-{table.table}-{entry_permission.action}-{entry_permission.entry_id}"
-														type="checkbox" />
-												</td>
-												<td></td>
-											{/each}
-											<td></td>
-											<td></td>
-										</tr>
-									{/each}
+									<div></div>
 								{/if}
 							{/each}
 						</tbody>

@@ -208,11 +208,6 @@
 		if (table.table !== 'roles') return;
 
 		savePermissionType('permissions', `${process.globals.apiUrl}/permissions?_norelations=true`, newRole);
-		savePermissionType(
-			'entry_permissions_by_role',
-			`${process.globals.apiUrl}/entry_permissions?_norelations=true`,
-			newRole
-		);
 	}
 
 	async function saveEntry() {
