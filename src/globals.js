@@ -1,4 +1,7 @@
+const base = 'http://localhost:8000';
+
 export default {
-	baseUrl: 'http://localhost:8000/api',
+	apiServer: base,
+	apiUrl: `${base}/api`,
 	title: 'Louise Schroeder Gymnasium',
 };

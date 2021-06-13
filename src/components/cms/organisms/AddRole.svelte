@@ -103,7 +103,7 @@
 	}
 
 	async function fetchTableEntries(subject) {
-		res = await request(`${process.globals.baseUrl}/${subject.table}?_norelations=true`, 'get', {}, true);
+		res = await request(`${process.globals.apiUrl}/${subject.table}?_norelations=true`, 'get', {}, true);
 
 		if (!res.error) {
 			return res.data[subject.table];
@@ -112,7 +112,7 @@
 	}
 
 	async function fetchGroups() {
-		res = await request(`${process.globals.baseUrl}/groups`, 'get', {}, true);
+		res = await request(`${process.globals.apiUrl}/groups`, 'get', {}, true);
 
 		if (!res.error) {
 			const grouped = res.data.groups;

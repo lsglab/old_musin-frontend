@@ -11,7 +11,7 @@
 
 	async function login() {
 		const response = await request(
-			`${process.globals.baseUrl}/auth/login`,
+			`${process.globals.apiUrl}/auth/login`,
 			'post',
 			new FormData(document.getElementById('login-form'))
 		);

@@ -86,7 +86,7 @@ $top-nav-height: 3rem;
 
 //override the default focus styles of browsers
 
-* {
+*:focus-visible {
 	outline: none;
 	-moz-outline: none;
 }

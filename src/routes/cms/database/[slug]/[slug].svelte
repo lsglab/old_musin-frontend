@@ -17,7 +17,7 @@
 		const split = path.split('/');
 		const table = split[split.length - 2];
 
-		const response = await request(`${globals.baseUrl}/${table}`, 'get', {}, false);
+		const response = await request(`${globals.apiUrl}/${table}`, 'get', {}, false);
 
 		if (response.status === 404) {
 			// eslint-disable-next-line babel/no-invalid-this
@@ -65,7 +65,7 @@
 		let fetchedData = {};
 
 		if (id !== 'new') {
-			res = await request(`${process.globals.baseUrl}/${tableName}?id=${id}`, 'get', {}, true);
+			res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'get', {}, true);
 
 			if (!res.error) {
 				fetchedData = res.data[tableName][0];
@@ -78,7 +78,7 @@
 	}
 
 	async function fetchRelation(relation) {
-		res = await request(`${process.globals.baseUrl}/tables?table=${relation}`, 'get', {}, true);
+		res = await request(`${process.globals.apiUrl}/tables?table=${relation}`, 'get', {}, true);
 
 		let foreign;
 
@@ -92,7 +92,7 @@
 			return undefined;
 		}
 
-		res = await request(`${process.globals.baseUrl}/${foreign.table}?_norelations=true`, 'get', {}, true);
+		res = await request(`${process.globals.apiUrl}/${foreign.table}?_norelations=true`, 'get', {}, true);
 
 		if (!res.error) {
 			return { data: res.data[foreign.table], table: foreign };
@@ -119,7 +119,7 @@
 	}
 
 	async function fetchTable() {
-		res = await request(`${process.globals.baseUrl}/tables?table=${tableName}`, 'get', {}, true);
+		res = await request(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true);
 
 		if (!res.error) {
 			table = new Table(res.data.tables[0]);
@@ -159,7 +159,7 @@
 	}
 
 	async function deleteOne() {
-		res = await request(`${process.globals.baseUrl}/${tableName}?id=${id}&_norelations=true`, 'delete', {}, true);
+		res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}&_norelations=true`, 'delete', {}, true);
 		if (res.error !== true) {
 			window.history.go(-1);
 		}
@@ -207,10 +207,10 @@
 	function savePermissions(newRole) {
 		if (table.table !== 'roles') return;
 
-		savePermissionType('permissions', `${process.globals.baseUrl}/permissions?_norelations=true`, newRole);
+		savePermissionType('permissions', `${process.globals.apiUrl}/permissions?_norelations=true`, newRole);
 		savePermissionType(
 			'entry_permissions_by_role',
-			`${process.globals.baseUrl}/entry_permissions?_norelations=true`,
+			`${process.globals.apiUrl}/entry_permissions?_norelations=true`,
 			newRole
 		);
 	}
@@ -224,7 +224,7 @@
 		const body = difference(data, oldData);
 
 		savePermissions();
-		res = await request(`${process.globals.baseUrl}/${tableName}?id=${id}`, 'put', body, true);
+		res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'put', body, true);
 
 		if (res.status === 200) {
 			const newData = res.data[tableName][0];
@@ -241,7 +241,7 @@
 		}
 		data = table.modifyData(data);
 
-		res = await request(`${process.globals.baseUrl}/${tableName}`, 'post', data, true);
+		res = await request(`${process.globals.apiUrl}/${tableName}`, 'post', data, true);
 
 		if (res.status === 200) {
 			const newData = res.data[tableName][0];

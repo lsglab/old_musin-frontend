@@ -8,7 +8,7 @@
 	export async function preload({ params }, { globals }) {
 		const slug = params.slug;
 
-		const response = await request(`${globals.baseUrl}/${slug}`, 'get', {}, false);
+		const response = await request(`${globals.apiUrl}/${slug}`, 'get', {}, false);
 
 		if (response.status === 404) {
 			// eslint-disable-next-line babel/no-invalid-this
@@ -50,7 +50,7 @@
 	}
 
 	async function deleteOne(id) {
-		await request(`${process.globals.baseUrl}/${slug}?id=${id}`, 'delete', {}, true);
+		await request(`${process.globals.apiUrl}/${slug}?id=${id}`, 'delete', {}, true);
 		// trigger a reload in the TableEntries component
 		triggerReload = true;
 	}

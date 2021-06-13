@@ -16,7 +16,8 @@
 	export let data;
 	export let tableName;
 	export let deleteAll = false;
-	export let triggerReload = false;
+	export let triggerDataReload = false;
+	export let triggerTableReload = false;
 	// default
 	let deleteLength;
 	let domLoaded = false;
@@ -34,7 +35,7 @@
 
 	async function fetchData(params) {
 		data = undefined;
-		let url = `${process.globals.baseUrl}/${tableName}?_norelations=true`;
+		let url = `${process.globals.apiUrl}/${tableName}?_norelations=true`;
 
 		if (params !== undefined) {
 			params.forEach((ele) => {
@@ -53,7 +54,7 @@
 	async function fetchTable() {
 		table = undefined;
 
-		const res = await request(`${process.globals.baseUrl}/tables?table=${tableName}`, 'get', {}, true);
+		const res = await request(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true);
 
 		if (!res.error) {
 			table = new Table(res.data.tables[0]);
@@ -66,11 +67,18 @@
 		fetched();
 	}
 
+	async function reloadTable() {
+		if (domLoaded === false || triggerTableReload === false) return;
+		table = undefined;
+		await fetchTable();
+		triggerTableReload = false;
+	}
+
 	async function reloadData() {
-		if (domLoaded === false || triggerReload === false) return;
+		if (domLoaded === false || triggerDataReload === false) return;
 		data = undefined;
-		fetchData();
-		triggerReload = false;
+		await fetchData();
+		triggerDataReload = false;
 	}
 
 	async function reload() {
@@ -88,15 +96,16 @@
 	async function deleteMultiple() {
 		const ids = data.filter((ele) => ele.ctx_delete === true).map((ele) => ele.id);
 
-		await request(`${process.globals.baseUrl}/${tableName}`, 'delete', { ids }, true);
-		reloadData();
+		await request(`${process.globals.apiUrl}/${tableName}`, 'delete', { ids }, true);
+		triggerDataReload = true;
 	}
 
 	$: deleteLength = data !== undefined ? data.filter((ele) => ele.ctx_delete === true).length : 0;
 	$: searchChanged(search);
 	$: changeDeletes(deleteAll);
 	$: reload(tableName);
-	$: reloadData(triggerReload);
+	$: reloadData(triggerDataReload);
+	$: reloadTable(triggerTableReload);
 
 	onMount(() => {
 		domLoaded = true;
@@ -108,7 +117,7 @@
 	<Input placeholder="Suche..." inputClasses="w-60" bind:value="{search}" id="search" type="text" />
 </TopNav>
 
-{#if table === undefined && data === undefined}
+{#if data === undefined}
 	<Flex classes="w-full full-minus-nav" justify="center" align="center">
 		<Loading />
 	</Flex>

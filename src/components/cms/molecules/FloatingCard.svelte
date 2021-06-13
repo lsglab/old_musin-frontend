@@ -27,8 +27,8 @@
 	}
 </style>
 
-<div class="fixed top-0 left-0 z-50 w-screen h-screen background" transition:fade="{{ duration: duration / 3 }}">
-	<div class="max-w-xl mx-auto mt-16 bg-white card" transition:fly="{{ duration, y: 100 }}">
+<div class="fixed top-0 left-0 z-30 w-screen h-screen background" transition:fade="{{ duration: duration / 3 }}">
+	<div class="max-w-2xl mx-auto mt-16 bg-white card" transition:fly="{{ duration, y: 100 }}">
 		<div class="bg-gray-100">
 			<Flex justify="between" align="center">
 				<slot name="header" />
