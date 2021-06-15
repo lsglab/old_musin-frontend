@@ -90,7 +90,6 @@
 		formData.set('description', file.description);
 		formData.set('name', file.name);
 		formData.set('type', file.type);
-		formData.set('size', file.size);
 		formData.set('public', file.public);
 		formData.set('file', file.file);
 

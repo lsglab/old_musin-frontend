@@ -20,6 +20,7 @@
 	let domLoaded = false;
 
 	const actions = ['read', 'read-self', 'edit', 'edit-self', 'delete', 'delete-self', 'create'];
+	const columnActions = ['edit'];
 
 	actions.forEach((ele, i) => {
 		actions[i] = {
@@ -28,15 +29,23 @@
 		};
 	});
 
-	function fillPermissions(data) {
-		data.forEach((ele) => {
-			ele.open = false;
-			ele.role_permissions = [];
+	columnActions.forEach((ele, i) => {
+		columnActions[i] = {
+			action: ele,
+			checked: false,
+		};
+	});
+
+	function fillPermissions(tables) {
+		tables.forEach((table) => {
+			table.open = false;
+			table.role_permissions = [];
+			table.column_permissions = [];
 			actions.forEach((action) => {
 				const perm = {
 					action: action.action,
 					role_id: role.id,
-					table: ele.table,
+					table: table.table,
 				};
 
 				const find = role.permissions.find((per) => {
@@ -50,19 +59,34 @@
 					perm.checked = false;
 					perm.id = null;
 				}
-				ele.role_permissions.push(perm);
+				table.role_permissions.push(perm);
+			});
+			columnActions.forEach((action) => {
+				table.getColumnNames(table.getEditable()).forEach((column) => {
+					const perm = {
+						action: action.action,
+						column,
+						role_id: role.id,
+						table: table.table,
+					};
+
+					const find = role.column_permissions.find((per) => {
+						return per.table === perm.table && per.action === perm.action && per.column === perm.column;
+					});
+
+					if (find !== undefined) {
+						perm.checked = false;
+						perm.id = find.id;
+					} else {
+						perm.checked = true;
+						perm.id = null;
+					}
+
+					table.column_permissions.push(perm);
+				});
 			});
 		});
-		return data;
-	}
-
-	async function fetchTableEntries(subject) {
-		res = await request(`${process.globals.apiUrl}/${subject.table}?_norelations=true`, 'get', {}, true);
-
-		if (!res.error) {
-			return res.data[subject.table];
-		}
-		return false;
+		return tables;
 	}
 
 	async function fetchGroups() {
@@ -76,16 +100,7 @@
 				group.tables = Object.values(group.tables);
 
 				for (let j = 0; j < group.tables.length; j += 1) {
-					const table = new Table(group.tables[j]);
-					table.checked = false;
-					// eslint-disable-next-line no-await-in-loop
-					const ans = await fetchTableEntries(table);
-					if (ans !== false) {
-						table.entries = ans;
-					} else {
-						table.entries = [];
-					}
-					group.tables[j] = table;
+					group.tables[j] = new Table(group.tables[j]);
 				}
 
 				group.tables = fillPermissions(group.tables);
@@ -97,15 +112,25 @@
 	}
 
 	function tableUpdate(table) {
-		if (roleTable.getReadOnly(id)) return;
 		table.role_permissions.forEach((per) => {
 			per.checked = !table.checked;
 		});
 	}
 
+	function columnActionUpdate(action, table) {
+		if (groups === undefined) return;
+
+		table.column_permissions
+			.filter((ele) => ele.action === action.action)
+			.forEach((per) => {
+				per.checked = !action.checked;
+			});
+		// eslint-disable-next-line no-self-assign
+		groups = groups;
+	}
+
 	function actionUpdate(action) {
 		if (groups === undefined) return;
-		if (roleTable.getReadOnly(id)) return;
 		groups
 			.filter((group) => group.title === selected)
 			.forEach((group) => {
@@ -126,6 +151,7 @@
 	function permissionsChanged() {
 		if (groups === undefined) return;
 		const permissions = [];
+		const columnPermissions = [];
 		groups.forEach((group) => {
 			group.tables.forEach((table) => {
 				table.role_permissions.forEach((per) => {
@@ -133,10 +159,17 @@
 						permissions.push(per);
 					}
 				});
+				table.column_permissions.forEach((per) => {
+					if (!per.checked) {
+						columnPermissions.push(per);
+					}
+				});
 			});
 		});
+		role.column_permissions = columnPermissions;
 		role.permissions = permissions;
 		role = role;
+		console.log('role', role);
 	}
 
 	async function roleChanged() {
@@ -158,7 +191,7 @@
 <style lang="scss">
 	td,
 	th {
-		@apply p-1;
+		@apply p-1 text-xss font-bold;
 	}
 
 	.rotate {
@@ -198,7 +231,7 @@
 										on:click="{() => {
 											actionUpdate(action);
 										}}"
-										readonly="{roleTable.getReadOnly()}"
+										readonly="{roleTable.getReadOnly(id)}"
 										bind:value="{action.checked}"
 										labelClasses="font-bold text-xss capitalize"
 										type="checkbox"
@@ -247,7 +280,45 @@
 									</td>
 								</tr>
 								{#if table.open}
-									<div></div>
+									<tr>
+										<td></td>
+										<td>Column Permissions</td>
+										<td></td>
+										<td></td>
+										{#each columnActions as action}
+											<td>
+												<Input
+													on:click="{() => {
+														columnActionUpdate(action, table);
+													}}"
+													bind:value="{action.checked}"
+													readonly="{roleTable.getReadOnly(id)}"
+													id="{table.table}-column-action-{action}"
+													labelPos="right"
+													labelClasses="capitalize text-xss font-bold "
+													type="checkbox">
+													{action.action}
+												</Input>
+											</td>
+										{/each}
+									</tr>
+									{#each table.getEditable() as column}
+										<tr>
+											<td></td>
+											<td class="text-gray-700">{column.name}</td>
+											<td></td>
+											<td></td>
+											{#each table.column_permissions.filter((ele) => ele.column === column.name) as column_permission}
+												<td>
+													<Input
+														bind:value="{column_permission.checked}"
+														readonly="{roleTable.getReadOnly(id)}"
+														id="{table.table}-column-{column.name}"
+														type="checkbox" />
+												</td>
+											{/each}
+										</tr>
+									{/each}
 								{/if}
 							{/each}
 						</tbody>

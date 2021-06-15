@@ -174,14 +174,14 @@
 				</Flex>
 				<Flex justify="between">
 					<div class="info">
-						<h5>Typ</h5>
-						<p>{file.type.split('/')[1]}</p>
+						<h5>Datei-typ</h5>
+						<p>{file.type.split('/')[file.type.split('/').length - 1]}</p>
 					</div>
 				</Flex>
 			</div>
 			<div>
 				<Input
-					readonly="{table.getReadOnly(file.id)}"
+					readonly="{table.getReadOnly(file.id, 'name')}"
 					classes="mb-3"
 					error="{hasError('name', errors)}"
 					labelClasses="font-bold"
@@ -191,7 +191,7 @@
 					Dateiname
 				</Input>
 				<Input
-					readonly="{table.getReadOnly(file.id)}"
+					readonly="{table.getReadOnly(file.id, 'description')}"
 					error="{hasError('description', errors)}"
 					labelClasses="font-bold"
 					classes="mb-3"
@@ -201,7 +201,7 @@
 					Beschreibung
 				</Input>
 				<Input
-					readonly="{table.getReadOnly(file.id)}"
+					readonly="{table.getReadOnly(file.id, 'public')}"
 					error="{hasError('public', errors)}"
 					labelClasses="font-bold"
 					inputClasses="w-8 h-4"

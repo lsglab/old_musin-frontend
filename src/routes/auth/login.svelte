@@ -16,7 +16,7 @@
 			new FormData(document.getElementById('login-form'))
 		);
 
-		if (response.error) {
+		if (response.status === 400) {
 			error = response.data.message;
 
 			if (error === 'invalid_credentials') {

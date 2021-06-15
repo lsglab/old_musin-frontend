@@ -1,10 +1,10 @@
 <script>
-	import BasicInput from '../../../components/both/atoms/BasicInput.svelte';
 	import Button from '../../../components/cms/atoms/Button.svelte';
 	import DisplayMedia from '../../../components/cms/molecules/displayMedia.svelte';
 	import EditMedia from '../../../components/cms/organisms/editMedia.svelte';
 	import FileOption from '../../../components/cms/atoms/FileOption.svelte';
 	import Flex from '../../../components/both/atoms/Flex.svelte';
+	import Input from '../../../components/both/atoms/BasicInput.svelte';
 	import NewMedia from '../../../components/cms/organisms/newMedia.svelte';
 	import TableEntries from '../../../components/cms/molecules/TableEntries.svelte';
 	import request from '../../../cms/Utils/requests';
@@ -59,12 +59,12 @@
 		</Button>
 	</div>
 	{#if data.length > 0}
-		<BasicInput classes="my-2" type="checkbox" bind:value="{deleteAll}" id="delete-all" />
+		<Input classes="my-2" type="checkbox" bind:value="{deleteAll}" id="delete-all" />
 	{/if}
 	<Flex classes="w-full" align="center">
 		{#each data as file}
 			<DisplayMedia justify="between" classes="w-1/6 mr-2 h-auto" src="{process.globals.apiServer}/{file.url}">
-				<BasicInput classes="m-0.5" type="checkbox" id="{file.name}-select" bind:value="{file.ctx_delete}" />
+				<Input classes="m-0.5" type="checkbox" id="{file.name}-select" bind:value="{file.ctx_delete}" />
 				<div>
 					<FileOption
 						title="Löschen"

@@ -11,6 +11,7 @@ export default class Table extends Base {
 		this.assign(object, 'parent');
 		this.assign(object, 'children');
 		this.assign(object, 'permissions');
+		this.assign(object, 'editable');
 		this.createColumns(object.columns);
 		this.createRelations(object.relations);
 	}
@@ -77,6 +78,18 @@ export default class Table extends Base {
 		});
 	}
 
+	getEditable(array) {
+		const data = this.arrayIsNull(array);
+		return data.filter((ele) => {
+			return this.editable.includes(ele.name);
+		});
+	}
+
+	getColumnNames(array) {
+		const data = this.arrayIsNull(array);
+		return data.map((ele) => ele.name);
+	}
+
 	getDisplayValue(array) {
 		const data = this.arrayIsNull(array);
 		const find = data.find((ele) => ele.isDisplayValue === true);
@@ -113,13 +126,17 @@ export default class Table extends Base {
 		return data;
 	}
 
-	getReadOnly(id) {
+	getReadOnly(id, name = undefined) {
 		const permissions = this.getPermissions(id);
 
 		if (id === 'new') {
 			return !permissions.create;
 		}
-		return !permissions.edit;
+		if (name === undefined) {
+			return !permissions.edit;
+		}
+
+		return !(this.editable.includes(name) && permissions.edit);
 	}
 
 	modifyData(ele) {

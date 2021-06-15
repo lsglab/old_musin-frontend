@@ -37,17 +37,19 @@
 	</div>
 	{#if groups !== undefined}
 		<div class="pt-4">
-			{#each groups as group, i}
-				<div class="py-4">
-					<p class="text-xs font-bold padding-x">{group.title}</p>
-					<Flex cols="true">
-						{#each Object.keys(group.tables) as key}
-							<a
-								class="text-black capitalize transition duration-75 padding-x text-xss hover:bg-gray-100 hover:border-l-1 border-cmsBtnColor"
-								href="cms{group.links[key]}">{group.tables[key].table}</a>
-						{/each}
-					</Flex>
-				</div>
+			{#each groups as group}
+				{#if Object.keys(group.tables).length > 0}
+					<div class="py-4">
+						<p class="text-xs font-bold padding-x">{group.title}</p>
+						<Flex cols="true">
+							{#each Object.keys(group.tables) as key}
+								<a
+									class="text-black capitalize transition duration-75 padding-x text-xss hover:bg-gray-100 hover:border-l-1 border-cmsBtnColor"
+									href="cms{group.links[key]}">{group.tables[key].table}</a>
+							{/each}
+						</Flex>
+					</div>
+				{/if}
 			{/each}
 		</div>
 	{:else}

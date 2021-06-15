@@ -208,6 +208,11 @@
 		if (table.table !== 'roles') return;
 
 		savePermissionType('permissions', `${process.globals.apiUrl}/permissions?_norelations=true`, newRole);
+		savePermissionType(
+			'column_permissions',
+			`${process.globals.apiUrl}/column_permissions?_norelations=true`,
+			newRole
+		);
 	}
 
 	async function saveEntry() {
@@ -302,7 +307,7 @@
 								labelClasses="text-black font-bold capitalize"
 								inputClasses=" {column.type === 'radio' ? 'w-10 h-5' : ''}"
 								autocomplete="{column.autocomplete}"
-								readonly="{table.getReadOnly(id)}"
+								readonly="{table.getReadOnly(id, column.name)}"
 								required="{column.required}"
 								options="{makeEnumOptions(column.enum)}"
 								error="{errors[column.name] !== undefined ? errors[column.name][0] : false}"
@@ -339,7 +344,7 @@
 							<Input
 								bind:value="{data[relation.name]}"
 								class="w-full"
-								readonly="{table.getReadOnly(id)}"
+								readonly="{table.getReadOnly(id, relation.name)}"
 								error="{errors[relation.name] !== undefined ? errors[relation.name][0] : false}"
 								type="enum"
 								options="{getOptions(relation)}" />
