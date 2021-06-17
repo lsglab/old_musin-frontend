@@ -20,16 +20,6 @@
 	* {
 		word-break: normal;
 	}
-
-	.awards {
-		&:first-child {
-			background-position: left;
-		}
-
-		&:last-child {
-			background-position: right;
-		}
-	}
 </style>
 
 <svelte:head>
@@ -74,7 +64,7 @@
 		</header>
 	</Section>
 	<Section customStyles="padding-bottom: 30px;" classes="dashedTopBorder hidden md:block">
-		<div class="flex flex-row justify-between w-full bg-transparent awards">
+		<div class="flex flex-row justify-between flex-grow w-full bg-transparent awards">
 			<slot />
 		</div>
 	</Section>

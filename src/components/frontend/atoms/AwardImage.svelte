@@ -7,14 +7,11 @@
 </script>
 
 <style lang="scss">
-	div {
-		@apply w-full mx-auto h-10;
-		background-position: center center;
-		background-size: contain;
-		background-repeat: no-repeat;
+	img {
+		@apply h-10;
 		filter: grayscale(1);
 		mix-blend-mode: multiply;
 	}
 </style>
 
-<div style="background-image: url('{blueprint.img.data}');" id="{blueprint.img.id}"></div>
+<img src="{blueprint.img.data}" id="{blueprint.img.id}" alt="" />
