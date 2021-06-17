@@ -19,7 +19,7 @@ export default class Link extends Base {
 		});
 	}
 
-	prepareInput(document) {
+	prepareInput(document, triggerUpdate) {
 		const editLinkId = `edit-${this.id}`;
 		const atag = document.getElementById(this.id);
 		const editLink = this.newLink(atag, editLinkId);
@@ -48,8 +48,7 @@ export default class Link extends Base {
 		editLink.$on('save', (e) => {
 			this.href = e.detail.href;
 			this.placeholder = e.detail.placeholder;
-			atag.href = this.href;
-			atag.firstChild.nodeValue = this.placeholder;
+			triggerUpdate();
 			close();
 		});
 	}

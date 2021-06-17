@@ -7,7 +7,7 @@
 	// The link this image links to
 	export let href = '';
 
-	export const blueprint = {
+	export let blueprint = {
 		header: new ShortText('Titel'),
 		img: new Img('https://i.stack.imgur.com/y9DpT.jpg'),
 	};

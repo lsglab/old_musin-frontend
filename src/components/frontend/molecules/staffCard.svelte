@@ -6,7 +6,7 @@
 
 	export let href = '';
 
-	export const blueprint = {
+	export let blueprint = {
 		description: new ShortText('Beschreibung'),
 		header: new ShortText('Name'),
 		img: new Img('http://aeda.gov.gh/wp-content/uploads/2016/11/placeholder-person.jpg'),

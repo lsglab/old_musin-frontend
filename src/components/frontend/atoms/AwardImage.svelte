@@ -1,7 +1,7 @@
 <script>
 	import Img from '../../../cms/SiteEditor/Inputs/Img';
 
-	export const blueprint = {
+	export let blueprint = {
 		img: new Img('https://lsg.musin.de/homepage/images/LOGOsorsmc_SCREEN_80mm_RGB_mini.jpg'),
 	};
 </script>

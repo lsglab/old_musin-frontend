@@ -19,7 +19,7 @@
 	linkText="Zu allen Terminen"
 	link="/termine"
 	id="termine">
-	<Calender classes="w-11/12 lg:w-4/5" />
+	<Calender classes="w-full" />
 </SectionWrapper>
 <a href="/cms" style="opacity: 0;position: absolute;pointer-events:none">d</a>
 <a href="/auth/login" style="opacity: 0;position: absolute;pointer-events:none">d</a>

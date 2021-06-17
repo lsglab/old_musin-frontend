@@ -8,6 +8,7 @@
 	import request from '../../../cms/Utils/requests';
 
 	import { createEventDispatcher, onMount } from 'svelte';
+	import EntriesFound from '../atoms/EntriesFound.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -124,10 +125,7 @@
 {:else if table !== undefined && data !== undefined}
 	<div class="p-4 overflow-y-scroll min-h-full-minus-nav">
 		<Flex justify="between" classes="w-full" align="start">
-			<div>
-				<h5 class="capitalize">{table.name}</h5>
-				<p class="m-0 text-gray-600 text-xss">{data.length} Einträge gefunden</p>
-			</div>
+			<EntriesFound tableName="{table.table}" length="{data.length}" />
 			{#if table.getPermissions().create === true}
 				<slot name="create" />
 			{/if}

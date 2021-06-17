@@ -6,7 +6,7 @@
 	export let id = '';
 	export let center = false;
 
-	export const blueprint = {
+	export let blueprint = {
 		header: new ShortText('Titel'),
 		subHeader: new ShortText('Zusätzlicher Text'),
 	};

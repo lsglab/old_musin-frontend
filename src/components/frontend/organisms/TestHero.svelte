@@ -6,7 +6,7 @@
 	import Section from '../atoms/Section.svelte';
 	import ShortText from '../../../cms/SiteEditor/Inputs/ShortText';
 
-	export const blueprint = {
+	export let blueprint = {
 		button: new Link(),
 		children: [AwardImage],
 		header: new ShortText('Städtisches Louise Schroeder Gymnasium München'),

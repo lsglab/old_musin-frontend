@@ -5,7 +5,7 @@
 	export let justify = both || 'start';
 	export let align = both || 'stretch';
 
-	export const blueprint = {};
+	export let blueprint = {};
 
 	export let classes = '';
 </script>

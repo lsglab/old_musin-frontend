@@ -1,5 +1,5 @@
 <script>
-	export const blueprint = {};
+	export let blueprint = {};
 
 	export let classes = '';
 </script>

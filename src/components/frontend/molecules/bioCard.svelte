@@ -7,7 +7,7 @@
 	import ShortText from '../../../cms/SiteEditor/Inputs/ShortText';
 
 	// blueprint for the component
-	export const blueprint = {
+	export let blueprint = {
 		bio: new LongText('Biographie der Person'),
 		description: new ShortText('Beschreibung der Person'),
 		img: new Img('http://aeda.gov.gh/wp-content/uploads/2016/11/placeholder-person.jpg'),

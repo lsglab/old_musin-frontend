@@ -31,7 +31,7 @@
 				<div class="mt-12 lg:m-12 lg:ml-0 lg:mr-24" style="max-width: 500px">
 					<h1 class="text-3xl leading-9 break-normal text-heading">{header}</h1>
 					<h3 class="my-4 text-xl leading-5" style="font-weight: 900;">{subHeader}</h3>
-					<Button buttonText="{buttonText}" href="{buttonLink}" classes="min-w-40" />
+					<Button buttonText="{buttonText}" href="{buttonLink}" classes="min-w-40">Termine</Button>
 					<p class="mt-6 text-gray-700" style="font-size: 14px">{note}</p>
 				</div>
 			</div>

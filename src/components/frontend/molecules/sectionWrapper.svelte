@@ -17,7 +17,7 @@
 	// section height 100vh ?
 	export let fullscreen = false;
 	// describes the "object"
-	export const blueprint = {
+	export let blueprint = {
 		header: new ShortText('Titel der Section'),
 		link: new InputLink('Ein Link (optional)'),
 		subHeader: new ShortText('subHeader der Section'),

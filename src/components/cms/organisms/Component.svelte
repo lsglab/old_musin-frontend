@@ -11,6 +11,15 @@
 	const uuid = Date.now();
 	const slotId = `slot-${uuid}`;
 
+	let triggeredUpdate = false;
+
+	function triggerLayoutUpdate() {
+		console.log('updating');
+		const newList = $layout;
+		layout.set(newList);
+		triggeredUpdate = true;
+	}
+
 	function getPropertyIndex(name) {
 		return rendered.$$.props[name];
 	}
@@ -28,9 +37,13 @@
 		}
 	}
 
+	function triggerComponentUpdate() {
+		rendered.$set({ blueprint: getProperty('blueprint') });
+	}
+
 	function insertFields() {
 		loopBlueprints((blueprint, key) => {
-			blueprint[key].prepareInput(document);
+			blueprint[key].prepareInput(document, triggerComponentUpdate);
 		});
 	}
 
@@ -60,14 +73,6 @@
 		}
 	}
 
-	let triggeredUpdate = false;
-
-	function triggerUpdate() {
-		const newList = $layout;
-		layout.set(newList);
-		triggeredUpdate = true;
-	}
-
 	function childrenTypes() {
 		const blueprint = getProperty('blueprint');
 		if (blueprint && blueprint.children) {
@@ -85,7 +90,7 @@
 			checkForSlot();
 			await tick();
 			childrenTypes();
-			triggerUpdate();
+			triggerLayoutUpdate();
 		}
 	}
 
