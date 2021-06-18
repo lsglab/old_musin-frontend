@@ -19,4 +19,9 @@ export default class Link extends Base {
 				console.error('Error occured creating editor', error);
 			});
 	}
+
+	save(document) {
+		const node = document.getElementById(this.id);
+		this.data = node.innerHtml;
+	}
 }

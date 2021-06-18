@@ -1,4 +1,5 @@
 <script>
+	export let link = '/';
 	export let classes = '';
 </script>
 
@@ -8,4 +9,4 @@
 
 -->
 
-<a href="/" class="{classes} text-base text-black">LSG</a>
+<a href="{link}" class="{classes} text-base text-black">LSG</a>

@@ -33,7 +33,7 @@
 
 <div class="w-1/6 h-full shadow-lg">
 	<div class="flex flex-row items-center w-full bg-gray-100 top-nav-height padding-x">
-		<Logo />
+		<Logo link="/cms" />
 	</div>
 	{#if groups !== undefined}
 		<div class="pt-4">

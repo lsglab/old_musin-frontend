@@ -30,10 +30,10 @@
 	}
 </script>
 
-<Flex classes="top-nav-height shadow-md bg-white w-full pl-4 pr-6" justify="between" align="center">
-	<div>
+<Flex classes="top-nav-height shadow-md bg-white pl-4 pr-6" justify="between" align="center">
+	<Flex classes="h-full py-3 w-3/4" align="center" justify="between">
 		<slot />
-	</div>
+	</Flex>
 	<Flex classes="h-full" align="center" justify="center">
 		{#if user !== undefined}
 			<p class="mr-4 text-xs">{user.name}</p>

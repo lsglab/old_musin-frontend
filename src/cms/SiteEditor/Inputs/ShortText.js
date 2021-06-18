@@ -12,4 +12,9 @@ export default class ShortText extends Base {
 		ele.contenteditable = true;
 		ele.classList.add('input-outline');
 	}
+
+	save(document) {
+		const node = document.getElementById(this.id);
+		this.data = node.innerText;
+	}
 }
