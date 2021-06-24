@@ -8,8 +8,11 @@
 	let user;
 
 	onMount(async () => {
-		if (JSON.parse(sessionStorage.getItem('user')) == null) {
+		const storageUser = sessionStorage.getItem('user');
+
+		if (storageUser === 'undefined' || storageUser == null) {
 			const res = await request('http://localhost:8000/api/auth/user', 'get', {}, true);
+
 			if (!res.error) {
 				user = res.data.user;
 				sessionStorage.setItem('user', JSON.stringify(user));
@@ -30,7 +33,7 @@
 	}
 </script>
 
-<Flex classes="top-nav-height shadow-md bg-white pl-4 pr-6" justify="between" align="center">
+<Flex classes="top-nav-height shadow-md bg-white pl-4 pr-6 relative z-10" justify="between" align="center">
 	<Flex classes="h-full py-3 w-3/4" align="center" justify="between">
 		<slot />
 	</Flex>

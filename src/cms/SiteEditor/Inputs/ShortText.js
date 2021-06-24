@@ -16,5 +16,6 @@ export default class ShortText extends Base {
 	save(document) {
 		const node = document.getElementById(this.id);
 		this.data = node.innerText;
+		return super.save(document);
 	}
 }

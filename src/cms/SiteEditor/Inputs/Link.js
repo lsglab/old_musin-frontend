@@ -6,29 +6,30 @@ export default class Link extends Base {
 		super(placeholder);
 		this.type = 'link';
 		this.href = hrefPlaceholder;
+		this.editLinkID = `edit-${this.id}`;
 	}
 
-	newLink(node, id) {
+	newLink(node, id, document) {
 		return new EditLink({
 			props: {
+				data: this.data,
+				document,
 				href: this.href,
 				id,
-				placeholder: this.placeholder,
 			},
 			target: node,
 		});
 	}
 
 	prepareInput(document, triggerUpdate) {
-		const editLinkId = `edit-${this.id}`;
 		const atag = document.getElementById(this.id);
-		const editLink = this.newLink(atag, editLinkId);
+		const editLink = this.newLink(atag, this.editLinkID, document);
 
 		let closing = false;
 
 		atag.addEventListener('click', (e) => {
 			e.preventDefault();
-			document.getElementById(editLinkId);
+			document.getElementById(this.editLinkID);
 			if (!closing) {
 				editLink.$set({ visible: true });
 			} else {
@@ -47,9 +48,20 @@ export default class Link extends Base {
 
 		editLink.$on('save', (e) => {
 			this.href = e.detail.href;
-			this.placeholder = e.detail.placeholder;
+			this.data = e.detail.data;
 			triggerUpdate();
 			close();
 		});
+	}
+
+	save(document) {
+		const data = super.save(document);
+		data.href = this.href;
+		data.editLinkID = this.editLinkID;
+		return data;
+	}
+
+	deleteInput(document) {
+		document.getElementById(this.editLinkID).remove();
 	}
 }

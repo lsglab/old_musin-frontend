@@ -50,9 +50,7 @@
 				<div
 					id="{blueprint.bio.id}"
 					class="overflow-hidden text-xs leading-6 text-gray-600 {!editing ? 'max-h-40' : ''}"
-					class:collapsed>
-					{blueprint.bio.data}
-				</div>
+					class:collapsed></div>
 				<Button classes="h-8 lg:h-7 mt-5 md:w-20" buttonFunction="{click}">
 					{collapsed ? 'Weniger' : 'Mehr'}
 				</Button>

@@ -4,11 +4,8 @@ export default class Base {
 	constructor(placeholder = '') {
 		this.placeholder = placeholder;
 		this.data = this.placeholder;
+		this.type = 'base';
 		this.createUUID();
-	}
-
-	prepareInput() {
-		this.data = this.placeholder;
 	}
 
 	createUUID() {
@@ -17,6 +14,21 @@ export default class Base {
 			const r = (Math.random() * 16) | 0;
 			const v = c === 'x' ? r : (r & 0x3) | 0x8;
 			return v.toString(16);
+		});
+	}
+
+	save() {
+		return {
+			data: this.data,
+			id: this.id,
+			placeholder: this.placeholder,
+			type: this.type,
+		};
+	}
+
+	createFromData(data) {
+		Object.keys(data).forEach((key) => {
+			this[key] = data[key];
 		});
 	}
 }

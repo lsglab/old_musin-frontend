@@ -1,21 +1,24 @@
-<script>
-	import { createEventDispatcher, onMount } from 'svelte';
+<script context="module">
+	import { createEventDispatcher } from 'svelte';
+	import { files } from '../../../stores';
+
 	import Button from '../atoms/Button.svelte';
 	import EntriesFound from '../atoms/EntriesFound.svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
 	import Loading from '../atoms/Loading.svelte';
 	import request from '../../../cms/Utils/requests';
+</script>
 
+<script>
 	const dispatch = createEventDispatcher();
 
-	let data;
 	let card;
 
+	export let id;
 	export let visible = false;
 
 	async function fetchData(params) {
-		data = undefined;
-		let url = `${process.globals.apiUrl}/files?_norelations=true`;
+		let url = `${process.globals.apiUrl}/files?_norelations=true&public=true`;
 
 		if (params !== undefined) {
 			params.forEach((ele) => {
@@ -26,7 +29,7 @@
 		const res = await request(url, 'get', {}, true);
 
 		if (!res.error) {
-			data = res.data.files;
+			files.set(res.data.files);
 		}
 	}
 
@@ -38,10 +41,6 @@
 		dispatch('selected', file);
 		close();
 	}
-
-	onMount(() => {
-		fetchData();
-	});
 </script>
 
 <style>
@@ -51,15 +50,16 @@
 </style>
 
 <div
+	id="{id}"
 	bind:this="{card}"
 	class="fixed duration-200 bg-white rounded-lg opacity-0 pointer-events-none shadow-equal left-10 right-10 top-10 bottom-10"
 	style="z-index:100"
 	class:visible>
 	<div class="float-right m-2 text-2xl text-gray-500 cursor-pointer material-icons" on:click="{close}">close</div>
 	<div class="p-5">
-		{#if data !== undefined}
+		{#if $files !== undefined}
 			<Flex classes="mt-1" justify="between">
-				<EntriesFound classes="mb-6" tableName="Dateien" length="{data.length}" />
+				<EntriesFound classes="mb-6" tableName="Dateien" length="{$files.length}" />
 				<Button
 					classes="h-min-content "
 					buttonFunction="{() => {
@@ -72,7 +72,7 @@
 				</Button>
 			</Flex>
 			<Flex classes="w-full" align="center" wrap="{true}">
-				{#each data as file}
+				{#each $files as file}
 					<img
 						src="{process.globals.apiServer}/{file.url}"
 						alt=""

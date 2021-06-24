@@ -8,6 +8,8 @@
 	import Input from '../../both/molecules/Input.svelte';
 
 	export let component;
+	export let table;
+	export let page;
 
 	let propsOpen = true;
 	let open = true;
@@ -109,14 +111,16 @@
 							{/if}
 						</div>
 						<div class="w-5 h-5 icon-dimens">
-							{#if component.slot}
+							{#if component.slot && table.getColumnPermission(page.id, 'blueprint')}
 								<ChooseComponent parent="{component}" on:click="{openTrue}" />
 							{/if}
 						</div>
 						<div style="margin-right: 0;" class="icon-dimens">
-							<div on:click="{deleteComponent}" class="material-icons text-cmsErrorRed">
-								{#if component.parent !== undefined}delete{/if}
-							</div>
+							{#if table.getColumnPermission(page.id, 'blueprint')}
+								<div on:click="{deleteComponent}" class="material-icons text-cmsErrorRed">
+									{#if component.parent !== undefined}delete{/if}
+								</div>
+							{/if}
 						</div>
 					</Flex>
 				</Flex>
@@ -127,6 +131,7 @@
 						<Input
 							on:blur="{triggerUpdate}"
 							id="{key}"
+							readonly="{table.getReadOnly(page.id, 'blueprint')}"
 							justify="between"
 							classes="w-full my-1"
 							inputClasses="{getType(component.props[key]) === 'radio' ? 'h-3 w-6' : 'h-7'}"
@@ -142,7 +147,7 @@
 	</Flex>
 	{#if open}
 		{#each component.children as child}
-			<svelte:self component="{child}" />
+			<svelte:self component="{child}" table="{table}" page="{page}" />
 		{/each}
 	{/if}
 </div>

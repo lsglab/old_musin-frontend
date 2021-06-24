@@ -126,17 +126,24 @@ export default class Table extends Base {
 		return data;
 	}
 
-	getReadOnly(id, name = undefined) {
+	getColumnPermission(id, name) {
 		const permissions = this.getPermissions(id);
 
 		if (id === 'new') {
-			return !permissions.create;
+			return permissions.create;
 		}
+
+		return this.editable.includes(name) && permissions.edit;
+	}
+
+	getReadOnly(id, name = undefined) {
+		const permissions = this.getPermissions(id);
+
 		if (name === undefined) {
 			return !permissions.edit;
 		}
 
-		return !(this.editable.includes(name) && permissions.edit);
+		return !this.getColumnPermission(id, name);
 	}
 
 	modifyData(ele) {

@@ -1,7 +1,7 @@
 import Base from './Base';
 
-export default class Link extends Base {
-	constructor(placeholder = 'https://example.com') {
+export default class LongText extends Base {
+	constructor(placeholder = 'Long Text') {
 		super(placeholder);
 		this.type = 'longText';
 	}
@@ -10,10 +10,12 @@ export default class Link extends Base {
 		const module = await import('@ckeditor/ckeditor5-build-inline');
 		const inlineEditor = module.default;
 		const node = document.getElementById(this.id);
+
 		inlineEditor
 			.create(node)
 			.then((editor) => {
-				console.log(editor);
+				this.editor = editor;
+				this.editor.setData(this.data);
 			})
 			.catch((error) => {
 				console.error('Error occured creating editor', error);
@@ -21,7 +23,7 @@ export default class Link extends Base {
 	}
 
 	save(document) {
-		const node = document.getElementById(this.id);
-		this.data = node.innerHtml;
+		this.data = this.editor.getData();
+		return super.save(document);
 	}
 }

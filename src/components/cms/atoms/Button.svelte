@@ -21,7 +21,7 @@
 	let domLoaded = false;
 
 	function configAction() {
-		if (!domLoaded) return;
+		if (!domLoaded || button === undefined) return;
 		button.disabled = disabled;
 	}
 

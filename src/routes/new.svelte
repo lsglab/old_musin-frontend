@@ -1,7 +1,7 @@
 <script>
 	/* eslint-disable import/first */
 
-	import { layout } from '../stores';
+	import { files, layout, page, pageTable } from '../stores';
 	import { onMount } from 'svelte';
 	import Component from '../components/cms/organisms/Component.svelte';
 	import EditComponent from '../cms/SiteEditor/EditComponent';
@@ -17,11 +17,13 @@
 	import SectionWrapper from '../components/frontend/molecules/sectionWrapper.svelte';
 	import StaffCard from '../components/frontend/molecules/staffCard.svelte';
 	import TestHero from '../components/frontend/organisms/TestHero.svelte';
+	import request from '../cms/Utils/requests';
 
 	const components = [
 		BioCard,
 		TestHero,
 		AwardImage,
+		Empty,
 		Calender,
 		SectionWrapper,
 		AboutSection,
@@ -32,6 +34,14 @@
 
 	let cCreated = false;
 
+	async function fetchData() {
+		const res = await request(`${process.globals.apiUrl}/files?_norelations=true&public=true`, 'get', {}, true);
+
+		if (!res.error) {
+			files.set(res.data.files);
+		}
+	}
+
 	onMount(() => {
 		layout.set(new EditComponent(Empty, undefined));
 
@@ -40,7 +50,6 @@
 
 		layout.subscribe((ele) => {
 			if (!cCreated) {
-				console.log(ele);
 				const event = new CustomEvent('c_update', { detail: ele });
 				window.parent.document.dispatchEvent(event);
 			} else {
@@ -56,6 +65,31 @@
 			},
 			false
 		);
+
+		window.document.addEventListener(
+			'c_resume',
+			(e) => {
+				const blueprint = e.detail.blueprint;
+				const comp = new EditComponent(e.detail.table, e.detail.page.id).createFromData(
+					blueprint,
+					components,
+					null
+				);
+				layout.set(comp);
+			},
+			false
+		);
+
+		window.document.addEventListener(
+			'c_fetched',
+			(e) => {
+				pageTable.set(e.detail.table);
+				page.set(e.detail.page);
+			},
+			false
+		);
+
+		fetchData();
 	});
 </script>
 

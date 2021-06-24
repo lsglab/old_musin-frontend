@@ -6,17 +6,21 @@ export default class Img extends Base {
 		super(placeholder);
 		this.type = 'img';
 		this.description = '';
+		this.selectMediaID = `edit-${this.id}`;
 	}
 
 	prepareInput(document, triggerUpdate) {
 		const img = document.getElementById(this.id);
 		const selectMedia = new SelectMedia({
-			props: {},
+			props: {
+				id: this.selectMediaID,
+			},
 			target: document.getElementById('app'),
 		});
 
 		img.addEventListener('click', (e) => {
 			e.preventDefault();
+
 			selectMedia.$set({ visible: true });
 		});
 
@@ -26,5 +30,16 @@ export default class Img extends Base {
 			this.description = file.description;
 			triggerUpdate();
 		});
+	}
+
+	save(document) {
+		const data = super.save(document);
+		data.description = this.description;
+		data.selectMediaID = this.selectMediaID;
+		return data;
+	}
+
+	deleteInput(document) {
+		document.getElementById(this.selectMediaID).remove();
 	}
 }

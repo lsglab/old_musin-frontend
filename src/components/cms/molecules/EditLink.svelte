@@ -1,11 +1,14 @@
-<script>
+<script context="module">
 	import { createEventDispatcher, onMount } from 'svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
 	import Input from '../../both/molecules/Input.svelte';
+</script>
 
-	export let placeholder;
+<script>
+	export let data;
 	export let id;
 	export let href = '';
+	export let document;
 
 	const dispatch = createEventDispatcher();
 
@@ -20,8 +23,8 @@
 
 	function save() {
 		dispatch('save', {
+			data,
 			href,
-			placeholder,
 		});
 		visible = false;
 	}
@@ -79,7 +82,7 @@
 	class="absolute rounded-sm z-50 cursor-default p-2 origin-center bg-white border border-gray-400 border-solid shadow-md pos {visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}"
 	style="transform: translate(-50%,-50%)">
 	<Flex align="center">
-		<Input id="text-{id}" classes="mx-2" type="text" bind:value="{placeholder}" />
+		<Input id="text-{id}" classes="mx-2" type="text" bind:value="{data}" />
 		<Input id="link-{id}" classes="mx-2" type="url" bind:value="{href}" placeholder="Url des Links" />
 		<div on:click="{save}" class="material-icons text-cmsSuccessGreen">done</div>
 		<div on:click="{close}" class="material-icons text-cmsErrorRed">close</div>

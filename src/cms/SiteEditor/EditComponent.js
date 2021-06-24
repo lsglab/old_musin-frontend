@@ -1,6 +1,12 @@
+import Img from './Inputs/Img';
+import Link from './Inputs/Link';
+import LongText from './Inputs/LongText';
+import ShortText from './Inputs/ShortText';
+
 export default class EditComponent {
-	constructor(component, parent) {
+	constructor(component = undefined, parent = undefined) {
 		this.component = component;
+		this.blueprint = {};
 		this.children = [];
 		this.childrenTypes = [];
 		this.props = {};
@@ -14,5 +20,79 @@ export default class EditComponent {
 		if (find !== undefined) {
 			this.children.splice(find, 1);
 		}
+	}
+
+	save(document) {
+		const keys = Object.keys(this.blueprint);
+
+		const data = {
+			blueprint: {},
+			children: [],
+			childrenTypes: this.childrenTypes,
+			componentName: this.component.name,
+			props: this.props,
+			slot: this.slot,
+		};
+
+		keys.forEach((key) => {
+			if (key !== 'children') {
+				data.blueprint[key] = this.blueprint[key].save(document);
+			}
+		});
+
+		this.children.forEach((ele) => {
+			data.children.push(ele.save(document));
+		});
+
+		return data;
+	}
+
+	createFromData(data, components, parent = null) {
+		function createBlueprint(blueprint) {
+			function create(object) {
+				object.createFromData(blueprint);
+				return object;
+			}
+
+			switch (blueprint.type) {
+				case 'img':
+					return create(new Img());
+				case 'link':
+					return create(new Link());
+				case 'shortText':
+					return create(new ShortText());
+				case 'longText':
+					return create(new LongText());
+				default:
+			}
+
+			return false;
+		}
+
+		this.component = components.find((ele) => {
+			return ele.name === data.componentName;
+		});
+
+		this.children = data.children;
+		this.childrenTypes = data.childrenTypes;
+		this.props = data.props;
+		this.parent = parent;
+		this.slot = data.slot;
+
+		Object.keys(data.blueprint).forEach((key) => {
+			this.blueprint[key] = createBlueprint(data.blueprint[key]);
+		});
+
+		this.childrenTypes.forEach((type, i) => {
+			if (i === 0) this.blueprint.children = [];
+			const component = components.find((comp) => comp.name === type);
+			this.blueprint.children.push(component);
+		});
+
+		this.children = this.children.map((child) => {
+			return new EditComponent().createFromData(child, components, this);
+		});
+
+		return this;
 	}
 }
