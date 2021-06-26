@@ -42,8 +42,6 @@
 			current.files.push(file);
 		});
 
-		console.log('sorted', sorted);
-
 		files = sorted;
 	}
 

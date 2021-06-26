@@ -10,8 +10,13 @@
 	import TopNav from '../../../components/cms/molecules/TopNav.svelte';
 	import request from '../../../cms/Utils/requests';
 
+	let domLoaded;
+	let cUpdate = false;
+
 	export async function preload({ params }) {
 		const id = params.slug;
+		domLoaded = false;
+		cUpdate = false;
 
 		return { id };
 	}
@@ -19,7 +24,6 @@
 
 <script>
 	export let id;
-	let cUpdate = false;
 	let table;
 	let data;
 	let errors = {};
@@ -134,7 +138,27 @@
 		return errors[inputName] !== undefined ? errors[inputName][0] : false;
 	}
 
+	async function fetch() {
+		if (domLoaded !== true) return;
+
+		// wait till iframe is mounted so that all events work
+		window.document.addEventListener('iframe_mounted', async () => {
+			await fetchTable();
+			await fetchData();
+
+			cUpdate = false;
+
+			const event = new CustomEvent('c_fetched', { detail: { page: data, table } });
+			document.getElementById('iframe').contentWindow.document.dispatchEvent(event);
+		});
+	}
+
 	onMount(async () => {
+		layout.set(0);
+		console.log('layout slug', $layout);
+		console.log('cUpdate slug', cUpdate);
+		domLoaded = true;
+
 		window.document.addEventListener(
 			'components',
 			(e) => {
@@ -146,6 +170,7 @@
 		window.document.addEventListener(
 			'c_update',
 			(e) => {
+				console.log('slug c_updating');
 				cUpdate = true;
 				layout.set(e.detail);
 			},
@@ -153,18 +178,18 @@
 		);
 
 		layout.subscribe((ele) => {
+			console.log('slug layout change wants to send --', cUpdate);
 			if (!cUpdate) {
+				console.log('slug layout change');
 				const event = new CustomEvent('c_created', { detail: ele });
 				document.getElementById('iframe').contentDocument.dispatchEvent(event);
 			} else {
 				cUpdate = false;
 			}
+			console.log('slug layout change leaving --', cUpdate);
 		});
 
-		await fetchTable();
-		await fetchData();
-		const event = new CustomEvent('c_fetched', { detail: { page: data, table } });
-		document.getElementById('iframe').contentDocument.dispatchEvent(event);
+		fetch();
 	});
 </script>
 
