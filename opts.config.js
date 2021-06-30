@@ -88,7 +88,6 @@ const terserConfig = () => ({
 	},
 	format: {
 		indent_level: 0,
-		semicolons: false,
 		webkit: true,
 	},
 	keep_classnames: true,
