@@ -1,6 +1,7 @@
 <script>
 	/* eslint-disable import/first */
-	import { compConfig, layout } from '../../../stores';
+	import { compConfig } from '../../../stores';
+	import { createEventDispatcher } from 'svelte';
 	import Card from '../../frontend/atoms/Card.svelte';
 	import EditComponent from '../../../cms/SiteEditor/EditComponent';
 	import Flex from '../../both/atoms/Flex.svelte';
@@ -8,17 +9,14 @@
 	let visible = false;
 	export let parent;
 
+	const dispatch = createEventDispatcher();
+
 	const components = $compConfig.filter((ele) => {
 		return parent.childrenTypes.length === 0 || parent.childrenTypes.includes(ele.name);
 	});
 
 	function componentChosen(component) {
-		parent.children.push(new EditComponent(component, parent));
-
-		const newList = $layout;
-
-		layout.set(newList);
-
+		dispatch('chosen', new EditComponent(component, parent));
 		visible = false;
 	}
 </script>

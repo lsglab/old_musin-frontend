@@ -1,6 +1,6 @@
 <script context="module">
-	import { compConfig, layout } from '../../../stores';
-	import { onDestroy, onMount } from 'svelte/internal';
+	import { compConfig } from '../../../stores';
+	import { onMount } from 'svelte/internal';
 	import Button from '../../../components/cms/atoms/Button.svelte';
 	import Flex from '../../../components/both/atoms/Flex.svelte';
 	import Input from '../../../components/both/molecules/Input.svelte';
@@ -10,16 +10,8 @@
 	import TopNav from '../../../components/cms/molecules/TopNav.svelte';
 	import request from '../../../cms/Utils/requests';
 
-	let cUpdate = false;
-	let initialized = false;
-	let domLoaded = false;
-
 	export async function preload({ params }) {
 		const id = params.slug;
-
-		cUpdate = false;
-		initialized = false;
-		domLoaded = false;
 
 		return { id };
 	}
@@ -31,7 +23,10 @@
 	let data;
 	let errors = {};
 	let disabled = false;
-	let unsubscribe;
+	let initialized = false;
+	let domLoaded = false;
+
+	let layout;
 
 	async function fetchTable() {
 		const res = await request(`${process.globals.apiUrl}/tables?table=sites`, 'get', {}, true);
@@ -97,7 +92,7 @@
 	}
 
 	function prepareData() {
-		const component = $layout;
+		const component = layout;
 
 		// get the document of the i frame
 		const doc = document.getElementById('iframe').contentWindow.document;
@@ -163,7 +158,6 @@
 	}
 
 	onMount(() => {
-		layout.set(0);
 		domLoaded = true;
 
 		window.document.addEventListener(
@@ -177,31 +171,21 @@
 		window.document.addEventListener(
 			'c_update',
 			(e) => {
-				cUpdate = true;
-				layout.set(e.detail);
+				layout = e.detail;
 			},
 			false
 		);
-
-		unsubscribe = layout.subscribe((ele) => {
-			if (!cUpdate && initialized === true) {
-				const event = new CustomEvent('c_created', { detail: ele });
-				document.getElementById('iframe').contentDocument.dispatchEvent(event);
-			} else {
-				cUpdate = false;
-			}
-		});
 
 		fetch();
 
 		initialized = true;
 	});
 
-	onDestroy(() => {
-		if (initialized) {
-			unsubscribe();
-		}
-	});
+	function sendLayoutUpdate() {
+		layout = layout;
+		const event = new CustomEvent('c_created', { detail: layout });
+		document.getElementById('iframe').contentDocument.dispatchEvent(event);
+	}
 </script>
 
 <TopNav>
@@ -262,8 +246,8 @@
 		</div>
 	</div>
 	<div class="w-3/12 pr-2 overflow-y-scroll border-l-2 border-gray-300 border-solid full-minus-nav max">
-		{#if $layout !== 0 && table !== undefined && data !== undefined}
-			<Node component="{$layout}" table="{table}" page="{data}" />
+		{#if layout !== undefined && initialized && table !== undefined && data !== undefined}
+			<Node on:update="{sendLayoutUpdate}" bind:component="{layout}" table="{table}" page="{data}" />
 		{/if}
 	</div>
 </Flex>

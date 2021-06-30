@@ -1,8 +1,11 @@
 <script>
 	/* eslint-disable import/first */
-	import { afterUpdate, tick } from 'svelte';
-	import { layout, page, pageTable } from '../../../stores';
+	import { afterUpdate, createEventDispatcher, tick } from 'svelte';
+	import { page, pageTable } from '../../../stores';
 	import Flex from '../../both/atoms/Flex.svelte';
+
+	const dispatch = createEventDispatcher();
+
 	// import ShortText from './shortText.svelte';
 
 	export let component;
@@ -24,8 +27,7 @@
 	}
 
 	function triggerLayoutUpdate() {
-		const newList = $layout;
-		layout.set(newList);
+		dispatch('update', {});
 		triggeredUpdate = true;
 	}
 
@@ -122,7 +124,7 @@
 	{#if hasBlueprint}
 		<svelte:component blueprint={component.blueprint} this="{component.component}" bind:this="{rendered}" {...component.props}>
 			{#each component.children as child}
-				<svelte:self component="{child}" />
+				<svelte:self bind:component="{child}" on:update={triggerLayoutUpdate} />
 			{:else}
 				<div id="{slotId}" class="w-full p-10 h-60">
 					<Flex classes="w-full border-4 border-gray-300 border-dashed rounded-lg h-full" justify="center" align="center">
@@ -134,7 +136,7 @@
 	{:else}
 		<svelte:component this="{component.component}" bind:this="{rendered}" {...component.props}>
 			{#each component.children as child}
-				<svelte:self component="{child}" />
+				<svelte:self bind:component="{child}" on:update={triggerLayoutUpdate} />
 			{:else}
 				<div id="{slotId}" class="w-full p-10 h-60">
 					<Flex classes="w-full border-4 border-gray-300 border-dashed rounded-lg h-full" justify="center" align="center">

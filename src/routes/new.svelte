@@ -1,8 +1,6 @@
 <script>
-	/* eslint-disable import/first */
-
-	import { files, layout, page, pageTable } from '../stores';
-	import { onDestroy, onMount } from 'svelte';
+	import { files, page, pageTable } from '../stores';
+	import { onMount } from 'svelte';
 	import Component from '../components/cms/organisms/Component.svelte';
 	import EditComponent from '../cms/SiteEditor/EditComponent';
 	import Empty from '../components/cms/atoms/Empty.svelte';
@@ -32,9 +30,8 @@
 		Flex,
 	];
 
-	let cCreated = false;
 	let initialized = false;
-	let unsubscribe;
+	let layout;
 
 	async function fetchData() {
 		const res = await request(`${process.globals.apiUrl}/files?_norelations=true&public=true`, 'get', {}, true);
@@ -44,21 +41,16 @@
 		}
 	}
 
-	onMount(() => {
-		unsubscribe = layout.subscribe((ele) => {
-			if (!cCreated && initialized === true) {
-				const event = new CustomEvent('c_update', { detail: ele });
-				window.parent.document.dispatchEvent(event);
-			} else {
-				cCreated = false;
-			}
-		});
+	function sendLayoutUpdate() {
+		const event = new CustomEvent('c_update', { detail: layout });
+		window.parent.document.dispatchEvent(event);
+	}
 
+	onMount(() => {
 		window.document.addEventListener(
 			'c_created',
 			(e) => {
-				cCreated = true;
-				layout.set(e.detail);
+				layout = e.detail;
 			},
 			false
 		);
@@ -67,12 +59,11 @@
 			'c_resume',
 			(e) => {
 				const blueprint = e.detail.blueprint;
-				const comp = new EditComponent(e.detail.table, e.detail.page.id).createFromData(
+				layout = new EditComponent(e.detail.table, e.detail.page.id).createFromData(
 					blueprint,
 					components,
 					null
 				);
-				layout.set(comp);
 				initialized = true;
 			},
 			false
@@ -81,7 +72,7 @@
 		window.document.addEventListener(
 			'c_new',
 			() => {
-				layout.set(new EditComponent(Empty, undefined));
+				layout = new EditComponent(Empty, undefined);
 				initialized = true;
 			},
 			false
@@ -103,17 +94,9 @@
 
 		const mountEvent = new CustomEvent('iframe_mounted', { detail: {} });
 		window.parent.document.dispatchEvent(mountEvent);
-
-		layout.set(new EditComponent(Empty, undefined));
-	});
-
-	onDestroy(() => {
-		if (initialized) {
-			unsubscribe();
-		}
 	});
 </script>
 
 {#if initialized === true}
-	<Component component="{$layout}" />
+	<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" />
 {/if}

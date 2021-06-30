@@ -1,11 +1,11 @@
 <script>
-	/* eslint-disable import/first */
-
+	import { createEventDispatcher } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { layout } from '../../../stores';
 	import ChooseComponent from '../organisms/ChooseComponent.svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
 	import Input from '../../both/molecules/Input.svelte';
+
+	const dispatch = createEventDispatcher();
 
 	export let component;
 	export let table;
@@ -27,9 +27,12 @@
 	}
 
 	function triggerUpdate() {
-		// trigger a layout reload
-		const newList = $layout;
-		layout.set(newList);
+		dispatch('update', {});
+	}
+
+	function addChild(event) {
+		component.children.push(event.detail);
+		triggerUpdate();
 	}
 
 	function deleteComponent() {
@@ -112,7 +115,7 @@
 						</div>
 						<div class="w-5 h-5 icon-dimens">
 							{#if component.slot && table.getColumnPermission(page.id, 'blueprint')}
-								<ChooseComponent parent="{component}" on:click="{openTrue}" />
+								<ChooseComponent parent="{component}" on:click="{openTrue}" on:chosen="{addChild}" />
 							{/if}
 						</div>
 						<div style="margin-right: 0;" class="icon-dimens">
@@ -147,7 +150,7 @@
 	</Flex>
 	{#if open}
 		{#each component.children as child}
-			<svelte:self component="{child}" table="{table}" page="{page}" />
+			<svelte:self bind:component="{child}" table="{table}" page="{page}" on:update="{triggerUpdate}" />
 		{/each}
 	{/if}
 </div>
