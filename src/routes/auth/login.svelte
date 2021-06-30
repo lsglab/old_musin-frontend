@@ -51,6 +51,7 @@
 	});
 </script>
 
+<a href="/cms" class="hidden" alt="">cms</a>
 <Section classes="h-full">
 	<Flex justify="center" align="center" classes="h-full">
 		<Form classes="w-64" id="login-form" header="Login" subHeader="Bittle melden sie sich an" error="{error}">

@@ -2,7 +2,7 @@
 	/* eslint-disable import/first */
 
 	import { files, layout, page, pageTable } from '../stores';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import Component from '../components/cms/organisms/Component.svelte';
 	import EditComponent from '../cms/SiteEditor/EditComponent';
 	import Empty from '../components/cms/atoms/Empty.svelte';
@@ -33,6 +33,8 @@
 	];
 
 	let cCreated = false;
+	let initialized = false;
+	let unsubscribe;
 
 	async function fetchData() {
 		const res = await request(`${process.globals.apiUrl}/files?_norelations=true&public=true`, 'get', {}, true);
@@ -43,30 +45,18 @@
 	}
 
 	onMount(() => {
-		console.log('new layout', $layout);
-		console.log('new cCreated', cCreated);
-
-		layout.set(new EditComponent(Empty, undefined));
-
-		const compEvent = new CustomEvent('components', { detail: components });
-		window.parent.document.dispatchEvent(compEvent);
-
-		layout.subscribe((ele) => {
-			console.log('new layout change wants to send --', cCreated);
-			if (!cCreated) {
-				console.log('new layout change');
+		unsubscribe = layout.subscribe((ele) => {
+			if (!cCreated && initialized === true) {
 				const event = new CustomEvent('c_update', { detail: ele });
 				window.parent.document.dispatchEvent(event);
 			} else {
 				cCreated = false;
 			}
-			console.log('new layout change leaving', cCreated);
 		});
 
 		window.document.addEventListener(
 			'c_created',
 			(e) => {
-				console.log('c_created');
 				cCreated = true;
 				layout.set(e.detail);
 			},
@@ -83,6 +73,16 @@
 					null
 				);
 				layout.set(comp);
+				initialized = true;
+			},
+			false
+		);
+
+		window.document.addEventListener(
+			'c_new',
+			() => {
+				layout.set(new EditComponent(Empty, undefined));
+				initialized = true;
 			},
 			false
 		);
@@ -90,7 +90,6 @@
 		window.document.addEventListener(
 			'c_fetched',
 			(e) => {
-				console.log('c_fetched');
 				pageTable.set(e.detail.table);
 				page.set(e.detail.page);
 			},
@@ -99,11 +98,22 @@
 
 		fetchData();
 
+		const compEvent = new CustomEvent('components', { detail: components });
+		window.parent.document.dispatchEvent(compEvent);
+
 		const mountEvent = new CustomEvent('iframe_mounted', { detail: {} });
 		window.parent.document.dispatchEvent(mountEvent);
+
+		layout.set(new EditComponent(Empty, undefined));
+	});
+
+	onDestroy(() => {
+		if (initialized) {
+			unsubscribe();
+		}
 	});
 </script>
 
-{#if $layout !== 0}
+{#if initialized === true}
 	<Component component="{$layout}" />
 {/if}

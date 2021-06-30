@@ -31,7 +31,7 @@
 	}
 </style>
 
-<div class="w-1/6 h-full shadow-lg">
+<div class="relative z-10 w-1/6 h-full shadow-lg">
 	<div class="flex flex-row items-center w-full bg-gray-100 top-nav-height padding-x">
 		<Logo link="/cms" />
 	</div>

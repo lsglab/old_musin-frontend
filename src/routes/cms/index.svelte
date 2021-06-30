@@ -3,3 +3,4 @@
 </script>
 
 <TopNav />
+<a class="hidden" alt="" href="/new">d</a>

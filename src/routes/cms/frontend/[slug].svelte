@@ -1,6 +1,6 @@
 <script context="module">
 	import { compConfig, layout } from '../../../stores';
-	import { onMount } from 'svelte/internal';
+	import { onDestroy, onMount } from 'svelte/internal';
 	import Button from '../../../components/cms/atoms/Button.svelte';
 	import Flex from '../../../components/both/atoms/Flex.svelte';
 	import Input from '../../../components/both/molecules/Input.svelte';
@@ -10,13 +10,16 @@
 	import TopNav from '../../../components/cms/molecules/TopNav.svelte';
 	import request from '../../../cms/Utils/requests';
 
-	let domLoaded;
 	let cUpdate = false;
+	let initialized = false;
+	let domLoaded = false;
 
 	export async function preload({ params }) {
 		const id = params.slug;
-		domLoaded = false;
+
 		cUpdate = false;
+		initialized = false;
+		domLoaded = false;
 
 		return { id };
 	}
@@ -28,6 +31,7 @@
 	let data;
 	let errors = {};
 	let disabled = false;
+	let unsubscribe;
 
 	async function fetchTable() {
 		const res = await request(`${process.globals.apiUrl}/tables?table=sites`, 'get', {}, true);
@@ -37,14 +41,8 @@
 		}
 	}
 
-	function setData(resData) {
-		data = resData;
+	function setData() {
 		data.filename = data.filename.split('.')[0];
-		/* for some reason this has to be parsed twice ??? */
-		const parsed = JSON.parse(JSON.parse(resData.blueprint));
-
-		const event = new CustomEvent('c_resume', { detail: { blueprint: parsed, page: data, table } });
-		document.getElementById('iframe').contentDocument.dispatchEvent(event);
 	}
 
 	async function fetchData() {
@@ -60,7 +58,8 @@
 		const res = await request(`${process.globals.apiUrl}/sites?id=${id}`, 'get', {}, true);
 
 		if (res.status === 200) {
-			setData(res.data.sites[0]);
+			data = res.data.sites[0];
+			setData();
 		}
 	}
 
@@ -75,7 +74,8 @@
 		const res = await request(`${process.globals.apiUrl}/sites?id=${id}`, 'put', body, true);
 
 		if (res.status === 200) {
-			setData(res.data.sites[0]);
+			data = res.data.sites[0];
+			setData();
 			errors = {};
 		} else if (res.status === 400) {
 			errors = res.data;
@@ -146,17 +146,24 @@
 			await fetchTable();
 			await fetchData();
 
-			cUpdate = false;
-
-			const event = new CustomEvent('c_fetched', { detail: { page: data, table } });
+			let event = new CustomEvent('c_fetched', { detail: { page: data, table } });
 			document.getElementById('iframe').contentWindow.document.dispatchEvent(event);
+
+			if (id !== 'new') {
+				/* for some reason this has to be parsed twice ??? */
+				const blueprint = JSON.parse(JSON.parse(data.blueprint));
+
+				event = new CustomEvent('c_resume', { detail: { blueprint, page: data, table } });
+				document.getElementById('iframe').contentDocument.dispatchEvent(event);
+			} else {
+				event = new CustomEvent('c_new', {});
+				document.getElementById('iframe').contentDocument.dispatchEvent(event);
+			}
 		});
 	}
 
-	onMount(async () => {
+	onMount(() => {
 		layout.set(0);
-		console.log('layout slug', $layout);
-		console.log('cUpdate slug', cUpdate);
 		domLoaded = true;
 
 		window.document.addEventListener(
@@ -170,26 +177,30 @@
 		window.document.addEventListener(
 			'c_update',
 			(e) => {
-				console.log('slug c_updating');
 				cUpdate = true;
 				layout.set(e.detail);
 			},
 			false
 		);
 
-		layout.subscribe((ele) => {
-			console.log('slug layout change wants to send --', cUpdate);
-			if (!cUpdate) {
-				console.log('slug layout change');
+		unsubscribe = layout.subscribe((ele) => {
+			if (!cUpdate && initialized === true) {
 				const event = new CustomEvent('c_created', { detail: ele });
 				document.getElementById('iframe').contentDocument.dispatchEvent(event);
 			} else {
 				cUpdate = false;
 			}
-			console.log('slug layout change leaving --', cUpdate);
 		});
 
 		fetch();
+
+		initialized = true;
+	});
+
+	onDestroy(() => {
+		if (initialized) {
+			unsubscribe();
+		}
 	});
 </script>
 
@@ -222,7 +233,6 @@
 		<Loading diameter="8" />
 	{/if}
 </TopNav>
-
 <Flex classes="w-full">
 	<div class="w-9/12">
 		<Flex classes="h-1/10 pl-4 border-b-2 border-gray-300" align="center">

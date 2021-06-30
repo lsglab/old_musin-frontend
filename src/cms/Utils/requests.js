@@ -6,6 +6,7 @@ export default async function request(url, method, data, token) {
 	const config = {
 		data,
 		headers: {
+			'Accept': 'application/json',
 			'Content-Type': 'application/json',
 		},
 		method,

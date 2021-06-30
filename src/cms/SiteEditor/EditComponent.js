@@ -48,6 +48,9 @@ export default class EditComponent {
 	}
 
 	createFromData(data, components, parent = null) {
+		console.log('data', data);
+		console.log('components', components);
+
 		function createBlueprint(blueprint) {
 			function create(object) {
 				object.createFromData(blueprint);

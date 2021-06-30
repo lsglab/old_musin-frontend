@@ -4,6 +4,7 @@
 	import SectionWrapper from '../components/frontend/molecules/sectionWrapper.svelte';
 </script>
 
+<a href="/auth/login" class="hidden" alt="">d</a>
 <Hero
 	header="Städtisches Louise Schroeder Gymnasium München"
 	subHeader="Naturwissenschaftlich-technologisches und sprachliches Gymnasium."
