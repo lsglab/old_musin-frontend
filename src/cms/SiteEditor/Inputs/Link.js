@@ -23,6 +23,7 @@ export default class Link extends Base {
 
 	prepareInput(document, triggerUpdate) {
 		const atag = document.getElementById(this.id);
+
 		const editLink = this.newLink(atag, this.editLinkID, document);
 
 		let closing = false;

@@ -22,9 +22,22 @@ export default class EditComponent {
 		}
 	}
 
-	save(document) {
+	blueprintKeys(callback) {
 		const keys = Object.keys(this.blueprint);
+		keys.forEach((key) => {
+			if (key !== 'children') {
+				callback(key);
+			}
+		});
+	}
 
+	eachChildren(callback) {
+		this.children.forEach((child) => {
+			callback(child);
+		});
+	}
+
+	save(document) {
 		const data = {
 			blueprint: {},
 			children: [],
@@ -34,23 +47,24 @@ export default class EditComponent {
 			slot: this.slot,
 		};
 
-		keys.forEach((key) => {
-			if (key !== 'children') {
-				data.blueprint[key] = this.blueprint[key].save(document);
-			}
+		this.blueprintKeys((key) => {
+			data.blueprint[key] = this.blueprint[key].save(document);
 		});
 
-		this.children.forEach((ele) => {
-			data.children.push(ele.save(document));
+		this.eachChildren((child) => {
+			child.save(document);
 		});
 
 		return data;
 	}
 
-	createFromData(data, components, parent = null) {
-		console.log('data', data);
-		console.log('components', components);
+	prepareInput(document) {
+		this.eachChildren((child) => {
+			child.prepareInput(document);
+		});
+	}
 
+	createFromData(data, components, parent = null) {
 		function createBlueprint(blueprint) {
 			function create(object) {
 				object.createFromData(blueprint);

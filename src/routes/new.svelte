@@ -1,6 +1,6 @@
 <script>
 	import { files, page, pageTable } from '../stores';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import Component from '../components/cms/organisms/Component.svelte';
 	import EditComponent from '../cms/SiteEditor/EditComponent';
 	import Empty from '../components/cms/atoms/Empty.svelte';
@@ -31,6 +31,7 @@
 	];
 
 	let initialized = false;
+	let reload = false;
 	let layout;
 
 	async function fetchData() {
@@ -87,6 +88,16 @@
 			false
 		);
 
+		window.document.addEventListener(
+			'c_reload',
+			async () => {
+				reload = true;
+				await tick();
+				reload = false;
+			},
+			false
+		);
+
 		fetchData();
 
 		const compEvent = new CustomEvent('components', { detail: components });
@@ -97,6 +108,6 @@
 	});
 </script>
 
-{#if initialized === true}
+{#if initialized === true && reload === false}
 	<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" />
 {/if}

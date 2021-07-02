@@ -17,7 +17,8 @@ export default class Base {
 		});
 	}
 
-	save() {
+	save(document) {
+		this.deleteInput(document);
 		return {
 			data: this.data,
 			id: this.id,

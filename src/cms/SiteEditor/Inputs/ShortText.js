@@ -18,4 +18,11 @@ export default class ShortText extends Base {
 		this.data = node.innerText;
 		return super.save(document);
 	}
+
+	deleteInput(document) {
+		const ele = document.getElementById(this.id);
+		ele.contentEditable = false;
+		ele.contenteditable = false;
+		ele.classList.remove('input-outline');
+	}
 }

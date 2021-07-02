@@ -7,6 +7,7 @@ export default class LongText extends Base {
 	}
 
 	async prepareInput(document) {
+		console.log('preparing long text input');
 		const module = await import('@ckeditor/ckeditor5-build-inline');
 		const inlineEditor = module.default;
 		const node = document.getElementById(this.id);
@@ -25,5 +26,9 @@ export default class LongText extends Base {
 	save(document) {
 		this.data = this.editor.getData();
 		return super.save(document);
+	}
+
+	deleteInput() {
+		this.editor.destroy();
 	}
 }

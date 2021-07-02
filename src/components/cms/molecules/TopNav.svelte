@@ -12,7 +12,7 @@
 
 		if (storageUser === 'undefined' || storageUser == null) {
 			const res = await request('http://localhost:8000/api/auth/user', 'get', {}, true);
-
+			console.log('res', res);
 			if (!res.error) {
 				user = res.data.user;
 				sessionStorage.setItem('user', JSON.stringify(user));

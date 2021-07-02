@@ -88,25 +88,29 @@
 		} else if (res.status === 400) {
 			errors = res.data;
 		}
+
+		// make content editable again
+		const event = new CustomEvent('c_reload');
+		document.getElementById('iframe').contentDocument.dispatchEvent(event);
+
 		disabled = false;
 	}
 
 	function prepareData() {
 		const component = layout;
 
-		// get the document of the i frame
 		const doc = document.getElementById('iframe').contentWindow.document;
-
-		const reqData = {
-			html: doc.children[0].innerHTML,
-		};
+		// get the document of the i frame
+		const reqData = {};
 
 		if (table.getColumnPermission(data.id, 'blueprint')) reqData.blueprint = JSON.stringify(component.save(doc));
 		if (table.getColumnPermission(data.id, 'filename')) reqData.filename = `${data.filename}.html`;
 		if (table.getColumnPermission(data.id, 'path')) reqData.path = data.path;
 		if (table.getColumnPermission(data.id, 'public')) reqData.public = data.public;
 
-		// get the document of the i frame
+		reqData.html = document.getElementById('iframe').contentWindow.document.children[0].innerHTML;
+
+		console.log(reqData.html);
 		return reqData;
 	}
 
