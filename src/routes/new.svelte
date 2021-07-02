@@ -32,6 +32,7 @@
 
 	let initialized = false;
 	let reload = false;
+	let saving = false;
 	let layout;
 
 	async function fetchData() {
@@ -89,6 +90,22 @@
 		);
 
 		window.document.addEventListener(
+			'c_start_saving',
+			() => {
+				saving = true;
+			},
+			false
+		);
+
+		window.document.addEventListener(
+			'c_stop_saving',
+			() => {
+				saving = false;
+			},
+			false
+		);
+
+		window.document.addEventListener(
 			'c_reload',
 			async () => {
 				reload = true;
@@ -109,5 +126,5 @@
 </script>
 
 {#if initialized === true && reload === false}
-	<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" />
+	<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" saving="{saving}" />
 {/if}

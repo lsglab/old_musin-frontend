@@ -1,6 +1,6 @@
 <script context="module">
 	import { compConfig } from '../../../stores';
-	import { onMount } from 'svelte/internal';
+	import { onMount, tick } from 'svelte/internal';
 	import Button from '../../../components/cms/atoms/Button.svelte';
 	import Flex from '../../../components/both/atoms/Flex.svelte';
 	import Input from '../../../components/both/molecules/Input.svelte';
@@ -64,6 +64,17 @@
 		window.history.go(-1);
 	}
 
+	function afterSaving() {
+		let event = new CustomEvent('c_stop_saving');
+		document.getElementById('iframe').contentDocument.dispatchEvent(event);
+
+		// make content editable again
+		event = new CustomEvent('c_reload');
+		document.getElementById('iframe').contentDocument.dispatchEvent(event);
+
+		disabled = false;
+	}
+
 	async function saveData(body) {
 		disabled = true;
 		const res = await request(`${process.globals.apiUrl}/sites?id=${id}`, 'put', body, true);
@@ -75,7 +86,7 @@
 		} else if (res.status === 400) {
 			errors = res.data;
 		}
-		disabled = false;
+		afterSaving();
 	}
 
 	async function createData(body) {
@@ -89,38 +100,39 @@
 			errors = res.data;
 		}
 
-		// make content editable again
-		const event = new CustomEvent('c_reload');
-		document.getElementById('iframe').contentDocument.dispatchEvent(event);
-
-		disabled = false;
+		afterSaving();
 	}
 
-	function prepareData() {
+	async function prepareData() {
 		const component = layout;
 
 		const doc = document.getElementById('iframe').contentWindow.document;
 		// get the document of the i frame
 		const reqData = {};
 
+		const event = new CustomEvent('c_start_saving');
+		document.getElementById('iframe').contentDocument.dispatchEvent(event);
+
 		if (table.getColumnPermission(data.id, 'blueprint')) reqData.blueprint = JSON.stringify(component.save(doc));
 		if (table.getColumnPermission(data.id, 'filename')) reqData.filename = `${data.filename}.html`;
 		if (table.getColumnPermission(data.id, 'path')) reqData.path = data.path;
 		if (table.getColumnPermission(data.id, 'public')) reqData.public = data.public;
+		// wait till dom is updated
+		await tick();
 
-		reqData.html = document.getElementById('iframe').contentWindow.document.children[0].innerHTML;
+		const string = document.getElementById('iframe').contentWindow.document.children[0].innerHTML;
+		reqData.html = ` ${string}`.slice(1);
 
 		console.log(reqData.html);
 		return reqData;
 	}
 
 	async function create() {
-		createData(prepareData());
+		createData(await prepareData());
 	}
 
-	function save() {
-		prepareData();
-		saveData(prepareData());
+	async function save() {
+		saveData(await prepareData());
 	}
 
 	function publish() {

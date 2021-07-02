@@ -9,6 +9,7 @@
 	// import ShortText from './shortText.svelte';
 
 	export let component;
+	export let saving = false;
 
 	const hasBlueprint = Object.keys(component.blueprint).length > 0;
 
@@ -124,26 +125,28 @@
 	{#if hasBlueprint}
 		<svelte:component blueprint={component.blueprint} this="{component.component}" bind:this="{rendered}" {...component.props}>
 			{#each component.children as child}
-				<svelte:self bind:component="{child}" on:update={triggerLayoutUpdate} />
-			{:else}
+				<svelte:self saving={saving} bind:component="{child}" on:update={triggerLayoutUpdate} />
+			{/each}
+			{#if saving === false && component.children.length === 0}
 				<div id="{slotId}" class="w-full p-10 h-60">
 					<Flex classes="w-full border-4 border-gray-300 border-dashed rounded-lg h-full" justify="center" align="center">
 						<div class="text-gray-300 material-icons" style="font-size: 5rem;">add</div>
 					</Flex>
 				</div>
-			{/each}
+			{/if}
 		</svelte:component>
 	{:else}
 		<svelte:component this="{component.component}" bind:this="{rendered}" {...component.props}>
 			{#each component.children as child}
-				<svelte:self bind:component="{child}" on:update={triggerLayoutUpdate} />
-			{:else}
+				<svelte:self saving={saving} bind:component="{child}" on:update={triggerLayoutUpdate} />
+			{/each}
+			{#if saving === false && component.children.length === 0}
 				<div id="{slotId}" class="w-full p-10 h-60">
 					<Flex classes="w-full border-4 border-gray-300 border-dashed rounded-lg h-full" justify="center" align="center">
 						<div class="text-gray-300 material-icons" style="font-size: 5rem;">add</div>
 					</Flex>
 				</div>
-			{/each}
+			{/if}
 		</svelte:component>
 	{/if}
 {/each}
