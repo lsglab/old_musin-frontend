@@ -72,7 +72,6 @@ const preprocessConfig = (dev) => ({
 });
 const terserConfig = () => ({
 	compress: {
-		booleans_as_integers: true,
 		defaults: true,
 		hoist_funs: true,
 		hoist_vars: true,
