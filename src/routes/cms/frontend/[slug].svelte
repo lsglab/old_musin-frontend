@@ -123,7 +123,6 @@
 		const string = document.getElementById('iframe').contentWindow.document.children[0].innerHTML;
 		reqData.html = ` ${string}`.slice(1);
 
-		console.log(reqData.html);
 		return reqData;
 	}
 

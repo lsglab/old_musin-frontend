@@ -27,8 +27,12 @@
 		return rendered.$$.ctx[getPropertyIndex(name)];
 	}
 
-	function triggerLayoutUpdate() {
+	function dispatchLayoutUpdate() {
 		dispatch('update', {});
+	}
+
+	function triggerLayoutUpdate() {
+		dispatchLayoutUpdate();
 		triggeredUpdate = true;
 	}
 
@@ -125,7 +129,7 @@
 	{#if hasBlueprint}
 		<svelte:component blueprint={component.blueprint} this="{component.component}" bind:this="{rendered}" {...component.props}>
 			{#each component.children as child}
-				<svelte:self saving={saving} bind:component="{child}" on:update={triggerLayoutUpdate} />
+				<svelte:self saving={saving} bind:component="{child}" on:update={dispatchLayoutUpdate} />
 			{/each}
 			{#if saving === false && component.children.length === 0}
 				<div id="{slotId}" class="w-full p-10 h-60">
@@ -138,7 +142,7 @@
 	{:else}
 		<svelte:component this="{component.component}" bind:this="{rendered}" {...component.props}>
 			{#each component.children as child}
-				<svelte:self saving={saving} bind:component="{child}" on:update={triggerLayoutUpdate} />
+				<svelte:self saving={saving} bind:component="{child}" on:update={dispatchLayoutUpdate} />
 			{/each}
 			{#if saving === false && component.children.length === 0}
 				<div id="{slotId}" class="w-full p-10 h-60">

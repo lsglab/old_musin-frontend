@@ -12,7 +12,6 @@ export default class EditComponent {
 		this.props = {};
 		this.parent = parent;
 		this.slot = false;
-		this.saving = false;
 	}
 
 	deleteChild(child) {
@@ -32,15 +31,7 @@ export default class EditComponent {
 		});
 	}
 
-	eachChildren(callback) {
-		this.children.forEach((child, i) => {
-			callback(child, i);
-		});
-	}
-
 	save(document) {
-		this.saving = true;
-
 		const data = {
 			blueprint: {},
 			children: [],
@@ -51,18 +42,18 @@ export default class EditComponent {
 		};
 
 		this.blueprintKeys((key) => {
+			console.log('save blueprints', key, 'name', this.component.name);
 			data.blueprint[key] = this.blueprint[key].save(document);
 		});
 
-		this.eachChildren((child) => {
+		this.children.forEach((child) => {
 			data.children.push(child.save(document));
 		});
 		return data;
 	}
 
 	prepareInput(document) {
-		this.saving = false;
-		this.eachChildren((child) => {
+		this.children.forEach((child) => {
 			child.prepareInput(document);
 		});
 	}

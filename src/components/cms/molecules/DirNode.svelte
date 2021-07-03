@@ -1,7 +1,7 @@
 <script>
 	export let dir;
 	export let first = false;
-	export let selectedFile;
+	export let selectedFile = null;
 	let open = first;
 
 	function toggleOpen() {

@@ -68,7 +68,7 @@
 	}
 
 	async function fileChanged() {
-		if (selectedFile === undefined) return;
+		if (selectedFile == null) return;
 		await tick();
 		loading = true;
 
@@ -97,7 +97,7 @@
 			<DirNode bind:selectedFile dir="{files}" first="{true}" />
 		{/if}
 	</div>
-	{#if selectedFile === undefined}
+	{#if selectedFile == null}
 		<Flex classes="w-3/4 h-full" justify="center" align="center" cols="true">
 			<div class="m-5 text-5xl text-gray-200 material-icons">note_add</div>
 			<Button href="/cms/frontend/new">Neue Seite erstellen</Button>
