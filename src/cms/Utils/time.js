@@ -39,3 +39,8 @@ export function toLocalDateString(time, options = {}, lang) {
 
 	return date.toLocaleDateString(lang, options);
 }
+
+export function formatMMDDYYYY(date, seperator = '.') {
+	const month = date.getMonth() + 1;
+	return date.getDate() + seperator + month + seperator + date.getFullYear();
+}

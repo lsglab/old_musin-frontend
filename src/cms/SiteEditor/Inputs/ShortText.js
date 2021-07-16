@@ -1,16 +1,25 @@
-import Base from './Base';
+import InputBase from './InputBase';
 
-export default class ShortText extends Base {
+export default class ShortText extends InputBase {
 	constructor(placeholder) {
 		super(placeholder);
 		this.type = 'shortText';
 	}
 
-	prepareInput(document) {
+	prepareInput(document, triggerUpdate) {
 		const ele = document.getElementById(this.id);
 		ele.contentEditable = true;
 		ele.contenteditable = true;
 		ele.classList.add('input-outline');
+
+		ele.addEventListener(
+			'input',
+			() => {
+				this.data = ele.innerText;
+				triggerUpdate();
+			},
+			false
+		);
 	}
 
 	save(document) {

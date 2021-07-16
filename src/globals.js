@@ -1,4 +1,4 @@
-const base = 'http://localhost:8000';
+const base = '';
 
 export default {
 	apiServer: base,

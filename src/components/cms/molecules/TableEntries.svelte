@@ -1,7 +1,7 @@
 <script>
 	import Button from '../atoms/Button.svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
-	import Input from '../../both/molecules/Input.svelte';
+	import Input from '../inputs/Input.svelte';
 	import Loading from '../atoms/Loading.svelte';
 	import Table from '../../../cms/Tables/table';
 	import TopNav from './TopNav.svelte';

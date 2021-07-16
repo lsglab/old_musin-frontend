@@ -94,3 +94,16 @@ $top-nav-height: 3rem;
 .input-outline:focus-visible {
 	@apply border-btnBlue p-1 border rounded-sm;
 }
+
+//styles for inputs
+.input-border-error {
+	@apply border-cmsErrorRed;
+}
+
+.input-border {
+	@apply border-2 rounded-sm focus:border-cmsBtnColor;
+}
+
+.input-readonly {
+	@apply pointer-events-none;
+}

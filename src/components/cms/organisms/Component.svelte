@@ -45,8 +45,14 @@
 		}
 	}
 
+	function componentUpdate() {
+		dispatch('component_update');
+	}
+
 	function triggerComponentUpdate() {
 		rendered.$set({ blueprint: getProperty('blueprint') });
+		component = component;
+		componentUpdate();
 	}
 
 	function insertFields() {
@@ -127,9 +133,9 @@
 	<div></div>
 {:else}
 	{#if hasBlueprint}
-		<svelte:component blueprint={component.blueprint} this="{component.component}" bind:this="{rendered}" {...component.props}>
+		<svelte:component component={component} blueprint={component.blueprint} this="{component.component}" bind:this="{rendered}" {...component.props}>
 			{#each component.children as child}
-				<svelte:self saving={saving} bind:component="{child}" on:update={dispatchLayoutUpdate} />
+				<svelte:self saving={saving} on:component_update={triggerComponentUpdate} bind:component="{child}" on:update={dispatchLayoutUpdate} />
 			{/each}
 			{#if saving === false && component.children.length === 0}
 				<div id="{slotId}" class="w-full p-10 h-60">
@@ -140,9 +146,9 @@
 			{/if}
 		</svelte:component>
 	{:else}
-		<svelte:component this="{component.component}" bind:this="{rendered}" {...component.props}>
+		<svelte:component component={component} this="{component.component}" bind:this="{rendered}" {...component.props}>
 			{#each component.children as child}
-				<svelte:self saving={saving} bind:component="{child}" on:update={dispatchLayoutUpdate} />
+				<svelte:self on:component_update={triggerComponentUpdate}  saving={saving} bind:component="{child}" on:update={dispatchLayoutUpdate} />
 			{/each}
 			{#if saving === false && component.children.length === 0}
 				<div id="{slotId}" class="w-full p-10 h-60">

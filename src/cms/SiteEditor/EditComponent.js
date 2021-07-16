@@ -2,9 +2,11 @@ import Img from './Inputs/Img';
 import Link from './Inputs/Link';
 import LongText from './Inputs/LongText';
 import ShortText from './Inputs/ShortText';
+import WebBase from './WebBase';
 
-export default class EditComponent {
+export default class EditComponent extends WebBase {
 	constructor(component = undefined, parent = undefined) {
+		super();
 		this.component = component;
 		this.blueprint = {};
 		this.children = [];

@@ -1,5 +1,5 @@
 <script>
-	import BasicInput from '../atoms/BasicInput.svelte';
+	import BasicInput from './BasicInput.svelte';
 
 	export let type;
 	export let name = '';

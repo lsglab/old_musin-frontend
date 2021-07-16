@@ -5,7 +5,7 @@
 	import AddRole from '../../../../components/cms/organisms/AddRole.svelte';
 	import Button from '../../../../components/cms/atoms/Button.svelte';
 	import Flex from '../../../../components/both/atoms/Flex.svelte';
-	import Input from '../../../../components/both/molecules/Input.svelte';
+	import Input from '../../../../components/cms/inputs/Input.svelte';
 	import Loading from '../../../../components/cms/atoms/Loading.svelte';
 	import Table from '../../../../cms/Tables/table';
 	import TopNav from '../../../../components/cms/molecules/TopNav.svelte';
@@ -269,7 +269,7 @@
 
 <style lang="scss">
 	.side-card {
-		@apply shadow-equal-sm w-full p-2;
+		@apply shadow-cms-equal-sm w-full p-2;
 
 		& > h5 {
 			@apply text-xss text-black font-bold;
@@ -298,7 +298,7 @@
 		</Flex>
 		<Flex align="start">
 			<Flex classes="w-3/4" cols="true">
-				<Flex classes="w-full mb-4 p-2 shadow-equal-sm h-auto" wrap="true">
+				<Flex classes="w-full mb-4 p-2 shadow-cms-equal-sm h-auto" wrap="true">
 					{#each columns as column}
 						<div class="m-2 w-80">
 							<Input
@@ -352,7 +352,7 @@
 					{/if}
 				{/each}
 				{#if table.getPermissions().delete && id !== 'new'}
-					<Button buttonFunction="{deleteOne}" classes="w-full shadow-equal-sm" color="bg-cmsErrorRed">
+					<Button buttonFunction="{deleteOne}" classes="w-full shadow-cms-equal-sm" color="bg-cmsErrorRed">
 						<Flex align="center">
 							<span class="mr-2 material-icons">delete</span>
 							<p class="text-xss">Diesen Eintrag löschen</p>

@@ -1,7 +1,7 @@
-import Base from './Base';
 import EditLink from '../../../components/cms/molecules/EditLink.svelte';
+import InputBase from './InputBase';
 
-export default class Link extends Base {
+export default class Link extends InputBase {
 	constructor(placeholder = 'Link', hrefPlaceholder = 'https://example.com') {
 		super(placeholder);
 		this.type = 'link';

@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 
 	import Flex from '../../both/atoms/Flex.svelte';
-	import Input from '../../both/molecules/Input.svelte';
+	import Input from '../inputs/Input.svelte';
 	import Loading from '../atoms/Loading.svelte';
 	import Table from '../../../cms/Tables/table';
 	import request from '../../../cms/Utils/requests';
@@ -199,7 +199,7 @@
 	}
 </style>
 
-<div class="w-full shadow-equal-sm">
+<div class="w-full shadow-cms-equal-sm">
 	{#if res === undefined}
 		<Flex classes="w-full p-5" align="center" justify="center">
 			<Loading />

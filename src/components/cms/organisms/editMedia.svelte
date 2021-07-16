@@ -7,7 +7,7 @@
 
 	import { createEventDispatcher } from 'svelte';
 	import FileOption from '../atoms/FileOption.svelte';
-	import Input from '../../both/molecules/Input.svelte';
+	import Input from '../inputs/Input.svelte';
 	import _ from 'lodash';
 	import request from '../../../cms/Utils/requests';
 	import sizeToString from '../../../cms/Utils/files';

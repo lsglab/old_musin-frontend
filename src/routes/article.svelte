@@ -1,17 +1,24 @@
 <script>
 	import { onMount } from 'svelte';
+	import Img from '../cms/SiteEditor/Inputs/Img';
+	import ShortText from '../cms/SiteEditor/Inputs/ShortText';
 
 	import Flex from '../components/both/atoms/Flex.svelte';
 	import Section from '../components/frontend/atoms/Section.svelte';
-	import Text from '../components/frontend/atoms/Text.svelte';
+
+	export let img = true;
+
+	export let blueprint = {
+		header: new ShortText('Titel'),
+		img: new Img('https://i.stack.imgur.com/y9DpT.jpg'),
+		subHeader: new ShortText('sub Header'),
+	};
 
 	let sticky = false;
 	let normOffset;
 	let y;
 	let active = 0;
 	let checked = false;
-
-	export let img = false;
 	// THIS HARDCODED LIST/OBJECT IS ONLY TEMPORARELY NECCESARY!!!!!!!!!!
 
 	const list = [
@@ -31,6 +38,8 @@
 	// is the dom loaded or not
 	let dom = false;
 
+	let slotBlueprint;
+
 	function getOffsetTop(ele) {
 		let offsetTop = 0;
 
@@ -45,7 +54,6 @@
 	}
 	// functions checks if the content-table is on the top or not
 	function isSticky() {
-		console.log('normOffset', normOffset);
 		// set the Offset the content table has when the page is first loaded
 		if (normOffset == null) {
 			normOffset = getOffsetTop(document.getElementById('content-table'));
@@ -106,6 +114,8 @@
 	onMount(() => {
 		dom = true;
 	});
+
+	$: console.log('slotBlueprint', slotBlueprint);
 </script>
 
 <style>
@@ -142,14 +152,20 @@
 		class="flex flex-col-reverse justify-center transition-none align-center article lg:grid {img ? 'lg:grid-cols-2 lg:h-80' : 'lg:grid-cols-1 h-52'}">
 		{#if img !== false}
 			<Flex justify="center" classes="w-full h-inherit">
-				<img class="object-cover w-full h-full rounded-md shadow-equal lg:w-auto" src="{img}" alt="" />
+				<img
+					id="{blueprint.img.id}"
+					class="object-cover w-full h-full rounded-md shadow-equal lg:w-auto"
+					src="{blueprint.img.data}"
+					alt="" />
 			</Flex>
 		{/if}
 		<div class="{img ? 'w-auto' : 'article-width justify-self-end'}">
 			<Flex justify="{img ? 'center' : 'start'}" align="center" classes="w-full h-full">
 				<div class="m-8 {img ? 'text-center' : 'text-left ml-0'}">
-					<h3 class="text-2xl text-heading md:text-2.5xl">Ausbildungsrichtungen am LSG</h3>
-					<p class="mt-3 text-heading2">Das ist ein sub-header</p>
+					<h3 class="text-2xl text-heading md:text-2.5xl" id="{blueprint.header.id}">
+						{blueprint.header.data}
+					</h3>
+					<p class="mt-3 text-heading2" id="{blueprint.subHeader.id}">{blueprint.subHeader.data}</p>
 				</div>
 			</Flex>
 		</div>
@@ -209,7 +225,8 @@
 					</p>
 				</div>
 				<!--Build loop for the article sections-->
-				{#each list as section, i}
+
+				<!--{#each list as section, i}
 					<div class="pt-16 m-0 art-content-sect" id="sect{i}">
 						<header>
 							<hr class="w-12 my-3 text-black border-t-0 border-b-2 border-black" />
@@ -217,7 +234,11 @@
 						</header>
 						<Text html="{section.html}"/>
 					</div>
-				{/each}
+				{/each} -->
+
+				<slot blueprint={slotBlueprint}>
+
+				</slot>
 			</div>
 		</Flex>
 	</div>

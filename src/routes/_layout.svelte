@@ -16,15 +16,17 @@
 
 <Tailwind />
 <Styles />
-{#if segment !== 'cms'}
+{#if segment !== 'cms' && segment !== 'new'}
 	<Nav />
 	<slot />
 	<Footer />
-{:else}
+{:else if segment === 'cms'}
 	<Flex classes="w-screen h-screen">
 		<CmsNav />
 		<div class="w-full">
 			<slot />
 		</div>
 	</Flex>
+{:else}
+	<slot />
 {/if}

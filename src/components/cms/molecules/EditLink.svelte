@@ -1,7 +1,7 @@
 <script context="module">
 	import { createEventDispatcher, onMount } from 'svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
-	import Input from '../../both/molecules/Input.svelte';
+	import Input from '../inputs/Input.svelte';
 </script>
 
 <script>

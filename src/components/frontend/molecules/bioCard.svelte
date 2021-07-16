@@ -33,7 +33,7 @@
 </style>
 
 <Card classes="w-full lg:w-3/4 my-10 p-5 pt-3 z-10 {classes}">
-	<div slot="body" class="w-full overflow-hidden h-4/10">
+	<div slot="body" class="w-full h-full overflow-hidden">
 		<Flex classes="md:flex-row flex-col">
 			<img
 				class="object-cover max-w-50 md:max-w-full mx-auto mb-4 md:w-3/12 h-40 mt-2.5 rounded-sm"

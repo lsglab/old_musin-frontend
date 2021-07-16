@@ -52,7 +52,7 @@
 <div
 	id="{id}"
 	bind:this="{card}"
-	class="fixed duration-200 bg-white rounded-lg opacity-0 pointer-events-none shadow-equal left-10 right-10 top-10 bottom-10"
+	class="fixed duration-200 bg-white rounded-lg opacity-0 pointer-events-none shadow-cms-equal left-10 right-10 top-10 bottom-10"
 	style="z-index:100"
 	class:visible>
 	<div class="float-right m-2 text-2xl text-gray-500 cursor-pointer material-icons" on:click="{close}">close</div>

@@ -17,7 +17,7 @@
 	export let classes = '';
 </script>
 
-<form class="p-5 rounded-md shadow-equal {classes}" action="{action}" method="{method}" id="{id}">
+<form class="p-5 rounded-md shadow-cms-equal {classes}" action="{action}" method="{method}" id="{id}">
 	<Flex justify="center" align="center" cols="true" classes="w-full h-full">
 		<h5 class="mb-3 text-heading">{header}</h5>
 		<p class="mb-3 text-xss text-heading2">{subHeader}</p>

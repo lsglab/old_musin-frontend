@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Flex from '../../components/both/atoms/Flex.svelte';
 	import Form from '../../components/both/molecules/Form.svelte';
-	import Input from '../../components/both/molecules/Input.svelte';
+	import Input from '../../components/cms/inputs/Input.svelte';
 	import Section from '../../components/frontend/atoms/Section.svelte';
 	import request from '../../cms/Utils/requests';
 

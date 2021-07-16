@@ -1,7 +1,7 @@
-import Base from './Base';
+import InputBase from './InputBase';
 import SelectMedia from '../../../components/cms/organisms/SelectMedia.svelte';
 
-export default class Img extends Base {
+export default class Img extends InputBase {
 	constructor(placeholder = 'https://www2.tuhh.de/zll/wp-content/uploads/placeholder.png') {
 		super(placeholder);
 		this.type = 'img';

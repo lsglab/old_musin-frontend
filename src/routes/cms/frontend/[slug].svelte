@@ -3,7 +3,7 @@
 	import { onMount, tick } from 'svelte/internal';
 	import Button from '../../../components/cms/atoms/Button.svelte';
 	import Flex from '../../../components/both/atoms/Flex.svelte';
-	import Input from '../../../components/both/molecules/Input.svelte';
+	import Input from '../../../components/cms/inputs/Input.svelte';
 	import Loading from '../../../components/cms/atoms/Loading.svelte';
 	import Node from '../../../components/cms/molecules/Node.svelte';
 	import Table from '../../../cms/Tables/table';
@@ -41,6 +41,7 @@
 	}
 
 	async function fetchData() {
+		console.log('id', id);
 		if (id === 'new') {
 			data = {
 				id: 'new',
@@ -174,6 +175,7 @@
 
 	onMount(() => {
 		domLoaded = true;
+		layout = undefined;
 
 		window.document.addEventListener(
 			'components',

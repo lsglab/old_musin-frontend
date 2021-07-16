@@ -3,7 +3,7 @@
 	import { fade } from 'svelte/transition';
 	import ChooseComponent from '../organisms/ChooseComponent.svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
-	import Input from '../../both/molecules/Input.svelte';
+	import Input from '../inputs/Input.svelte';
 
 	const dispatch = createEventDispatcher();
 

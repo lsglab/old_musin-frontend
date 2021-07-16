@@ -4,7 +4,7 @@
 	import EditMedia from '../../../components/cms/organisms/editMedia.svelte';
 	import FileOption from '../../../components/cms/atoms/FileOption.svelte';
 	import Flex from '../../../components/both/atoms/Flex.svelte';
-	import Input from '../../../components/both/atoms/BasicInput.svelte';
+	import Input from '../../../components/cms/inputs/BasicInput.svelte';
 	import NewMedia from '../../../components/cms/organisms/newMedia.svelte';
 	import TableEntries from '../../../components/cms/molecules/TableEntries.svelte';
 	import request from '../../../cms/Utils/requests';

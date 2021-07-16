@@ -4,13 +4,16 @@
 	import Component from '../components/cms/organisms/Component.svelte';
 	import EditComponent from '../cms/SiteEditor/EditComponent';
 	import Empty from '../components/cms/atoms/Empty.svelte';
+	import Footer from '../components/frontend/organisms/Footer.svelte';
+	import Nav from '../components/frontend/organisms/Nav.svelte';
 
 	// IMPORTS
 	import AboutSection from '../components/frontend/molecules/aboutSection.svelte';
+	import Article from '../components/frontend/templates/article.svelte';
+	import ArticleSection from '../components/frontend/atoms/ArticleSection.svelte';
 	import AwardImage from '../components/frontend/atoms/AwardImage.svelte';
 	import BioCard from '../components/frontend/molecules/bioCard.svelte';
 	import Calender from '../components/frontend/molecules/Calender.svelte';
-	import Flex from '../components/both/atoms/Flex.svelte';
 	import MensaCard from '../components/frontend/molecules/MensaCard.svelte';
 	import SectionWrapper from '../components/frontend/molecules/sectionWrapper.svelte';
 	import StaffCard from '../components/frontend/molecules/staffCard.svelte';
@@ -18,6 +21,8 @@
 	import request from '../cms/Utils/requests';
 
 	const components = [
+		Article,
+		ArticleSection,
 		BioCard,
 		TestHero,
 		AwardImage,
@@ -27,13 +32,13 @@
 		AboutSection,
 		MensaCard,
 		StaffCard,
-		Flex,
 	];
 
 	let initialized = false;
 	let reload = false;
 	let saving = false;
 	let layout;
+	let singleComponent = false;
 
 	async function fetchData() {
 		const res = await request(`${process.globals.apiUrl}/files?_norelations=true&public=true`, 'get', {}, true);
@@ -48,7 +53,19 @@
 		window.parent.document.dispatchEvent(event);
 	}
 
+	function getComponent(name) {
+		return components.find((comp) => comp.name === name);
+	}
+
 	onMount(() => {
+		layout = undefined;
+		const params = Object.fromEntries(new URLSearchParams(window.location.search).entries());
+
+		if (params.component !== undefined) {
+			singleComponent = getComponent(params.component);
+			return;
+		}
+
 		window.document.addEventListener(
 			'c_created',
 			(e) => {
@@ -125,6 +142,12 @@
 	});
 </script>
 
-{#if initialized === true && reload === false}
+{#if initialized === true && reload === false && singleComponent === false}
+	<Nav />
 	<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" saving="{saving}" />
+	<Footer />
+{:else if singleComponent !== false}
+	<div class="m-4 pointer-events-none">
+		<svelte:component this="{singleComponent}" />
+	</div>
 {/if}

@@ -25,6 +25,9 @@ module.exports = {
 				'rect-pattern': 'resolve(rect-pattern.png)',
 			}),
 			boxShadow: {
+				'cms-equal': '0 5px 15px rgba(0,0,0,0.2)',
+				'cms-equal-sm': '0px 0px 10px 0px rgba(0,0,0,0.2)',
+				'cms-equal-xl': '0 10px 20px 5px rgba(0, 0, 0, 0.1);',
 				'equal': '0 5px 15px rgba(0,0,0,0.2)',
 				'equal-sm': '0px 0px 10px 0px rgba(0,0,0,0.2)',
 				'equal-xl': '0 10px 20px 5px rgba(0, 0, 0, 0.1);',
@@ -78,6 +81,10 @@ module.exports = {
 			},
 			maxHeight: {
 				0: '0',
+			},
+			maxWidth: {
+				'1/3': '33.33%',
+				'1/4': '25%',
 			},
 			minWidth: {
 				40: '10rem',

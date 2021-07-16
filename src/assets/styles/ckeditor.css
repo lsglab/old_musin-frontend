@@ -1,0 +1,8 @@
+:root {
+	--ck-spacing-standard: 0;
+}
+
+.ck-content .table {
+	width: 100% !important;
+	margin: 0 !important;
+}

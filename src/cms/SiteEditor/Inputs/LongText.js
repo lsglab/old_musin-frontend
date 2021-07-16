@@ -1,14 +1,15 @@
-import Base from './Base';
+import InputBase from './InputBase';
 
-export default class LongText extends Base {
+export default class LongText extends InputBase {
 	constructor(placeholder = 'Long Text') {
 		super(placeholder);
 		this.type = 'longText';
 	}
 
 	async prepareInput(document) {
-		console.log('preparing long text input');
 		const module = await import('@ckeditor/ckeditor5-build-inline');
+		// import file to override certain ckeditor rules
+		await import('../../../assets/styles/ckeditor.css');
 		const inlineEditor = module.default;
 		const node = document.getElementById(this.id);
 

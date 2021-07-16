@@ -1,7 +1,7 @@
 <script context="module">
 	import Button from '../../../../components/cms/atoms/Button.svelte';
 	import Flex from '../../../../components/both/atoms/Flex.svelte';
-	import Input from '../../../../components/both/molecules/Input.svelte';
+	import Input from '../../../../components/cms/inputs/Input.svelte';
 	import TableEntries from '../../../../components/cms/molecules/TableEntries.svelte';
 	import request from '../../../../cms/Utils/requests';
 
@@ -105,7 +105,7 @@
 			<span on:click="{toggleVisible}" class="text-lg material-icons"> settings </span>
 			<div
 				bind:this="{settingsCard}"
-				class="absolute right-0 p-2 bg-white opacity-0 pointer-events-none shadow-equal-sm w-max top-6"
+				class="absolute right-0 p-2 bg-white opacity-0 pointer-events-none shadow-cms-equal-sm w-max top-6"
 				class:visible>
 				<Flex align="center" classes="mb-1">
 					<p class="mr-2 text-xs font-bold">Dargestellte Felder</p>
@@ -133,7 +133,7 @@
 			</div>
 		</Flex>
 	</div>
-	<table class="w-full mb-10 shadow-equal-sm">
+	<table class="w-full mb-10 shadow-cms-equal-sm">
 		<thead>
 			<tr>
 				<th class="bg-gray-100">
