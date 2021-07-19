@@ -2,6 +2,7 @@
 	import { compConfig } from '../../../stores';
 	import { onMount, tick } from 'svelte/internal';
 	import Button from '../../../components/cms/atoms/Button.svelte';
+	import DialogButton from '../../../components/cms/molecules/DialogButton.svelte';
 	import Flex from '../../../components/both/atoms/Flex.svelte';
 	import Input from '../../../components/cms/inputs/Input.svelte';
 	import Loading from '../../../components/cms/atoms/Loading.svelte';
@@ -89,8 +90,8 @@
 		disabled = true;
 		const res = await request(`${process.globals.apiUrl}/sites`, 'post', body, true);
 
-		if (res.status === 200) {
-			window.location = window.location.toString().replace('new', res.data.sites[0].id);
+		if (res.status !== 400) {
+			window.history.go(-1);
 			errors = {};
 		} else if (res.status === 400) {
 			errors = res.data;
@@ -209,19 +210,32 @@
 					<Button disabled="{disabled}" buttonFunction="{save}" classes="h-full w-32">Speichern</Button>
 				{/if}
 				{#if table.getPermissions(id).delete}
-					<Button buttonFunction="{deleteSite}" classes="h-full w-32 ml-4" color="bg-cmsErrorRed">
+					<DialogButton
+						color="bg-cmsErrorRed"
+						classes="h-full w-32 ml-4"
+						dialogText="Sind sie sicher, dass sie die Seite unwiederuflich löschen möchten?"
+						buttonFunction="{deleteSite}">
 						Löschen
-					</Button>
+					</DialogButton>
 				{/if}
 			{/if}
 		</Flex>
 		{#if id !== 'new' && table.getColumnPermission(id, 'public')}
 			{#if !data.public}
-				<Button buttonFunction="{publish}" color="bg-cmsSuccessGreen" classes="h-full w-32">
-					Veröffentlichen
-				</Button>
+				<DialogButton
+					buttonFunction="{publish}"
+					color="bg-cmsSuccessGreen"
+					classes="h-full w-32"
+					dialogText="Sind sie sicher, dass sie die Seite veröffentlichen wollen?">
+					Veröffenlichen
+				</DialogButton>
 			{:else}
-				<Button classes="h-full w-32" buttonFunction="{unpublish}">Unpublish</Button>
+				<DialogButton
+					buttonFunction="{unpublish}"
+					classes="h-full w-32"
+					dialogText="Sind sie sicher, dass sie die Seite nicht mehr öffentlich machen wollen?">
+					Unpublish
+				</DialogButton>
 			{/if}
 		{/if}
 	{:else}

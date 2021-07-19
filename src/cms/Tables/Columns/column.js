@@ -55,6 +55,7 @@ export default class Column extends Base {
 	setDisplayData(ele) {
 		const data = ele;
 		switch (this.type) {
+			case 'date':
 			case 'timestamp':
 				data[this.name] = toLocalDateString(data[this.name], {
 					day: 'numeric',

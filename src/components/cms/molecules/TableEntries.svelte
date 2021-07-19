@@ -1,5 +1,5 @@
 <script>
-	import Button from '../atoms/Button.svelte';
+	import DialogButton from './DialogButton.svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
 	import Input from '../inputs/Input.svelte';
 	import Loading from '../atoms/Loading.svelte';
@@ -137,12 +137,16 @@
 						{deleteLength}
 						{deleteLength === 1 ? 'ausgewählter Eintrag' : 'ausgewählte Einträge'}
 					</p>
-					<Button color="bg-cmsErrorRed ml-4" buttonFunction="{deleteMultiple}">
+					<DialogButton
+						color="bg-cmsErrorRed"
+						classes="ml-4"
+						buttonFunction="{deleteMultiple}"
+						dialogText="Wollen sie {deleteLength} {deleteLength === 1 ? 'Eintrag' : 'Einträge'} unwiederuflich löschen?">
 						<Flex align="center">
 							<span class="mr-2 text-white material-icons">delete</span>
 							<p class="text-xss">Ausgewählte löschen</p>
 						</Flex>
-					</Button>
+					</DialogButton>
 				</Flex>
 			{/if}
 			<slot name="config" />

@@ -1,9 +1,9 @@
 <script>
 	import { difference } from '../../../cms/Utils/object';
 	import Button from '../atoms/Button.svelte';
+	import Dialog from '../atoms/Dialog.svelte';
 	import DisplayMedia from '../molecules/displayMedia.svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
-	import FloatingCard from '../molecules/FloatingCard.svelte';
 
 	import { createEventDispatcher } from 'svelte';
 	import FileOption from '../atoms/FileOption.svelte';
@@ -142,7 +142,7 @@
 	id="fileupload"
 	class="hidden"
 	multiple />
-<FloatingCard on:close="{abort}">
+<Dialog on:close="{abort}">
 	<p slot="header" class="floating-card-header">Datei Bearbeiten</p>
 	<Flex>
 		<DisplayMedia
@@ -219,4 +219,4 @@
 			<Button color="bg-cmsSuccessGreen" buttonFunction="{save}" disabled="{!canSave}">Speichern</Button>
 		</Flex>
 	</div>
-</FloatingCard>
+</Dialog>

@@ -2,9 +2,9 @@
 	/* eslint-disable no-param-reassign */
 	/* eslint-disable no-self-assign */
 	import Button from '../atoms/Button.svelte';
+	import Dialog from '../atoms/Dialog.svelte';
 	import DisplayMedia from '../molecules/displayMedia.svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
-	import FloatingCard from '../molecules/FloatingCard.svelte';
 
 	import { createEventDispatcher } from 'svelte';
 	import EditMedia from './editMedia.svelte';
@@ -154,7 +154,7 @@
 	class="hidden"
 	multiple />
 {#if selecting === true}
-	<FloatingCard on:close="{closeSelectCard}">
+	<Dialog on:close="{closeSelectCard}">
 		<p slot="header" class="floating-card-header">Datei hinzufügen</p>
 		<div class="py-5 my-4 border-2 border-gray-100 border-dashed rounded-md bg-gray-50">
 			<Flex classes="w-full" align="center" justify="center" cols="true">
@@ -167,7 +167,7 @@
 		<div slot="footer">
 			<Button color="bg-gray-400" buttonFunction="{closeSelectCard}">Abbrechen</Button>
 		</div>
-	</FloatingCard>
+	</Dialog>
 {:else if selectedFile !== undefined}
 	<EditMedia
 		table="{table}"
@@ -177,7 +177,7 @@
 		bind:file="{selectedFile}"
 		on:close="{fileEdited}" />
 {:else}
-	<FloatingCard on:close="{closeDisplayCard}">
+	<Dialog on:close="{closeDisplayCard}">
 		<p slot="header" class="floating-card-header">Dateien hochladen</p>
 		<Button
 			buttonFunction="{() => {
@@ -233,5 +233,5 @@
 				</Button>
 			</Flex>
 		</div>
-	</FloatingCard>
+	</Dialog>
 {/if}

@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import AddRole from '../../../../components/cms/organisms/AddRole.svelte';
 	import Button from '../../../../components/cms/atoms/Button.svelte';
+	import DialogButton from '../../../../components/cms/molecules/DialogButton.svelte';
 	import Flex from '../../../../components/both/atoms/Flex.svelte';
 	import Input from '../../../../components/cms/inputs/Input.svelte';
 	import Loading from '../../../../components/cms/atoms/Loading.svelte';
@@ -352,12 +353,16 @@
 					{/if}
 				{/each}
 				{#if table.getPermissions().delete && id !== 'new'}
-					<Button buttonFunction="{deleteOne}" classes="w-full shadow-cms-equal-sm" color="bg-cmsErrorRed">
+					<DialogButton
+						buttonFunction="{deleteOne}"
+						classes="w-full shadow-cms-equal-sm"
+						color="bg-cmsErrorRed"
+						dialogText="Sind sie sicher, dass sie diesen Eintrag unwiederuflich löschen wollen?">
 						<Flex align="center">
 							<span class="mr-2 material-icons">delete</span>
 							<p class="text-xss">Diesen Eintrag löschen</p>
 						</Flex>
-					</Button>
+					</DialogButton>
 				{/if}
 			</Flex>
 		</Flex>

@@ -1,5 +1,6 @@
 <script context="module">
 	import Button from '../../../../components/cms/atoms/Button.svelte';
+	import ConfirmDialog from '../../../../components/cms/molecules/ConfirmDialog.svelte';
 	import Flex from '../../../../components/both/atoms/Flex.svelte';
 	import Input from '../../../../components/cms/inputs/Input.svelte';
 	import TableEntries from '../../../../components/cms/molecules/TableEntries.svelte';
@@ -33,19 +34,21 @@
 	let deleteAll = false;
 	// the settings card
 	let settingsCard;
+	// delete Dialog visibility
+	let deleteDialog;
 
 	function getAttributes() {
 		displayValues = [];
-		table.getVisible(table.columns).forEach((ele) => {
-			if (ele.type === 'timestamp') ele.visible = false;
-			else ele.visible = true;
+		table.getVisible(table.columns).forEach((column) => {
+			if (column.type === 'timestamp') column.visible = false;
+			else column.visible = true;
 
 			data.forEach((entry) => {
-				entry = ele.setDisplayData(entry);
+				entry = column.setDisplayData(entry);
 				return entry;
 			});
 
-			displayValues.push(ele);
+			displayValues.push(column);
 		});
 	}
 
@@ -171,7 +174,13 @@
 						{#if table.getPermissions(ele.id).delete}
 							<span
 								class="cursor-pointer material-icons"
-								on:click="{() => deleteOne(ele.id)}">delete</span>
+								on:click="{() => {
+									deleteDialog = true;
+								}}">delete</span>
+							<ConfirmDialog
+								bind:visible="{deleteDialog}"
+								dialogText="Sind sie sicher, dass sie den Eintrag löschen wollen?"
+								dialogFunction="{() => deleteOne(ele.id)}" />
 						{/if}
 					</td>
 				</tr>
