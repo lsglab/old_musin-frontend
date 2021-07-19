@@ -33,7 +33,7 @@
 				}}"
 				class="flex flex-row items-center ml-4 cursor-pointer">
 				<div class="text-red-400 material-icons">description</div>
-				<p class="name">{file.filename}</p>
+				<p class="name">index.html</p>
 			</div>
 		{/each}
 	{/if}

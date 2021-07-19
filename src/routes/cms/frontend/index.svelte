@@ -107,8 +107,8 @@
 			<div style="height:8%">
 				<Flex classes="w-full h-full px-3 py-2 border-gray-100 border-b-2" justify="between" align="center">
 					<Flex>
-						<p class="mr-4 font-bold text-xss">{selectedFile.path}{selectedFile.filename}</p>
-						<Button href="/cms/frontend/{selectedFile.id}">Bearbeiten</Button>
+						<p class="mr-4 font-bold text-xss">{selectedFile.path}</p>
+						<Button classes="" href="/cms/frontend/{selectedFile.id}">Bearbeiten</Button>
 					</Flex>
 					<Button color="bg-cmsSuccessGreen" href="/cms/frontend/new">Neue Seite Erstellen</Button>
 				</Flex>

@@ -65,7 +65,7 @@
 
 <div
 	on:click
-	class="flex w-full text-gray-600 {classes} container-{labelPos}  {labelPos === 'left' || labelPos === 'right' ? `flex-row${labelPos === 'right' ? '-reverse' : ''} justify-${justify} items-center` : `flex-col${labelPos === 'bottom' ? '-reverse' : ''}`}">
+	class="flex text-gray-600 {classes} container-{labelPos}  {labelPos === 'left' || labelPos === 'right' ? `flex-row${labelPos === 'right' ? '-reverse' : ''} justify-${justify} items-center` : `flex-col${labelPos === 'bottom' ? '-reverse' : ''}`}">
 	<label for="{id}" class="{labelPos} {labelClasses}" class:readonly><slot /></label>
 	<BasicInput
 		on:blur

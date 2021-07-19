@@ -36,10 +36,6 @@
 		}
 	}
 
-	function setData() {
-		data.filename = data.filename.split('.')[0];
-	}
-
 	async function fetchData() {
 		console.log('id', id);
 		if (id === 'new') {
@@ -55,7 +51,6 @@
 
 		if (res.status === 200) {
 			data = res.data.sites[0];
-			setData();
 		}
 	}
 
@@ -79,10 +74,10 @@
 	async function saveData(body) {
 		disabled = true;
 		const res = await request(`${process.globals.apiUrl}/sites?id=${id}`, 'put', body, true);
+		res.status = 400;
 
 		if (res.status === 200) {
 			data = res.data.sites[0];
-			setData();
 			errors = {};
 		} else if (res.status === 400) {
 			errors = res.data;
@@ -115,7 +110,6 @@
 		document.getElementById('iframe').contentDocument.dispatchEvent(event);
 
 		if (table.getColumnPermission(data.id, 'blueprint')) reqData.blueprint = JSON.stringify(component.save(doc));
-		if (table.getColumnPermission(data.id, 'filename')) reqData.filename = `${data.filename}.html`;
 		if (table.getColumnPermission(data.id, 'path')) reqData.path = data.path;
 		if (table.getColumnPermission(data.id, 'public')) reqData.public = data.public;
 		// wait till dom is updated
@@ -238,22 +232,16 @@
 	<div class="w-9/12">
 		<Flex classes="h-1/10 pl-4 border-b-2 border-gray-300" align="center">
 			{#if data !== undefined && table !== undefined}
+				<p class="mr-1 font-bold text-black text-xss">lsg.musin.de</p>
 				<Input
 					placeholder="Pfad der Seite"
 					readonly="{table.getReadOnly(id, 'path')}"
-					inputClasses="w-60"
+					classes="w-60"
+					inputClasses="w-60 font-bold"
 					bind:value="{data.path}"
 					error="{getError('path', errors)}"
 					type="text"
 					id="path" />
-				<Input
-					placeholder="Name der Seite"
-					readonly="{table.getReadOnly(id, 'filename')}"
-					inputClasses="w-60"
-					bind:value="{data.filename}"
-					error="{getError('filename', errors)}"
-					type="text"
-					id="name" />
 			{:else}
 				<Loading diameter="8" />
 			{/if}
