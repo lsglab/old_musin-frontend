@@ -74,6 +74,11 @@
 		return components.find((comp) => comp.name === name);
 	}
 
+	function siteLoaded() {
+		const event = new CustomEvent('site_loaded', {});
+		window.parent.document.dispatchEvent(event);
+	}
+
 	onMount(() => {
 		layout = undefined;
 		const params = Object.fromEntries(new URLSearchParams(window.location.search).entries());
@@ -170,6 +175,6 @@
 	</div>
 {:else if site !== false}
 	<Nav />
-	<DisplayComponent component="{site}" />
+	<DisplayComponent component="{site}" on:loaded="{siteLoaded}" />
 	<Footer />
 {/if}

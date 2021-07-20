@@ -7,7 +7,7 @@
 	import Flex from '../../both/atoms/Flex.svelte';
 
 	let visible = false;
-	export let parent;
+	export let parent = null;
 
 	const dispatch = createEventDispatcher();
 
