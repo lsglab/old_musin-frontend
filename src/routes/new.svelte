@@ -2,6 +2,7 @@
 	import { files, page, pageTable } from '../stores';
 	import { onMount, tick } from 'svelte';
 	import Component from '../components/cms/organisms/Component.svelte';
+	import ComponentClass from '../cms/SiteEditor/Component';
 	import EditComponent from '../cms/SiteEditor/EditComponent';
 	import Empty from '../components/cms/atoms/Empty.svelte';
 	import Footer from '../components/frontend/organisms/Footer.svelte';
@@ -14,6 +15,7 @@
 	import AwardImage from '../components/frontend/atoms/AwardImage.svelte';
 	import BioCard from '../components/frontend/molecules/bioCard.svelte';
 	import Calender from '../components/frontend/molecules/Calender.svelte';
+	import DisplayComponent from '../components/cms/atoms/DisplayComponent.svelte';
 	import MensaCard from '../components/frontend/molecules/MensaCard.svelte';
 	import SectionWrapper from '../components/frontend/molecules/sectionWrapper.svelte';
 	import StaffCard from '../components/frontend/molecules/staffCard.svelte';
@@ -38,13 +40,28 @@
 	let reload = false;
 	let saving = false;
 	let layout;
+
 	let singleComponent = false;
+	let site = false;
 
 	async function fetchData() {
 		const res = await request(`${process.globals.apiUrl}/files?_norelations=true&public=true`, 'get', {}, true);
 
 		if (!res.error) {
 			files.set(res.data.files);
+		}
+	}
+
+	async function fetchSite(siteId) {
+		console.log('siteId', siteId);
+		const res = await request(`${process.globals.apiUrl}/sites?_norelations=true?id=${siteId}`, 'get', {}, true);
+
+		if (!res.error) {
+			const data = res.data.sites[0];
+			const blueprint = JSON.parse(JSON.parse(data.blueprint));
+
+			site = new ComponentClass().createFromData(blueprint, components, null);
+			console.log('site', site);
 		}
 	}
 
@@ -66,6 +83,11 @@
 			return;
 		}
 
+		if (params.site !== undefined) {
+			fetchSite(params.site);
+			return;
+		}
+
 		window.document.addEventListener(
 			'c_created',
 			(e) => {
@@ -78,11 +100,7 @@
 			'c_resume',
 			(e) => {
 				const blueprint = e.detail.blueprint;
-				layout = new EditComponent(e.detail.table, e.detail.page.id).createFromData(
-					blueprint,
-					components,
-					null
-				);
+				layout = new EditComponent().createFromData(blueprint, components, null);
 				initialized = true;
 			},
 			false
@@ -142,7 +160,7 @@
 	});
 </script>
 
-{#if initialized === true && reload === false && singleComponent === false}
+{#if initialized === true && reload === false && singleComponent === false && site === false}
 	<Nav />
 	<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" saving="{saving}" />
 	<Footer />
@@ -150,4 +168,8 @@
 	<div class="m-4 pointer-events-none">
 		<svelte:component this="{singleComponent}" />
 	</div>
+{:else if site !== false}
+	<Nav />
+	<DisplayComponent component="{site}" />
+	<Footer />
 {/if}

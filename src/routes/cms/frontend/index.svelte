@@ -125,7 +125,7 @@
 					id="iframe"
 					class="w-full h-full"
 					title="{selectedFile.name}"
-					src="{process.globals.apiServer}{selectedFile.url}"></iframe>
+					src="/new?site={selectedFile.id}"></iframe>
 			</div>
 		</div>
 	{/if}

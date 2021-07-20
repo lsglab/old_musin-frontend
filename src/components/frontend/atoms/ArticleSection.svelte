@@ -15,5 +15,7 @@
 		<hr class="w-12 my-3 text-black border-t-0 border-b-2 border-black" />
 		<h4 class="my-4 font-normal" id="{blueprint.header.id}">{blueprint.header.data}</h4>
 	</header>
-	<div id="{blueprint.content.id}">{blueprint.content.data}</div>
+	<div id="{blueprint.content.id}">
+		{@html blueprint.content.data}
+	</div>
 </div>
