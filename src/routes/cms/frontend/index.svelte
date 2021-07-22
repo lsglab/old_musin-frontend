@@ -16,7 +16,11 @@
 	let table;
 	let loading;
 
+	let customComponents;
+
 	let rebuildSites = false;
+
+	let reload = false;
 
 	function sortFiles() {
 		const sorted = {
@@ -71,18 +75,45 @@
 		}
 	}
 
+	async function fetchCustomComponents() {
+		const res = await request(`${process.globals.apiUrl}/components?_norelations=true`, 'get', {}, true);
+
+		if (res.status === 200) {
+			customComponents = res.data.components;
+		}
+	}
+
 	async function fileChanged() {
 		if (selectedFile == null) return;
+		reload = true;
 		await tick();
+		reload = false;
+
 		loading = true;
 
-		document.getElementById('iframe').onload = () => {
-			loading = false;
-		};
+		console.log('fileChanged');
+
+		window.document.addEventListener(
+			'blueprint_ready',
+			() => {
+				const blueprint = JSON.parse(JSON.parse(selectedFile.blueprint));
+
+				const event = new CustomEvent('blueprint_create', { detail: { blueprint, customComponents } });
+				document.getElementById('iframe').contentDocument.dispatchEvent(event);
+
+				window.document.addEventListener(
+					'site_loaded',
+					() => {
+						loading = false;
+					},
+					false
+				);
+			},
+			false
+		);
 	}
 
 	function rebuildAllSites() {
-		console.log('rebuilding All Sites');
 		rebuildSites = true;
 	}
 
@@ -91,11 +122,12 @@
 	onMount(async () => {
 		await fetchTable();
 		fetchData();
+		fetchCustomComponents();
 	});
 </script>
 
 <TopNav>
-	{#if fetchedFiles !== undefined}
+	{#if fetchedFiles !== undefined && table !== undefined && customComponents !== undefined && table.getPermissions().edit}
 		<DialogButton
 			buttonFunction="{rebuildAllSites}"
 			dialogText="Sind sie sicher, dass sie alle Seiten neu generieren wollen?">
@@ -116,20 +148,28 @@
 			<DirNode bind:selectedFile dir="{files}" first="{true}" />
 		{/if}
 	</div>
-	{#if selectedFile == null}
+	{#if table === undefined}
+		<Flex classes="w-3/4 h-full" justify="center" align="center">
+			<Loading />
+		</Flex>
+	{:else if selectedFile == null && table.getPermissions().create}
 		<Flex classes="w-3/4 h-full" justify="center" align="center" cols="true">
 			<div class="m-5 text-5xl text-gray-200 material-icons">note_add</div>
 			<Button href="/cms/frontend/new">Neue Seite erstellen</Button>
 		</Flex>
-	{:else}
+	{:else if reload === false}
 		<div class="w-3/4 h-full">
 			<div style="height:8%">
 				<Flex classes="w-full h-full px-3 py-2 border-gray-100 border-b-2" justify="between" align="center">
 					<Flex>
 						<p class="mr-4 font-bold text-xss">{selectedFile.path}</p>
-						<Button classes="" href="/cms/frontend/{selectedFile.id}">Bearbeiten</Button>
+						{#if table.getPermissions(selectedFile.id).edit}
+							<Button classes="" href="/cms/frontend/{selectedFile.id}">Bearbeiten</Button>
+						{/if}
 					</Flex>
-					<Button color="bg-cmsSuccessGreen" href="/cms/frontend/new">Neue Seite Erstellen</Button>
+					{#if table.getPermissions().create}
+						<Button color="bg-cmsSuccessGreen" href="/cms/frontend/new">Neue Seite Erstellen</Button>
+					{/if}
 				</Flex>
 			</div>
 			<div class="relative" style="height:92%;">
@@ -140,16 +180,12 @@
 						</Flex>
 					</div>
 				{/if}
-				<iframe
-					id="iframe"
-					class="w-full h-full"
-					title="{selectedFile.name}"
-					src="/new?site={selectedFile.id}"></iframe>
+				<iframe id="iframe" class="w-full h-full" title="" src="/new?blueprint={true}"></iframe>
 			</div>
 		</div>
 	{/if}
 </Flex>
 
-{#if fetchedFiles !== undefined}
-	<RebuildSites bind:visible="{rebuildSites}" sites="{fetchedFiles}" />
+{#if fetchedFiles !== undefined && customComponents !== undefined}
+	<RebuildSites bind:visible="{rebuildSites}" sites="{fetchedFiles}" customComponents="{customComponents}" />
 {/if}

@@ -7,6 +7,10 @@
 	function toggleOpen() {
 		open = !open;
 	}
+
+	function selectFile(file) {
+		selectedFile = file;
+	}
 </script>
 
 <style>
@@ -22,19 +26,19 @@
 		<p class="name">{dir.name}</p>
 	</div>
 
-	{#if open}
+	<div class="{open ? '' : 'hidden'}">
 		{#each dir.dirs as directory}
 			<svelte:self bind:selectedFile dir="{directory}" />
 		{/each}
 		{#each dir.files as file}
 			<div
 				on:click="{() => {
-					selectedFile = file;
+					selectFile(file);
 				}}"
 				class="flex flex-row items-center ml-4 cursor-pointer">
 				<div class="text-red-400 material-icons">description</div>
 				<p class="name">index.html</p>
 			</div>
 		{/each}
-	{/if}
+	</div>
 </div>

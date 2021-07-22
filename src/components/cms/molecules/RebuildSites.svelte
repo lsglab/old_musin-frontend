@@ -9,6 +9,7 @@
 
 	export let visible = false;
 	export let sites;
+	export let customComponents;
 
 	let currentSite;
 
@@ -16,6 +17,8 @@
 
 	let progress = 0;
 	let progressText = '';
+
+	let reload;
 
 	async function updateFile() {
 		const html = document.getElementById('iframe').contentWindow.document.children[0].innerHTML;
@@ -35,6 +38,23 @@
 
 		currentSite = site;
 		progressText = 'Building site';
+
+		reload = true;
+		await tick();
+		reload = false;
+
+		window.document.addEventListener(
+			'blueprint_ready',
+			() => {
+				const blueprint = JSON.parse(JSON.parse(site.blueprint));
+
+				const event = new CustomEvent('blueprint_create', { detail: { blueprint, customComponents } });
+				document.getElementById('iframe').contentDocument.dispatchEvent(event);
+
+				console.log('event dispatched');
+			},
+			false
+		);
 
 		// wait for the site to be loaded
 		await new Promise((resolve) => {
@@ -63,6 +83,11 @@
 
 	async function build() {
 		if (visible === false) return;
+
+		if (sites.length === 0) {
+			finished = true;
+			return;
+		}
 
 		await tick();
 
@@ -101,8 +126,10 @@
 					<p class="my-2 text-xs font-bold text-black">Building: {currentSite.path}</p>
 					<ProgressBar value="{progress}" />
 					<p class="notice">{progressText}</p>
-					<div class="hidden"><iframe id="iframe" src="/new?site={currentSite.id}" title=""></iframe></div>
-				{:else if finished === true}
+					{#if reload === false}
+						<div class="hidden"><iframe id="iframe" src="/new?blueprint={true}" title=""></iframe></div>
+					{/if}
+				{:else if finished === true && sites.length > 0}
 					<div class="my-5" transition:fade="{{ duration: 100 }}">
 						<div
 							class="flex flex-row w-20 h-20 mb-5 bg-white border-2 rounded-full border-cmsSuccessGreen circle shadow-cms-equal">
@@ -118,6 +145,15 @@
 							</svg>
 						</div>
 						<p class="text-xs font-bold text-center text-cmsSuccessGreen">Completed</p>
+					</div>
+				{:else if finished === true && sites.length === 0}
+					<div class="my-5">
+						<div
+							class="w-full mx-auto text-center text-gray-300 material-icons"
+							style="font-size: 5rem;line-height: 5rem;">
+							search
+						</div>
+						<p class="font-bold text-xss">Keine Dateien gefunden</p>
 					</div>
 				{/if}
 			</Flex>

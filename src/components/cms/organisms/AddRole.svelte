@@ -169,7 +169,6 @@
 		role.column_permissions = columnPermissions;
 		role.permissions = permissions;
 		role = role;
-		console.log('role', role);
 	}
 
 	async function roleChanged() {

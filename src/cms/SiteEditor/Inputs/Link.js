@@ -22,8 +22,6 @@ export default class Link extends InputBase {
 	}
 
 	prepareInput(document, triggerUpdate) {
-		console.log('prepareinput tirggered');
-
 		const atag = document.getElementById(this.id);
 
 		const editLink = this.newLink(atag, this.editLinkID, document);

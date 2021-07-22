@@ -44,24 +44,13 @@
 	let singleComponent = false;
 	let site = false;
 
+	let customComponents = [];
+
 	async function fetchData() {
 		const res = await request(`${process.globals.apiUrl}/files?_norelations=true&public=true`, 'get', {}, true);
 
 		if (!res.error) {
 			files.set(res.data.files);
-		}
-	}
-
-	async function fetchSite(siteId) {
-		console.log('siteId', siteId);
-		const res = await request(`${process.globals.apiUrl}/sites?_norelations=true?id=${siteId}`, 'get', {}, true);
-
-		if (!res.error) {
-			const data = res.data.sites[0];
-			const blueprint = JSON.parse(JSON.parse(data.blueprint));
-
-			site = new ComponentClass().createFromData(blueprint, components, null);
-			console.log('site', site);
 		}
 	}
 
@@ -79,7 +68,7 @@
 		window.parent.document.dispatchEvent(event);
 	}
 
-	onMount(() => {
+	onMount(async () => {
 		layout = undefined;
 		const params = Object.fromEntries(new URLSearchParams(window.location.search).entries());
 
@@ -88,8 +77,19 @@
 			return;
 		}
 
-		if (params.site !== undefined) {
-			fetchSite(params.site);
+		window.document.addEventListener(
+			'blueprint_create',
+			(e) => {
+				customComponents = e.detail.customComponents;
+				site = new ComponentClass().createFromData(e.detail.blueprint, components, customComponents, null);
+			},
+			false
+		);
+
+		if (params.blueprint) {
+			const event = new CustomEvent('blueprint_ready', {});
+			window.parent.document.dispatchEvent(event);
+
 			return;
 		}
 
@@ -105,7 +105,7 @@
 			'c_resume',
 			(e) => {
 				const blueprint = e.detail.blueprint;
-				layout = new EditComponent().createFromData(blueprint, components, null);
+				layout = new EditComponent().createFromData(blueprint, components, customComponents, null);
 				initialized = true;
 			},
 			false
@@ -125,6 +125,7 @@
 			(e) => {
 				pageTable.set(e.detail.table);
 				page.set(e.detail.page);
+				customComponents = e.detail.customComponents;
 			},
 			false
 		);
@@ -165,9 +166,11 @@
 	});
 </script>
 
-{#if initialized === true && reload === false && singleComponent === false && site === false}
+{#if initialized === true && singleComponent === false && site === false}
 	<Nav />
-	<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" saving="{saving}" />
+	{#if reload === false}
+		<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" saving="{saving}" />
+	{/if}
 	<Footer />
 {:else if singleComponent !== false}
 	<div class="m-4 pointer-events-none">

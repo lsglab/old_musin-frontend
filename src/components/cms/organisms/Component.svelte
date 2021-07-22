@@ -36,7 +36,7 @@
 		triggeredUpdate = true;
 	}
 
-	function loopBlueprints(callback) {
+	/* function loopBlueprints(callback) {
 		const blueprint = getProperty('blueprint');
 		if (blueprint !== undefined) {
 			Object.keys(blueprint).forEach((key) => {
@@ -44,23 +44,21 @@
 			});
 		}
 	}
+	*/
 
 	function componentUpdate() {
 		dispatch('component_update');
 	}
 
 	function triggerComponentUpdate() {
-		rendered.$set({ blueprint: getProperty('blueprint') });
 		component = component;
 		componentUpdate();
 	}
 
 	function insertFields() {
-		loopBlueprints((blueprint, key) => {
-			if ($pageTable.getColumnPermission($page.id, 'blueprint')) {
-				blueprint[key].prepareInput(document, triggerComponentUpdate);
-			}
-		});
+		if ($pageTable.getColumnPermission($page.id, 'blueprint')) {
+			component.prepareInput(document, triggerComponentUpdate);
+		}
 	}
 
 	function advancedFields() {

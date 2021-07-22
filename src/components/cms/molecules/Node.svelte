@@ -11,6 +11,8 @@
 	export let table;
 	export let page;
 
+	export let customComponents;
+
 	let propsOpen = true;
 	let open = true;
 
@@ -100,12 +102,14 @@
 		<div class="{component.parent !== undefined ? 'content' : 'w-full'}">
 			<div class="{propsOpen ? 'mb-2' : ''}">
 				<Flex align="center" justify="between">
-					<p class="text-xs font-bold" on:click="{toggleOpen}">
-						{component.component === undefined || component.component === null ? 'Loading...' : component.component.name}
-					</p>
+					{#if component.component !== undefined && component.component !== null}
+						<p class="text-xs font-bold" on:click="{toggleOpen}">
+							{component.isCustomComponent ? component.customComponent.name : component.component.name}
+						</p>
+					{/if}
 					<Flex align="center">
 						<div class="icon-dimens">
-							{#if Object.keys(component.props).length > 0}
+							{#if Object.keys(component.props).length > 0 && !component.isCustomComponent}
 								<div
 									on:click="{togglePropsOpen}"
 									class="{propsOpen ? 'rotate' : ''} block duration-100 cursor-pointer material-icons">
@@ -114,12 +118,16 @@
 							{/if}
 						</div>
 						<div class="w-5 h-5 icon-dimens">
-							{#if component.slot && table.getColumnPermission(page.id, 'blueprint')}
-								<ChooseComponent parent="{component}" on:click="{openTrue}" on:chosen="{addChild}" />
+							{#if !component.isCustomComponent && component.slot && table.getColumnPermission(page.id, 'blueprint')}
+								<ChooseComponent
+									customComponents="{customComponents}"
+									parent="{component}"
+									on:click="{openTrue}"
+									on:chosen="{addChild}" />
 							{/if}
 						</div>
 						<div style="margin-right: 0;" class="icon-dimens">
-							{#if table.getColumnPermission(page.id, 'blueprint')}
+							{#if table.getColumnPermission(page.id, 'blueprint') && component.parent !== null}
 								<div on:click="{deleteComponent}" class="material-icons text-cmsErrorRed">
 									{#if component.parent !== undefined}delete{/if}
 								</div>
@@ -148,9 +156,14 @@
 			{/if}
 		</div>
 	</Flex>
-	{#if open}
+	{#if open && !component.isCustomComponent}
 		{#each component.children as child}
-			<svelte:self bind:component="{child}" table="{table}" page="{page}" on:update="{triggerUpdate}" />
+			<svelte:self
+				customComponents="{customComponents}"
+				bind:component="{child}"
+				table="{table}"
+				page="{page}"
+				on:update="{triggerUpdate}" />
 		{/each}
 	{/if}
 </div>

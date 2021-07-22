@@ -9,16 +9,16 @@ export default class EditComponent extends Component {
 		}
 	}
 
-	blueprintKeys(callback) {
-		const keys = Object.keys(this.blueprint);
-		keys.forEach((key) => {
-			if (key !== 'children') {
-				callback(key);
-			}
-		});
-	}
-
 	save(document) {
+		if (this.isCustomComponent) {
+			const data = {
+				id: this.customComponent.id,
+				isCustomComponent: this.isCustomComponent,
+			};
+
+			return data;
+		}
+
 		const data = {
 			blueprint: {},
 			children: [],
@@ -29,7 +29,6 @@ export default class EditComponent extends Component {
 		};
 
 		this.blueprintKeys((key) => {
-			console.log('save blueprints', key, 'name', this.component.name);
 			data.blueprint[key] = this.blueprint[key].save(document);
 		});
 
@@ -39,9 +38,16 @@ export default class EditComponent extends Component {
 		return data;
 	}
 
-	prepareInput(document) {
-		this.children.forEach((child) => {
-			child.prepareInput(document);
+	prepareInput(document, triggerUpdate) {
+		if (this.isCustomComponent || this.belongsToCustomComponent) return;
+
+		this.blueprintKeys((key) => {
+			this.blueprint[key].prepareInput(document, triggerUpdate);
 		});
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	createNewInstance() {
+		return new EditComponent();
 	}
 }

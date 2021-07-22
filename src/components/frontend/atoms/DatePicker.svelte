@@ -130,8 +130,6 @@
 	function lock(e) {
 		x0 = e.clientX || e.touches[0].clientX;
 
-		console.log('x0', x0);
-
 		touched = true;
 	}
 

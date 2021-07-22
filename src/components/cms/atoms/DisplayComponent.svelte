@@ -5,7 +5,6 @@
 	export let component;
 
 	function loaded() {
-		console.log('fully loaded', component.component.name, new Date().getMilliseconds());
 		dispatch('loaded', { component });
 	}
 

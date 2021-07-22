@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import Img from './Inputs/Img';
 import Link from './Inputs/Link';
 import LongText from './Inputs/LongText';
@@ -14,9 +15,37 @@ export default class Component extends WebBase {
 		this.props = {};
 		this.parent = parent;
 		this.slot = false;
+		this.isCustomComponent = false;
+		this.belongsToCustomComponent = false;
+		this.customComponent = undefined;
 	}
 
-	createFromData(data, components, parent = null) {
+	blueprintKeys(callback) {
+		const keys = Object.keys(this.blueprint);
+		keys.forEach((key) => {
+			if (key !== 'children') {
+				callback(key);
+			}
+		});
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	createNewInstance() {
+		return new Component();
+	}
+
+	setCustomComponent(customComponent) {
+		this.isCustomComponent = true;
+		this.customComponent = customComponent;
+	}
+
+	createFromData(data, components, customComponents, parent = null) {
+		if (data.isCustomComponent === true) {
+			const component = customComponents.find((ele) => ele.id === data.id);
+			data = JSON.parse(JSON.parse(component.blueprint));
+			this.setCustomComponent(component);
+		}
+
 		function createBlueprint(blueprint) {
 			function create(object) {
 				object.createFromData(blueprint);
@@ -59,7 +88,9 @@ export default class Component extends WebBase {
 		});
 
 		this.children = this.children.map((child) => {
-			return new Component().createFromData(child, components, this);
+			const created = this.createNewInstance().createFromData(child, components, customComponents, this);
+			created.belongsToCustomComponent = this.isCustomComponent || this.belongsToCustomComponent;
+			return created;
 		});
 
 		return this;

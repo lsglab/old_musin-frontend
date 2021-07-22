@@ -3,11 +3,17 @@
 	import { alignment, cards, images, sections, templates, text } from '../../../cms/SiteEditor/Components';
 	import { compConfig } from '../../../stores';
 	import { createEventDispatcher } from 'svelte';
+	import ComponentCategory from '../molecules/ComponentCategory.svelte';
 	import EditComponent from '../../../cms/SiteEditor/EditComponent';
 	import Flex from '../../both/atoms/Flex.svelte';
+	import Grid from '../../both/atoms/Grid.svelte';
 
 	let visible = false;
 	export let parent = null;
+
+	export let customComponents = false;
+
+	const childrenTypes = parent.childrenTypes.length > 0;
 
 	const dispatch = createEventDispatcher();
 
@@ -24,13 +30,19 @@
 		});
 	}
 
-	function componentChosen(component) {
+	function componentChosen(e) {
+		const component = components.find((ele) => ele.name === e.detail.component.component);
 		dispatch('chosen', new EditComponent(component, parent));
 		visible = false;
 	}
 
-	function getComponent(name) {
-		return components.find((ele) => ele.name === name);
+	function customComponentChosen(e) {
+		const blueprint = JSON.parse(JSON.parse(e.detail.component.blueprint));
+		const component = new EditComponent();
+		component.setCustomComponent(e.detail.component);
+		component.createFromData(blueprint, $compConfig, parent);
+		dispatch('chosen', component);
+		visible = false;
 	}
 </script>
 
@@ -39,25 +51,6 @@
 		opacity: 1;
 		pointer-events: auto;
 		cursor: auto;
-	}
-
-	.category-header:hover + .category-desc {
-		opacity: 1;
-		pointer-events: auto;
-	}
-
-	.component:hover > .component-desc {
-		opacity: 1;
-		pointer-events: auto;
-	}
-
-	.iframe-container {
-		padding-top: 56.25%;
-	}
-
-	.component-desc {
-		@apply left-1/2 pt-5;
-		transform: translateX(-50%);
 	}
 </style>
 
@@ -77,57 +70,26 @@
 		</div>
 	</Flex>
 
-	<Flex classes="w-full mt-4" justify="between">
+	<Grid classes="w-full mt-4" cols="{4}" gap="{3}">
 		{#each categories as category, i}
 			{#if category.comps.length > 0}
-				<div class="w-1/4">
-					<div class="relative">
-						<div class="category-header">
-							<Flex align="center">
-								<p class="mr-2 font-light material-icons">{category.icon}</p>
-								<p class="font-bold">{category.name}</p>
-							</Flex>
-						</div>
-						<div
-							class="absolute z-10 w-32 h-auto p-2 font-light leading-5 bg-white rounded-sm shadow-lg opacity-0 pointer-events-none text-xss category-desc">
-							{category.desc}
-						</div>
-					</div>
-					<div>
-						{#each category.comps as component}
-							<Flex>
-								<div class="text-xss material-icons">navigate_next</div>
-								<div
-									class="relative p-1 text-xs duration-75 rounded-sm cursor-pointer component hover:bg-gray-100"
-									on:click="{() => {
-										componentChosen(getComponent(component.component));
-									}}">
-									{component.name}
-									<div class="absolute z-10 opacity-0 pointer-events-none component-desc">
-										<div class="bg-white rounded-sm shadow-xl card-position w-96">
-											<div class="relative overflow-hidden iframe-container">
-												<iframe
-													on:click="{() => {
-														componentChosen(getComponent(component.component));
-													}}"
-													id="{component.component}"
-													title="{component.name}"
-													src="/new?component={component.component}"
-													class="absolute top-0 left-0 w-full h-full"></iframe>
-											</div>
-											<div class="p-2 mt-2 font-light leading-5 bg-gray-100 rounded-sm text-xss">
-												{component.desc}
-											</div>
-										</div>
-									</div>
-								</div>
-							</Flex>
-						{/each}
-					</div>
-				</div>
+				<ComponentCategory
+					categoryIcon="{category.icon}"
+					categoryName="{category.name}"
+					categoryDescription="{category.description}"
+					components="{category.comps}"
+					on:chosen="{componentChosen}" />
 			{/if}
 		{/each}
-	</Flex>
+		{#if customComponents !== false && !childrenTypes}
+			<ComponentCategory
+				categoryIcon="dashboard_customize"
+				categoryName="Custom Components"
+				categoryDescription="Komponenten die aus mehreren anderen Komponenten erstellt wurde"
+				components="{customComponents}"
+				on:chosen="{customComponentChosen}" />
+		{/if}
+	</Grid>
 </div>
 <div
 	on:click="{() => {

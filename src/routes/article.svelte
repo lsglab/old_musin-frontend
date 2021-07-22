@@ -114,8 +114,6 @@
 	onMount(() => {
 		dom = true;
 	});
-
-	$: console.log('slotBlueprint', slotBlueprint);
 </script>
 
 <style>

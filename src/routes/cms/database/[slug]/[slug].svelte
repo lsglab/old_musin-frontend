@@ -151,8 +151,6 @@
 	function dataChanged() {
 		if (data === undefined || oldData === undefined) return;
 		if (!_.isEqual(data, oldData)) {
-			// console.log('data', JSON.parse(JSON.stringify(data)));
-			// console.log('oldData', JSON.parse(JSON.stringify(oldData)));
 			save = true;
 		} else {
 			save = false;

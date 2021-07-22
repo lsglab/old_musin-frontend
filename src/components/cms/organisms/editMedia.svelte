@@ -47,9 +47,7 @@
 
 	function abort() {
 		// revert all changes and close
-		console.log('oldData', oldData);
 		file = oldData;
-		console.log('file', file);
 		close();
 	}
 
@@ -60,9 +58,7 @@
 			data.set(key, diff[key]);
 		});
 
-		console.log('input', fileInput, 'data', data);
 		if (fileInput.value !== '') {
-			console.log('heloo');
 			data.set(fileInput.name, fileInput.files[0]);
 		}
 
