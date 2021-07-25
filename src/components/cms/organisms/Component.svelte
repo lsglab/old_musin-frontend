@@ -52,6 +52,7 @@
 
 	function triggerComponentUpdate() {
 		component = component;
+		rendered.$set({ blueprint: component.blueprint });
 		componentUpdate();
 	}
 

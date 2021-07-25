@@ -1,6 +1,6 @@
 <script>
 	/* eslint-disable import/first */
-	import { alignment, cards, images, sections, templates, text } from '../../../cms/SiteEditor/Components';
+	import { alignment, cards, images, sections, special, templates, text } from '../../../cms/SiteEditor/Components';
 	import { compConfig } from '../../../stores';
 	import { createEventDispatcher } from 'svelte';
 	import ComponentCategory from '../molecules/ComponentCategory.svelte';
@@ -21,7 +21,7 @@
 		return parent.childrenTypes.length === 0 || parent.childrenTypes.includes(ele.name);
 	});
 
-	const categories = [alignment, cards, sections, templates, images, text];
+	const categories = [alignment, cards, sections, templates, images, text, special];
 
 	if (parent.childrenTypes.length > 0) {
 		categories.forEach((category) => {
@@ -40,9 +40,24 @@
 		const blueprint = JSON.parse(JSON.parse(e.detail.component.blueprint));
 		const component = new EditComponent();
 		component.setCustomComponent(e.detail.component);
-		component.createFromData(blueprint, $compConfig, parent);
+		component.createFromData(blueprint, $compConfig, customComponents, parent);
 		dispatch('chosen', component);
 		visible = false;
+	}
+
+	function mount(comps) {
+		comps.forEach((component) => {
+			window.document.addEventListener(
+				'blueprint_iframe_mounted',
+				() => {
+					const blueprint = JSON.parse(JSON.parse(component.blueprint));
+
+					const event = new CustomEvent('create_blueprint', { detail: { blueprint, customComponents } });
+					document.getElementById(component.name).contentDocument.dispatchEvent(event);
+				},
+				false
+			);
+		});
 	}
 </script>
 
@@ -83,6 +98,10 @@
 		{/each}
 		{#if customComponents !== false && !childrenTypes}
 			<ComponentCategory
+				getIframeUrl="{(component) => {
+					return `/new?blueprint=${component.blueprint}`;
+				}}"
+				mount="{mount}"
 				categoryIcon="dashboard_customize"
 				categoryName="Custom Components"
 				categoryDescription="Komponenten die aus mehreren anderen Komponenten erstellt wurde"

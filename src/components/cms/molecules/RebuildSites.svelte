@@ -44,14 +44,12 @@
 		reload = false;
 
 		window.document.addEventListener(
-			'blueprint_ready',
+			'blueprint_iframe_mounted',
 			() => {
 				const blueprint = JSON.parse(JSON.parse(site.blueprint));
 
-				const event = new CustomEvent('blueprint_create', { detail: { blueprint, customComponents } });
+				const event = new CustomEvent('create_blueprint', { detail: { blueprint, customComponents } });
 				document.getElementById('iframe').contentDocument.dispatchEvent(event);
-
-				console.log('event dispatched');
 			},
 			false
 		);

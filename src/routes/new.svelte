@@ -1,4 +1,4 @@
-<script>
+<script context="module">
 	import { files, page, pageTable } from '../stores';
 	import { onMount, tick } from 'svelte';
 	import Component from '../components/cms/organisms/Component.svelte';
@@ -18,10 +18,14 @@
 	import DisplayComponent from '../components/cms/atoms/DisplayComponent.svelte';
 	import MensaCard from '../components/frontend/molecules/MensaCard.svelte';
 	import SectionWrapper from '../components/frontend/molecules/sectionWrapper.svelte';
+	import Slot from '../components/frontend/atoms/Slot.svelte';
 	import StaffCard from '../components/frontend/molecules/staffCard.svelte';
+	import TestFooter from '../components/frontend/organisms/TestFooter.svelte';
 	import TestHero from '../components/frontend/organisms/TestHero.svelte';
 	import request from '../cms/Utils/requests';
+</script>
 
+<script>
 	const components = [
 		Article,
 		ArticleSection,
@@ -29,9 +33,13 @@
 		TestHero,
 		AwardImage,
 		Empty,
+		Footer,
+		TestFooter,
 		Calender,
+		Slot,
 		SectionWrapper,
 		AboutSection,
+		Nav,
 		MensaCard,
 		StaffCard,
 	];
@@ -68,28 +76,33 @@
 		window.parent.document.dispatchEvent(event);
 	}
 
+	function iframeMounted(mode) {
+		const mountEvent = new CustomEvent(`${mode}_iframe_mounted`, { detail: {} });
+		window.parent.document.dispatchEvent(mountEvent);
+	}
+
 	onMount(async () => {
 		layout = undefined;
 		const params = Object.fromEntries(new URLSearchParams(window.location.search).entries());
 
 		if (params.component !== undefined) {
 			singleComponent = getComponent(params.component);
+			iframeMounted('component');
 			return;
 		}
 
-		window.document.addEventListener(
-			'blueprint_create',
-			(e) => {
-				customComponents = e.detail.customComponents;
-				site = new ComponentClass().createFromData(e.detail.blueprint, components, customComponents, null);
-			},
-			false
-		);
-
 		if (params.blueprint) {
-			const event = new CustomEvent('blueprint_ready', {});
-			window.parent.document.dispatchEvent(event);
+			window.document.addEventListener(
+				'create_blueprint',
+				(e) => {
+					customComponents = e.detail.customComponents;
 
+					site = new ComponentClass().createFromData(e.detail.blueprint, components, customComponents, null);
+				},
+				false
+			);
+
+			iframeMounted('blueprint');
 			return;
 		}
 
@@ -114,7 +127,14 @@
 		window.document.addEventListener(
 			'c_new',
 			() => {
-				layout = new EditComponent(Empty, undefined);
+				const id = customComponents.find((comp) => comp.name === 'Base').id;
+
+				const base = {
+					children: [],
+					id,
+					isCustomComponent: true,
+				};
+				layout = new EditComponent().createFromData(base, components, customComponents, null);
 				initialized = true;
 			},
 			false
@@ -122,7 +142,7 @@
 
 		window.document.addEventListener(
 			'c_fetched',
-			(e) => {
+			async (e) => {
 				pageTable.set(e.detail.table);
 				page.set(e.detail.page);
 				customComponents = e.detail.customComponents;
@@ -161,23 +181,20 @@
 		const compEvent = new CustomEvent('components', { detail: components });
 		window.parent.document.dispatchEvent(compEvent);
 
-		const mountEvent = new CustomEvent('iframe_mounted', { detail: {} });
-		window.parent.document.dispatchEvent(mountEvent);
+		iframeMounted('default');
 	});
 </script>
 
 {#if initialized === true && singleComponent === false && site === false}
-	<Nav />
 	{#if reload === false}
 		<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" saving="{saving}" />
 	{/if}
-	<Footer />
 {:else if singleComponent !== false}
 	<div class="m-4 pointer-events-none">
 		<svelte:component this="{singleComponent}" />
 	</div>
 {:else if site !== false}
-	<Nav />
-	<DisplayComponent component="{site}" on:loaded="{siteLoaded}" />
-	<Footer />
+	<div class="pointer-events-none">
+		<DisplayComponent component="{site}" on:loaded="{siteLoaded}" />
+	</div>
 {/if}

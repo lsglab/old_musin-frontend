@@ -83,8 +83,7 @@
 	async function saveData(body) {
 		disabled = true;
 		const res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'put', body, true);
-		res.status = 400;
-
+		console.log('res', res);
 		if (res.status === 200) {
 			data = res.data[tableName][0];
 			errors = {};
@@ -98,8 +97,11 @@
 		disabled = true;
 		const res = await request(`${process.globals.apiUrl}/${tableName}`, 'post', body, true);
 
+		console.log('body', body);
+		console.log('RES', res);
+
 		if (res.status !== 400) {
-			window.history.go(-1);
+			// window.history.go(-1);
 			errors = {};
 		} else if (res.status === 400) {
 			errors = res.data;
@@ -120,7 +122,7 @@
 
 		if (table.getColumnPermission(data.id, 'blueprint')) reqData.blueprint = JSON.stringify(component.save(doc));
 		// wait till dom is updated
-		return prepareData(reqData);
+		return prepareData(reqData, component);
 	}
 
 	async function create() {
@@ -135,7 +137,7 @@
 		if (domLoaded !== true) return;
 
 		// wait till iframe is mounted so that all events work
-		window.document.addEventListener('iframe_mounted', async () => {
+		window.document.addEventListener('default_iframe_mounted', async () => {
 			await fetchTable();
 			await fetchData();
 			await fetchCustomComponents();

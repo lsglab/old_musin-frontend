@@ -91,14 +91,12 @@
 
 		loading = true;
 
-		console.log('fileChanged');
-
 		window.document.addEventListener(
-			'blueprint_ready',
+			'blueprint_iframe_mounted',
 			() => {
 				const blueprint = JSON.parse(JSON.parse(selectedFile.blueprint));
 
-				const event = new CustomEvent('blueprint_create', { detail: { blueprint, customComponents } });
+				const event = new CustomEvent('create_blueprint', { detail: { blueprint, customComponents } });
 				document.getElementById('iframe').contentDocument.dispatchEvent(event);
 
 				window.document.addEventListener(

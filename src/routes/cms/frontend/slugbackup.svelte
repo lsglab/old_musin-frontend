@@ -147,7 +147,7 @@
 		if (domLoaded !== true) return;
 
 		// wait till iframe is mounted so that all events work
-		window.document.addEventListener('iframe_mounted', async () => {
+		window.document.addEventListener('default_iframe_mounted', async () => {
 			await fetchTable();
 			await fetchData();
 

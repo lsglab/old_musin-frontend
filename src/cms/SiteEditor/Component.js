@@ -39,9 +39,30 @@ export default class Component extends WebBase {
 		this.customComponent = customComponent;
 	}
 
+	searchForComponent(name) {
+		for (let i = 0; i < this.children.length; i += 1) {
+			const child = this.children[i];
+
+			if (child.component.name === name) {
+				return child;
+			}
+
+			const result = child.searchForComponent(name);
+
+			if (result !== false) {
+				return result;
+			}
+		}
+
+		return false;
+	}
+
 	createFromData(data, components, customComponents, parent = null) {
+		let customComponentChildren = [];
+
 		if (data.isCustomComponent === true) {
 			const component = customComponents.find((ele) => ele.id === data.id);
+			customComponentChildren = data.children;
 			data = JSON.parse(JSON.parse(component.blueprint));
 			this.setCustomComponent(component);
 		}
@@ -92,6 +113,13 @@ export default class Component extends WebBase {
 			created.belongsToCustomComponent = this.isCustomComponent || this.belongsToCustomComponent;
 			return created;
 		});
+
+		if (this.isCustomComponent === true && this.customComponent.slot === true) {
+			const slot = this.searchForComponent('Slot');
+			slot.children = customComponentChildren.map((child) => {
+				return this.createNewInstance().createFromData(child, components, customComponents, slot);
+			});
+		}
 
 		return this;
 	}

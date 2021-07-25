@@ -5,6 +5,8 @@
 	import Logo from '../../both/atoms/Logo.svelte';
 	import Section from '../atoms/Section.svelte';
 
+	export let blueprint = {};
+
 	const menus = [
 		{
 			href: '/',

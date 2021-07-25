@@ -61,6 +61,16 @@ export const templates = {
 			description: 'Der Kalender zeigt alle Termine des LSG an',
 			name: 'Kalender',
 		},
+		{
+			component: 'Nav',
+			description: 'Die Navigationsleiste',
+			name: 'Navigationsleiste',
+		},
+		{
+			component: 'TestFooter',
+			description: 'Der Footer der Seite',
+			name: 'Footer',
+		},
 	],
 	description: 'Templates sind schon fertige/fast fertige Seiten die nur noch befüllt werden müssen',
 	icon: 'web',
@@ -96,4 +106,17 @@ export const text = {
 	description: 'Komponent um Text darzustellen',
 	icon: 'article',
 	name: 'Text',
+};
+
+export const special = {
+	comps: [
+		{
+			component: 'Slot',
+			description: 'Slot component',
+			name: 'Slot',
+		},
+	],
+	description: 'Spezielle Komponenten',
+	icon: 'settings',
+	name: 'Speziel',
 };

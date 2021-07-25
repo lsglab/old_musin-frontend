@@ -16,6 +16,20 @@
 	let propsOpen = true;
 	let open = true;
 
+	let parentComponent;
+
+	function getParent() {
+		if (component.isCustomComponent) {
+			const comp = component.searchForComponent('Slot');
+			parentComponent = comp;
+			return;
+		}
+
+		parentComponent = component;
+	}
+
+	// the component that acts as a parent for other components. This is usually the same as the component
+
 	function toggleOpen() {
 		open = !open;
 	}
@@ -33,7 +47,7 @@
 	}
 
 	function addChild(event) {
-		component.children.push(event.detail);
+		parentComponent.children.push(event.detail);
 		triggerUpdate();
 	}
 
@@ -58,6 +72,8 @@
 		}
 		return 'text';
 	}
+
+	$: getParent(component);
 </script>
 
 <style lang="scss">
@@ -83,7 +99,7 @@
 </style>
 
 <div
-	class="mx-1 pl-2 py-3 {component.parent !== undefined ? 'border-l-4 border-gray-300 border-solid' : ''} cursor-pointer">
+	class="mx-1 pl-2 {component.belongsToCustomComponent ? 'hidden' : ''} py-3 {component.parent !== undefined ? 'border-l-4 border-gray-300 border-solid' : ''} cursor-pointer">
 	<Flex>
 		{#if component.parent !== undefined}
 			<svg
@@ -118,10 +134,10 @@
 							{/if}
 						</div>
 						<div class="w-5 h-5 icon-dimens">
-							{#if !component.isCustomComponent && component.slot && table.getColumnPermission(page.id, 'blueprint')}
+							{#if (!component.isCustomComponent && component.slot && table.getColumnPermission(page.id, 'blueprint')) || (component.isCustomComponent && component.customComponent.slot === true)}
 								<ChooseComponent
 									customComponents="{customComponents}"
-									parent="{component}"
+									parent="{parentComponent}"
 									on:click="{openTrue}"
 									on:chosen="{addChild}" />
 							{/if}
@@ -156,8 +172,8 @@
 			{/if}
 		</div>
 	</Flex>
-	{#if open && !component.isCustomComponent}
-		{#each component.children as child}
+	{#if open}
+		{#each parentComponent.children as child}
 			<svelte:self
 				customComponents="{customComponents}"
 				bind:component="{child}"

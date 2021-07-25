@@ -12,9 +12,16 @@ export default class EditComponent extends Component {
 	save(document) {
 		if (this.isCustomComponent) {
 			const data = {
+				children: [],
 				id: this.customComponent.id,
 				isCustomComponent: this.isCustomComponent,
 			};
+
+			if (this.customComponent.slot === true) {
+				this.searchForComponent('Slot').children.forEach((child) => {
+					data.children.push(child.save(document));
+				});
+			}
 
 			return data;
 		}
@@ -35,6 +42,8 @@ export default class EditComponent extends Component {
 		this.children.forEach((child) => {
 			data.children.push(child.save(document));
 		});
+
+		console.log('data', data);
 		return data;
 	}
 

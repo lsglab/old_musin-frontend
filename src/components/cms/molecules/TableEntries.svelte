@@ -19,6 +19,8 @@
 	export let deleteAll = false;
 	export let triggerDataReload = false;
 	export let triggerTableReload = false;
+
+	export let additionalRequests = async () => {};
 	// default
 	let deleteLength;
 	let domLoaded = false;
@@ -65,6 +67,7 @@
 	async function fetchAll() {
 		await fetchData();
 		await fetchTable();
+		await additionalRequests();
 		fetched();
 	}
 

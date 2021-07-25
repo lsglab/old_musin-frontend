@@ -26,9 +26,10 @@
 		};
 	}
 
-	async function prepareData(reqData) {
+	async function prepareData(reqData, component) {
 		if (table.getColumnPermission(data.id, 'description')) reqData.description = data.description;
 		if (table.getColumnPermission(data.id, 'name')) reqData.name = data.name;
+		if (table.getColumnPermission(data.id, 'slot')) reqData.slot = component.searchForComponent('Slot') !== false;
 
 		return reqData;
 	}

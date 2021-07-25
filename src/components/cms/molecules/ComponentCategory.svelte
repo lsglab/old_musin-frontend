@@ -1,5 +1,5 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
 
 	const dispatch = createEventDispatcher();
@@ -13,12 +13,18 @@
 	export let classes = '';
 
 	export let getIframeUrl = (component) => {
-		return `/new?component=${component.name}`;
+		return `/new?component=${component.component}`;
 	};
+
+	export let mount = () => {};
 
 	function chosen(component) {
 		dispatch('chosen', { component });
 	}
+
+	onMount(() => {
+		mount(components);
+	});
 </script>
 
 <style lang="scss">
@@ -67,12 +73,14 @@
 					{component.name}
 					<div class="absolute z-10 opacity-0 pointer-events-none component-desc">
 						<div class="bg-white rounded-sm shadow-xl card-position w-96">
-							<div class="relative overflow-hidden iframe-container">
+							<div
+								class="relative overflow-hidden iframe-container"
+								on:click="{() => {
+									chosen(component);
+								}}">
+								<slot />
 								<iframe
-									on:click="{() => {
-										chosen(component);
-									}}"
-									id="{component.component}"
+									id="{component.name}"
 									title="{component.name}"
 									src="{getIframeUrl(component)}"
 									class="absolute top-0 left-0 w-full h-full"></iframe>
