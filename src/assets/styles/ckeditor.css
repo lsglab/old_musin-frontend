@@ -1,5 +1,5 @@
 :root {
-	--ck-spacing-standard: 0;
+	--ck-spacing-standard: 0 !important;
 }
 
 .ck-content .table {

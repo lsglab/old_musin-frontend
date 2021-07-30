@@ -6,7 +6,6 @@
 	import ComponentCategory from '../molecules/ComponentCategory.svelte';
 	import EditComponent from '../../../cms/SiteEditor/EditComponent';
 	import Flex from '../../both/atoms/Flex.svelte';
-	import Grid from '../../both/atoms/Grid.svelte';
 
 	let visible = false;
 	export let parent = null;
@@ -85,7 +84,7 @@
 		</div>
 	</Flex>
 
-	<Grid classes="w-full mt-4" cols="{4}" gap="{3}">
+	<div class="grid w-full grid-cols-4 gap-3 mt-4">
 		{#each categories as category, i}
 			{#if category.comps.length > 0}
 				<ComponentCategory
@@ -108,7 +107,7 @@
 				components="{customComponents}"
 				on:chosen="{customComponentChosen}" />
 		{/if}
-	</Grid>
+	</div>
 </div>
 <div
 	on:click="{() => {

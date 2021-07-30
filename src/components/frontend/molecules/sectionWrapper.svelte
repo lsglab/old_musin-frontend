@@ -4,26 +4,19 @@
 	import Link from '../../both/atoms/Link.svelte';
 	import Section from '../atoms/Section.svelte';
 	import ShortText from '../../../cms/SiteEditor/Inputs/ShortText';
-	// header of this Section
-	// export let header = '<input class="cms-input" type="text" placeholder="Enter a header"></input>';
-	// subHeader of the title
-	// export let subHeader = '';
-	// Text of the link
-	// export let linkText;
-	// The href of the link
-	// export let link;
+
 	// The id of the element
 	export let id = '';
 	// section height 100vh ?
 	export let fullscreen = false;
-	// describes the "object"
+	// whether section wrapper has link or not
+	export let link = true;
+
 	export let blueprint = {
 		header: new ShortText('Titel der Section'),
 		link: new InputLink('Ein Link (optional)'),
 		subHeader: new ShortText('subHeader der Section'),
 	};
-	// the address the link is supposed to go to
-	export let href = '';
 	// default padding yes or no
 	export let padding = false;
 	// additional classes
@@ -45,9 +38,7 @@
 			<div>
 				<slot />
 			</div>
-			{#if href !== undefined}
-				<Link href="{blueprint.link.href}" id="{blueprint.link.id}">{blueprint.link.data}</Link>
-			{/if}
+			<Link href="{blueprint.link.href}" classes="{link ? '' : 'hidden'}" id="{blueprint.link.id}">{blueprint.link.data}</Link>
 		</Flex>
 	</Flex>
 </Section>

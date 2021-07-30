@@ -1,4 +1,5 @@
 import InputBase from './InputBase';
+import '../../../assets/styles/ckeditor.css';
 
 export default class LongText extends InputBase {
 	constructor(placeholder = 'Long Text') {
@@ -8,8 +9,7 @@ export default class LongText extends InputBase {
 
 	async prepareInput(document) {
 		const module = await import('@ckeditor/ckeditor5-build-inline');
-		// import file to override certain ckeditor rules
-		await import('../../../assets/styles/ckeditor.css');
+
 		const inlineEditor = module.default;
 		const node = document.getElementById(this.id);
 

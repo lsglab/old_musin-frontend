@@ -341,7 +341,7 @@
 	}
 
 	.menuCard {
-		@apply hidden top-12 overflow-hidden w-32 shadow-equal-xl lg:grid max-h-screen h-auto absolute z-40 rounded-lg bg-white pb-1;
+		@apply hidden top-12 overflow-hidden w-32 shadow-equal-xl lg:grid max-h-screen h-auto absolute rounded-lg bg-white pb-1;
 		transition: 0.3s;
 		> div {
 			@apply flex flex-col;
@@ -432,7 +432,7 @@
 
 <div
 	bind:this="{menuCard}"
-	class="menuCard"
+	class="z-40 menuCard"
 	style="height:{cardHeight}px;left:{cardPosition.x}px;opacity:{cardValues.opacity};pointer-events:{cardValues.pointer_events}">
 	{#each menus.filter((f) => f.contents) as menu}
 		{#if menu.id === currentMenu}

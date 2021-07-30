@@ -1,7 +1,6 @@
 <script>
 	import Button from '../../../components/cms/atoms/Button.svelte';
 	import Flex from '../../../components/both/atoms/Flex.svelte';
-	import Grid from '../../../components/both/atoms/Grid.svelte';
 	import TableEntries from '../../../components/cms/molecules/TableEntries.svelte';
 	import request from '../../../cms/Utils/requests';
 
@@ -59,7 +58,7 @@
 	</div>
 	<div>
 		{#if customComponents !== undefined}
-			<Grid cols="{3}" gap="6">
+			<div class="grid grid-cols-3 gap-6">
 				{#each components as component}
 					<a
 						alt=""
@@ -78,7 +77,7 @@
 						</div>
 					</a>
 				{/each}
-			</Grid>
+			</div>
 		{/if}
 	</div>
 </TableEntries>

@@ -32,35 +32,36 @@
 	function checkBoundaries() {
 		const ele = document.getElementById(id);
 		const boundaries = ele.getBoundingClientRect();
-		let translate = 0;
-		const padding = 10;
-		const transDirection = [];
+
+		const padding = 20;
+		const translations = [];
 
 		const windowHeight = document.documentElement.scrollHeight;
-		const windowWidth = document.documentElement.scrollWidth;
+		const windowWidth = window.innerWidth;
 
-		if (boundaries.x < 0) {
-			transDirection.push('left');
-			translate = Math.abs(boundaries.x) + padding;
+		if (boundaries.left < 0) {
+			const translate = Math.abs(boundaries.left) + padding;
+			translations.push({ direction: 'left', translate });
 		}
-		if (boundaries.x > windowWidth) {
-			transDirection.push('right');
-			translate = boundaries.x - windowWidth + padding;
+		if (boundaries.right > windowWidth) {
+			const translate = -(boundaries.right - windowWidth + padding);
+			translations.push({ direction: 'left', translate });
 		}
-		if (boundaries.y < 0) {
-			transDirection.push('top');
-			translate = Math.abs(boundaries.y) + padding;
-		}
-		if (boundaries.y > windowHeight) {
-			transDirection.push('bottom');
-			translate = boundaries.y - windowHeight + padding;
+		if (boundaries.top < 0) {
+			const translate = Math.abs(boundaries.top) + padding;
+			translations.push({ direction: 'top', translate });
 		}
 
-		transDirection.forEach((direction) => {
-			ele.style[direction] = `${translate}px`;
+		if (boundaries.bottom > windowHeight) {
+			const translate = boundaries.bottom - windowHeight + padding;
+			translations.push({ direction: 'bottom', translate });
+		}
+
+		translations.forEach((translation) => {
+			ele.style[translation.direction] = `${translation.translate}px`;
 		});
 
-		if (transDirection.length === 0) {
+		if (translations.length === 0) {
 			ele.style.left = '50%';
 			ele.style.top = '50%';
 		}
@@ -80,7 +81,7 @@
 <div
 	id="{id}"
 	class="absolute rounded-sm z-50 cursor-default p-2 origin-center bg-white border border-gray-400 border-solid shadow-md pos {visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}"
-	style="transform: translate(-50%,-50%)">
+	style="transform: translate(-50%,-50%);">
 	<Flex align="center">
 		<Input id="text-{id}" classes="mx-2" type="text" bind:value="{data}" />
 		<Input id="link-{id}" classes="mx-2" type="url" bind:value="{href}" placeholder="Url des Links" />
