@@ -68,6 +68,7 @@
 	setNewData="{setNewData}"
 	chooseCustomComponents="{true}"
 	prepareData="{prepareData}"
+	goback="/cms/frontend"
 	bind:errors>
 	<div slot="buttons">
 		{#if id !== 'new' && table.getColumnPermission(id, 'public')}

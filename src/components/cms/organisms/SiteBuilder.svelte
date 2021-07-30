@@ -4,6 +4,7 @@
 	import Button from '../atoms/Button.svelte';
 	import DialogButton from '../molecules/DialogButton.svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
+	import GoBack from '../atoms/GoBack.svelte';
 	import Loading from '../atoms/Loading.svelte';
 	import Node from '../molecules/Node.svelte';
 	import Table from '../../../cms/Tables/table';
@@ -24,6 +25,8 @@
 
 	export let table;
 	export let data;
+
+	export let goback;
 
 	export let chooseCustomComponents = false;
 	let customComponents;
@@ -192,7 +195,8 @@
 
 <TopNav>
 	{#if table !== undefined && data !== undefined}
-		<Flex>
+		<Flex align="center">
+			<GoBack href="{goback}" />
 			{#if id === 'new' && table.getPermissions(id).create}
 				<Button disabled="{disabled}" buttonFunction="{create}" classes="h-full w-32">Erstellen</Button>
 			{:else}

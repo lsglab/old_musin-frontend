@@ -6,6 +6,7 @@
 	import Button from '../../../../components/cms/atoms/Button.svelte';
 	import DialogButton from '../../../../components/cms/molecules/DialogButton.svelte';
 	import Flex from '../../../../components/both/atoms/Flex.svelte';
+	import GoBack from '../../../../components/cms/atoms/GoBack.svelte';
 	import Input from '../../../../components/cms/inputs/Input.svelte';
 	import Loading from '../../../../components/cms/atoms/Loading.svelte';
 	import Table from '../../../../cms/Tables/table';
@@ -277,9 +278,7 @@
 </style>
 
 <TopNav>
-	<a href="/cms/database/{tableName}">
-		<span class="text-xl text-gray-800 material-icons"> navigate_before </span>
-	</a>
+	<GoBack href="/cms/database/{tableName}" />
 </TopNav>{#if res === undefined}
 	<Flex classes="w-full full-minus-nav" justify="center" align="center">
 		<Loading />

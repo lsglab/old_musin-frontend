@@ -47,6 +47,7 @@
 	tableName="components"
 	setNewData="{setNewData}"
 	prepareData="{prepareData}"
+	goback="/cms/components"
 	bind:errors>
 	<div slot="inputs" class="w-full">
 		<Flex align="center" classes="w-full">
