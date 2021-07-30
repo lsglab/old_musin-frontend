@@ -7,27 +7,32 @@
 	import EditComponent from '../../../cms/SiteEditor/EditComponent';
 	import Flex from '../../both/atoms/Flex.svelte';
 
-	let visible = false;
-	export let parent = null;
-
-	export let customComponents = false;
-
-	const childrenTypes = parent.childrenTypes.length > 0;
-
 	const dispatch = createEventDispatcher();
 
-	const components = $compConfig.filter((ele) => {
-		return parent.childrenTypes.length === 0 || parent.childrenTypes.includes(ele.name);
-	});
+	let visible = false;
 
-	const categories = [alignment, cards, sections, templates, images, text, special];
+	export let parent = null;
+	export let customComponents = false;
 
-	if (parent.childrenTypes.length > 0) {
-		categories.forEach((category) => {
-			// eslint-disable-next-line no-param-reassign
-			category.comps = category.comps.filter((comp) => parent.childrenTypes.includes(comp.component));
+	const categories = JSON.parse(JSON.stringify([alignment, cards, sections, templates, images, text, special]));
+	let components = [];
+
+	$: childrenTypes = parent.childrenTypes.length > 0;
+
+	function updateComponentSelection() {
+		components = $compConfig.filter((ele) => {
+			return parent.childrenTypes.length === 0 || parent.childrenTypes.includes(ele.name);
 		});
+
+		if (childrenTypes) {
+			categories.forEach((category) => {
+				// eslint-disable-next-line no-param-reassign
+				category.comps = category.comps.filter((comp) => parent.childrenTypes.includes(comp.component));
+			});
+		}
 	}
+
+	$: updateComponentSelection(childrenTypes);
 
 	function componentChosen(e) {
 		const component = components.find((ele) => ele.name === e.detail.component.component);
