@@ -2,6 +2,7 @@
 	import { compConfig } from '../../../stores';
 	import { onMount } from 'svelte/internal';
 	import Button from '../atoms/Button.svelte';
+	import ChooseComponent from './ChooseComponent.svelte';
 	import DialogButton from '../molecules/DialogButton.svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
 	import GoBack from '../atoms/GoBack.svelte';
@@ -29,6 +30,7 @@
 	export let goback;
 
 	export let chooseCustomComponents = false;
+	export let useBase = false;
 	let customComponents;
 
 	let disabled = false;
@@ -155,7 +157,7 @@
 				event = new CustomEvent('c_resume', { detail: { blueprint, page: data, table } });
 				document.getElementById('iframe').contentDocument.dispatchEvent(event);
 			} else {
-				event = new CustomEvent('c_new', {});
+				event = new CustomEvent(useBase ? 'c_base_new' : 'c_new', {});
 				document.getElementById('iframe').contentDocument.dispatchEvent(event);
 			}
 		});
@@ -232,14 +234,12 @@
 			<iframe id="iframe" src="/new" title="New site" class="absolute top-0 w-full h-full"></iframe>
 		</div>
 	</div>
-	<div class="w-3/12 pr-2 overflow-y-scroll border-l-2 border-gray-300 border-solid full-minus-nav max">
+	<div class="w-3/12 pl-0.5 pr-2 overflow-y-scroll border-l-2 border-gray-300 border-solid full-minus-nav max">
 		{#if layout !== undefined && initialized && table !== undefined && data !== undefined && customComponents !== undefined}
-			<Node
-				customComponents="{chooseCustomComponents ? customComponents : false}"
+			<Node on:update="{sendLayoutUpdate}" bind:component="{layout}" table="{table}" page="{data}" />
+			<ChooseComponent
 				on:update="{sendLayoutUpdate}"
-				bind:component="{layout}"
-				table="{table}"
-				page="{data}" />
+				customComponents="{chooseCustomComponents ? customComponents : false}" />
 		{/if}
 	</div>
 </Flex>

@@ -118,5 +118,28 @@ export const special = {
 	],
 	description: 'Spezielle Komponenten',
 	icon: 'settings',
-	name: 'Speziel',
+	name: 'Speziell',
+};
+
+export const nav = {
+	comps: [
+		{
+			component: 'TestNav',
+			description: 'Navbar',
+			name: 'Nav',
+		},
+		{
+			component: 'NavMenu',
+			description: 'Sub Menu of nav',
+			name: 'Nav Menu',
+		},
+		{
+			component: 'NavMenuItem',
+			description: 'Item of one Nav Menu',
+			name: 'Nav Menu Item',
+		},
+	],
+	description: 'Components for nav',
+	icon: 'menu',
+	name: 'Navbar',
 };

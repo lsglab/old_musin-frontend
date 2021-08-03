@@ -17,11 +17,14 @@
 	import Calender from '../components/frontend/molecules/Calender.svelte';
 	import DisplayComponent from '../components/cms/atoms/DisplayComponent.svelte';
 	import MensaCard from '../components/frontend/molecules/MensaCard.svelte';
+	import NavMenu from '../components/frontend/test/NavMenu.svelte';
+	import NavMenuItem from '../components/frontend/test/NavMenuItem.svelte';
 	import SectionWrapper from '../components/frontend/molecules/sectionWrapper.svelte';
 	import Slot from '../components/frontend/atoms/Slot.svelte';
 	import StaffCard from '../components/frontend/molecules/staffCard.svelte';
 	import TestFooter from '../components/frontend/organisms/TestFooter.svelte';
 	import TestHero from '../components/frontend/organisms/TestHero.svelte';
+	import TestNav from '../components/frontend/test/TestNav.svelte';
 	import request from '../cms/Utils/requests';
 </script>
 
@@ -40,6 +43,9 @@
 		SectionWrapper,
 		AboutSection,
 		Nav,
+		TestNav,
+		NavMenu,
+		NavMenuItem,
 		MensaCard,
 		StaffCard,
 	];
@@ -125,7 +131,7 @@
 		);
 
 		window.document.addEventListener(
-			'c_new',
+			'c_base_new',
 			() => {
 				const id = customComponents.find((comp) => comp.name === 'Base').id;
 
@@ -135,6 +141,15 @@
 					isCustomComponent: true,
 				};
 				layout = new EditComponent().createFromData(base, components, customComponents, null);
+				initialized = true;
+			},
+			false
+		);
+
+		window.document.addEventListener(
+			'c_new',
+			() => {
+				layout = new EditComponent(Empty);
 				initialized = true;
 			},
 			false

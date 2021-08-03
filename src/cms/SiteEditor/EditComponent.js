@@ -1,6 +1,11 @@
 import Component from './Component';
 
 export default class EditComponent extends Component {
+	constructor(component, parent) {
+		super(component, parent);
+		this.initialized = false;
+	}
+
 	deleteChild(child) {
 		const find = this.children.indexOf(child);
 

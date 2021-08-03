@@ -1,7 +1,16 @@
 <script>
 	/* eslint-disable import/first */
-	import { alignment, cards, images, sections, special, templates, text } from '../../../cms/SiteEditor/Components';
-	import { compConfig } from '../../../stores';
+	import {
+		alignment,
+		cards,
+		images,
+		nav,
+		sections,
+		special,
+		templates,
+		text,
+	} from '../../../cms/SiteEditor/Components';
+	import { chooseComponent, compConfig } from '../../../stores';
 	import { createEventDispatcher } from 'svelte';
 	import ComponentCategory from '../molecules/ComponentCategory.svelte';
 	import EditComponent from '../../../cms/SiteEditor/EditComponent';
@@ -9,20 +18,24 @@
 
 	const dispatch = createEventDispatcher();
 
-	let visible = false;
-
-	export let parent = null;
 	export let customComponents = false;
 
-	const categories = JSON.parse(JSON.stringify([alignment, cards, sections, templates, images, text, special]));
-	let components = [];
+	let visible = false;
+	let parent;
+	let childrenTypes = false;
 
-	$: childrenTypes = parent.childrenTypes.length > 0;
+	let categories = [];
+	const components = $compConfig;
 
-	function updateComponentSelection() {
-		components = $compConfig.filter((ele) => {
-			return parent.childrenTypes.length === 0 || parent.childrenTypes.includes(ele.name);
-		});
+	chooseComponent.subscribe((value) => {
+		if (value === false) {
+			visible = false;
+			return;
+		}
+
+		parent = value.parent;
+		childrenTypes = parent.childrenTypes.length > 0;
+		categories = JSON.parse(JSON.stringify([alignment, cards, sections, templates, images, text, special, nav]));
 
 		if (childrenTypes) {
 			categories.forEach((category) => {
@@ -30,14 +43,19 @@
 				category.comps = category.comps.filter((comp) => parent.childrenTypes.includes(comp.component));
 			});
 		}
-	}
 
-	$: updateComponentSelection(childrenTypes);
+		visible = true;
+	});
+
+	function setChild(child) {
+		parent.children.push(child);
+		dispatch('update', {});
+	}
 
 	function componentChosen(e) {
 		const component = components.find((ele) => ele.name === e.detail.component.component);
-		dispatch('chosen', new EditComponent(component, parent));
-		visible = false;
+		setChild(new EditComponent(component, parent));
+		chooseComponent.set(false);
 	}
 
 	function customComponentChosen(e) {
@@ -45,8 +63,8 @@
 		const component = new EditComponent();
 		component.setCustomComponent(e.detail.component);
 		component.createFromData(blueprint, $compConfig, customComponents, parent);
-		dispatch('chosen', component);
-		visible = false;
+		setChild(component);
+		chooseComponent.set(false);
 	}
 
 	function mount(comps) {
@@ -102,8 +120,8 @@
 		{/each}
 		{#if customComponents !== false && !childrenTypes}
 			<ComponentCategory
-				getIframeUrl="{(component) => {
-					return `/new?blueprint=${component.blueprint}`;
+				getIframeUrl="{() => {
+					return `/new?blueprint=true`;
 				}}"
 				mount="{mount}"
 				categoryIcon="dashboard_customize"
@@ -113,23 +131,4 @@
 				on:chosen="{customComponentChosen}" />
 		{/if}
 	</div>
-</div>
-<div
-	on:click="{() => {
-		visible = true;
-	}}"
-	class="w-full h-full">
-	<Flex
-		justify="center"
-		align="center"
-		classes="w-full h-full text-center text-white rounded-full cursor-pointer bg-cmsBtnColor">
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			height="24px"
-			viewBox="0 0 24 24"
-			width="24px"
-			class="fill-current"
-			fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"></path>
-			<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg>
-	</Flex>
 </div>

@@ -10,6 +10,7 @@ export default class Component extends WebBase {
 		super();
 		this.component = component;
 		this.blueprint = {};
+		this.initialized = true;
 		this.children = [];
 		this.childrenTypes = [];
 		this.props = {};

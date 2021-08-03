@@ -63,6 +63,7 @@
 	bind:this="{builder}"
 	bind:table
 	bind:data
+	useBase="{true}"
 	id="{id}"
 	tableName="sites"
 	setNewData="{setNewData}"
