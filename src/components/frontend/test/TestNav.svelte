@@ -46,7 +46,7 @@
 			});
 		});
 
-		document.getElementById('nav').addEventListener('menuHovered', (e) => {
+		document.getElementById('nav').addEventListener('menuHovered', async (e) => {
 			const target = e.detail.target;
 			const menu = e.detail.menu;
 
@@ -199,9 +199,7 @@
 	style="height:{cardHeight}px;left:{cardPosition.x}px;">
 	{#if component.initialized}
 		{#each component.children.filter((child) => child.initialized && child.children.length > 0) as menu}
-			{console.log('looping')}
 			{#if menu.id === currentMenu}
-				{console.log('updating card content')}
 				<div transition:fly="{{ duration: 400, x: 30 }}">
 					<p>{menu.props.title}</p>
 					{#each menu.children as child}

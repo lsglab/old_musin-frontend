@@ -48,7 +48,9 @@
 			() => {
 				const blueprint = JSON.parse(JSON.parse(site.blueprint));
 
-				const event = new CustomEvent('create_blueprint', { detail: { blueprint, customComponents } });
+				const event = new CustomEvent('create_blueprint', {
+					detail: { blueprint, customComponents },
+				});
 				document.getElementById('iframe').contentDocument.dispatchEvent(event);
 			},
 			false

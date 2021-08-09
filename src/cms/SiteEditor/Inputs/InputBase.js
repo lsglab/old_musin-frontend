@@ -8,8 +8,8 @@ export default class InputBase extends WebBase {
 		this.type = 'base';
 	}
 
-	save(document) {
-		this.deleteInput(document);
+	save() {
+		// this.deleteInput(document);
 		return {
 			data: this.data,
 			id: this.id,

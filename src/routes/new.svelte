@@ -52,7 +52,6 @@
 
 	let initialized = false;
 	let reload = false;
-	let saving = false;
 	let layout;
 
 	let singleComponent = false;
@@ -89,6 +88,8 @@
 
 	onMount(async () => {
 		layout = undefined;
+		initialized = false;
+
 		const params = Object.fromEntries(new URLSearchParams(window.location.search).entries());
 
 		if (params.component !== undefined) {
@@ -102,6 +103,10 @@
 				'create_blueprint',
 				(e) => {
 					customComponents = e.detail.customComponents;
+					if (e.detail.createNew === false) {
+						site = e.detail.blueprint;
+						return;
+					}
 
 					site = new ComponentClass().createFromData(e.detail.blueprint, components, customComponents, null);
 				},
@@ -135,11 +140,18 @@
 			() => {
 				const id = customComponents.find((comp) => comp.name === 'Base').id;
 
+				if (id === undefined) {
+					layout = new EditComponent(Empty);
+					initialized = true;
+					return;
+				}
+
 				const base = {
 					children: [],
 					id,
 					isCustomComponent: true,
 				};
+
 				layout = new EditComponent().createFromData(base, components, customComponents, null);
 				initialized = true;
 			},
@@ -166,22 +178,6 @@
 		);
 
 		window.document.addEventListener(
-			'c_start_saving',
-			() => {
-				saving = true;
-			},
-			false
-		);
-
-		window.document.addEventListener(
-			'c_stop_saving',
-			() => {
-				saving = false;
-			},
-			false
-		);
-
-		window.document.addEventListener(
 			'c_reload',
 			async () => {
 				reload = true;
@@ -202,7 +198,7 @@
 
 {#if initialized === true && singleComponent === false && site === false}
 	{#if reload === false}
-		<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" saving="{saving}" />
+		<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" />
 	{/if}
 {:else if singleComponent !== false}
 	<div class="m-4 pointer-events-none">

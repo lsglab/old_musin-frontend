@@ -3,8 +3,6 @@
 	import CmsNav from '../components/cms/organisms/CmsNav.svelte';
 	import Tailwind from '../components/both/atoms/Tailwind.svelte';
 	import Styles from '../components/both/atoms/Styles.svelte';
-	import Footer from '../components/frontend/organisms/Footer.svelte';
-	import Nav from '../components/frontend/organisms/Nav.svelte';
 	import Flex from '../components/both/atoms/Flex.svelte';
 
 	export let segment;
@@ -16,11 +14,8 @@
 
 <Tailwind />
 <Styles />
-{#if segment !== 'cms' && segment !== 'new'}
-	<Nav />
-	<slot />
-	<Footer />
-{:else if segment === 'cms'}
+
+{#if segment === 'cms'}
 	<Flex classes="w-screen h-screen">
 		<CmsNav />
 		<div class="w-full">

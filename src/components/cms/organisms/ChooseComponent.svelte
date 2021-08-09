@@ -75,7 +75,12 @@
 					const blueprint = JSON.parse(JSON.parse(component.blueprint));
 
 					const event = new CustomEvent('create_blueprint', { detail: { blueprint, customComponents } });
-					document.getElementById(component.name).contentDocument.dispatchEvent(event);
+
+					const ele = document.getElementById(component.name);
+
+					if (ele !== null) {
+						ele.contentDocument.dispatchEvent(event);
+					}
 				},
 				false
 			);

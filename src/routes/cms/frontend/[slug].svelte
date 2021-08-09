@@ -1,5 +1,4 @@
 <script context="module">
-	import { tick } from 'svelte';
 	import DialogButton from '../../../components/cms/molecules/DialogButton.svelte';
 	import Flex from '../../../components/both/atoms/Flex.svelte';
 	import Input from '../../../components/cms/inputs/Input.svelte';
@@ -20,6 +19,9 @@
 	let errors = {};
 	let builder;
 
+	let saving;
+	let customComponents = [];
+
 	function setNewData() {
 		return {
 			id: 'new',
@@ -28,14 +30,41 @@
 		};
 	}
 
-	async function prepareData(reqData) {
+	async function getHtml(component) {
+		saving = true;
+
+		window.document.addEventListener(
+			'blueprint_iframe_mounted',
+			() => {
+				const event = new CustomEvent('create_blueprint', {
+					detail: { blueprint: component, createNew: false, customComponents },
+				});
+				document.getElementById('saving_iframe').contentDocument.dispatchEvent(event);
+			},
+			false
+		);
+
+		// wait for the site to be loaded
+		await new Promise((resolve) => {
+			window.document.addEventListener(
+				'site_loaded',
+				() => {
+					resolve();
+				},
+				false
+			);
+		});
+
+		const html = document.getElementById('saving_iframe').contentWindow.document.children[0].innerHTML;
+
+		return html;
+	}
+
+	async function prepareData(reqData, component) {
 		if (table.getColumnPermission(data.id, 'path')) reqData.path = data.path;
 		if (table.getColumnPermission(data.id, 'public')) reqData.public = data.public;
-		// wait till dom is updated
-		await tick();
 
-		const string = document.getElementById('iframe').contentWindow.document.children[0].innerHTML;
-		reqData.html = ` ${string}`.slice(1);
+		reqData.html = await getHtml(component);
 
 		return reqData;
 	}
@@ -63,6 +92,7 @@
 	bind:this="{builder}"
 	bind:table
 	bind:data
+	bind:customComponents
 	useBase="{true}"
 	id="{id}"
 	tableName="sites"
@@ -106,3 +136,6 @@
 		</Flex>
 	</div>
 </SiteBuilder>
+<div class="hidden">
+	{#if saving === true}<iframe id="saving_iframe" src="/new?blueprint={true}" title="Saving..."></iframe>{/if}
+</div>

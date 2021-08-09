@@ -72,7 +72,10 @@ const preprocessConfig = (dev) => ({
 });
 const terserConfig = () => ({
 	compress: {
+		collapse_vars: false,
 		defaults: true,
+		drop_console: false,
+		drop_debugger: false,
 		hoist_funs: true,
 		hoist_vars: true,
 		keep_fargs: false,
@@ -90,6 +93,7 @@ const terserConfig = () => ({
 		webkit: true,
 	},
 	keep_classnames: true,
+	keep_fnames: true,
 	mangle: {
 		toplevel: true,
 	},

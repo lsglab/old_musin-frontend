@@ -31,7 +31,7 @@
 
 	export let chooseCustomComponents = false;
 	export let useBase = false;
-	let customComponents;
+	export let customComponents;
 
 	let disabled = false;
 	let initialized = false;
@@ -75,35 +75,28 @@
 	}
 
 	function afterSaving() {
-		let event = new CustomEvent('c_stop_saving');
-		document.getElementById('iframe').contentDocument.dispatchEvent(event);
-
-		// make content editable again
-		event = new CustomEvent('c_reload');
-		document.getElementById('iframe').contentDocument.dispatchEvent(event);
-
 		disabled = false;
 	}
 
 	async function saveData(body) {
 		disabled = true;
+
 		const res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'put', body, true);
-		console.log('res', res);
+
 		if (res.status === 200) {
 			data = res.data[tableName][0];
 			errors = {};
 		} else if (res.status === 400) {
 			errors = res.data;
 		}
+
 		afterSaving();
 	}
 
 	async function createData(body) {
 		disabled = true;
-		const res = await request(`${process.globals.apiUrl}/${tableName}`, 'post', body, true);
 
-		console.log('body', body);
-		console.log('RES', res);
+		const res = await request(`${process.globals.apiUrl}/${tableName}`, 'post', body, true);
 
 		if (res.status !== 400) {
 			// window.history.go(-1);
@@ -117,14 +110,9 @@
 
 	async function prepare() {
 		const component = layout;
-
-		const doc = document.getElementById('iframe').contentWindow.document;
-		// get the document of the i frame
 		const reqData = {};
 
-		const event = new CustomEvent('c_start_saving');
-		document.getElementById('iframe').contentDocument.dispatchEvent(event);
-
+		const doc = document.getElementById('iframe').contentWindow.document;
 		if (table.getColumnPermission(data.id, 'blueprint')) reqData.blueprint = JSON.stringify(component.save(doc));
 		// wait till dom is updated
 		return prepareData(reqData, component);
@@ -188,7 +176,7 @@
 		initialized = true;
 	});
 
-	function sendLayoutUpdate() {
+	async function sendLayoutUpdate() {
 		layout = layout;
 		const event = new CustomEvent('c_created', { detail: layout });
 		document.getElementById('iframe').contentDocument.dispatchEvent(event);
@@ -236,7 +224,9 @@
 	</div>
 	<div class="w-3/12 pl-0.5 pr-2 overflow-y-scroll border-l-2 border-gray-300 border-solid full-minus-nav max">
 		{#if layout !== undefined && initialized && table !== undefined && data !== undefined && customComponents !== undefined}
-			<Node on:update="{sendLayoutUpdate}" bind:component="{layout}" table="{table}" page="{data}" />
+			<div class="relative w-full h-full" id="node-container">
+				<Node on:update="{sendLayoutUpdate}" bind:component="{layout}" table="{table}" page="{data}" />
+			</div>
 			<ChooseComponent
 				on:update="{sendLayoutUpdate}"
 				customComponents="{chooseCustomComponents ? customComponents : false}" />

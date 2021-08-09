@@ -14,8 +14,8 @@ export default class EditComponent extends Component {
 		}
 	}
 
-	save(document) {
-		if (this.isCustomComponent) {
+	save(document, removeCustomComponents = true) {
+		if (this.isCustomComponent && removeCustomComponents === true) {
 			const data = {
 				children: [],
 				id: this.customComponent.id,
@@ -24,7 +24,7 @@ export default class EditComponent extends Component {
 
 			if (this.customComponent.slot === true) {
 				this.searchForComponent('Slot').children.forEach((child) => {
-					data.children.push(child.save(document));
+					data.children.push(child.save(document, removeCustomComponents));
 				});
 			}
 
@@ -45,10 +45,9 @@ export default class EditComponent extends Component {
 		});
 
 		this.children.forEach((child) => {
-			data.children.push(child.save(document));
+			data.children.push(child.save(document, removeCustomComponents));
 		});
 
-		console.log('data', data);
 		return data;
 	}
 
