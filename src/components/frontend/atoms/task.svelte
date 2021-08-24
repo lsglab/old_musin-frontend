@@ -1,19 +1,25 @@
 <script>
+	import Img from '../../../cms/SiteEditor/Inputs/Img';
+	import ShortText from '../../../cms/SiteEditor/Inputs/ShortText';
+
 	import Flex from '../../both/atoms/Flex.svelte';
-	import Icon from './Icon.svelte';
+
+	export let blueprint = {
+		content: new ShortText('Kurze Beschreibung'),
+		header: new ShortText('Name der Aufgabe'),
+		img: new Img(),
+	};
 
 	export let classes = '';
-
-	export let img = '';
-
-	export let header = '';
-	export let content = '';
 </script>
 
 <Flex classes="{classes} p-4">
-	<Icon classes="mt-1 mr-2" img="{img}" />
+	<div
+		id="{blueprint.img.id}"
+		class="h-10 p-5 mt-1 mr-2 bg-green-300 bg-center bg-no-repeat rounded-full"
+		style="background-image: url('{blueprint.img.data}');"></div>
 	<div>
-		<p class="font-bold text-gray-500">{header}</p>
-		<p class="text-xs font-bold text-gray-400">{content}</p>
+		<p class="font-bold text-gray-500" id="{blueprint.header.id}">{blueprint.header.data}</p>
+		<p class="text-xs font-bold text-gray-400" id="{blueprint.content.id}">{blueprint.content.data}</p>
 	</div>
 </Flex>

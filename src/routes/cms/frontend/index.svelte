@@ -94,7 +94,7 @@
 		window.document.addEventListener(
 			'blueprint_iframe_mounted',
 			() => {
-				const blueprint = JSON.parse(JSON.parse(selectedFile.blueprint));
+				const blueprint = JSON.parse(selectedFile.blueprint);
 
 				const event = new CustomEvent('create_blueprint', { detail: { blueprint, customComponents } });
 				document.getElementById('iframe').contentDocument.dispatchEvent(event);

@@ -1,5 +1,11 @@
 export const alignment = {
-	comps: [],
+	comps: [
+		{
+			component: 'AlignItems',
+			description: 'Komponent um andere Komponenten anzuordnen',
+			name: 'AlignItems',
+		},
+	],
 	description:
 		'Diese Komponenten dienen dazu andere richtig anzuordnen (e.g horizontal, veritkal, Platz dazwischen, etc..)',
 	icon: 'align_horizontal_left',
@@ -57,6 +63,11 @@ export const templates = {
 			name: 'Startseite',
 		},
 		{
+			component: 'SmallHero',
+			description: 'Simplere Startseite',
+			name: 'Simple Startseite',
+		},
+		{
 			component: 'Calender',
 			description: 'Der Kalender zeigt alle Termine des LSG an',
 			name: 'Kalender',
@@ -101,6 +112,11 @@ export const text = {
 			component: 'ArticleSection',
 			description: 'Eine Sektion eines Artikels',
 			name: 'Artikel Sektion',
+		},
+		{
+			component: 'Task',
+			description: 'Ein task',
+			name: 'Aufgabe',
 		},
 	],
 	description: 'Komponent um Text darzustellen',

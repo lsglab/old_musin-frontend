@@ -140,7 +140,7 @@
 
 			if (id !== 'new') {
 				/* for some reason this has to be parsed twice ??? */
-				const blueprint = JSON.parse(JSON.parse(data.blueprint));
+				const blueprint = JSON.parse(data.blueprint);
 
 				event = new CustomEvent('c_resume', { detail: { blueprint, page: data, table } });
 				document.getElementById('iframe').contentDocument.dispatchEvent(event);

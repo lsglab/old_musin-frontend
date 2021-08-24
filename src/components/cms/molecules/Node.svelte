@@ -1,5 +1,4 @@
 <script>
-	/* eslint-disable import/first */
 	/* eslint-disable no-param-reassign */
 	import { chooseComponent, currentNodeActive, currentNodeDetached, currentNodeHovered } from '../../../stores';
 	import { createEventDispatcher, onMount } from 'svelte';
@@ -210,7 +209,7 @@
 		// default is -> active Node = currentNode
 		let activeNode = currentNode;
 		// if the detached node is positioned right to the hovered Element it becomes the active Element
-		// --> active element is the always the new parent
+		// --> active element is always the new parent
 		if (elmntRect.left + leftPadding < currentNode.getBoundingClientRect().left) {
 			const currentNodeBase = getSelfTopParentNode(currentNode);
 			activeNode = document.getElementById(`node-body-${currentNodeBase.parentNode.id}`);

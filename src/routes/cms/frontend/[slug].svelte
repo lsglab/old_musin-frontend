@@ -19,7 +19,7 @@
 	let errors = {};
 	let builder;
 
-	let saving;
+	let saving = false;
 	let customComponents = [];
 
 	function setNewData() {

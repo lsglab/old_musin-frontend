@@ -119,7 +119,6 @@
 		if (triggeredUpdate === true) {
 			insertFields();
 			triggeredUpdate = false;
-			console.log('set component');
 			component.initialized = true;
 			triggerComponentUpdate();
 		}

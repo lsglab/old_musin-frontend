@@ -59,7 +59,7 @@
 	}
 
 	function customComponentChosen(e) {
-		const blueprint = JSON.parse(JSON.parse(e.detail.component.blueprint));
+		const blueprint = JSON.parse(e.detail.component.blueprint);
 		const component = new EditComponent();
 		component.setCustomComponent(e.detail.component);
 		component.createFromData(blueprint, $compConfig, customComponents, parent);
@@ -72,7 +72,7 @@
 			window.document.addEventListener(
 				'blueprint_iframe_mounted',
 				() => {
-					const blueprint = JSON.parse(JSON.parse(component.blueprint));
+					const blueprint = JSON.parse(component.blueprint);
 
 					const event = new CustomEvent('create_blueprint', { detail: { blueprint, customComponents } });
 

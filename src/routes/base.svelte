@@ -61,7 +61,6 @@
 				const code = document.scripts[0].innerHTML;
 				const array = code.split('{');
 
-				console.log('array', array);
 				let finishedString = '';
 
 				array.forEach((ele, i) => {

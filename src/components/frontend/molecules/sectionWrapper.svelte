@@ -29,16 +29,14 @@
 -->
 
 <Section classes="bg-white {classes}" id="{id}" padding="{padding}">
-	<Flex cols="true" align="center" justify="center" classes="lg:{fullscreen ? "min-h-screen" : "h-auto" } md:h-auto">
-		<Flex cols="true" align="center" classes="py-10 w-full">
-			<Flex cols="true" align="center">
-				<h3 class="text-center text-heading2" id="{blueprint.header.id}">{blueprint.header.data}</h3>
-				<p class="mt-4 text-center text-purpleAccent" id="{blueprint.subHeader.id}">{blueprint.subHeader.data}</p>
-			</Flex>
-			<div>
-				<slot />
-			</div>
-			<Link href="{blueprint.link.href}" classes="{link ? '' : 'hidden'}" id="{blueprint.link.id}">{blueprint.link.data}</Link>
+	<Flex cols="true" align="center" justify="between" classes="py-10 w-full lg:{fullscreen ? "min-h-screen" : "h-auto" } md:h-auto">
+		<Flex cols="true" align="center">
+			<h3 class="text-center text-heading2" id="{blueprint.header.id}">{blueprint.header.data}</h3>
+			<p class="mt-4 text-center text-purpleAccent" id="{blueprint.subHeader.id}">{blueprint.subHeader.data}</p>
 		</Flex>
+		<div>
+			<slot />
+		</div>
+		<Link href="{blueprint.link.href}" classes="{link ? '' : 'hidden'}" id="{blueprint.link.id}">{blueprint.link.data}</Link>
 	</Flex>
 </Section>

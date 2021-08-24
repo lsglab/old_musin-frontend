@@ -10,6 +10,7 @@
 
 	// IMPORTS
 	import AboutSection from '../components/frontend/molecules/aboutSection.svelte';
+	import AlignItems from '../components/frontend/atoms/AlignItems.svelte';
 	import Article from '../components/frontend/templates/article.svelte';
 	import ArticleSection from '../components/frontend/atoms/ArticleSection.svelte';
 	import AwardImage from '../components/frontend/atoms/AwardImage.svelte';
@@ -21,7 +22,9 @@
 	import NavMenuItem from '../components/frontend/test/NavMenuItem.svelte';
 	import SectionWrapper from '../components/frontend/molecules/sectionWrapper.svelte';
 	import Slot from '../components/frontend/atoms/Slot.svelte';
+	import SmallHero from '../components/frontend/organisms/smallHero.svelte';
 	import StaffCard from '../components/frontend/molecules/staffCard.svelte';
+	import Task from '../components/frontend/atoms/task.svelte';
 	import TestFooter from '../components/frontend/organisms/TestFooter.svelte';
 	import TestHero from '../components/frontend/organisms/TestHero.svelte';
 	import TestNav from '../components/frontend/test/TestNav.svelte';
@@ -36,10 +39,13 @@
 		TestHero,
 		AwardImage,
 		Empty,
+		AlignItems,
 		Footer,
 		TestFooter,
 		Calender,
 		Slot,
+		SmallHero,
+		Task,
 		SectionWrapper,
 		AboutSection,
 		Nav,
@@ -138,13 +144,15 @@
 		window.document.addEventListener(
 			'c_base_new',
 			() => {
-				const id = customComponents.find((comp) => comp.name === 'Base').id;
+				const component = customComponents.find((comp) => comp.name === 'Base');
 
-				if (id === undefined) {
+				if (component === undefined) {
 					layout = new EditComponent(Empty);
 					initialized = true;
 					return;
 				}
+
+				const id = component.id;
 
 				const base = {
 					children: [],
@@ -205,7 +213,5 @@
 		<svelte:component this="{singleComponent}" />
 	</div>
 {:else if site !== false}
-	<div class="pointer-events-none">
-		<DisplayComponent component="{site}" on:loaded="{siteLoaded}" />
-	</div>
+	<DisplayComponent component="{site}" on:loaded="{siteLoaded}" />
 {/if}

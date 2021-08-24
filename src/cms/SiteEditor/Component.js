@@ -64,7 +64,7 @@ export default class Component extends WebBase {
 		if (data.isCustomComponent === true) {
 			const component = customComponents.find((ele) => ele.id === data.id);
 			customComponentChildren = data.children;
-			data = JSON.parse(JSON.parse(component.blueprint));
+			data = JSON.parse(component.blueprint);
 			this.setCustomComponent(component);
 		}
 
