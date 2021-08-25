@@ -188,7 +188,7 @@
 		</Button>
 		<Flex classes="w-full my-4" wrap="{true}">
 			{#each files as file}
-				<DisplayMedia src="{file.url}" classes="w-1/4 mt-2 mr-2">
+				<DisplayMedia src="{file.url}" type="{file.type}" classes="w-1/4 mt-2 mr-2">
 					<FileOption
 						title="Löschen"
 						background="cmsErrorRed"

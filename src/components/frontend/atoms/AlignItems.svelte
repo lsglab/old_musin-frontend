@@ -6,7 +6,7 @@
 	export let ycenter = false;
 	export let wrap = true;
 
-	export let blueprint = {};
+	export const blueprint = {};
 
 	function getAlign() {
 		if (column) {

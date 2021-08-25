@@ -1,5 +1,5 @@
 <script>
-	export let blueprint = {};
+	export const blueprint = {};
 
 	export let classes = '';
 </script>
@@ -74,5 +74,3 @@
 		</tr>
 	</tbody>
 </table>
-
-<svelte:options accessors="{true}" />

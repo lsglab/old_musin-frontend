@@ -143,6 +143,7 @@
 	<Flex>
 		<DisplayMedia
 			classes="w-1/2"
+			type="{file.type}"
 			src="{file.local ? file.url : `${process.globals.apiServer}/${file.url}`}"
 			square="{true}">
 			{#if table.getPermissions(file.id).delete === true}

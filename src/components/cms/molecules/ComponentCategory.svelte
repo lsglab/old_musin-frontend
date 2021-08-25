@@ -71,6 +71,7 @@
 						chosen(component);
 					}}">
 					{component.name}
+					<!--
 					<div class="absolute z-10 opacity-0 pointer-events-none component-desc">
 						<div class="bg-white rounded-sm shadow-xl card-position w-96">
 							<div
@@ -79,6 +80,7 @@
 									chosen(component);
 								}}">
 								<slot />
+
 								<iframe
 									id="{component.name}"
 									title="{component.name}"
@@ -90,6 +92,7 @@
 							</div>
 						</div>
 					</div>
+					-->
 				</div>
 			</Flex>
 		{/each}

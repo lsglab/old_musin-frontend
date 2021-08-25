@@ -1,5 +1,5 @@
 <script>
-	export let blueprint = {};
+	export const blueprint = {};
 </script>
 
 <slot />

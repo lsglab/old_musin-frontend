@@ -51,7 +51,10 @@
 
 	function triggerComponentUpdate() {
 		component = component;
-		rendered.$set({ blueprint: component.blueprint });
+		// only set the blueprint if its not an empty object --> allows blueprint to be constant in certain cases
+		if (Object.keys(component.blueprint).length > 0) {
+			rendered.$set({ blueprint: component.blueprint });
+		}
 		componentUpdate();
 	}
 

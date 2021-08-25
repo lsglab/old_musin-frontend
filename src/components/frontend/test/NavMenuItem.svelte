@@ -2,7 +2,7 @@
 	export let href = 'https://example.com';
 	export let title = 'Item Test';
 
-	export let blueprint = {};
+	export const blueprint = {};
 </script>
 
 <style lang="scss">

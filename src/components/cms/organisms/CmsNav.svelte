@@ -44,6 +44,7 @@
 						<Flex cols="true">
 							{#each Object.keys(group.tables) as key}
 								<a
+									sapper:prefetch
 									class="text-black capitalize transition duration-75 padding-x text-xss hover:bg-gray-100 hover:border-l-1 border-cmsBtnColor"
 									href="cms{group.links[key]}">{group.tables[key].table}</a>
 							{/each}

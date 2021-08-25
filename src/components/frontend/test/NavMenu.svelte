@@ -2,7 +2,7 @@
 	export let title = 'Test';
 	export let href = 'https://example.com';
 
-	export let blueprint = {};
+	export const blueprint = {};
 
 	export let component = {};
 

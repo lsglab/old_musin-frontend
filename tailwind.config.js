@@ -22,6 +22,7 @@ module.exports = {
 				'icon-events': 'resolve(emoji_events.svg)',
 				'icon-organise': 'resolve(sort.svg)',
 				'icon-paid': 'resolve(paid.svg)',
+				'pdf': 'resolve(pdf.svg)',
 				'rect-pattern': 'resolve(rect-pattern.png)',
 			}),
 			boxShadow: {
@@ -122,6 +123,7 @@ module.exports = {
 				linear: 'linear',
 			},
 			width: {
+				'1/7': '14.2857%',
 				'9/20': '45%',
 			},
 		},

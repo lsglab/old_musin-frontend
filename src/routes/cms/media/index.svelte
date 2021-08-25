@@ -63,7 +63,12 @@
 	{/if}
 	<Flex classes="w-full" align="center">
 		{#each data as file}
-			<DisplayMedia justify="between" classes="w-1/6 mr-2 h-auto" src="{process.globals.apiServer}/{file.url}">
+			<DisplayMedia
+				justify="between"
+				classes="w-1/7 mr-2 h-auto"
+				type="{file.type}"
+				square="{true}"
+				src="{process.globals.apiServer}/{file.url}">
 				<Input classes="m-0.5" type="checkbox" id="{file.name}-select" bind:value="{file.ctx_delete}" />
 				<div>
 					<FileOption
