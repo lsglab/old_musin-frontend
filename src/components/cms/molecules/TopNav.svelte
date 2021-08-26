@@ -12,7 +12,7 @@
 	onMount(async () => {
 		const storageUser = sessionStorage.getItem('user');
 
-		if (storageUser === 'undefined' || storageUser == null) {
+		if (storageUser === 'undefined' || storageUser == null || storageUser === undefined) {
 			const res = await request('http://localhost:8000/api/auth/user', 'get', {}, true);
 
 			if (!res.error) {

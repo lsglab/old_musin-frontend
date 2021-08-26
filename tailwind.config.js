@@ -50,6 +50,7 @@ module.exports = {
 				'8xl': '6rem',
 				'9xl': '7rem',
 				'xss': '0.66rem',
+				'xsss': '0.6rem',
 			},
 			height: {
 				'1/10': '10%',

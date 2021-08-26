@@ -1,4 +1,5 @@
 <script context="module">
+	import { allComponents } from '../cms/SiteEditor/Components';
 	import { files, page, pageTable } from '../stores';
 	import { onMount, tick } from 'svelte';
 	import Component from '../components/cms/organisms/Component.svelte';
@@ -18,8 +19,8 @@
 	import Calender from '../components/frontend/molecules/Calender.svelte';
 	import DisplayComponent from '../components/cms/atoms/DisplayComponent.svelte';
 	import MensaCard from '../components/frontend/molecules/MensaCard.svelte';
-	import NavMenu from '../components/frontend/test/NavMenu.svelte';
-	import NavMenuItem from '../components/frontend/test/NavMenuItem.svelte';
+	import NavMenuFix from '../components/frontend/test/NavMenuFix.svelte';
+	import NavMenuItemFix from '../components/frontend/test/NavMenuItemFix.svelte';
 	import SectionWrapper from '../components/frontend/molecules/sectionWrapper.svelte';
 	import Slot from '../components/frontend/atoms/Slot.svelte';
 	import SmallHero from '../components/frontend/organisms/smallHero.svelte';
@@ -27,7 +28,7 @@
 	import Task from '../components/frontend/atoms/task.svelte';
 	import TestFooter from '../components/frontend/organisms/TestFooter.svelte';
 	import TestHero from '../components/frontend/organisms/TestHero.svelte';
-	import TestNav from '../components/frontend/test/TestNav.svelte';
+	import TestNavFix from '../components/frontend/test/TestNavFix.svelte';
 	import request from '../cms/Utils/requests';
 </script>
 
@@ -49,9 +50,9 @@
 		SectionWrapper,
 		AboutSection,
 		Nav,
-		TestNav,
-		NavMenu,
-		NavMenuItem,
+		TestNavFix,
+		NavMenuFix,
+		NavMenuItemFix,
 		MensaCard,
 		StaffCard,
 	];
@@ -114,7 +115,13 @@
 						return;
 					}
 
-					site = new ComponentClass().createFromData(e.detail.blueprint, components, customComponents, null);
+					site = new ComponentClass().createFromData(
+						e.detail.blueprint,
+						components,
+						customComponents,
+						allComponents,
+						null
+					);
 				},
 				false
 			);
@@ -135,7 +142,13 @@
 			'c_resume',
 			(e) => {
 				const blueprint = e.detail.blueprint;
-				layout = new EditComponent().createFromData(blueprint, components, customComponents, null);
+				layout = new EditComponent().createFromData(
+					blueprint,
+					components,
+					customComponents,
+					allComponents,
+					null
+				);
 				initialized = true;
 			},
 			false
@@ -160,7 +173,7 @@
 					isCustomComponent: true,
 				};
 
-				layout = new EditComponent().createFromData(base, components, customComponents, null);
+				layout = new EditComponent().createFromData(base, components, customComponents, allComponents, null);
 				initialized = true;
 			},
 			false

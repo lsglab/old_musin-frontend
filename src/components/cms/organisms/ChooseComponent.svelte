@@ -1,15 +1,6 @@
 <script>
 	/* eslint-disable import/first */
-	import {
-		alignment,
-		cards,
-		images,
-		nav,
-		sections,
-		special,
-		templates,
-		text,
-	} from '../../../cms/SiteEditor/Components';
+	import { allCategories, allComponents } from '../../../cms/SiteEditor/Components';
 	import { chooseComponent, compConfig } from '../../../stores';
 	import { createEventDispatcher } from 'svelte';
 	import ComponentCategory from '../molecules/ComponentCategory.svelte';
@@ -35,7 +26,7 @@
 
 		parent = value.parent;
 		childrenTypes = parent.childrenTypes.length > 0;
-		categories = JSON.parse(JSON.stringify([alignment, cards, sections, templates, images, text, special, nav]));
+		categories = JSON.parse(JSON.stringify(allCategories));
 
 		if (childrenTypes) {
 			categories.forEach((category) => {
@@ -54,7 +45,7 @@
 
 	function componentChosen(e) {
 		const component = components.find((ele) => ele.name === e.detail.component.component);
-		setChild(new EditComponent(component, parent));
+		setChild(new EditComponent(component, parent, e.detail.component.name));
 		chooseComponent.set(false);
 	}
 
@@ -62,7 +53,7 @@
 		const blueprint = JSON.parse(e.detail.component.blueprint);
 		const component = new EditComponent();
 		component.setCustomComponent(e.detail.component);
-		component.createFromData(blueprint, $compConfig, customComponents, parent);
+		component.createFromData(blueprint, $compConfig, customComponents, allComponents, parent);
 		setChild(component);
 		chooseComponent.set(false);
 	}

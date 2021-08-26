@@ -140,17 +140,17 @@ export const special = {
 export const nav = {
 	comps: [
 		{
-			component: 'TestNav',
+			component: 'TestNavFix',
 			description: 'Navbar',
 			name: 'Nav',
 		},
 		{
-			component: 'NavMenu',
+			component: 'NavMenuFix',
 			description: 'Sub Menu of nav',
 			name: 'Nav Menu',
 		},
 		{
-			component: 'NavMenuItem',
+			component: 'NavMenuItemFix',
 			description: 'Item of one Nav Menu',
 			name: 'Nav Menu Item',
 		},
@@ -159,3 +159,7 @@ export const nav = {
 	icon: 'menu',
 	name: 'Navbar',
 };
+
+export const allCategories = [alignment, cards, sections, templates, images, text, special, nav];
+
+export const allComponents = allCategories.flatMap((category) => category.comps);

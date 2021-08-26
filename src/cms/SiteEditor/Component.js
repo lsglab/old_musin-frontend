@@ -6,7 +6,7 @@ import ShortText from './Inputs/ShortText';
 import WebBase from './WebBase';
 
 export default class Component extends WebBase {
-	constructor(component = undefined, parent = undefined) {
+	constructor(component = undefined, parent = undefined, componentName = '') {
 		super();
 		this.component = component;
 		this.blueprint = {};
@@ -19,6 +19,7 @@ export default class Component extends WebBase {
 		this.isCustomComponent = false;
 		this.belongsToCustomComponent = false;
 		this.customComponent = undefined;
+		this.name = componentName;
 	}
 
 	blueprintKeys(callback) {
@@ -38,6 +39,7 @@ export default class Component extends WebBase {
 	setCustomComponent(customComponent) {
 		this.isCustomComponent = true;
 		this.customComponent = customComponent;
+		this.name = customComponent.name;
 	}
 
 	searchForComponent(name) {
@@ -58,7 +60,7 @@ export default class Component extends WebBase {
 		return false;
 	}
 
-	createFromData(data, components, customComponents, parent = null) {
+	createFromData(data, components, customComponents, componentNames, parent = null) {
 		let customComponentChildren = [];
 
 		if (data.isCustomComponent === true) {
@@ -66,6 +68,12 @@ export default class Component extends WebBase {
 			customComponentChildren = data.children;
 			data = JSON.parse(component.blueprint);
 			this.setCustomComponent(component);
+		} else {
+			const componentClassName = components.find((ele) => {
+				return ele.name === data.componentName;
+			}).name;
+
+			this.name = componentNames.find((ele) => ele.component === componentClassName).name;
 		}
 
 		function createBlueprint(blueprint) {
@@ -110,7 +118,13 @@ export default class Component extends WebBase {
 		});
 
 		this.children = this.children.map((child) => {
-			const created = this.createNewInstance().createFromData(child, components, customComponents, this);
+			const created = this.createNewInstance().createFromData(
+				child,
+				components,
+				customComponents,
+				componentNames,
+				this
+			);
 			created.belongsToCustomComponent = this.isCustomComponent || this.belongsToCustomComponent;
 			return created;
 		});
@@ -118,7 +132,13 @@ export default class Component extends WebBase {
 		if (this.isCustomComponent === true && this.customComponent.slot === true) {
 			const slot = this.searchForComponent('Slot');
 			slot.children = customComponentChildren.map((child) => {
-				return this.createNewInstance().createFromData(child, components, customComponents, slot);
+				return this.createNewInstance().createFromData(
+					child,
+					components,
+					customComponents,
+					componentNames,
+					slot
+				);
 			});
 		}
 

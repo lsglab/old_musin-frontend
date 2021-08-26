@@ -366,9 +366,7 @@
 			<div class="{propsOpen ? 'mb-2' : ''}">
 				<Flex align="center" justify="between">
 					{#if component.component !== undefined && component.component !== null}
-						<p class="text-xs font-bold" id="{headerId}" on:mousedown="{dragMouseDown}">
-							{component.isCustomComponent ? component.customComponent.name : component.component.name}
-						</p>
+						<p class="text-xs font-bold" id="{headerId}" on:mousedown="{dragMouseDown}">{component.name}</p>
 					{/if}
 					<Flex align="center">
 						<div class="icon-dimens">

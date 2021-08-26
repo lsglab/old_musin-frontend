@@ -1,8 +1,8 @@
 import Component from './Component';
 
 export default class EditComponent extends Component {
-	constructor(component, parent) {
-		super(component, parent);
+	constructor(component, parent, componentName) {
+		super(component, parent, componentName);
 		this.initialized = false;
 	}
 
