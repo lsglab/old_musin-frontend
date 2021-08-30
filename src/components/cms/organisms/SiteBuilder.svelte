@@ -183,6 +183,12 @@
 	}
 </script>
 
+<style>
+	#iframe {
+		width: inherit;
+	}
+</style>
+
 <TopNav>
 	{#if table !== undefined && data !== undefined}
 		<Flex align="center">
@@ -218,8 +224,8 @@
 				<Loading diameter="8" />
 			{/if}
 		</Flex>
-		<div class="relative overflow-x-hidden h-9/10 resize-vertical">
-			<iframe id="iframe" src="/new" title="New site" class="absolute top-0 w-full h-full"></iframe>
+		<div class="w-full max-w-full overflow-x-hidden transition-none resize-x h-9/10">
+			<iframe id="iframe" src="/new" title="New site" class="h-full max-w-full"></iframe>
 		</div>
 	</div>
 	<div class="w-3/12 pl-0.5 pr-2 overflow-y-scroll border-l-2 border-gray-300 border-solid full-minus-nav max">
