@@ -33,29 +33,29 @@
 </script>
 
 <script>
-	const components = [
+	const components = {
+		AboutSection,
+		AlignItems,
 		Article,
 		ArticleSection,
-		BioCard,
-		TestHero,
 		AwardImage,
-		Empty,
-		AlignItems,
-		Footer,
-		TestFooter,
+		BioCard,
 		Calender,
-		Slot,
-		SmallHero,
-		Task,
-		SectionWrapper,
-		AboutSection,
+		Empty,
+		Footer,
+		MensaCard,
 		Nav,
-		TestNavFix,
 		NavMenuFix,
 		NavMenuItemFix,
-		MensaCard,
+		SectionWrapper,
+		Slot,
+		SmallHero,
 		StaffCard,
-	];
+		Task,
+		TestFooter,
+		TestHero,
+		TestNavFix,
+	};
 
 	let initialized = false;
 	let reload = false;

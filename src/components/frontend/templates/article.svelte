@@ -26,6 +26,8 @@
 
 	// is the dom loaded or not
 	let dom = false;
+	let currentLocation = '';
+	let readingTime = '';
 
 	function getOffsetTop(ele) {
 		let offsetTop = 0;
@@ -52,6 +54,8 @@
 	}
 
 	function calcReadingTime() {
+		if (!dom) return '';
+
 		let txt = '';
 
 		const sections = Object.values(document.getElementsByClassName('art-content-sect'));
@@ -102,6 +106,9 @@
 
 	onMount(() => {
 		dom = true;
+		// remove parameters and anchors
+		currentLocation = window.location.href.split(/[?#]/)[0];
+		readingTime = calcReadingTime();
 	});
 </script>
 
@@ -183,7 +190,7 @@
 											{active !== i ? '' : 'text-blue-400 list-square'}"
 										id="{i}">
 										{#if child.blueprint.header !== undefined}
-											<a class = "lg:text-sm" href="{window.location.href}/#{child.id}" on:click="{() => {checked = false;}}">{i + 1}. {child.blueprint.header.data}</a>
+											<a class = "lg:text-sm" href="{currentLocation}#{child.id}" on:click="{() => {checked = false;}}">{i + 1}. {child.blueprint.header.data}</a>
 										{/if}
 									</li>
 								{/each}
@@ -198,7 +205,7 @@
 				<div class="mt-2 -mb-5">
 					<Flex align="center" classes="border-b border-solid border-gray-500 pb-1">
 						<div class="mr-1.5 material-icons">schedule</div>
-						<p>{calcReadingTime()}</p>
+						<p>{readingTime}</p>
 					</Flex>
 					<p class="text-sm text-gray-700">
 						Letzte Aktualisierung am 28.10.2020

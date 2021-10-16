@@ -69,11 +69,7 @@ export default class Component extends WebBase {
 			data = JSON.parse(component.blueprint);
 			this.setCustomComponent(component);
 		} else {
-			const componentClassName = components.find((ele) => {
-				return ele.name === data.componentName;
-			}).name;
-
-			this.name = componentNames.find((ele) => ele.component === componentClassName).name;
+			this.name = componentNames.find((ele) => ele.component === data.componentName).name;
 		}
 
 		function createBlueprint(blueprint) {
@@ -97,10 +93,12 @@ export default class Component extends WebBase {
 			return false;
 		}
 
-		this.component = components.find((ele) => {
-			return ele.name === data.componentName;
-		});
+		this.component = components[data.componentName];
+		if (this.component.name === undefined) {
+			this.component.name = data.componentName;
+		}
 
+		this.id = data.id;
 		this.children = data.children;
 		this.childrenTypes = data.childrenTypes;
 		this.props = data.props;
@@ -113,7 +111,7 @@ export default class Component extends WebBase {
 
 		this.childrenTypes.forEach((type, i) => {
 			if (i === 0) this.blueprint.children = [];
-			const component = components.find((comp) => comp.name === type);
+			const component = components[type];
 			this.blueprint.children.push(component);
 		});
 

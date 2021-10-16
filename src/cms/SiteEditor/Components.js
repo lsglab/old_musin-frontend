@@ -131,6 +131,11 @@ export const special = {
 			description: 'Slot component',
 			name: 'Slot',
 		},
+		{
+			component: 'Empty',
+			description: 'Ein komplett leerer component',
+			name: 'Empty',
+		},
 	],
 	description: 'Spezielle Komponenten',
 	icon: 'settings',

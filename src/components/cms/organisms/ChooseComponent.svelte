@@ -44,7 +44,7 @@
 	}
 
 	function componentChosen(e) {
-		const component = components.find((ele) => ele.name === e.detail.component.component);
+		const component = components[e.detail.component.component];
 		setChild(new EditComponent(component, parent, e.detail.component.name));
 		chooseComponent.set(false);
 	}

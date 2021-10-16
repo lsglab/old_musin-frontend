@@ -36,6 +36,7 @@ export default class EditComponent extends Component {
 			children: [],
 			childrenTypes: this.childrenTypes,
 			componentName: this.component.name,
+			id: this.id,
 			props: this.props,
 			slot: this.slot,
 		};

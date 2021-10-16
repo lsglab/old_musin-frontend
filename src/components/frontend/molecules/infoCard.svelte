@@ -1,11 +1,9 @@
 <script>
 	import Card from '../atoms/Card.svelte';
 	import Flex from '../../both/atoms/Flex.svelte';
-	import Icon from '../atoms/Icon.svelte';
 
 	export let shadow = true;
 
-	export let icon;
 	export let header;
 	export let subHeader;
 	export let content;
@@ -14,7 +12,6 @@
 <Card shadow="{shadow}">
 	<div slot="header">
 		<Flex>
-			<Icon img="{icon}" />
 			<div>
 				<h4>{header}</h4>
 				<p>{subHeader}</p>
