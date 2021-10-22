@@ -30,6 +30,18 @@
 		}
 	}
 
+	function select(eleId) {
+		// if one date was clicked twice set selected to -1 (nothing)
+		selected = selected === eleId ? -1 : eleId;
+
+		// dispatch the on:select event that includes the selected date (in milliseconds)
+		dispatch('select', {
+			date: selected,
+		});
+
+		visible = false;
+	}
+
 	function calculateMonths() {
 		months = [];
 		// loop through all 12 months and save their max date and name in an object
@@ -85,18 +97,6 @@
 			current += change;
 		}
 	}
-
-	function select(eleId) {
-		// if one date was clicked twice set selected to -1 (nothing)
-		selected = selected === eleId ? -1 : eleId;
-		// dispatch the on:select event that includes the selected date (in milliseconds)
-		dispatch('select', {
-			date: selected,
-		});
-
-		visible = false;
-	}
-
 	calculateMonths();
 	calculateWeekDayNames();
 

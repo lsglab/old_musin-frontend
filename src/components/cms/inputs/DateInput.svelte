@@ -15,7 +15,7 @@
 	export let configAction;
 
 	let visible = false;
-	let datePicked = new Date(value).getMilliseconds();
+	let datePicked = value ? new Date(value).getTime() : new Date().getTime();
 
 	let datePickerInput;
 	let datePicker;

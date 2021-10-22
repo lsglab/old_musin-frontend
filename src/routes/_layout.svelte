@@ -12,13 +12,17 @@
 		if (res.status === 200) {
 			return res.data.components;
 		}
-		return [];
+		return false;
 	}
 
 	async function fetchComponent(apiUrl, component) {
 		const res = await request(`${apiUrl}/components?name=${component}`, 'get', {}, false);
 
-		return JSON.parse(res.data.components[0].blueprint);
+		if (res.status === 200) {
+			return JSON.parse(res.data.components[0].blueprint);
+		}
+
+		return false;
 	}
 
 	export async function preload(page, session) {
@@ -56,7 +60,11 @@
 {:else if segment === 'new'}
 	<slot />
 {:else}
-	<Export data="{nav}" customComponents="{customComponents}" />
+	{#if !!nav}
+		<Export data="{nav}" customComponents="{customComponents}" />
+	{/if}
 	<slot />
-	<Export data="{footer}" customComponents="{customComponents}" />
+	{#if !!footer}
+		<Export data="{footer}" customComponents="{customComponents}" />
+	{/if}
 {/if}
