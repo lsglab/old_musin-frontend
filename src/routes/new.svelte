@@ -1,68 +1,22 @@
 <script context="module">
-	import { allComponents } from '../cms/SiteEditor/Components';
+	import { componentConfig, components } from '../cms/SiteEditor/Components';
 	import { files, page, pageTable } from '../stores';
 	import { onMount, tick } from 'svelte';
 	import Component from '../components/cms/organisms/Component.svelte';
 	import ComponentClass from '../cms/SiteEditor/Component';
-	import EditComponent from '../cms/SiteEditor/EditComponent';
-	import Empty from '../components/cms/atoms/Empty.svelte';
-	import Footer from '../components/frontend/organisms/Footer.svelte';
-	import Nav from '../components/frontend/organisms/Nav.svelte';
-
-	// IMPORTS
-	import AboutSection from '../components/frontend/molecules/aboutSection.svelte';
-	import AlignItems from '../components/frontend/atoms/AlignItems.svelte';
-	import Article from '../components/frontend/templates/article.svelte';
-	import ArticleSection from '../components/frontend/atoms/ArticleSection.svelte';
-	import AwardImage from '../components/frontend/atoms/AwardImage.svelte';
-	import BioCard from '../components/frontend/molecules/bioCard.svelte';
-	import Calender from '../components/frontend/molecules/Calender.svelte';
 	import DisplayComponent from '../components/cms/atoms/DisplayComponent.svelte';
-	import MensaCard from '../components/frontend/molecules/MensaCard.svelte';
-	import NavMenuFix from '../components/frontend/test/NavMenuFix.svelte';
-	import NavMenuItemFix from '../components/frontend/test/NavMenuItemFix.svelte';
-	import SectionWrapper from '../components/frontend/molecules/sectionWrapper.svelte';
-	import Slot from '../components/frontend/atoms/Slot.svelte';
-	import SmallHero from '../components/frontend/organisms/smallHero.svelte';
-	import StaffCard from '../components/frontend/molecules/staffCard.svelte';
-	import Task from '../components/frontend/atoms/task.svelte';
-	import TestFooter from '../components/frontend/organisms/TestFooter.svelte';
-	import TestHero from '../components/frontend/organisms/TestHero.svelte';
-	import TestNavFix from '../components/frontend/test/TestNavFix.svelte';
+	import EditComponent from '../cms/SiteEditor/EditComponent';
 	import request from '../cms/Utils/requests';
 </script>
 
 <script>
-	const components = {
-		AboutSection,
-		AlignItems,
-		Article,
-		ArticleSection,
-		AwardImage,
-		BioCard,
-		Calender,
-		Empty,
-		Footer,
-		MensaCard,
-		Nav,
-		NavMenuFix,
-		NavMenuItemFix,
-		SectionWrapper,
-		Slot,
-		SmallHero,
-		StaffCard,
-		Task,
-		TestFooter,
-		TestHero,
-		TestNavFix,
-	};
-
 	let initialized = false;
 	let reload = false;
 	let layout;
 
-	let singleComponent = false;
 	let site = false;
+
+	let singleComponent = false;
 
 	let customComponents = [];
 
@@ -79,18 +33,21 @@
 		window.parent.document.dispatchEvent(event);
 	}
 
-	function getComponent(name) {
-		return components.find((comp) => comp.name === name);
-	}
-
 	function siteLoaded() {
 		const event = new CustomEvent('site_loaded', {});
 		window.parent.document.dispatchEvent(event);
 	}
-
 	function iframeMounted(mode) {
 		const mountEvent = new CustomEvent(`${mode}_iframe_mounted`, { detail: {} });
 		window.parent.document.dispatchEvent(mountEvent);
+	}
+
+	function newEmptyEditComponent() {
+		return new EditComponent(
+			components.Empty,
+			undefined,
+			componentConfig.find((comp) => comp.component === 'Empty').name
+		);
 	}
 
 	onMount(async () => {
@@ -100,7 +57,7 @@
 		const params = Object.fromEntries(new URLSearchParams(window.location.search).entries());
 
 		if (params.component !== undefined) {
-			singleComponent = getComponent(params.component);
+			singleComponent = components[params.component];
 			iframeMounted('component');
 			return;
 		}
@@ -119,7 +76,7 @@
 						e.detail.blueprint,
 						components,
 						customComponents,
-						allComponents,
+						componentConfig,
 						null
 					);
 				},
@@ -146,21 +103,20 @@
 					blueprint,
 					components,
 					customComponents,
-					allComponents,
+					componentConfig,
 					null
 				);
 				initialized = true;
 			},
 			false
 		);
-
 		window.document.addEventListener(
 			'c_base_new',
 			() => {
 				const component = customComponents.find((comp) => comp.name === 'Base');
 
 				if (component === undefined) {
-					layout = new EditComponent(Empty);
+					layout = newEmptyEditComponent();
 					initialized = true;
 					return;
 				}
@@ -173,7 +129,7 @@
 					isCustomComponent: true,
 				};
 
-				layout = new EditComponent().createFromData(base, components, customComponents, allComponents, null);
+				layout = new EditComponent().createFromData(base, components, customComponents, componentConfig, null);
 				initialized = true;
 			},
 			false
@@ -182,7 +138,7 @@
 		window.document.addEventListener(
 			'c_new',
 			() => {
-				layout = new EditComponent(Empty);
+				layout = newEmptyEditComponent();
 				initialized = true;
 			},
 			false
@@ -217,7 +173,7 @@
 	});
 </script>
 
-{#if initialized === true && singleComponent === false && site === false}
+{#if initialized === true && singleComponent === false}
 	{#if reload === false}
 		<Component bind:component="{layout}" on:update="{sendLayoutUpdate}" />
 	{/if}

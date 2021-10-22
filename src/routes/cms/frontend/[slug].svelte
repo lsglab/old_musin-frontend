@@ -19,7 +19,6 @@
 	let errors = {};
 	let builder;
 
-	let saving = false;
 	let customComponents = [];
 
 	function setNewData() {
@@ -30,41 +29,9 @@
 		};
 	}
 
-	async function getHtml(component) {
-		saving = true;
-
-		window.document.addEventListener(
-			'blueprint_iframe_mounted',
-			() => {
-				const event = new CustomEvent('create_blueprint', {
-					detail: { blueprint: component, createNew: false, customComponents },
-				});
-				document.getElementById('saving_iframe').contentDocument.dispatchEvent(event);
-			},
-			false
-		);
-
-		// wait for the site to be loaded
-		await new Promise((resolve) => {
-			window.document.addEventListener(
-				'site_loaded',
-				() => {
-					resolve();
-				},
-				false
-			);
-		});
-
-		const html = document.getElementById('saving_iframe').contentWindow.document.children[0].innerHTML;
-
-		return html;
-	}
-
-	async function prepareData(reqData, component) {
+	async function prepareData(reqData) {
 		if (table.getColumnPermission(data.id, 'path')) reqData.path = data.path;
 		if (table.getColumnPermission(data.id, 'public')) reqData.public = data.public;
-
-		reqData.html = await getHtml(component);
 
 		return reqData;
 	}
@@ -136,6 +103,3 @@
 		</Flex>
 	</div>
 </SiteBuilder>
-<div class="hidden">
-	{#if saving === true}<iframe id="saving_iframe" src="/new?blueprint={true}" title="Saving..."></iframe>{/if}
-</div>

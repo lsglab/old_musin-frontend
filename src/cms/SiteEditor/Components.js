@@ -1,3 +1,25 @@
+import AboutSection from '../../components/frontend/molecules/aboutSection.svelte';
+import AlignItems from '../../components/frontend/atoms/AlignItems.svelte';
+import Article from '../../components/frontend/templates/article.svelte';
+import ArticleSection from '../../components/frontend/atoms/ArticleSection.svelte';
+import AwardImage from '../../components/frontend/atoms/AwardImage.svelte';
+import BioCard from '../../components/frontend/molecules/bioCard.svelte';
+import Calender from '../../components/frontend/molecules/Calender.svelte';
+import Empty from '../../components/frontend/atoms/Empty.svelte';
+import Footer from '../../components/frontend/organisms/Footer.svelte';
+import MensaCard from '../../components/frontend/molecules/MensaCard.svelte';
+import Nav from '../../components/frontend/organisms/Nav.svelte';
+import NavMenuFix from '../../components/frontend/test/NavMenuFix.svelte';
+import NavMenuItemFix from '../../components/frontend/test/NavMenuItemFix.svelte';
+import SectionWrapper from '../../components/frontend/molecules/sectionWrapper.svelte';
+import Slot from '../../components/frontend/atoms/Slot.svelte';
+import SmallHero from '../../components/frontend/organisms/smallHero.svelte';
+import StaffCard from '../../components/frontend/molecules/staffCard.svelte';
+import Task from '../../components/frontend/atoms/task.svelte';
+import TestFooter from '../../components/frontend/organisms/TestFooter.svelte';
+import TestHero from '../../components/frontend/organisms/TestHero.svelte';
+import TestNavFix from '../../components/frontend/test/TestNavFix.svelte';
+
 export const alignment = {
 	comps: [
 		{
@@ -167,4 +189,28 @@ export const nav = {
 
 export const allCategories = [alignment, cards, sections, templates, images, text, special, nav];
 
-export const allComponents = allCategories.flatMap((category) => category.comps);
+export const componentConfig = allCategories.flatMap((category) => category.comps);
+
+export const components = {
+	AboutSection,
+	AlignItems,
+	Article,
+	ArticleSection,
+	AwardImage,
+	BioCard,
+	Calender,
+	Empty,
+	Footer,
+	MensaCard,
+	Nav,
+	NavMenuFix,
+	NavMenuItemFix,
+	SectionWrapper,
+	Slot,
+	SmallHero,
+	StaffCard,
+	Task,
+	TestFooter,
+	TestHero,
+	TestNavFix,
+};

@@ -15,12 +15,20 @@
 
 <script>
 	export let id;
+
 	export let prepareData = async () => {
 		return {};
 	};
+
 	export let setNewData = () => {
 		return {};
 	};
+
+	export let deleteCheck = () => {
+		console.log('checking delte');
+		return true;
+	};
+
 	export let tableName;
 	export let errors = {};
 
@@ -176,6 +184,7 @@
 	});
 
 	async function sendLayoutUpdate() {
+		console.log('updating');
 		layout = layout;
 		const event = new CustomEvent('c_created', { detail: layout });
 		document.getElementById('iframe').contentDocument.dispatchEvent(event);
@@ -198,7 +207,7 @@
 				{#if table.getPermissions(id).edit}
 					<Button disabled="{disabled}" buttonFunction="{save}" classes="h-full w-32">Speichern</Button>
 				{/if}
-				{#if table.getPermissions(id).delete}
+				{#if table.getPermissions(id).delete && deleteCheck()}
 					<DialogButton
 						color="bg-cmsErrorRed"
 						classes="h-full w-32 ml-4"

@@ -1,6 +1,6 @@
 <script>
 	/* eslint-disable import/first */
-	import { allCategories, allComponents } from '../../../cms/SiteEditor/Components';
+	import { allCategories, componentConfig } from '../../../cms/SiteEditor/Components';
 	import { chooseComponent, compConfig } from '../../../stores';
 	import { createEventDispatcher } from 'svelte';
 	import ComponentCategory from '../molecules/ComponentCategory.svelte';
@@ -53,7 +53,7 @@
 		const blueprint = JSON.parse(e.detail.component.blueprint);
 		const component = new EditComponent();
 		component.setCustomComponent(e.detail.component);
-		component.createFromData(blueprint, $compConfig, customComponents, allComponents, parent);
+		component.createFromData(blueprint, $compConfig, customComponents, componentConfig, parent);
 		setChild(component);
 		chooseComponent.set(false);
 	}

@@ -26,6 +26,10 @@
 		};
 	}
 
+	function deleteCheck() {
+		return data.name !== 'Footer' && data.name !== 'Navbar';
+	}
+
 	async function prepareData(reqData, component) {
 		if (table.getColumnPermission(data.id, 'description')) reqData.description = data.description;
 		if (table.getColumnPermission(data.id, 'name')) reqData.name = data.name;
@@ -45,6 +49,7 @@
 	bind:data
 	id="{id}"
 	tableName="components"
+	deleteCheck="{deleteCheck}"
 	setNewData="{setNewData}"
 	prepareData="{prepareData}"
 	goback="/cms/components"
