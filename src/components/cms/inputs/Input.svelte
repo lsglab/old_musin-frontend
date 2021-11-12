@@ -36,6 +36,8 @@
 		required,
 		type,
 	};
+
+	$: console.log('readonly', readonly);
 </script>
 
 <style>
@@ -57,16 +59,12 @@
 	.right {
 		@apply ml-2;
 	}
-
-	.readonly {
-		@apply pointer-events-none;
-	}
 </style>
 
 <div
 	on:click
 	class="flex text-gray-600 {classes} container-{labelPos}  {labelPos === 'left' || labelPos === 'right' ? `flex-row${labelPos === 'right' ? '-reverse' : ''} justify-${justify} items-center` : `flex-col${labelPos === 'bottom' ? '-reverse' : ''}`}">
-	<label for="{id}" class="{labelPos} {labelClasses}" class:readonly><slot /></label>
+	<label for="{id}" class="{labelPos} {labelClasses} {readonly ? 'input-readonly' : ''} "><slot /></label>
 	<BasicInput
 		on:blur
 		on:input

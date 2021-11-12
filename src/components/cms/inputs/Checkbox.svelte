@@ -10,30 +10,29 @@
 
 	export let typeAction;
 	export let configAction;
+
+	$: console.log('value', value);
 </script>
 
 <style lang="scss">
-	.checkbox {
-		input[type='checkbox']:checked + label {
-			@apply bg-btnBlue border-none;
-		}
+	input[type='checkbox']:checked + label {
+		@apply bg-cmsBtnColor border-none;
 	}
 </style>
 
-<div class="checkbox {classes} w-3.5 h-3.5 {readonly ? 'input-readonly' : ''} {error ? 'input-error' : ''}">
-	<input
-		use:typeAction
-		use:configAction
-		on:blur
-		on:input
-		class="hidden"
-		type="checkbox"
-		id="{id}"
-		autocomplete="{autocomplete}"
-		bind:checked="{value}"
-		name="{name}" />
-
-	<label for="{id}" class="relative flex items-center justify-center w-full h-full bg-white rounded-sm input-border">
-		{#if value}<span class="text-white text-xss material-icons">done</span>{/if}
-	</label>
-</div>
+<input
+	use:typeAction
+	use:configAction
+	on:blur
+	on:input
+	type="checkbox"
+	id="{id}"
+	class="hidden"
+	autocomplete="{autocomplete}"
+	bind:checked="{value}"
+	name="{name}" />
+<label
+	for="{id}"
+	class="{classes} flex w-3.5 h-3.5 items-center justify-center bg-white rounded-sm input-border {readonly ? 'input-readonly' : ''} {error ? 'input-error' : ''}">
+	{#if value}<span class="text-white text-xss material-icons">done</span>{/if}
+</label>

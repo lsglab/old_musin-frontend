@@ -139,6 +139,10 @@ export default class Table extends Base {
 	getReadOnly(id, name = undefined) {
 		const permissions = this.getPermissions(id);
 
+		if (id === 'new') {
+			return !permissions.create;
+		}
+
 		if (name === undefined) {
 			return !permissions.edit;
 		}

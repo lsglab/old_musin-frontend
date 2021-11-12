@@ -39,6 +39,7 @@
 	function fillPermissions(tables) {
 		tables.forEach((table) => {
 			table.open = false;
+			table.checked = false;
 			table.role_permissions = [];
 			table.column_permissions = [];
 			actions.forEach((action) => {

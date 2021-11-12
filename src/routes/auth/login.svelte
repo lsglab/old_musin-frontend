@@ -57,14 +57,16 @@
 		<Form classes="w-64" id="login-form" header="Login" subHeader="Bittle melden sie sich an" error="{error}">
 			<Input
 				error="{inputError}"
-				classes="mb-3"
+				classes="mb-3 w-48"
 				placeholder="max.mustermann@gmail.com"
 				type="email"
 				id="email"
 				name="email">
 				Email
 			</Input>
-			<Input error="{inputError}" classes="mb-3" type="password" id="password" name="password">Passwort</Input>
+			<Input error="{inputError}" classes="mb-3 w-48" type="password" id="password" name="password">
+				Passwort
+			</Input>
 			<Input
 				type="radio"
 				id="remember"

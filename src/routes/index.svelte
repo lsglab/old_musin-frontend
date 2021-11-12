@@ -1,1 +1,1 @@
-<a href="/lorem" alt="">Lorem</a>
+<a href="/auth/login" alt="" style="display:none">export</a>
