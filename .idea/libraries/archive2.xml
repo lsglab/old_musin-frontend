@@ -1,0 +1,9 @@
+﻿<component name="libraryTable">
+  <library name="archive2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/node_modules/node-unzip-2/testData/compressed-OSX-Finder/archive.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
