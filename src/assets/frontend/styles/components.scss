@@ -1,0 +1,109 @@
+html,
+body {
+	@apply font-normal whitespace-normal transition-all duration-300 ease-easeInOutCirc antialiased;
+	text-rendering: geometricPrecision;
+	scroll-behavior: smooth;
+	word-break: break-word;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	background-origin: border-box;
+	background-clip: border-box;
+}
+*,
+*::after,
+*::before {
+	@apply box-border;
+	scroll-behavior: inherit;
+	transition-property: inherit;
+	transition-duration: inherit;
+	transition-timing-function: inherit;
+	background-origin: inherit;
+	background-clip: inherit;
+}
+
+html,
+body,
+#app {
+	@apply w-full h-full;
+}
+
+.fullscreen {
+	@apply w-full min-h-full h-auto flex flex-col;
+	> * {
+		flex: 1;
+	}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.bold {
+	@apply font-bold;
+}
+
+.light {
+	@apply font-light;
+}
+
+a {
+	@apply text-blue-700 no-underline relative;
+	&:not(.light) {
+		&.emphasize::before {
+			content: '';
+			height: 2px;
+			@apply absolute bottom-0 left-0 w-0 bg-blue-700 duration-500;
+		}
+		&.emphasize:hover::before {
+			@apply w-full;
+		}
+		&.arrow::after {
+			content: '\002192';
+			@apply absolute pl-1 inline-block;
+		}
+	}
+}
+
+$top-nav-height: 3rem;
+
+.top-nav-height {
+	height: $top-nav-height;
+}
+
+.top-nav-height-width {
+	width: $top-nav-height;
+}
+
+.full-minus-nav {
+	height: calc(100vh - #{$top-nav-height});
+}
+
+.min-h-full-minus-nav {
+	min-height: calc(100vh - #{$top-nav-height});
+}
+
+//override the default focus styles of browsers
+
+*:focus-visible {
+	outline: none;
+	-moz-outline: none;
+}
+
+.input-outline:focus-visible {
+	@apply border-btnBlue p-1 border rounded-sm;
+}
+
+//styles for inputs
+.input-border-error {
+	@apply border-cmsErrorRed;
+}
+
+.input-border {
+	@apply border-2 rounded-sm focus:border-cmsBtnColor;
+}
+
+.input-readonly {
+	@apply pointer-events-none;
+}

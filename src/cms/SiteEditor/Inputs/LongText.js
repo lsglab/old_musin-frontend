@@ -1,5 +1,5 @@
 import InputBase from './InputBase';
-import '../../../assets/styles/ckeditor.css';
+import '../../../assets/cms/styles/ckeditor.css';
 
 export default class LongText extends InputBase {
 	constructor(placeholder = 'Long Text') {
