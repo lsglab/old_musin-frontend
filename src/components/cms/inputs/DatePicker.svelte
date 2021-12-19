@@ -1,6 +1,6 @@
 <script>
 	import { createEventDispatcher, onMount } from 'svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 
 	const dispatch = createEventDispatcher();
 	// id of the date picker. must be provided

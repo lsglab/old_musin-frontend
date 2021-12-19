@@ -1,4 +1,4 @@
-import { toLocalDateString } from '../../Utils/time';
+import { toLocalDateString } from '../../../Utils/time';
 import Base from '../../Base';
 
 export default class Column extends Base {

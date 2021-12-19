@@ -1,10 +1,10 @@
 <script>
 	import { onMount } from 'svelte';
-	import Flex from '../../components/both/atoms/Flex.svelte';
-	import Form from '../../components/both/molecules/Form.svelte';
+	import Flex from '../../components/cms/atoms/Flex.svelte';
+	import Form from '../../components/cms/inputs/Form.svelte';
 	import Input from '../../components/cms/inputs/Input.svelte';
 	import Section from '../../components/frontend/atoms/Section.svelte';
-	import request from '../../cms/Utils/requests';
+	import request from '../../Utils/requests';
 
 	let error = '';
 	let inputError = false;

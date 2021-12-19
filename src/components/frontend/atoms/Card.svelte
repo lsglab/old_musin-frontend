@@ -1,5 +1,5 @@
 <script>
-	import Link from '../../both/atoms/Link.svelte';
+	import Link from './Link.svelte';
 
 	/** Additional classes to pass in */
 	export let classes = '';

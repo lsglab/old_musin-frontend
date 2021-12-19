@@ -1,5 +1,5 @@
 <script>
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import Section from '../atoms/Section.svelte';
 
 	export let awards = [];

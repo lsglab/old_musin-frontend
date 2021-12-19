@@ -6,7 +6,7 @@
 	import ComponentClass from '../cms/SiteEditor/Component';
 	import DisplayComponent from '../components/cms/atoms/DisplayComponent.svelte';
 	import EditComponent from '../cms/SiteEditor/EditComponent';
-	import request from '../cms/Utils/requests';
+	import request from '../Utils/requests';
 </script>
 
 <script>

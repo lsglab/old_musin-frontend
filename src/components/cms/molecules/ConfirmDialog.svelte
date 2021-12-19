@@ -1,7 +1,7 @@
 <script>
 	import Button from '../atoms/Button.svelte';
 	import Dialog from '../atoms/Dialog.svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 
 	export let dialogFunction = () => {};
 

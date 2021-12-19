@@ -1,6 +1,6 @@
 <script>
 	import { fade, fly } from 'svelte/transition';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 
 	import { createEventDispatcher } from 'svelte';
 

@@ -3,9 +3,9 @@
 	import { tick } from 'svelte';
 	import Button from '../atoms/Button.svelte';
 	import Dialog from '../atoms/Dialog.svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import ProgressBar from '../atoms/ProgressBar.svelte';
-	import request from '../../../cms/Utils/requests';
+	import request from '../../../Utils/requests';
 
 	export let visible = false;
 	export let sites;

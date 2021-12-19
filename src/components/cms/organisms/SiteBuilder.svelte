@@ -4,13 +4,13 @@
 	import Button from '../atoms/Button.svelte';
 	import ChooseComponent from './ChooseComponent.svelte';
 	import DialogButton from '../molecules/DialogButton.svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import GoBack from '../atoms/GoBack.svelte';
 	import Loading from '../atoms/Loading.svelte';
 	import Node from '../molecules/Node.svelte';
 	import Table from '../../../cms/Tables/table';
 	import TopNav from '../molecules/TopNav.svelte';
-	import request from '../../../cms/Utils/requests';
+	import request from '../../../Utils/requests';
 </script>
 
 <script>

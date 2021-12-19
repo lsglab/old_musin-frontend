@@ -2,9 +2,9 @@
 	import BlueprintLink from '../../../cms/SiteEditor/Inputs/Link';
 	import ShortText from '../../../cms/SiteEditor/Inputs/ShortText';
 
-	import Flex from '../../both/atoms/Flex.svelte';
-	import Link from '../../both/atoms/Link.svelte';
-	import Logo from '../../both/atoms/Logo.svelte';
+	import Flex from '../atoms/Flex.svelte';
+	import Link from '../atoms/Link.svelte';
+	import Logo from '../atoms/Logo.svelte';
 	import Section from '../atoms/Section.svelte';
 
 	export let blueprint = {

@@ -1,6 +1,6 @@
 <script>
 	import Button from '../atoms/Button.svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 
 	import Img from '../../../cms/SiteEditor/Inputs/Img';
 	import Link from '../../../cms/SiteEditor/Inputs/Link';

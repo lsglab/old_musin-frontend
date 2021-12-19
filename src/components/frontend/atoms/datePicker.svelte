@@ -1,7 +1,7 @@
 <script>
 	import { createEventDispatcher, onMount } from 'svelte';
 	import Flex from './Flex.svelte';
-	import SearchBox from "./searchBox.svelte";
+	import SearchBox from './searchBox.svelte';
 
 	const dispatch = createEventDispatcher();
 	// placeholder of the input. Default Value is: Datum wählen

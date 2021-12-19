@@ -2,7 +2,7 @@
 	/* eslint-disable import/first */
 	import { afterUpdate, createEventDispatcher, tick } from 'svelte';
 	import { page, pageTable } from '../../../stores';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 
 	const dispatch = createEventDispatcher();
 

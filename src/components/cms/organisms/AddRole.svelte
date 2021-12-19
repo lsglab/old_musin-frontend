@@ -2,11 +2,11 @@
 	/* eslint-disable no-param-reassign */
 	import { onMount } from 'svelte';
 
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import Input from '../inputs/Input.svelte';
 	import Loading from '../atoms/Loading.svelte';
 	import Table from '../../../cms/Tables/table';
-	import request from '../../../cms/Utils/requests';
+	import request from '../../../Utils/requests';
 
 	export let oldData;
 	export let role;

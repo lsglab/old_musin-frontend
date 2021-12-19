@@ -3,12 +3,12 @@
 	import Button from '../../../components/cms/atoms/Button.svelte';
 	import DialogButton from '../../../components/cms/molecules/DialogButton.svelte';
 	import DirNode from '../../../components/cms/molecules/DirNode.svelte';
-	import Flex from '../../../components/both/atoms/Flex.svelte';
+	import Flex from '../../../components/cms/atoms/Flex.svelte';
 	import Loading from '../../../components/cms/atoms/Loading.svelte';
 	import RebuildSites from '../../../components/cms/molecules/RebuildSites.svelte';
 	import Table from '../../../cms/Tables/table';
 	import TopNav from '../../../components/cms/molecules/TopNav.svelte';
-	import request from '../../../cms/Utils/requests';
+	import request from '../../../Utils/requests';
 
 	let fetchedFiles;
 	let files;

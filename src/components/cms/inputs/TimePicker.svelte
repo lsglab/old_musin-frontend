@@ -1,5 +1,5 @@
 <script>
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 
 	export let id = 'timePicker';
 	export let visible = false;

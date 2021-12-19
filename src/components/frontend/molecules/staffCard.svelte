@@ -1,6 +1,6 @@
 <script>
 	import Card from '../atoms/Card.svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import Img from '../../../cms/SiteEditor/Inputs/Img';
 	import ShortText from '../../../cms/SiteEditor/Inputs/ShortText';
 

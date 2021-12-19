@@ -1,5 +1,5 @@
 <script>
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from './Flex.svelte';
 
 	export let column = false;
 	export let xcenter = false;

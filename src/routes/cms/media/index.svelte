@@ -3,11 +3,11 @@
 	import DisplayMedia from '../../../components/cms/molecules/displayMedia.svelte';
 	import EditMedia from '../../../components/cms/organisms/editMedia.svelte';
 	import FileOption from '../../../components/cms/atoms/FileOption.svelte';
-	import Flex from '../../../components/both/atoms/Flex.svelte';
+	import Flex from '../../../components/cms/atoms/Flex.svelte';
 	import Input from '../../../components/cms/inputs/BasicInput.svelte';
 	import NewMedia from '../../../components/cms/organisms/newMedia.svelte';
 	import TableEntries from '../../../components/cms/molecules/TableEntries.svelte';
-	import request from '../../../cms/Utils/requests';
+	import request from '../../../Utils/requests';
 
 	let table;
 	let data;

@@ -1,10 +1,12 @@
 <script context="module">
 	import CmsNav from '../components/cms/organisms/CmsNav.svelte';
+	import CmsStyles from '../components/cms/atoms/Styles.svelte';
+	import CmsTailwind from '../components/cms/atoms/Tailwind.svelte';
 	import Export from '../components/cms/export.svelte';
-	import Flex from '../components/both/atoms/Flex.svelte';
-	import Styles from '../components/both/atoms/Styles.svelte';
-	import Tailwind from '../components/both/atoms/Tailwind.svelte';
-	import request from '../cms/Utils/requests';
+	import Flex from '../components/cms/atoms/Flex.svelte';
+	import FrontendStyles from '../components/frontend/atoms/Styles.svelte';
+	import FrontendTailwind from '../components/frontend/atoms/Tailwind.svelte';
+	import request from '../Utils/requests';
 
 	async function fetchCustomComponents(apiUrl) {
 		const res = await request(`${apiUrl}/components?_norelations=true`, 'get', {}, false);
@@ -47,10 +49,9 @@
 	<title>{process.globals.title}</title>
 </svelte:head>
 
-<Tailwind />
-<Styles />
-
 {#if segment === 'cms'}
+	<CmsStyles />
+	<CmsTailwind />
 	<Flex classes="w-screen h-screen">
 		<CmsNav />
 		<div class="w-full">
@@ -58,8 +59,12 @@
 		</div>
 	</Flex>
 {:else if segment === 'new'}
+	<FrontendStyles />
+	<FrontendTailwind />
 	<slot />
 {:else}
+	<FrontendStyles />
+	<FrontendTailwind />
 	{#if !!nav}
 		<Export data="{nav}" customComponents="{customComponents}" />
 	{/if}

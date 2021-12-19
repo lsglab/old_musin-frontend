@@ -1,11 +1,11 @@
 <script>
 	import DialogButton from './DialogButton.svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import Input from '../inputs/Input.svelte';
 	import Loading from '../atoms/Loading.svelte';
 	import Table from '../../../cms/Tables/table';
 	import TopNav from './TopNav.svelte';
-	import request from '../../../cms/Utils/requests';
+	import request from '../../../Utils/requests';
 
 	import { createEventDispatcher, onMount } from 'svelte';
 	import EntriesFound from '../atoms/EntriesFound.svelte';

@@ -3,7 +3,7 @@
 	import { chooseComponent, currentNodeActive, currentNodeDetached, currentNodeHovered } from '../../../stores';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import Input from '../inputs/Input.svelte';
 
 	const dispatch = createEventDispatcher();

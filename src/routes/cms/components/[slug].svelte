@@ -1,5 +1,5 @@
 <script context="module">
-	import Flex from '../../../components/both/atoms/Flex.svelte';
+	import Flex from '../../../components/cms/atoms/Flex.svelte';
 	import Input from '../../../components/cms/inputs/Input.svelte';
 	import SiteBuilder from '../../../components/cms/organisms/SiteBuilder.svelte';
 

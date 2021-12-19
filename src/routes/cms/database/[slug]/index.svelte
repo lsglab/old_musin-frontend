@@ -1,10 +1,10 @@
 <script context="module">
 	import Button from '../../../../components/cms/atoms/Button.svelte';
 	import ConfirmDialog from '../../../../components/cms/molecules/ConfirmDialog.svelte';
-	import Flex from '../../../../components/both/atoms/Flex.svelte';
+	import Flex from '../../../../components/cms/atoms/Flex.svelte';
 	import Input from '../../../../components/cms/inputs/Input.svelte';
 	import TableEntries from '../../../../components/cms/molecules/TableEntries.svelte';
-	import request from '../../../../cms/Utils/requests';
+	import request from '../../../../Utils/requests';
 
 	export async function preload({ params }, { globals }) {
 		const slug = params.slug;

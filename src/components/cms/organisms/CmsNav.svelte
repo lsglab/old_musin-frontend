@@ -1,9 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import Loading from '../atoms/Loading.svelte';
-	import Logo from '../../both/atoms/Logo.svelte';
-	import request from '../../../cms/Utils/requests';
+	import Logo from '../atoms/Logo.svelte';
+	import request from '../../../Utils/requests';
 
 	let groups;
 

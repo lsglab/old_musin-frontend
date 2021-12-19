@@ -1,9 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 	import Button from '../atoms/Button.svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import Loading from '../atoms/Loading.svelte';
-	import request from '../../../cms/Utils/requests';
+	import request from '../../../Utils/requests';
 
 	let user;
 

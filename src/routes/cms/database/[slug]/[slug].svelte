@@ -1,18 +1,18 @@
 <script context="module">
-	import { difference } from '../../../../cms/Utils/object';
-	import { getTimeDifference } from '../../../../cms/Utils/time';
+	import { difference } from '../../../../Utils/object';
+	import { getTimeDifference } from '../../../../Utils/time';
 	import { onMount } from 'svelte';
 	import AddRole from '../../../../components/cms/organisms/AddRole.svelte';
 	import Button from '../../../../components/cms/atoms/Button.svelte';
 	import DialogButton from '../../../../components/cms/molecules/DialogButton.svelte';
-	import Flex from '../../../../components/both/atoms/Flex.svelte';
+	import Flex from '../../../../components/cms/atoms/Flex.svelte';
 	import GoBack from '../../../../components/cms/atoms/GoBack.svelte';
 	import Input from '../../../../components/cms/inputs/Input.svelte';
 	import Loading from '../../../../components/cms/atoms/Loading.svelte';
 	import Table from '../../../../cms/Tables/table';
 	import TopNav from '../../../../components/cms/molecules/TopNav.svelte';
 	import _ from 'lodash';
-	import request from '../../../../cms/Utils/requests';
+	import request from '../../../../Utils/requests';
 
 	export async function preload({ params, path }, { globals }) {
 		const id = params.slug;

@@ -1,5 +1,5 @@
 <script>
-	import { formatMMDDYYYY } from '../../../cms/Utils/time';
+	import { formatMMDDYYYY } from '../../../Utils/time';
 	import DatePicker from './DatePicker.svelte';
 
 	export let placeholder = '';

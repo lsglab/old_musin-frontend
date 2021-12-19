@@ -1,16 +1,16 @@
 <script>
-	import { difference } from '../../../cms/Utils/object';
+	import { difference } from '../../../Utils/object';
 	import Button from '../atoms/Button.svelte';
 	import Dialog from '../atoms/Dialog.svelte';
 	import DisplayMedia from '../molecules/displayMedia.svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 
 	import { createEventDispatcher } from 'svelte';
 	import FileOption from '../atoms/FileOption.svelte';
 	import Input from '../inputs/Input.svelte';
 	import _ from 'lodash';
-	import request from '../../../cms/Utils/requests';
-	import sizeToString from '../../../cms/Utils/files';
+	import request from '../../../Utils/requests';
+	import sizeToString from '../../../Utils/files';
 
 	const dispatch = createEventDispatcher();
 

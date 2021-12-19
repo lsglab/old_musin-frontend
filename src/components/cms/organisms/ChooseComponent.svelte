@@ -5,7 +5,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import ComponentCategory from '../molecules/ComponentCategory.svelte';
 	import EditComponent from '../../../cms/SiteEditor/EditComponent';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 
 	const dispatch = createEventDispatcher();
 

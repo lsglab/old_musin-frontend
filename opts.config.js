@@ -19,7 +19,7 @@ const postcssConfig = (dev) => ({
 		postcssImport(),
 		tailwindcss('./tailwind.config.js'),
 		postcssAssets({
-			loadPaths: ['src/assets/media/', 'src/assets/fonts/'],
+			loadPaths: ['src/assets/media', 'src/assets/fonts'],
 			relative: true,
 		}),
 		postcssUrl({

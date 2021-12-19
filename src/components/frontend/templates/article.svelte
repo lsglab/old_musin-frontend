@@ -4,7 +4,7 @@
 	import ShortText from '../../../cms/SiteEditor/Inputs/ShortText';
 
 	import ArticleSection from '../atoms/ArticleSection.svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import Section from '../atoms/Section.svelte';
 
 	export let img = true;

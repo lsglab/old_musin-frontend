@@ -1,7 +1,7 @@
 <script>
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import InputLink from '../../../cms/SiteEditor/Inputs/Link';
-	import Link from '../../both/atoms/Link.svelte';
+	import Link from '../atoms/Link.svelte';
 	import Section from '../atoms/Section.svelte';
 	import ShortText from '../../../cms/SiteEditor/Inputs/ShortText';
 

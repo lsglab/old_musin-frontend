@@ -1,6 +1,6 @@
 <script>
 	import Button from '../components/frontend/atoms/Button.svelte';
-	import Flex from '../components/both/atoms/Flex.svelte';
+	import Flex from '../components/frontend/atoms/Flex.svelte';
 	import Section from '../components/frontend/atoms/Section.svelte';
 
 	export let error;

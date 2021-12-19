@@ -4,13 +4,13 @@
 	import Button from '../atoms/Button.svelte';
 	import Dialog from '../atoms/Dialog.svelte';
 	import DisplayMedia from '../molecules/displayMedia.svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 
 	import { createEventDispatcher } from 'svelte';
 	import EditMedia from './editMedia.svelte';
 	import FileOption from '../atoms/FileOption.svelte';
 	import Loading from '../atoms/Loading.svelte';
-	import request from '../../../cms/Utils/requests';
+	import request from '../../../Utils/requests';
 
 	const dispatch = createEventDispatcher();
 

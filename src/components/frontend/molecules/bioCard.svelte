@@ -1,7 +1,7 @@
 <script>
 	import Button from '../atoms/Button.svelte';
 	import Card from '../atoms/Card.svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from '../atoms/Flex.svelte';
 	import Img from '../../../cms/SiteEditor/Inputs/Img';
 	import LongText from '../../../cms/SiteEditor/Inputs/LongText';
 	import ShortText from '../../../cms/SiteEditor/Inputs/ShortText';

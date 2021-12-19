@@ -2,7 +2,7 @@
 	import Img from '../../../cms/SiteEditor/Inputs/Img';
 	import ShortText from '../../../cms/SiteEditor/Inputs/ShortText';
 
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from './Flex.svelte';
 
 	export let blueprint = {
 		content: new ShortText('Kurze Beschreibung'),

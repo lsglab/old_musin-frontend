@@ -1,8 +1,8 @@
 <script>
 	import Button from '../../../components/cms/atoms/Button.svelte';
-	import Flex from '../../../components/both/atoms/Flex.svelte';
+	import Flex from '../../../components/cms/atoms/Flex.svelte';
 	import TableEntries from '../../../components/cms/molecules/TableEntries.svelte';
-	import request from '../../../cms/Utils/requests';
+	import request from '../../../Utils/requests';
 
 	let table;
 	let components;

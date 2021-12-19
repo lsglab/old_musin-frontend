@@ -16,14 +16,8 @@ module.exports = {
 	theme: {
 		extend: {
 			backgroundImage: () => ({
-				'arrowIcon': 'resolve(arrow.svg)',
-				'diamond-pattern': 'resolve(diamond-pattern.png)',
-				'icon-design': 'resolve(design.svg)',
-				'icon-events': 'resolve(emoji_events.svg)',
-				'icon-organise': 'resolve(sort.svg)',
-				'icon-paid': 'resolve(paid.svg)',
-				'pdf': 'resolve(pdf.svg)',
-				'rect-pattern': 'resolve(rect-pattern.png)',
+				arrowIcon: 'resolve(arrow.svg)',
+				pdf: 'resolve(pdf.svg)',
 			}),
 			boxShadow: {
 				'cms-equal': '0 5px 15px rgba(0,0,0,0.2)',
