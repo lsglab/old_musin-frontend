@@ -1,6 +1,6 @@
 <script>
 	import { createEventDispatcher, onMount } from 'svelte';
-	import Flex from '../../both/atoms/Flex.svelte';
+	import Flex from './Flex.svelte';
 	import SearchBox from './searchBox.svelte';
 
 	const dispatch = createEventDispatcher();
