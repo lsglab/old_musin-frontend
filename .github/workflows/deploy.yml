@@ -21,7 +21,7 @@ jobs:
             - name: 📂 Sync files
               uses: SamKirkland/FTP-Deploy-Action@4.1.0
               with:
-                  server: ftp://home.mnet-online.de
+                  server: home.mnet-online.de
                   username: simon
                   password: k4!Q8+Gd
                   local-dir: ./__sapper__/export/
