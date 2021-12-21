@@ -12,9 +12,9 @@
 
 	export let classes = '';
 
-	export let getIframeUrl = (component) => {
+	/* export let getIframeUrl = (component) => {
 		return `/new?component=${component.component}`;
-	};
+	}; */
 
 	export let mount = () => {};
 
@@ -33,10 +33,11 @@
 		pointer-events: auto;
 	}
 
+	/*
 	.component:hover > .component-desc {
 		opacity: 1;
 		pointer-events: auto;
-	}
+	} */
 
 	.iframe-container {
 		padding-top: 56.25%;
