@@ -12,7 +12,6 @@
 	}
 
 	async function fetchData(apiUrl, path) {
-		console.log('path', path);
 		const res = await request(`${apiUrl}/sites?path=${path}`, 'get', {}, false);
 
 		return JSON.parse(res.data.sites[0].blueprint);
@@ -38,6 +37,6 @@
 	export let data;
 </script>
 
-<div style="visibility:hidden;"></div>
+<div style="visibility:hidden;"><a href="/termine" alt=""></a></div>
 
 <Export data="{data}" customComponents="{customComponents}" />
