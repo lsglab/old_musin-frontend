@@ -239,7 +239,7 @@
 
 	<div
 		bind:this="{datePicker}"
-		class="absolute z-40 p-3 bg-white rounded-lg opacity-0 pointer-events-none inset-top-full box shadow-cms-equal-xl"
+		class="absolute z-40 p-3 bg-white rounded-lg opacity-0 pointer-events-none inset-top-full box shadow-equal-xl"
 		id="{datePickerId}"
 		class:visible>
 		<Flex justify="between">
