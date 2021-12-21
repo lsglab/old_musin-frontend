@@ -1,23 +1,42 @@
-<script>
-	import Calender from '../components/molecules/Calender.svelte';
-	import Hero from '../components/organisms/Hero.svelte';
-	import SectionWrapper from '../components/molecules/sectionWrapper.svelte';
+<script context="module">
+	import Export from '../components/cms/export.svelte';
+	import request from '../Utils/requests';
+
+	async function fetchCustomComponents(apiUrl) {
+		const res = await request(`${apiUrl}/components?_norelations=true`, 'get', {}, false);
+
+		if (res.status === 200) {
+			return res.data.components;
+		}
+		return [];
+	}
+
+	async function fetchData(apiUrl, path) {
+		const res = await request(`${apiUrl}/sites?path=${path}`, 'get', {}, false);
+
+		return JSON.parse(res.data.sites[0].blueprint);
+	}
+
+	export async function preload(page, session) {
+		const apiUrl = session.globals.apiUrl;
+		let path = page.path;
+
+		if (path === '/') {
+			path = '/index';
+		}
+
+		const customComponents = await fetchCustomComponents(apiUrl);
+		const data = await fetchData(apiUrl, path);
+
+		return { customComponents, data };
+	}
 </script>
 
-<Hero
-	header="Städtisches Louise Schroeder Gymnasium München"
-	subHeader="Naturwissenschaftlich-technologisches und sprachliches Gymnasium."
-	note="Referenzschule der TU München"
-	img="https://lsg.musin.de/homepage/images/header-images/schulhof_mini.jpg"
-	awards="{['https://lsg.musin.de/homepage/images/LOGOsorsmc_SCREEN_80mm_RGB_mini.jpg', 'https://lsg.musin.de/homepage/images/cils.png', 'https://lsg.musin.de/homepage/images/cae.png', 'https://lsg.musin.de/homepage/images/delf.jpg']}"
-	buttonText="Aktuelle Termine"
-	buttonLink="#termine" />
-<SectionWrapper
-	fullscreen="true"
-	header="Aktuelle Termine"
-	subHeader="Alle demnächst anstehende Termine des Louise-Schroeder-Gymnasiums"
-	linkText="Zu allen Terminen"
-	link="/termine"
-	id="termine">
-	<Calender classes="w-11/12 lg:w-4/5" />
-</SectionWrapper>
+<script>
+	export let customComponents;
+	export let data;
+</script>
+
+<div style="visibility:hidden;"><a href="/termine" alt="">/termine</a></div>
+
+<Export data="{data}" customComponents="{customComponents}" />

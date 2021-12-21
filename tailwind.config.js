@@ -16,21 +16,23 @@ module.exports = {
 	theme: {
 		extend: {
 			backgroundImage: () => ({
-				'arrowIcon': 'resolve(arrow.svg)',
-				'diamond-pattern': 'resolve(diamond-pattern.png)',
-				'icon-design': 'resolve(design.svg)',
-				'icon-events': 'resolve(emoji_events.svg)',
-				'icon-organise': 'resolve(sort.svg)',
-				'icon-paid': 'resolve(paid.svg)',
-				'rect-pattern': 'resolve(rect-pattern.png)',
+				arrowIcon: 'resolve(arrow.svg)',
+				pdf: 'resolve(pdf.svg)',
 			}),
 			boxShadow: {
+				'cms-equal': '0 5px 15px rgba(0,0,0,0.2)',
+				'cms-equal-sm': '0px 0px 10px 0px rgba(0,0,0,0.2)',
+				'cms-equal-xl': '0 10px 20px 5px rgba(0, 0, 0, 0.1);',
 				'equal': '0 5px 15px rgba(0,0,0,0.2)',
+				'equal-sm': '0px 0px 10px 0px rgba(0,0,0,0.2)',
 				'equal-xl': '0 10px 20px 5px rgba(0, 0, 0, 0.1);',
 			},
 			colors: {
 				backgroundDark: '#f6f9fc',
 				btnBlue: 'rgb(0, 119, 255)',
+				cmsBtnColor: 'rgb(0, 119, 255)',
+				cmsErrorRed: '#ff3333',
+				cmsSuccessGreen: 'rgb(109,187,26)',
 				heading: '#0a2540',
 				heading2: '#336',
 				lightBlue: '#56C1FB',
@@ -42,15 +44,21 @@ module.exports = {
 				'8xl': '6rem',
 				'9xl': '7rem',
 				'xss': '0.66rem',
+				'xsss': '0.6rem',
 			},
 			height: {
+				'1/10': '10%',
 				'1/4': '25%',
 				'2/10': '20%',
 				'3/10': '30%',
+				'4/10': '40%',
+				'5/10': '50%',
+				'6/10': '60%',
 				'7/10': '70%',
 				'8/10': '80%',
 				'80': '20rem',
 				'85vh': '85vh',
+				'9/10': '90%',
 				'inherit': 'inherit',
 				'min-content': 'min-content',
 			},
@@ -69,6 +77,10 @@ module.exports = {
 			},
 			maxHeight: {
 				0: '0',
+			},
+			maxWidth: {
+				'1/3': '33.33%',
+				'1/4': '25%',
 			},
 			minWidth: {
 				40: '10rem',
@@ -106,6 +118,7 @@ module.exports = {
 				linear: 'linear',
 			},
 			width: {
+				'1/7': '14.2857%',
 				'9/20': '45%',
 			},
 		},

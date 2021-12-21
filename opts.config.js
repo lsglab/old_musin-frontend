@@ -19,7 +19,7 @@ const postcssConfig = (dev) => ({
 		postcssImport(),
 		tailwindcss('./tailwind.config.js'),
 		postcssAssets({
-			loadPaths: ['src/assets/media/', 'src/assets/fonts/'],
+			loadPaths: ['src/assets/media', 'src/assets/fonts'],
 			relative: true,
 		}),
 		postcssUrl({
@@ -72,9 +72,10 @@ const preprocessConfig = (dev) => ({
 });
 const terserConfig = () => ({
 	compress: {
-		booleans_as_integers: true,
+		collapse_vars: false,
 		defaults: true,
-		drop_console: true,
+		drop_console: false,
+		drop_debugger: false,
 		hoist_funs: true,
 		hoist_vars: true,
 		keep_fargs: false,
@@ -91,6 +92,8 @@ const terserConfig = () => ({
 		indent_level: 0,
 		webkit: true,
 	},
+	keep_classnames: true,
+	keep_fnames: true,
 	mangle: {
 		toplevel: true,
 	},

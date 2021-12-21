@@ -55,7 +55,7 @@
 		"run:build:do": "sapper build --legacy",
 		"run:export": "cross-env NODE_ENV=production run-s run:export:*",
 		"run:export:before": "cross-env NODE_ENV=development yarn run:export:do",
-		"run:export:do": "sapper export --legacy",
+		"run:export:do": "sapper export",
 		"run:hot": "cross-env NODE_ENV=development run-s run:hot:*",
 		"run:hot:do": "sapper dev",
 		"run:serve": "serve __sapper__/export",
@@ -70,8 +70,10 @@
 		"warn:soydows": "echo \"Warning: This will fail if you're on a non-unix-like operating system, or more specifically, Windows. Get WSL, or just install Linux directly.\""
 	},
 	"dependencies": {
+		"@ckeditor/ckeditor5-build-inline": "^27.0.0",
+		"axios": "^0.21.1",
 		"compression": "^1.7.4",
-		"polka": "next",
+		"polka": "^0.5.2",
 		"serve": "^11.3.2",
 		"sirv": "^1.0.6"
 	},
@@ -113,7 +115,7 @@
 		"esm": "^3.2.25",
 		"husky": "^4.3.0",
 		"lint-staged": "^10.4.0",
-		"lodash": "^4.17.20",
+		"lodash": "^4.17.21",
 		"npm-run-all": "^4.1.5",
 		"postcss": "^8.2.6",
 		"postcss-assets": "^5.0.0",
