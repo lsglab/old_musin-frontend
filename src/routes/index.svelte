@@ -37,6 +37,6 @@
                 export let data;
             </script>
 
-            <div style="visibility:hidden;"><a href='/termine' alt=''>'/termine'</a></div>
+            <div style="visibility:hidden;"></div>
 
             <Export data="{data}" customComponents="{customComponents}" />
