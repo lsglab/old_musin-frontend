@@ -1,6 +1,6 @@
 <script context="module">
+    import { request } from '../Utils/requests';
     import Export from '../components/cms/export.svelte';
-    import request from '../Utils/requests';
 
     async function fetchCustomComponents(apiUrl) {
         const res = await request(`${apiUrl}/components?_norelations=true`, 'get', {}, false);
@@ -11,8 +11,13 @@
         return [];
     }
 
-    async function fetchData(apiUrl, path) {
+    async function fetchData(apiUrl, path, context) {
         const res = await request(`${apiUrl}/sites?path=${path}`, 'get', {}, false);
+
+		if (res.status !== 200) {
+			// eslint-disable-next-line babel/no-invalid-this
+			return context.error(res.status, res.data.message);
+		}
 
         return JSON.parse(res.data.sites[0].blueprint);
     }
@@ -26,7 +31,8 @@
         }
 
         const customComponents = await fetchCustomComponents(apiUrl);
-        const data = await fetchData(apiUrl, path);
+        // eslint-disable-next-line babel/no-invalid-this
+		const data = await fetchData(apiUrl, path, this);
 
         return { customComponents, data };
     }
@@ -40,4 +46,3 @@
 <div style="visibility:hidden;"></div>
 
 <Export data="{data}" customComponents="{customComponents}" />
-
