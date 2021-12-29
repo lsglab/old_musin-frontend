@@ -1,11 +1,9 @@
 <script>
 	import { onMount, tick } from 'svelte/internal';
 	import Button from '../../../components/cms/atoms/Button.svelte';
-	import DialogButton from '../../../components/cms/molecules/DialogButton.svelte';
 	import DirNode from '../../../components/cms/molecules/DirNode.svelte';
 	import Flex from '../../../components/cms/atoms/Flex.svelte';
 	import Loading from '../../../components/cms/atoms/Loading.svelte';
-	import RebuildSites from '../../../components/cms/molecules/RebuildSites.svelte';
 	import Table from '../../../cms/Tables/table';
 	import TopNav from '../../../components/cms/molecules/TopNav.svelte';
 	import request from '../../../Utils/requests';
@@ -17,8 +15,6 @@
 	let loading;
 
 	let customComponents;
-
-	let rebuildSites = false;
 
 	let reload = false;
 
@@ -111,10 +107,6 @@
 		);
 	}
 
-	function rebuildAllSites() {
-		rebuildSites = true;
-	}
-
 	$: fileChanged(selectedFile);
 
 	onMount(async () => {
@@ -124,17 +116,7 @@
 	});
 </script>
 
-<TopNav>
-	{#if fetchedFiles !== undefined && table !== undefined && customComponents !== undefined && table.getPermissions().edit}
-		<DialogButton
-			buttonFunction="{rebuildAllSites}"
-			dialogText="Sind sie sicher, dass sie alle Seiten neu generieren wollen?">
-			Alle Seiten neu generieren
-		</DialogButton>
-	{:else}
-		<Loading diameter="7" />
-	{/if}
-</TopNav>
+<TopNav />
 
 <Flex classes="w-full full-minus-nav">
 	<div class="w-1/4 border-r-2 border-gray-100">
@@ -183,7 +165,3 @@
 		</div>
 	{/if}
 </Flex>
-
-{#if fetchedFiles !== undefined && customComponents !== undefined}
-	<RebuildSites bind:visible="{rebuildSites}" sites="{fetchedFiles}" customComponents="{customComponents}" />
-{/if}
