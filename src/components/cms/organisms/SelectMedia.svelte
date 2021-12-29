@@ -2,11 +2,11 @@
 	import { createEventDispatcher } from 'svelte';
 	import { files } from '../../../stores';
 
+	import { webrequest } from '../../../Utils/requests';
 	import Button from '../atoms/Button.svelte';
 	import EntriesFound from '../atoms/EntriesFound.svelte';
 	import Flex from '../atoms/Flex.svelte';
 	import Loading from '../atoms/Loading.svelte';
-	import request from '../../../Utils/requests';
 </script>
 
 <script>
@@ -26,7 +26,7 @@
 			});
 		}
 
-		const res = await request(url, 'get', {}, true);
+		const res = await webrequest(url, 'get', {}, true, window);
 
 		if (!res.error) {
 			files.set(res.data.files);

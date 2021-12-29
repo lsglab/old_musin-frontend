@@ -1,9 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
+	import { webrequest } from '../../../Utils/requests';
 	import Button from '../atoms/Button.svelte';
 	import Flex from '../atoms/Flex.svelte';
 	import Loading from '../atoms/Loading.svelte';
-	import request from '../../../Utils/requests';
 
 	let user;
 
@@ -13,7 +13,7 @@
 		const storageUser = sessionStorage.getItem('user');
 
 		if (storageUser === 'undefined' || storageUser == null || storageUser === undefined) {
-			const res = await request('http://localhost:8000/api/auth/user', 'get', {}, true);
+			const res = await webrequest(`${process.globals.apiUrl}/auth/user`, 'get', {}, true, window);
 
 			if (!res.error) {
 				user = res.data.user;
@@ -25,7 +25,7 @@
 	});
 
 	async function logOut() {
-		const res = await request('http://localhost:8000/api/auth/logout', 'get', {}, true);
+		const res = await webrequest(`${process.globals.apiUrl}/auth/logout`, 'get', {}, true, window);
 
 		if (!res.error) {
 			localStorage.clear();

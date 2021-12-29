@@ -10,8 +10,6 @@
 
 	export let typeAction;
 	export let configAction;
-
-	$: console.log('value', value);
 </script>
 
 <style lang="scss">

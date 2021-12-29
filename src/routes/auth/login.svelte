@@ -4,7 +4,7 @@
 	import Form from '../../components/cms/inputs/Form.svelte';
 	import Input from '../../components/cms/inputs/Input.svelte';
 	import Section from '../../components/frontend/atoms/Section.svelte';
-	import request from '../../Utils/requests';
+	import { webrequest } from '../../Utils/requests';
 
 	let error = '';
 	let inputError = false;

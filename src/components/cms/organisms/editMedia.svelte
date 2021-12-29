@@ -6,10 +6,10 @@
 	import Flex from '../atoms/Flex.svelte';
 
 	import { createEventDispatcher } from 'svelte';
+	import { webrequest } from '../../../Utils/requests';
 	import FileOption from '../atoms/FileOption.svelte';
 	import Input from '../inputs/Input.svelte';
 	import _ from 'lodash';
-	import request from '../../../Utils/requests';
 	import sizeToString from '../../../Utils/files';
 
 	const dispatch = createEventDispatcher();
@@ -62,7 +62,13 @@
 			data.set(fileInput.name, fileInput.files[0]);
 		}
 
-		const res = await request(`${process.globals.apiUrl}/files?id=${file.id}&_method=PUT`, 'post', data, true);
+		const res = await webrequest(
+			`${process.globals.apiUrl}/files?id=${file.id}&_method=PUT`,
+			'post',
+			data,
+			true,
+			window
+		);
 
 		if (res.status === 200) {
 			file = res.data[table.table][0];

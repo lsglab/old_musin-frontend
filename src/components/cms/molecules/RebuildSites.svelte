@@ -1,11 +1,11 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import { tick } from 'svelte';
+	import { webrequest } from '../../../Utils/requests';
 	import Button from '../atoms/Button.svelte';
 	import Dialog from '../atoms/Dialog.svelte';
 	import Flex from '../atoms/Flex.svelte';
 	import ProgressBar from '../atoms/ProgressBar.svelte';
-	import request from '../../../Utils/requests';
 
 	export let visible = false;
 	export let sites;
@@ -23,7 +23,13 @@
 	async function updateFile() {
 		const html = document.getElementById('iframe').contentWindow.document.children[0].innerHTML;
 
-		const res = await request(`${process.globals.apiUrl}/sites?id=${currentSite.id}`, 'put', { html }, true);
+		const res = await webrequest(
+			`${process.globals.apiUrl}/sites?id=${currentSite.id}`,
+			'put',
+			{ html },
+			true,
+			window
+		);
 
 		if (res.status === 200) {
 			return true;

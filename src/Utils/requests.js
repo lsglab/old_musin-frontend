@@ -1,6 +1,7 @@
+import ErrorDialog from '../components/cms/molecules/ErrorDialog.svelte';
 import axios from 'axios';
 
-export default async function request(url, method, data, token) {
+export async function request(url, method, data, token) {
 	axios.defaults.withCredentials = true;
 
 	const config = {
@@ -18,7 +19,7 @@ export default async function request(url, method, data, token) {
 		config.headers.Authorization = `Bearer ${bearer}`;
 	}
 
-	const error = false;
+	let error = false;
 	let resData = {};
 	let status;
 	let res;
@@ -38,6 +39,7 @@ export default async function request(url, method, data, token) {
 		resData = res.data;
 		status = 200;
 	} catch (e) {
+		error = true;
 		// e.reponse is undefined if the error occured on this machine
 		if (e.response) {
 			status = e.response.status;
@@ -58,4 +60,20 @@ export default async function request(url, method, data, token) {
 		error,
 		status,
 	};
+}
+
+export async function webrequest(url, method, data, token, window) {
+	const res = await request(url, method, data, token);
+
+	if (res.status !== 200) {
+		// eslint-disable-next-line no-new
+		new ErrorDialog({
+			props: {
+				res,
+			},
+			target: window.document.getElementsByTagName('body')[0],
+		});
+	}
+
+	return res;
 }

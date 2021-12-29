@@ -1,9 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
+	import { webrequest } from '../../../Utils/requests';
 	import Flex from '../atoms/Flex.svelte';
 	import Loading from '../atoms/Loading.svelte';
 	import Logo from '../atoms/Logo.svelte';
-	import request from '../../../Utils/requests';
 
 	let groups;
 
@@ -19,7 +19,7 @@
 		} else {
 			sessionStorage.setItem('token', token);
 
-			const res = await request(`${process.globals.apiUrl}/groups`, 'get', {}, true);
+			const res = await webrequest(`${process.globals.apiUrl}/groups`, 'get', {}, true, window);
 			groups = res.data.groups;
 		}
 	});

@@ -2,11 +2,11 @@
 	import { componentConfig, components } from '../cms/SiteEditor/Components';
 	import { files, page, pageTable } from '../stores';
 	import { onMount, tick } from 'svelte';
+	import { webrequest } from '../Utils/requests';
 	import Component from '../components/cms/organisms/Component.svelte';
 	import ComponentClass from '../cms/SiteEditor/Component';
 	import DisplayComponent from '../components/cms/atoms/DisplayComponent.svelte';
 	import EditComponent from '../cms/SiteEditor/EditComponent';
-	import request from '../Utils/requests';
 </script>
 
 <script>
@@ -21,7 +21,13 @@
 	let customComponents = [];
 
 	async function fetchData() {
-		const res = await request(`${process.globals.apiUrl}/files?_norelations=true&public=true`, 'get', {}, true);
+		const res = await webrequest(
+			`${process.globals.apiUrl}/files?_norelations=true&public=true`,
+			'get',
+			{},
+			true,
+			window
+		);
 
 		if (!res.error) {
 			files.set(res.data.files);

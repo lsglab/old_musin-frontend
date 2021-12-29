@@ -2,6 +2,7 @@
 	import { difference } from '../../../../Utils/object';
 	import { getTimeDifference } from '../../../../Utils/time';
 	import { onMount } from 'svelte';
+	import { request, webrequest } from '../../../../Utils/requests';
 	import AddRole from '../../../../components/cms/organisms/AddRole.svelte';
 	import Button from '../../../../components/cms/atoms/Button.svelte';
 	import DialogButton from '../../../../components/cms/molecules/DialogButton.svelte';
@@ -12,14 +13,13 @@
 	import Table from '../../../../cms/Tables/table';
 	import TopNav from '../../../../components/cms/molecules/TopNav.svelte';
 	import _ from 'lodash';
-	import request from '../../../../Utils/requests';
 
 	export async function preload({ params, path }, { globals }) {
 		const id = params.slug;
 		const split = path.split('/');
 		const table = split[split.length - 2];
 
-		const response = await request(`${globals.apiUrl}/${table}`, 'get', {}, false);
+		const response = await request(`${globals.apiUrl}/${table}`, 'get', {}, false, window);
 
 		if (response.status === 404) {
 			// eslint-disable-next-line babel/no-invalid-this
@@ -67,7 +67,7 @@
 		let fetchedData = {};
 
 		if (id !== 'new') {
-			res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'get', {}, true);
+			res = await webrequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'get', {}, true, window);
 
 			if (!res.error) {
 				fetchedData = res.data[tableName][0];
@@ -80,7 +80,7 @@
 	}
 
 	async function fetchRelation(relation) {
-		res = await request(`${process.globals.apiUrl}/tables?table=${relation}`, 'get', {}, true);
+		res = await webrequest(`${process.globals.apiUrl}/tables?table=${relation}`, 'get', {}, true, window);
 
 		let foreign;
 
@@ -94,7 +94,7 @@
 			return undefined;
 		}
 
-		res = await request(`${process.globals.apiUrl}/${foreign.table}?_norelations=true`, 'get', {}, true);
+		res = await webrequest(`${process.globals.apiUrl}/${foreign.table}?_norelations=true`, 'get', {}, true, window);
 
 		if (!res.error) {
 			return { data: res.data[foreign.table], table: foreign };
@@ -121,7 +121,7 @@
 	}
 
 	async function fetchTable() {
-		res = await request(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true);
+		res = await webrequest(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true, window);
 
 		if (!res.error) {
 			table = new Table(res.data.tables[0]);
@@ -159,7 +159,13 @@
 	}
 
 	async function deleteOne() {
-		res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}&_norelations=true`, 'delete', {}, true);
+		res = await webrequest(
+			`${process.globals.apiUrl}/${tableName}?id=${id}&_norelations=true`,
+			'delete',
+			{},
+			true,
+			window
+		);
 		if (res.error !== true) {
 			window.history.go(-1);
 		}
@@ -197,10 +203,10 @@
 
 		if (deleteP.length > 0) {
 			deleteP = deleteP.map((ele) => ele.id);
-			await request(url, 'delete', { ids: deleteP }, true);
+			await webrequest(url, 'delete', { ids: deleteP }, true, window);
 		}
 		if (createP.length > 0) {
-			await request(url, 'post', createP, true);
+			await webrequest(url, 'post', createP, true, window);
 		}
 	}
 
@@ -224,7 +230,7 @@
 		const body = difference(data, oldData);
 
 		savePermissions();
-		res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'put', body, true);
+		res = await webrequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'put', body, true, window);
 
 		if (res.status === 200) {
 			const newData = res.data[tableName][0];
@@ -241,7 +247,7 @@
 		}
 		data = table.modifyData(data);
 
-		res = await request(`${process.globals.apiUrl}/${tableName}`, 'post', data, true);
+		res = await webrequest(`${process.globals.apiUrl}/${tableName}`, 'post', data, true, window);
 
 		if (res.status === 200) {
 			const newData = res.data[tableName][0];

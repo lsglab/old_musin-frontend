@@ -2,11 +2,11 @@
 	/* eslint-disable no-param-reassign */
 	import { onMount } from 'svelte';
 
+	import { webrequest } from '../../../Utils/requests';
 	import Flex from '../atoms/Flex.svelte';
 	import Input from '../inputs/Input.svelte';
 	import Loading from '../atoms/Loading.svelte';
 	import Table from '../../../cms/Tables/table';
-	import request from '../../../Utils/requests';
 
 	export let oldData;
 	export let role;
@@ -91,7 +91,7 @@
 	}
 
 	async function fetchGroups() {
-		res = await request(`${process.globals.apiUrl}/groups`, 'get', {}, true);
+		res = await webrequest(`${process.globals.apiUrl}/groups`, 'get', {}, true, window);
 
 		if (!res.error) {
 			const grouped = res.data.groups;

@@ -36,8 +36,6 @@
 		required,
 		type,
 	};
-
-	$: console.log('readonly', readonly);
 </script>
 
 <style>

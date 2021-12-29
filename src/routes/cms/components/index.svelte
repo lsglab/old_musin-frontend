@@ -1,8 +1,8 @@
 <script>
+	import { webrequest } from '../../../Utils/requests';
 	import Button from '../../../components/cms/atoms/Button.svelte';
 	import Flex from '../../../components/cms/atoms/Flex.svelte';
 	import TableEntries from '../../../components/cms/molecules/TableEntries.svelte';
-	import request from '../../../Utils/requests';
 
 	let table;
 	let components;
@@ -12,7 +12,7 @@
 	let triggerDataReload;
 
 	async function fetchCustomComponents() {
-		const res = await request(`${process.globals.apiUrl}/components?_norelations=true`, 'get', {}, true);
+		const res = await webrequest(`${process.globals.apiUrl}/components?_norelations=true`, 'get', {}, true, window);
 
 		if (res.status === 200) {
 			customComponents = res.data.components;

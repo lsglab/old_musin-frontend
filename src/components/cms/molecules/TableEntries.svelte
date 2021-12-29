@@ -1,11 +1,11 @@
 <script>
+	import { webrequest } from '../../../Utils/requests';
 	import DialogButton from './DialogButton.svelte';
 	import Flex from '../atoms/Flex.svelte';
 	import Input from '../inputs/Input.svelte';
 	import Loading from '../atoms/Loading.svelte';
 	import Table from '../../../cms/Tables/table';
 	import TopNav from './TopNav.svelte';
-	import request from '../../../Utils/requests';
 
 	import { createEventDispatcher, onMount } from 'svelte';
 	import EntriesFound from '../atoms/EntriesFound.svelte';
@@ -46,7 +46,7 @@
 			});
 		}
 
-		const res = await request(url, 'get', {}, true);
+		const res = await webrequest(url, 'get', {}, true, window);
 
 		if (!res.error) {
 			data = res.data[tableName];
@@ -57,7 +57,7 @@
 	async function fetchTable() {
 		table = undefined;
 
-		const res = await request(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true);
+		const res = await webrequest(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true, window);
 
 		if (!res.error) {
 			table = new Table(res.data.tables[0]);
@@ -100,7 +100,7 @@
 	async function deleteMultiple() {
 		const ids = data.filter((ele) => ele.ctx_delete === true).map((ele) => ele.id);
 
-		await request(`${process.globals.apiUrl}/${tableName}`, 'delete', { ids }, true);
+		await webrequest(`${process.globals.apiUrl}/${tableName}`, 'delete', { ids }, true, window);
 		triggerDataReload = true;
 	}
 

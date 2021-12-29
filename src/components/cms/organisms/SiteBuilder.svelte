@@ -1,6 +1,7 @@
 <script context="module">
 	import { compConfig } from '../../../stores';
 	import { onMount } from 'svelte/internal';
+	import { webrequest } from '../../../Utils/requests';
 	import Button from '../atoms/Button.svelte';
 	import ChooseComponent from './ChooseComponent.svelte';
 	import DialogButton from '../molecules/DialogButton.svelte';
@@ -10,7 +11,6 @@
 	import Node from '../molecules/Node.svelte';
 	import Table from '../../../cms/Tables/table';
 	import TopNav from '../molecules/TopNav.svelte';
-	import request from '../../../Utils/requests';
 </script>
 
 <script>
@@ -25,7 +25,6 @@
 	};
 
 	export let deleteCheck = () => {
-		console.log('checking delte');
 		return true;
 	};
 
@@ -48,7 +47,7 @@
 	let layout;
 
 	async function fetchTable() {
-		const res = await request(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true);
+		const res = await webrequest(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true, window);
 
 		if (res.status === 200) {
 			table = new Table(res.data.tables[0]);
@@ -61,7 +60,7 @@
 			return;
 		}
 
-		const res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'get', {}, true);
+		const res = await webrequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'get', {}, true, window);
 
 		if (res.status === 200) {
 			data = res.data[tableName][0];
@@ -69,7 +68,7 @@
 	}
 
 	async function fetchCustomComponents() {
-		const res = await request(`${process.globals.apiUrl}/components?_norelations=true`, 'get', {}, true);
+		const res = await webrequest(`${process.globals.apiUrl}/components?_norelations=true`, 'get', {}, true, window);
 
 		if (res.status === 200) {
 			customComponents = res.data.components;
@@ -77,7 +76,7 @@
 	}
 
 	async function deleteSite() {
-		await request(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'delete', {}, true);
+		await webrequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'delete', {}, true, window);
 
 		window.history.go(-1);
 	}
@@ -89,7 +88,7 @@
 	async function saveData(body) {
 		disabled = true;
 
-		const res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'put', body, true);
+		const res = await webrequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'put', body, true, window);
 
 		if (res.status === 200) {
 			data = res.data[tableName][0];
@@ -104,7 +103,7 @@
 	async function createData(body) {
 		disabled = true;
 
-		const res = await request(`${process.globals.apiUrl}/${tableName}`, 'post', body, true);
+		const res = await webrequest(`${process.globals.apiUrl}/${tableName}`, 'post', body, true, window);
 
 		if (res.status !== 400) {
 			// window.history.go(-1);
@@ -184,7 +183,6 @@
 	});
 
 	async function sendLayoutUpdate() {
-		console.log('updating');
 		layout = layout;
 		const event = new CustomEvent('c_created', { detail: layout });
 		document.getElementById('iframe').contentDocument.dispatchEvent(event);

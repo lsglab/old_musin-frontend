@@ -1,4 +1,5 @@
 <script context="module">
+	import { request } from '../Utils/requests';
 	import CmsNav from '../components/cms/organisms/CmsNav.svelte';
 	import CmsStyles from '../components/cms/atoms/Styles.svelte';
 	import CmsTailwind from '../components/cms/atoms/Tailwind.svelte';
@@ -6,7 +7,6 @@
 	import Flex from '../components/cms/atoms/Flex.svelte';
 	import FrontendStyles from '../components/frontend/atoms/Styles.svelte';
 	import FrontendTailwind from '../components/frontend/atoms/Tailwind.svelte';
-	import request from '../Utils/requests';
 
 	async function fetchCustomComponents(apiUrl) {
 		const res = await request(`${apiUrl}/components?_norelations=true`, 'get', {}, false);

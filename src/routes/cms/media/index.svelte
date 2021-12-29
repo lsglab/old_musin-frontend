@@ -1,4 +1,5 @@
 <script>
+	import { webrequest } from '../../../Utils/requests';
 	import Button from '../../../components/cms/atoms/Button.svelte';
 	import DisplayMedia from '../../../components/cms/molecules/displayMedia.svelte';
 	import EditMedia from '../../../components/cms/organisms/editMedia.svelte';
@@ -7,7 +8,6 @@
 	import Input from '../../../components/cms/inputs/BasicInput.svelte';
 	import NewMedia from '../../../components/cms/organisms/newMedia.svelte';
 	import TableEntries from '../../../components/cms/molecules/TableEntries.svelte';
-	import request from '../../../Utils/requests';
 
 	let table;
 	let data;
@@ -39,7 +39,7 @@
 	}
 
 	async function deleteFile(file) {
-		await request(`${process.globals.apiUrl}/${table.table}?id=${file.id}`, 'delete', {}, true);
+		await webrequest(`${process.globals.apiUrl}/${table.table}?id=${file.id}`, 'delete', {}, true, window);
 		reloadData();
 	}
 

@@ -1,15 +1,15 @@
 <script context="module">
+	import { request } from '../../../../Utils/requests';
 	import Button from '../../../../components/cms/atoms/Button.svelte';
 	import ConfirmDialog from '../../../../components/cms/molecules/ConfirmDialog.svelte';
 	import Flex from '../../../../components/cms/atoms/Flex.svelte';
 	import Input from '../../../../components/cms/inputs/Input.svelte';
 	import TableEntries from '../../../../components/cms/molecules/TableEntries.svelte';
-	import request from '../../../../Utils/requests';
 
 	export async function preload({ params }, { globals }) {
 		const slug = params.slug;
 
-		const response = await request(`${globals.apiUrl}/${slug}`, 'get', {}, false);
+		const response = await request(`${globals.apiUrl}/${slug}`, 'get', {}, false, window);
 
 		if (response.status === 404) {
 			// eslint-disable-next-line babel/no-invalid-this
