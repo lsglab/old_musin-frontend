@@ -16,7 +16,7 @@ jobs:
             - name: 🔨 Build Project
               run: |
                   yarn
-                  yarn do:export
+                  yarn do:export:production
 
             - name: 📂 Sync files
               uses: SamKirkland/FTP-Deploy-Action@4.1.0
