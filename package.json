@@ -9,6 +9,7 @@
 		"do:build": "run-s do:autofix run:build",
 		"do:commit": "yarn git:commit",
 		"do:dev": "run-s do:autofix run:hot",
+		"do:export:deploy": "run-s do:autofix run:export:deploy",
 		"do:export:dev": "run-s do:autofix run:export:dev",
 		"do:export:production": "run-s do:autofix run:export:production ",
 		"do:favicon": "run-s favicon:ci favicon:copy favicon:inject",
