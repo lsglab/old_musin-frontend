@@ -1,7 +1,7 @@
 <script context="module">
 	import { compConfig } from '../../../stores';
+	import { errorRequest, request } from '../../../Utils/requests';
 	import { onMount } from 'svelte/internal';
-	import { webrequest } from '../../../Utils/requests';
 	import Button from '../atoms/Button.svelte';
 	import ChooseComponent from './ChooseComponent.svelte';
 	import DialogButton from '../molecules/DialogButton.svelte';
@@ -47,9 +47,9 @@
 	let layout;
 
 	async function fetchTable() {
-		const res = await webrequest(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true, window);
+		const res = await errorRequest(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true, window);
 
-		if (res.status === 200) {
+		if (!res.error) {
 			table = new Table(res.data.tables[0]);
 		}
 	}
@@ -60,23 +60,29 @@
 			return;
 		}
 
-		const res = await webrequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'get', {}, true, window);
+		const res = await errorRequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'get', {}, true, window);
 
-		if (res.status === 200) {
+		if (!res.error) {
 			data = res.data[tableName][0];
 		}
 	}
 
 	async function fetchCustomComponents() {
-		const res = await webrequest(`${process.globals.apiUrl}/components?_norelations=true`, 'get', {}, true, window);
+		const res = await errorRequest(
+			`${process.globals.apiUrl}/components?_norelations=true`,
+			'get',
+			{},
+			true,
+			window
+		);
 
-		if (res.status === 200) {
+		if (!res.error) {
 			customComponents = res.data.components;
 		}
 	}
 
 	async function deleteSite() {
-		await webrequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'delete', {}, true, window);
+		await errorRequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'delete', {}, true, window);
 
 		window.history.go(-1);
 	}
@@ -88,7 +94,7 @@
 	async function saveData(body) {
 		disabled = true;
 
-		const res = await webrequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'put', body, true, window);
+		const res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'put', body, true);
 
 		if (res.status === 200) {
 			data = res.data[tableName][0];
@@ -103,7 +109,7 @@
 	async function createData(body) {
 		disabled = true;
 
-		const res = await webrequest(`${process.globals.apiUrl}/${tableName}`, 'post', body, true, window);
+		const res = await request(`${process.globals.apiUrl}/${tableName}`, 'post', body, true);
 
 		if (res.status !== 400) {
 			// window.history.go(-1);

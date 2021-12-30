@@ -1,7 +1,7 @@
 <script>
+	import { errorRequest } from '../../../Utils/requests';
 	import { fade } from 'svelte/transition';
 	import { tick } from 'svelte';
-	import { webrequest } from '../../../Utils/requests';
 	import Button from '../atoms/Button.svelte';
 	import Dialog from '../atoms/Dialog.svelte';
 	import Flex from '../atoms/Flex.svelte';
@@ -23,7 +23,7 @@
 	async function updateFile() {
 		const html = document.getElementById('iframe').contentWindow.document.children[0].innerHTML;
 
-		const res = await webrequest(
+		const res = await errorRequest(
 			`${process.globals.apiUrl}/sites?id=${currentSite.id}`,
 			'put',
 			{ html },
@@ -31,11 +31,7 @@
 			window
 		);
 
-		if (res.status === 200) {
-			return true;
-		}
-
-		return false;
+		return res.error;
 	}
 
 	async function buildOneSite(site, i) {

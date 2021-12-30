@@ -1,4 +1,4 @@
-const base = 'http://backend.cms.dotenv.de';
+const base = 'http://localhost:8000';
 
 export default {
 	apiServer: base,

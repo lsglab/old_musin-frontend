@@ -62,7 +62,7 @@ export async function request(url, method, data, token) {
 	};
 }
 
-export async function webrequest(url, method, data, token, window) {
+export async function errorRequest(url, method, data, token, window) {
 	const res = await request(url, method, data, token);
 
 	if (res.status !== 200) {

@@ -2,7 +2,7 @@
 	/* eslint-disable no-param-reassign */
 	import { onMount } from 'svelte';
 
-	import { webrequest } from '../../../Utils/requests';
+	import { errorRequest } from '../../../Utils/requests';
 	import Flex from '../atoms/Flex.svelte';
 	import Input from '../inputs/Input.svelte';
 	import Loading from '../atoms/Loading.svelte';
@@ -91,7 +91,7 @@
 	}
 
 	async function fetchGroups() {
-		res = await webrequest(`${process.globals.apiUrl}/groups`, 'get', {}, true, window);
+		res = await errorRequest(`${process.globals.apiUrl}/groups`, 'get', {}, true, window);
 
 		if (!res.error) {
 			const grouped = res.data.groups;

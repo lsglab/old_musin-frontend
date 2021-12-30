@@ -7,7 +7,7 @@
 	import Flex from '../atoms/Flex.svelte';
 
 	import { createEventDispatcher } from 'svelte';
-	import { webrequest } from '../../../Utils/requests';
+	import { errorRequest } from '../../../Utils/requests';
 	import EditMedia from './editMedia.svelte';
 	import FileOption from '../atoms/FileOption.svelte';
 	import Loading from '../atoms/Loading.svelte';
@@ -96,7 +96,7 @@
 		file.uploading = true;
 		files = files;
 
-		const res = await webrequest(`${process.globals.apiUrl}/files`, 'post', formData, true, window);
+		const res = await errorRequest(`${process.globals.apiUrl}/files`, 'post', formData, true, window);
 
 		if (res.status === 400) {
 			file.error = res.data[Object.keys(res.data)[0]][0];

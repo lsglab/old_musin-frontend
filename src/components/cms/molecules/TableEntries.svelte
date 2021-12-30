@@ -1,5 +1,5 @@
 <script>
-	import { webrequest } from '../../../Utils/requests';
+	import { errorRequest } from '../../../Utils/requests';
 	import DialogButton from './DialogButton.svelte';
 	import Flex from '../atoms/Flex.svelte';
 	import Input from '../inputs/Input.svelte';
@@ -46,7 +46,7 @@
 			});
 		}
 
-		const res = await webrequest(url, 'get', {}, true, window);
+		const res = await errorRequest(url, 'get', {}, true, window);
 
 		if (!res.error) {
 			data = res.data[tableName];
@@ -57,7 +57,7 @@
 	async function fetchTable() {
 		table = undefined;
 
-		const res = await webrequest(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true, window);
+		const res = await errorRequest(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true, window);
 
 		if (!res.error) {
 			table = new Table(res.data.tables[0]);
@@ -100,7 +100,7 @@
 	async function deleteMultiple() {
 		const ids = data.filter((ele) => ele.ctx_delete === true).map((ele) => ele.id);
 
-		await webrequest(`${process.globals.apiUrl}/${tableName}`, 'delete', { ids }, true, window);
+		await errorRequest(`${process.globals.apiUrl}/${tableName}`, 'delete', { ids }, true, window);
 		triggerDataReload = true;
 	}
 

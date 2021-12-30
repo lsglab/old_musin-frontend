@@ -1,6 +1,6 @@
 <script>
+	import { errorRequest } from '../../../Utils/requests';
 	import { onMount } from 'svelte';
-	import { webrequest } from '../../../Utils/requests';
 	import Button from '../atoms/Button.svelte';
 	import Flex from '../atoms/Flex.svelte';
 	import Loading from '../atoms/Loading.svelte';
@@ -13,7 +13,11 @@
 		const storageUser = sessionStorage.getItem('user');
 
 		if (storageUser === 'undefined' || storageUser == null || storageUser === undefined) {
-			const res = await webrequest(`${process.globals.apiUrl}/auth/user`, 'get', {}, true, window);
+			const res = await errorRequest(`${process.globals.apiUrl}/auth/user`, 'get', {}, true, window);
+
+			if (res.status === 401 || res.status === 403) {
+				window.location.replace('/auth/login');
+			}
 
 			if (!res.error) {
 				user = res.data.user;
@@ -25,7 +29,7 @@
 	});
 
 	async function logOut() {
-		const res = await webrequest(`${process.globals.apiUrl}/auth/logout`, 'get', {}, true, window);
+		const res = await errorRequest(`${process.globals.apiUrl}/auth/logout`, 'get', {}, true, window);
 
 		if (!res.error) {
 			localStorage.clear();
@@ -53,7 +57,7 @@
 		<div class="margin-right">
 			<a class="material-icons" href="{domLoaded ? window.location.href : '#'}">refresh</a>
 		</div>
-		{#if user !== undefined}
+		{#if user != null}
 			<p class="text-xs margin-right">{user.name}</p>
 			<Button color="bg-cmsErrorRed" buttonFunction="{logOut}">Logout</Button>
 		{:else}
