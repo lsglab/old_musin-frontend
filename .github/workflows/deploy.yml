@@ -25,4 +25,3 @@ jobs:
                   username: 'simon'
                   password: 'k4!Q8+Gd'
                   local-dir: ./__sapper__/export/
-                  server-dir: 'lsgWebsite/'
