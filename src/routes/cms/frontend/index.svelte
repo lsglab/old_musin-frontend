@@ -1,6 +1,6 @@
 <script>
+	import { errorRequest } from '../../../Utils/requests';
 	import { onMount, tick } from 'svelte/internal';
-	import { webrequest } from '../../../Utils/requests';
 	import Button from '../../../components/cms/atoms/Button.svelte';
 	import DirNode from '../../../components/cms/molecules/DirNode.svelte';
 	import Flex from '../../../components/cms/atoms/Flex.svelte';
@@ -53,7 +53,7 @@
 	}
 
 	async function fetchTable() {
-		const res = await webrequest(`${process.globals.apiUrl}/tables?table=sites`, 'get', {}, true, window);
+		const res = await errorRequest(`${process.globals.apiUrl}/tables?table=sites`, 'get', {}, true, window);
 
 		if (res.status === 200) {
 			table = new Table(res.data.tables[0]);
@@ -61,7 +61,7 @@
 	}
 
 	async function fetchData() {
-		const res = await webrequest(`${process.globals.apiUrl}/sites?_norelations=true`, 'get', {}, true, window);
+		const res = await errorRequest(`${process.globals.apiUrl}/sites?_norelations=true`, 'get', {}, true, window);
 
 		if (res.status === 200) {
 			fetchedFiles = res.data.sites;
@@ -70,7 +70,13 @@
 	}
 
 	async function fetchCustomComponents() {
-		const res = await webrequest(`${process.globals.apiUrl}/components?_norelations=true`, 'get', {}, true, window);
+		const res = await errorRequest(
+			`${process.globals.apiUrl}/components?_norelations=true`,
+			'get',
+			{},
+			true,
+			window
+		);
 
 		if (res.status === 200) {
 			customComponents = res.data.components;

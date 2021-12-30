@@ -1,10 +1,10 @@
 <script>
 	import { onMount } from 'svelte';
+	import { request } from '../../Utils/requests';
 	import Flex from '../../components/cms/atoms/Flex.svelte';
 	import Form from '../../components/cms/inputs/Form.svelte';
 	import Input from '../../components/cms/inputs/Input.svelte';
 	import Section from '../../components/frontend/atoms/Section.svelte';
-	import { webrequest } from '../../Utils/requests';
 
 	let error = '';
 	let inputError = false;
@@ -13,7 +13,8 @@
 		const response = await request(
 			`${process.globals.apiUrl}/auth/login`,
 			'post',
-			new FormData(document.getElementById('login-form'))
+			new FormData(document.getElementById('login-form')),
+			false
 		);
 
 		if (response.status === 400) {

@@ -1,8 +1,8 @@
 <script context="module">
 	import { difference } from '../../../../Utils/object';
+	import { errorRequest, request } from '../../../../Utils/requests';
 	import { getTimeDifference } from '../../../../Utils/time';
 	import { onMount } from 'svelte';
-	import { request, webrequest } from '../../../../Utils/requests';
 	import AddRole from '../../../../components/cms/organisms/AddRole.svelte';
 	import Button from '../../../../components/cms/atoms/Button.svelte';
 	import DialogButton from '../../../../components/cms/molecules/DialogButton.svelte';
@@ -67,7 +67,7 @@
 		let fetchedData = {};
 
 		if (id !== 'new') {
-			res = await webrequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'get', {}, true, window);
+			res = await errorRequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'get', {}, true, window);
 
 			if (!res.error) {
 				fetchedData = res.data[tableName][0];
@@ -80,7 +80,7 @@
 	}
 
 	async function fetchRelation(relation) {
-		res = await webrequest(`${process.globals.apiUrl}/tables?table=${relation}`, 'get', {}, true, window);
+		res = await errorRequest(`${process.globals.apiUrl}/tables?table=${relation}`, 'get', {}, true, window);
 
 		let foreign;
 
@@ -94,7 +94,13 @@
 			return undefined;
 		}
 
-		res = await webrequest(`${process.globals.apiUrl}/${foreign.table}?_norelations=true`, 'get', {}, true, window);
+		res = await errorRequest(
+			`${process.globals.apiUrl}/${foreign.table}?_norelations=true`,
+			'get',
+			{},
+			true,
+			window
+		);
 
 		if (!res.error) {
 			return { data: res.data[foreign.table], table: foreign };
@@ -121,7 +127,7 @@
 	}
 
 	async function fetchTable() {
-		res = await webrequest(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true, window);
+		res = await errorRequest(`${process.globals.apiUrl}/tables?table=${tableName}`, 'get', {}, true, window);
 
 		if (!res.error) {
 			table = new Table(res.data.tables[0]);
@@ -159,14 +165,14 @@
 	}
 
 	async function deleteOne() {
-		res = await webrequest(
+		res = await errorRequest(
 			`${process.globals.apiUrl}/${tableName}?id=${id}&_norelations=true`,
 			'delete',
 			{},
 			true,
 			window
 		);
-		if (res.error !== true) {
+		if (!res.error) {
 			window.history.go(-1);
 		}
 	}
@@ -203,10 +209,10 @@
 
 		if (deleteP.length > 0) {
 			deleteP = deleteP.map((ele) => ele.id);
-			await webrequest(url, 'delete', { ids: deleteP }, true, window);
+			await request(url, 'delete', { ids: deleteP }, true);
 		}
 		if (createP.length > 0) {
-			await webrequest(url, 'post', createP, true, window);
+			await request(url, 'post', createP, true);
 		}
 	}
 
@@ -230,7 +236,7 @@
 		const body = difference(data, oldData);
 
 		savePermissions();
-		res = await webrequest(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'put', body, true, window);
+		res = await request(`${process.globals.apiUrl}/${tableName}?id=${id}`, 'put', body, true);
 
 		if (res.status === 200) {
 			const newData = res.data[tableName][0];
@@ -247,7 +253,7 @@
 		}
 		data = table.modifyData(data);
 
-		res = await webrequest(`${process.globals.apiUrl}/${tableName}`, 'post', data, true, window);
+		res = await request(`${process.globals.apiUrl}/${tableName}`, 'post', data, true);
 
 		if (res.status === 200) {
 			const newData = res.data[tableName][0];

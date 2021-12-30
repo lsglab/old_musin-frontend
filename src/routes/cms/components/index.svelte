@@ -1,5 +1,5 @@
 <script>
-	import { webrequest } from '../../../Utils/requests';
+	import { errorRequest } from '../../../Utils/requests';
 	import Button from '../../../components/cms/atoms/Button.svelte';
 	import Flex from '../../../components/cms/atoms/Flex.svelte';
 	import TableEntries from '../../../components/cms/molecules/TableEntries.svelte';
@@ -12,9 +12,15 @@
 	let triggerDataReload;
 
 	async function fetchCustomComponents() {
-		const res = await webrequest(`${process.globals.apiUrl}/components?_norelations=true`, 'get', {}, true, window);
+		const res = await errorRequest(
+			`${process.globals.apiUrl}/components?_norelations=true`,
+			'get',
+			{},
+			true,
+			window
+		);
 
-		if (res.status === 200) {
+		if (!res.error) {
 			customComponents = res.data.components;
 		}
 	}

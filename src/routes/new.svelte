@@ -1,8 +1,8 @@
 <script context="module">
 	import { componentConfig, components } from '../cms/SiteEditor/Components';
+	import { errorRequest } from '../Utils/requests';
 	import { files, page, pageTable } from '../stores';
 	import { onMount, tick } from 'svelte';
-	import { webrequest } from '../Utils/requests';
 	import Component from '../components/cms/organisms/Component.svelte';
 	import ComponentClass from '../cms/SiteEditor/Component';
 	import DisplayComponent from '../components/cms/atoms/DisplayComponent.svelte';
@@ -21,7 +21,7 @@
 	let customComponents = [];
 
 	async function fetchData() {
-		const res = await webrequest(
+		const res = await errorRequest(
 			`${process.globals.apiUrl}/files?_norelations=true&public=true`,
 			'get',
 			{},
