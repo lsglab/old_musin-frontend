@@ -21,8 +21,8 @@ jobs:
             - name: 📂 Sync files
               uses: SamKirkland/FTP-Deploy-Action@4.1.0
               with:
-                  server: ''
-                  username: ''
-                  password: ''
+                  server: ftp.dotenv.de
+                  username: ftpuser
+                  password: ${{ secrets.ftp_password }}
                   local-dir: ./__sapper__/export/
-                  server-dir: ''
+                  server-dir: lsgWebsite/
