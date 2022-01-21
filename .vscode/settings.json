@@ -48,5 +48,8 @@
 	"[svelte]": {
 		"editor.defaultFormatter": "svelte.svelte-vscode"
 	},
-	"svelte.plugin.css.diagnostics.enable": false
+	"svelte.plugin.css.diagnostics.enable": false,
+	"yaml.schemas": {
+		"https://json.schemastore.org/github-workflow.json": "file:///e%3A/Simon/Development/websites/frontend/.github/workflows/deploy.yml"
+	}
 }
