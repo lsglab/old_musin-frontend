@@ -26,5 +26,5 @@ jobs:
                   password: ${{ secrets.ftp_password }}
                   local-dir: ./__sapper__/export/
                   server-dir: lsgWebsite/
-                  protocol: ftps
-                  port: 990
+                  protocol: ftp
+                  port: 21
